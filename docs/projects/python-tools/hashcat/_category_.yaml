@@ -1,0 +1,5 @@
+label: 'Hashcat'
+position: 4
+link:
+  type: 'doc'
+  id: projects/python-tools/hashcat/overview

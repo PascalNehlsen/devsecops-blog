@@ -1,5 +1,5 @@
-label: "DevOps"
+label: 'DevOps'
 link:
-    type: "doc"
-    id: "knowledge-base/DevOps/overview"
+  type: 'doc'
+  id: 'knowledge-base/DevOps/overview'
 position: 4

@@ -1,41 +1,49 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
+import { themes as prismThemes } from 'prism-react-renderer';
+import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 /* TODO: change to read configuration from environment */
-const blogEnabled = false
+const blogEnabled = false;
 
 const moreColumn = {
   title: 'More',
   items: [
     {
       label: 'GitHub',
-      href: 'https://github.com/spmse',
+      href: 'https://github.com/PascalNehlsen/',
+    },
+    {
+      label: 'Portfolio',
+      href: 'https://pascal-nehlsen.de/',
+    },
+    {
+      label: 'LinkedIn',
+      href: 'https://www.linkedin.com/in/pascal-nehlsen',
     },
   ],
-}
+};
 if (blogEnabled) {
   moreColumn.items.push({
     label: 'Blog',
     href: '/blog',
-  })
+  });
 }
 
 const config: Config = {
-  title: 'DSO Live Demo Docs',
-  tagline: 'Dinosaurs are cool',
+  title: 'Pascal Nehlsen',
+  tagline: 'DevSecOps/ Frontend Developer',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
+  url: 'https://pascalnehlsen.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/dev-blog-template/',
+  baseUrl: '/devsecops-blog/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'spmse', // Usually your GitHub org/user name.
-  projectName: 'dso-dev-blog', // Usually your repo name.
+  organizationName: 'PascalNehlsen', // Usually your GitHub org/user name.
+  projectName: 'devsecops-blog', // Usually your repo name.
 
   deploymentBranch: 'main',
 
@@ -58,25 +66,25 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/spmse/dev-blog-template',
+          //editUrl:
+          //  'https://github.com/PascalNehlsen/devsecops-blog',
         },
-        blog: blogEnabled ? 
-          {
-            showReadingTime: true,
-            feedOptions: {
-              type: ['rss', 'atom'],
-              xslt: true,
-            },
-            // Please change this to your repo.
-            // Remove this to remove the "edit this page" links.
-            editUrl:
-              'https://github.com/spmse/dev-blog-template',
-            // Useful options to enforce blogging best practices
-            onInlineTags: 'warn',
-            onInlineAuthors: 'warn',
-            onUntruncatedBlogPosts: 'warn',
-          }
+        blog: blogEnabled
+          ? {
+              showReadingTime: true,
+              feedOptions: {
+                type: ['rss', 'atom'],
+                xslt: true,
+              },
+              // Please change this to your repo.
+              // Remove this to remove the "edit this page" links.
+              // editUrl:
+              //  'https://github.com/PascalNehlsen/devsecops-blog',
+              // Useful options to enforce blogging best practices
+              //onInlineTags: 'warn',
+              //onInlineAuthors: 'warn',
+              //onUntruncatedBlogPosts: 'warn',
+            }
           : false,
         theme: {
           customCss: './src/css/custom.css',
@@ -87,12 +95,17 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
+    colorMode: {
+      defaultMode: 'dark',
+      disableSwitch: false,
+      respectPrefersColorScheme: false,
+    },
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
       title: 'My Site',
       logo: {
         alt: 'My Site Logo',
-        src: 'img/logo.svg',
+        src: 'img/favicon.ico',
       },
       items: [
         {
@@ -103,8 +116,13 @@ const config: Config = {
         },
         // {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/spmse/dev-blog-template',
+          href: 'https://github.com/PascalNehlsen/',
           label: 'Github',
+          position: 'right',
+        },
+        {
+          href: 'https://pascal-nehlsen.de/',
+          label: 'Portfolio',
           position: 'right',
         },
       ],
@@ -116,11 +134,20 @@ const config: Config = {
           title: 'Docs',
           items: [
             {
-              label: 'Tutorial',
-              to: '/docs/guides/intro',
+              label: 'Projects',
+              to: '/docs/projects/intro',
+            },
+            {
+              label: 'Knowledge Base',
+              to: '/docs/knowledge-base/intro',
+            },
+            {
+              label: 'Docusaurus Guides',
+              to: '/docs/docusaurus/intro',
             },
           ],
         },
+
         {
           title: 'Community',
           items: [
@@ -129,16 +156,16 @@ const config: Config = {
               href: 'https://stackoverflow.com/questions/tagged/docusaurus',
             },
             {
-              label: 'Discord',
+              label: 'Docusaurus Discord',
               href: 'https://discordapp.com/invite/docusaurus',
             },
             {
-              label: 'Twitter',
+              label: 'Docusaurus Twitter',
               href: 'https://twitter.com/docusaurus',
             },
           ],
         },
-        moreColumn
+        moreColumn,
         // {
         //   title: 'More',
         //   items: [
@@ -162,9 +189,13 @@ const config: Config = {
       magicComments: [
         // Remember to extend the default highlight class name as well!
         {
-          className: 'theme-code-block-highlighted-line',
+          className:
+            'theme-code-block-highlighted-line',
           line: 'highlight-next-line',
-          block: {start: 'highlight-start', end: 'highlight-end'},
+          block: {
+            start: 'highlight-start',
+            end: 'highlight-end',
+          },
         },
         {
           className: 'code-block-error-line',

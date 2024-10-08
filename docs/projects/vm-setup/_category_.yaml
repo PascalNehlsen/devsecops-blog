@@ -1,0 +1,5 @@
+label: 'VM Setup'
+position: 1
+link:
+  type: 'doc'
+  id: projects/vm-setup/overview
