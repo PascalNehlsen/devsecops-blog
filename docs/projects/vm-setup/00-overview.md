@@ -1,166 +1,108 @@
 ﻿# Virtual Machine Setup with Nginx and SSH Configuration
 
-This project demonstrates how to configure an existing server with **nginx**, generate and use **SSH keys** for secure login, disable password-based authentication, use **aliases** for SSH connections, and manage multiple **SSH identities**.
+In this blog post, you’ll learn how to configure an existing virtual machine (VM) with nginx as a web server while also setting up a secure SSH configuration. We will walk through generating SSH keys, disabling password-based authentication, using SSH aliases, and managing multiple SSH identities.
 
-## Table of Contents
+## Quick Start (README)
 
-- [About the Project](#about-the-project)
-- [Features](#features)
-- [Prerequisites](#prerequisites)
-- [Usage](#usage)
-- [Contact](#contact)
+### Prerequisites
 
-## About the Project
+- A Linux-based server with SSH access
+- Root or sudo privileges
 
-This project focuses on setting up an existing server with **nginx** for web hosting. Additionally, it covers the secure configuration of **SSH** by generating SSH keys, using aliases for simpler SSH commands, disabling password-based login for enhanced security, and managing multiple SSH identities.
+1. Generate an SSH Key
+   Generate an SSH key on your local machine to secure access to your server:
 
-### Technologies
-
-- **nginx** for the web server
-- **SSH** for secure server access
-
-## Features
-
-- Set up and configure nginx on the server
-- Generate and use SSH keys for secure login
-- Disable password-based SSH login for security
-- Use SSH aliases for easier login commands
-- Manage multiple SSH identities for different servers
-
-## Prerequisites
-
-- An existing server (Linux-based) with SSH access
-- Login data for the virtual machine
-- Root or sudo privileges on the server
-
-## Usage
-
-### Generating an SSH Key
-
-To secure access to your server, generate an SSH key on your local machine:
-
-Generate a new SSH key:
-
-```
+```bash
 ssh-keygen -t ed25519
 ```
 
-- Specify the path where you want to store the key
-- Enter passphrase depending on personal requirements
+Follow the instructions and store the key in a secure location. Optionally, you can add a passphrase for extra security.
 
-### Login
+2. Login to the VM
+   Login to your virtual machine using SSH (replace with your VM’s IP address):
 
-Login to your Virtual Machine (example ip address):
-
-```
+```bash
 ssh USER@192.655.265.55
 ```
 
-- Remember fingerprint
-- Enter your login password for the server
+Accept the fingerprint and enter your server’s password.
 
-### Store SSH key
+3. Store the SSH Key on the VM
+   Copy your public SSH key to the VM:
 
-Store the SSH key on your virtual machine (example path):
-
-```
+```bash
 ssh-copy-id -i ~/.ssh/key.pub USER@192.655.265.55
 ```
 
-- **Important:** Use the public (key.pub) key
-- Enter your login password for the server
-- Login to the server using the ssh key
+Now you can log in using the key:
 
-```
+```bash
 ssh -i ~/.ssh/key.pub USER@192.655.265.55
 ```
 
-### Deactivate the password login
+4. Disable Password Authentication
+   For enhanced security, disable password-based login on the server.
 
-For your safety we are deactivating the password login:
+- First, verify that you can log in with your SSH key.
+- Edit the SSH configuration on the server:
 
-- **Important:** First try if you can log in with your ssh key!
-- Go to the server config:
-
-```
+```bash
 sudo nano /etc/ssh/sshd_config
 ```
 
-- Search for the PasswordAuthentication entry
+Find the `PasswordAuthentication` line and change it from:
 
-```
+```bash
 #PasswordAuthentication no
 ```
 
-- Remove the comment character (entry color is changing)
-- Save the file
-- Restart the SSH service:
+to:
 
+```bash
+PasswordAuthentication no
 ```
+
+4. Save the file and restart the SSH service:
+
+```bash
 sudo systemctl restart ssh.service
 ```
 
-### Start your webserver
+5. Install and Configure Nginx
+   Install nginx to run the server as a web server:
 
-Install nginx to open the machine as a web server:
+- Update the package repositories:
 
-- Update your repositories on the Server:
-
-```
+```bash
 sudo apt update
 ```
 
 - Install nginx:
 
-```
+```bash
 sudo apt install nginx -y
 ```
 
-- Open the server on your Browser (the address is your vm ip)
+Open the server in your browser (using the VM's IP address).
 
-### Display alternative index with nginx
+6. Set Up an Alternate Index for Nginx
+   Create an alternative index page and configure nginx to serve it on a different port (8081).
 
-- Create the alternate directory:
+- Create a new directory for the alternate site:
 
-```
+```bash
 sudo mkdir /var/www/alternatives
 ```
 
-- Create your alternative index.html:
+- Create the new index.html:
 
-```
+```bash
 sudo touch /var/www/alternatives/your-index.html
 ```
 
-- Configure nginx:
+- Add content to `your-index.html`:
 
-```
-sudo nano /etc/nginx/sites-enabled/alternatives
-```
-
-- Configure the following file for port 8081:
-
-```
-server {
-    listen: 8081;
-    listen[::]8081;
-
-    root /var/www/alternatives;
-    index your-index.html;
-
-    location / {
-        try_files $uri $uri/ =404;
-    }
-}
-```
-
-- Create your alternate index.html:
-
-```
-sudo nano /var/www/alternatives/your-index.html
-```
-
-```
+```bash
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -174,54 +116,80 @@ sudo nano /var/www/alternatives/your-index.html
 </html>
 ```
 
-- Restart your nginx service:
+- Configure nginx to serve this site on port 8081:
 
+```bash
+sudo nano /etc/nginx/sites-enabled/alternatives
 ```
+
+- Add the following configuration:
+
+```nginx
+server {
+    listen 8081;
+    listen [::]:8081;
+
+    root /var/www/alternatives;
+    index your-index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+```
+
+- Restart the nginx service:
+
+```bash
 sudo service nginx restart
 ```
 
-- Open the server on your Browser (the address is your vm ip + port :8081)
+Open the server in your browser with the VM’s IP address and port 8081.
 
-### SSH connection aliases
+# Detailed Explanation (Writeup)
 
-- Create your alias with an absolute path:
+1. Why Use SSH Keys and Disable Password Authentication?
+   SSH keys provide stronger authentication compared to password-based login. By disabling password login, you add an extra layer of security, reducing the risk of brute-force attacks. This is especially important when managing servers in production environments.
 
-```
-alias your_alias="ssh -o StrictHostKeyChecking=False -i ~/.ssh/key.pub USER@192.655.265.55"
-```
+2. Setting Up Nginx for Multiple Sites
+   By configuring nginx to serve an alternative `index.html` on a different port, you can host multiple websites or test environments on the same server. This is a useful approach for separating staging environments or hosting multiple microservices.
 
-- Show all existing alias:
+3. Using SSH Aliases for Easier Connections
+   Instead of typing out long SSH commands every time, you can create an alias for frequently accessed servers. For example, add the following alias to your shell configuration (~/.bashrc or ~/.zshrc):
 
-```
-alias
-```
-
-- Login with your alias:
-
-```
-your_alias
+```bash
+alias myserver="ssh -o StrictHostKeyChecking=False -i ~/.ssh/key.pub USER@192.655.265.55"
 ```
 
-### SSH config for multiple identities
+This allows you to connect to your server by simply typing:
 
-- Change the config file of your SSH
-
-```
-nano ~/.ssh/config
+```bash
+myserver
 ```
 
-```
-HOST 192.655.265.55
-  User your_username
-  PreferredAuthentications publickey
-  IdentityFile ~/.ssh/key (the private key)
+4. Managing Multiple SSH Identities
+   If you work with multiple servers, each with its own SSH key, you can manage them using the SSH configuration file. This allows you to use different keys for different servers without having to specify them each time you connect.
+
+Edit your `~/.ssh/config` file and add an entry for each server:
+
+```bash
+Host myserver
+    User your_username
+    HostName 192.655.265.55
+    IdentityFile ~/.ssh/key
 ```
 
-- Login through your identity:
+Now you can connect to your server with:
 
+```bash
+ssh myserver
 ```
-ssh 192.655.265.55
-```
+
+### Conclusion
+
+By following this guide, you can set up a secure and efficient virtual machine with nginx for web hosting and SSH keys for access control. Implementing SSH aliases and multiple identities further streamlines server management, especially when dealing with multiple environments.
+
+If you have any questions or need further assistance, feel free to reach out!
 
 ## Contact
 
