@@ -1,0 +1,153 @@
+{
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "path": "/devsecops-blog/docs",
+      "versions": [
+        {
+          "name": "current",
+          "label": "Next",
+          "isLast": true,
+          "path": "/devsecops-blog/docs",
+          "mainDocId": "projects/intro",
+          "docs": [
+            {
+              "id": "docusaurus/docusaurus-basics/congratulations",
+              "path": "/devsecops-blog/docs/docusaurus/docusaurus-basics/congratulations",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "docusaurus/docusaurus-basics/create-a-blog-post",
+              "path": "/devsecops-blog/docs/docusaurus/docusaurus-basics/create-a-blog-post",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "docusaurus/docusaurus-basics/create-a-document",
+              "path": "/devsecops-blog/docs/docusaurus/docusaurus-basics/create-a-document",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "docusaurus/docusaurus-basics/create-a-page",
+              "path": "/devsecops-blog/docs/docusaurus/docusaurus-basics/create-a-page",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "docusaurus/docusaurus-basics/deploy-your-site",
+              "path": "/devsecops-blog/docs/docusaurus/docusaurus-basics/deploy-your-site",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "docusaurus/docusaurus-basics/markdown-features",
+              "path": "/devsecops-blog/docs/docusaurus/docusaurus-basics/markdown-features",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "docusaurus/intro",
+              "path": "/devsecops-blog/docs/docusaurus/intro",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "docusaurus/tutorial-extras/manage-docs-versions",
+              "path": "/devsecops-blog/docs/docusaurus/tutorial-extras/manage-docs-versions",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "docusaurus/tutorial-extras/translate-your-site",
+              "path": "/devsecops-blog/docs/docusaurus/tutorial-extras/translate-your-site",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "knowledge-base/Container/overview",
+              "path": "/devsecops-blog/docs/knowledge-base/Container/overview",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "knowledge-base/DevOps/overview",
+              "path": "/devsecops-blog/docs/knowledge-base/DevOps/overview",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "knowledge-base/git/branches",
+              "path": "/devsecops-blog/docs/knowledge-base/git/branches",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "knowledge-base/git/lifecycle-in-git",
+              "path": "/devsecops-blog/docs/knowledge-base/git/lifecycle-in-git",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "knowledge-base/git/pr",
+              "path": "/devsecops-blog/docs/knowledge-base/git/pr",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "knowledge-base/intro",
+              "path": "/devsecops-blog/docs/knowledge-base/intro",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "knowledge-base/linux/overview",
+              "path": "/devsecops-blog/docs/knowledge-base/linux/overview",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "projects/baby-tools-shop/overview",
+              "path": "/devsecops-blog/docs/projects/baby-tools-shop/overview",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "projects/intro",
+              "path": "/devsecops-blog/docs/projects/intro",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "projects/python-tools/hashcat/overview",
+              "path": "/devsecops-blog/docs/projects/python-tools/hashcat/overview",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "projects/python-tools/hydra/overview",
+              "path": "/devsecops-blog/docs/projects/python-tools/hydra/overview",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "projects/python-tools/overview",
+              "path": "/devsecops-blog/docs/projects/python-tools/overview",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "projects/vm-setup/overview",
+              "path": "/devsecops-blog/docs/projects/vm-setup/overview",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/git",
+              "path": "/devsecops-blog/docs/category/git",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/docusaurus---basics",
+              "path": "/devsecops-blog/docs/category/docusaurus---basics",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "/category/docusaurus---extras",
+              "path": "/devsecops-blog/docs/category/docusaurus---extras",
+              "sidebar": "tutorialSidebar"
+            }
+          ],
+          "draftIds": [],
+          "sidebars": {
+            "tutorialSidebar": {
+              "link": {
+                "path": "/devsecops-blog/docs/projects/intro",
+                "label": "Projects"
+              }
+            }
+          }
+        }
+      ],
+      "breadcrumbs": true
+    }
+  }
+}

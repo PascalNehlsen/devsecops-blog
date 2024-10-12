@@ -1,0 +1,26 @@
+{
+  "id": "knowledge-base/DevOps/overview",
+  "title": "Overview",
+  "description": "DevOps is a cultural and technical movement that aims to improve collaboration between development and operations teams, automate processes, and enhance the software delivery lifecycle. Implementing DevOps involves a combination of practices, tools, and cultural shifts.",
+  "source": "@site/docs/knowledge-base/DevOps/00-overview.md",
+  "sourceDirName": "knowledge-base/DevOps",
+  "slug": "/knowledge-base/DevOps/overview",
+  "permalink": "/devsecops-blog/docs/knowledge-base/DevOps/overview",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "title": "Overview"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Container",
+    "permalink": "/devsecops-blog/docs/knowledge-base/Container/overview"
+  },
+  "next": {
+    "title": "Guides Intro",
+    "permalink": "/devsecops-blog/docs/docusaurus/intro"
+  }
+}
