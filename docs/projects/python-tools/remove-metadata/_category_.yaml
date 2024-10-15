@@ -1,0 +1,5 @@
+label: 'PDF Remove Metadata'
+position: 2
+link:
+  type: 'doc'
+  id: projects/python-tools/remove-metadata/overview

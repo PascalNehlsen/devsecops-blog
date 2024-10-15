@@ -1,10 +1,10 @@
-﻿# My `hydra` Tool
+﻿# My SSH cracker Tool
 
 This repository contains the source code for my own implementation of the `hydra` tool, a network logon cracker used for brute-force attacks against various protocols. This lightweight implementation focuses on SSH brute-force and dictionary attacks.
 
-> [!CAUTION]  
-> **Only for Testing Purposes.**  
-> This tool is intended for educational and authorized penetration testing purposes only. Unauthorized use of this tool against systems that you do not have explicit permission to test is illegal and unethical.
+:::danger[Only for Testing Purposes]
+This tool is intended for educational and authorized penetration testing purposes only. Unauthorized use of this tool against systems that you do not have explicit permission to test is illegal and unethical.
+:::
 
 ## Table of Contents
 
@@ -13,7 +13,7 @@ This repository contains the source code for my own implementation of the `hydra
 - [Usage Examples](#usage-examples)
   - [Brute-Force Attack](#brute-force-attack)
   - [Dictionary Attack](#dictionary-attack)
-  - [All Hydra-Options](#all-hydra-Options)
+  - [All Hydra-Options](#all-hydra-options)
 - [Logging](#logging)
 - [Contact](#contact)
 
@@ -128,7 +128,7 @@ python hydra.py \
     -w ./password.txt
 ```
 
-### All Hydra-Options
+### All Hydra Options
 
 | Option        | Shorthand | Description                                    | Default value | Required |
 | ------------- | --------- | ---------------------------------------------- | ------------- | -------- |

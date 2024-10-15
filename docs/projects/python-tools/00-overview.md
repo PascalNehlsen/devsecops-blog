@@ -8,10 +8,25 @@ Pentesting tools in Python are scripts or applications designed to identify vuln
 
 ## Featured Projects
 
-- **Hydra** [(GitHub)](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/hydra) [(Docs)](hydra/overview):  
-  This project contains the source code for my own implementation of the `hydra` tool, a network logon cracker used for brute-force attacks against various protocols. This lightweight implementation focuses on SSH brute-force and dictionary attacks.
+- **CVE 2023_32764 Exploit** [GitHub](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/2023_32784_exploit) | [Docs Link](exploit/overview):  
+  This project contains the source code for my own implementation of the **hydra** tool, a network logon cracker used for brute-force attacks against various protocols. This lightweight implementation focuses on SSH brute-force and dictionary attacks.
 
-- **Hashcat** [(GitHub)](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/hashcat) [(Docs)](hashcat/overview):  
+- **PDF Remove Metadata** [GitHub](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/remove-metadata) | [Docs Link](remove-metadata/overview):  
+  This repository contains a Python tool that cleans metadata from a specified PDF document and linearizes it for improved web performance. The original file is replaced with the cleaned version.
+
+- **PDF Download/ Scan Metadata** [GitHub](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/metascan) | [Docs Link](metascan/overview):  
+  This repository contains a Python tool that automates the process of downloading all PDF documents from a given webpage and extracting their metadata. The extracted metadata is then saved into a CSV file.
+
+- **PDF Metadata Scan** [GitHub](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/metadata) | [Docs Link](metadata/overview):  
+  This repository contains the source code for my custom implementation of the **metadata** tool. This lightweight tool automates the extraction of metadata from PDF documents and exports them into a CSV file. It supports both individual PDF files and directories containing multiple PDFs.
+
+- **Nmap - Portscanner** [GitHub](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/nmap) | [Docs Link](nmap/overview):  
+  This project contains the source code for my custom implementation of the **nmap** tool. This lightweight implementation focuses on port scanning and service detection, offering a basic feature set to identify open ports and running services on a target machine.
+
+- **Hydra** [GitHub](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/hydra) | [Docs Link](hydra/overview):  
+  This project contains the source code for my own implementation of the **hydra** tool, a network logon cracker used for brute-force attacks against various protocols. This lightweight implementation focuses on SSH brute-force and dictionary attacks.
+
+- **Hashcat** [GitHub](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/hashcat) | [Docs Link](hashcat/overview):  
   This project contains the source code for my own implementation of the **hashcat** tool. Hashcat is a powerful password recovery tool that uses brute-force or dictionary attacks to crack hashed passwords by leveraging the processing power of CPUs, GPUs, or other hardware.
 
 ## Contact Me

@@ -1,5 +1,5 @@
 label: 'VM Setup'
-position: 1
+position: 3
 link:
   type: 'doc'
   id: projects/vm-setup/overview

@@ -1,0 +1,5 @@
+label: 'PDF Download/ Scan Metadata'
+position: 3
+link:
+  type: 'doc'
+  id: projects/python-tools/metascan/overview

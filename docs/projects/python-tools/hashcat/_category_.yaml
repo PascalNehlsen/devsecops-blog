@@ -1,5 +1,5 @@
-label: 'Hashcat'
-position: 4
+label: 'Hashcat - Hash cracker'
+position: 6
 link:
   type: 'doc'
   id: projects/python-tools/hashcat/overview

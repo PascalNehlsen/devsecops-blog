@@ -1,10 +1,10 @@
-﻿# My `hashcat` Tool
+﻿# My Hash cracker Tool
 
 This repository contains the source code for my own implementation of the **hashcat** tool.
 
-> [!CAUTION]  
-> **Only for Testing Purposes.**  
-> This tool is intended for educational and authorized penetration testing purposes only. Unauthorized use of this tool against systems that you do not have explicit permission to test is illegal and unethical.
+:::danger[Only for Testing Purposes]
+This tool is intended for educational and authorized penetration testing purposes only. Unauthorized use of this tool against systems that you do not have explicit permission to test is illegal and unethical.
+:::
 
 ## Table of Contents
 
