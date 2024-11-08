@@ -18,7 +18,7 @@ Welcome to my DevSecOps portfolio! On this page, you'll find an overview of my l
   This project demonstrates how to configure an existing server with **nginx**, generate and use **SSH keys** for secure login, disable password-based authentication, use **aliases** for SSH connections, and manage multiple **SSH identities**.
 
 - **Python Tools** [GitHub](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/) | [Docs Folder](python-tools/overview):  
-  This project contains the source code for my own implementation of the **hashcat** tool. Hashcat is a powerful password recovery tool that uses brute-force or dictionary attacks to crack hashed passwords by leveraging the processing power of CPUs, GPUs, or other hardware.
+  This projects demonstrates how to create Pentesting tools in **Python**, including scripts and applications designed to identify vulnerabilities and assess the security of systems, networks, or applications. It automates tasks such as network scanning, password cracking, and exploitation, making it essential for ethical hacking and security testing.
 
 ## Contact Me
 
