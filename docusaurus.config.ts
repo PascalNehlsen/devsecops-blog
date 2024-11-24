@@ -32,7 +32,7 @@ if (blogEnabled) {
 const config: Config = {
   title: 'Pascal Nehlsen',
   tagline: 'DevSecOps/ Frontend Developer',
-  favicon: 'img/favicon.ico',
+  favicon: '/img/favicon.ico',
 
   // Set the production url of your site here
   url: 'https://pascalnehlsen.github.io/',
