@@ -1,0 +1,5 @@
+label: 'PDF Metadata Scan'
+position: 4
+link:
+  type: 'doc'
+  id: projects/python-tools/metadata/overview
