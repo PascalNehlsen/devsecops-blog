@@ -1,0 +1,26 @@
+{
+  "id": "projects/python-tools/overview",
+  "title": "Python Tools Intro",
+  "description": "Pentesting tools in Python are scripts or applications designed to identify vulnerabilities and assess the security of systems, networks, or applications. These tools automate tasks like network scanning, password cracking, and exploitation, making them essential for ethical hacking and security testing.",
+  "source": "@site/docs/projects/python-tools/00-overview.md",
+  "sourceDirName": "projects/python-tools",
+  "slug": "/projects/python-tools/overview",
+  "permalink": "/devsecops-blog/docs/projects/python-tools/overview",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Baby Tools Shop",
+    "permalink": "/devsecops-blog/docs/projects/baby-tools-shop/overview"
+  },
+  "next": {
+    "title": "Hydra",
+    "permalink": "/devsecops-blog/docs/projects/python-tools/hydra/overview"
+  }
+}

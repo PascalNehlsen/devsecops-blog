@@ -1,0 +1,27 @@
+{
+  "id": "knowledge-base/git/pr",
+  "title": "Pull Requests",
+  "description": "A pull request (PR) is a feature in Git-based version control systems (like GitHub, GitLab, and Bitbucket) that allows developers to propose changes to a codebase. It facilitates code review and collaboration before merging changes into the main branch.",
+  "source": "@site/docs/knowledge-base/git/02-pr.md",
+  "sourceDirName": "knowledge-base/git",
+  "slug": "/knowledge-base/git/pr",
+  "permalink": "/devsecops-blog/docs/knowledge-base/git/pr",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_label": "Pull Requests",
+    "title": "Pull Requests"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Branches",
+    "permalink": "/devsecops-blog/docs/knowledge-base/git/branches"
+  },
+  "next": {
+    "title": "Container",
+    "permalink": "/devsecops-blog/docs/knowledge-base/Container/overview"
+  }
+}

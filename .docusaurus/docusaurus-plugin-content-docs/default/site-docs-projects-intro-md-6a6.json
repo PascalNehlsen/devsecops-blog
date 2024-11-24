@@ -1,0 +1,22 @@
+{
+  "id": "projects/intro",
+  "title": "Projects Intro",
+  "description": "Welcome to my DevSecOps portfolio! On this page, you'll find an overview of my latest projects in the DevSecOps space. From integrating security practices into CI/CD pipelines to automating compliance and monitoring, I focus on building secure, scalable, and efficient solutions that blend development, security, and operations. Explore my work to see how I apply DevSecOps principles to enhance software delivery while maintaining a strong security posture.",
+  "source": "@site/docs/projects/intro.md",
+  "sourceDirName": "projects",
+  "slug": "/projects/intro",
+  "permalink": "/devsecops-blog/docs/projects/intro",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1
+  },
+  "sidebar": "tutorialSidebar",
+  "next": {
+    "title": "VM Setup",
+    "permalink": "/devsecops-blog/docs/projects/vm-setup/overview"
+  }
+}

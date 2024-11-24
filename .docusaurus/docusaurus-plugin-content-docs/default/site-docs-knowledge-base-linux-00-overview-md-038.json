@@ -1,0 +1,24 @@
+{
+  "id": "knowledge-base/linux/overview",
+  "title": "What is Linux?",
+  "description": "Linux is an open-source, Unix-like operating system kernel first developed by Linus Torvalds in 1991. It is the foundation for various operating systems known as \"Linux distributions\" or \"distros,\" which combine the Linux kernel with software and tools to create a complete operating system. Linux is known for its versatility, security, and robust performance across different types of devices, from servers to desktops and embedded systems. Its open-source nature allows anyone to modify and distribute it, fostering a large global community of developers.",
+  "source": "@site/docs/knowledge-base/linux/00-overview.md",
+  "sourceDirName": "knowledge-base/linux",
+  "slug": "/knowledge-base/linux/overview",
+  "permalink": "/devsecops-blog/docs/knowledge-base/linux/overview",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Knowledge Base",
+    "permalink": "/devsecops-blog/docs/knowledge-base/intro"
+  },
+  "next": {
+    "title": "Git",
+    "permalink": "/devsecops-blog/docs/category/git"
+  }
+}

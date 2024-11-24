@@ -1,0 +1,27 @@
+{
+  "id": "knowledge-base/git/lifecycle-in-git",
+  "title": "Lifecycle in Git",
+  "description": "The Git lifecycle consists of several states that files can occupy as they are modified, staged, and committed in a repository. Understanding this lifecycle is essential for efficient version control using Git.",
+  "source": "@site/docs/knowledge-base/git/00-lifecycle-in-git.md",
+  "sourceDirName": "knowledge-base/git",
+  "slug": "/knowledge-base/git/lifecycle-in-git",
+  "permalink": "/devsecops-blog/docs/knowledge-base/git/lifecycle-in-git",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 0,
+  "frontMatter": {
+    "sidebar_label": "Lifecycle in Git",
+    "title": "Lifecycle in Git"
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Git",
+    "permalink": "/devsecops-blog/docs/category/git"
+  },
+  "next": {
+    "title": "Branches",
+    "permalink": "/devsecops-blog/docs/knowledge-base/git/branches"
+  }
+}
