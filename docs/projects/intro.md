@@ -20,6 +20,9 @@ Welcome to my DevSecOps portfolio! On this page, you'll find an overview of my l
 - **Python Tools** [GitHub](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/) | [Docs Folder](/docs/projects/python-tools/00-overview.md):  
   This projects demonstrates how to create Pentesting tools in **Python**, including scripts and applications designed to identify vulnerabilities and assess the security of systems, networks, or applications. It automates tasks such as network scanning, password cracking, and exploitation, making it essential for ethical hacking and security testing.
 
+- **Juice Shop Challenges** [GitHub](https://github.com/PascalNehlsen/juice-shop-challenges) | [Docs Folder](/docs/projects/juice-shop/intro.md):  
+  This projects contains the documentation of specific OWASP Juice Shop Challenges designed to help users understand and mitigate common web vulnerabilities. Each challenge provides hands-on experience in identifying and exploiting security flaws in a safe and educational environment.
+
 ## Contact Me
 
 If you're interested in discussing any of my projects or exploring potential collaborations, feel free to reach out via
