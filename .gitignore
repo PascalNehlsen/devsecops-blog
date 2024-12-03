@@ -3,12 +3,16 @@
 
 # Production
 /build
+/readmes
 
 # Generated files
 .docusaurus
 .cache-loader
 
 *.env
+*menu.json
+*menu.md
+
 !example.env
 
 # Misc
