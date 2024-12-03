@@ -2,10 +2,13 @@ import fs from "fs";
 import path from "path";
 import { Octokit } from "@octokit/rest";
 import { execSync } from 'child_process';
+import dotenv from 'dotenv';
+
+dotenv.config();  // local usage
 
 // GitHub-Konfiguration
 const { TOKEN, ORG, EMAIL } = process.env
-const MENU_FILE = "./menu.json"; // Pfad zur Menüdatei
+const MENU_FILE = "./menu.json";
 const README_FOLDER = "./readmes"; // Ordner, in dem alle README.md gespeichert werden
 
 const octokit = new Octokit({ auth: TOKEN });
@@ -16,13 +19,6 @@ if (!fs.existsSync(README_FOLDER)) {
     console.log(`Ordner ${README_FOLDER} wurde erstellt.`);
 }
 
-// Hilfsfunktion für das Datum von vor zwei Wochen im ISO-Format
-const getISODateTwoWeeksAgo = () => {
-    const today = new Date();
-    today.setDate(today.getDate() - 14);  // Subtrahiere 14 Tage (2 Wochen)
-    return today.toISOString();
-};
-
 const setGitConfig = () => {
     execSync(`git config --global user.name "${ORG}"`);
     execSync(`git config --global user.email "${EMAIL}"`);
@@ -30,11 +26,8 @@ const setGitConfig = () => {
 
 (async () => {
     try {
-        console.log("Fetching repositories updated since two weeks ago...");
+        console.log("Fetching all repositories...");
         console.log(`GitHub Token: ${TOKEN ? 'Token ist gesetzt' : 'Kein Token gefunden'}`);
-
-        const sinceDate = getISODateTwoWeeksAgo(); // Datum vor 2 Wochen
-        console.log(`Prüfen ab: ${sinceDate}`);
 
         // Hole Repositories des Nutzers
         const repos = await octokit.repos.listForUser({
@@ -48,12 +41,6 @@ const setGitConfig = () => {
         const readmeChanges = [];
 
         for (const repo of repos.data) {
-            const updatedAt = repo.updated_at;
-            if (new Date(updatedAt) < new Date(sinceDate)) {
-                console.log(`Überspringe Repository: ${repo.name}, zuletzt aktualisiert am ${updatedAt}`);
-                continue;
-            }
-
             console.log(`Prüfe Repository: ${repo.name}`);
 
             try {

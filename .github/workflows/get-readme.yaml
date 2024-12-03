@@ -23,7 +23,7 @@ jobs:
       - name: Run the script
         run: |
           node src/components/GitHubWorkFlowScripts/updateMenu.cjs
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-          GITHUB_ORG: ${{ secrets.ORG }}
-          GITHUB_EMAIL: ${{ secrets.EMAIL }}
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        #   GITHUB_ORG: ${{ secrets.ORG }}
+        #   GITHUB_EMAIL: ${{ secrets.EMAIL }}
