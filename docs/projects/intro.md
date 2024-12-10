@@ -8,6 +8,9 @@ Welcome to my DevSecOps portfolio! On this page, you'll find an overview of my l
 
 ## Featured Projects
 
+- **Minecraft Server** [GitHub](https://github.com/PascalNehlsen/minecraft-server) | [Docs Link](/docs/projects/minecraft.md):  
+  This repository provides an easy-to-use setup for running a customizable Minecraft server using Docker Compose. Deploy it locally or to a virtual machine (VM) with minimal effort.
+
 - **Truck Signs API** [GitHub](https://github.com/PascalNehlsen/truck_signs_api) | [Docs Link](/docs/projects/truck-signs-api.md):  
   This project is an online store called "Signs for Trucks," designed to sell pre-designed and customizable vinyl truck signs. It allows customers to purchase vinyls with truck logos, numbers, or custom text, as well as upload and customize their own designs. The backend is built with **Django** and **Django Rest Framework**, with payment integration via Stripe and Dockerized for deployment.
 
