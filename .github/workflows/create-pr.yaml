@@ -39,7 +39,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up GitHub CLI
+      - name: Set up NodeJS
         uses: actions/setup-node@v4
 
       - name: Create Pull Request with GitHub API
