@@ -69,7 +69,7 @@ Ensure you have the following tools installed:
 
 ### Configuration
 
-The server settings can be customized in the [example.env](./example.env) file. Below are the key environment variables you can modify:
+The server settings can be customized in the [example.env](https://github.com/PascalNehlsen/minecraft-server/blob/main/example.env) file. Below are the key environment variables you can modify:
 
 | Variable      | Description                                             | Default value | Possible Values                          |
 | ------------- | ------------------------------------------------------- | ------------- | ---------------------------------------- |
