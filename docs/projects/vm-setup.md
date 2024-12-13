@@ -2,7 +2,7 @@
 id: vm-setup
 title: VM Setup
 sidebar_label: VM Setup
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 # Virtual Machine Setup with Nginx and SSH Configuration
