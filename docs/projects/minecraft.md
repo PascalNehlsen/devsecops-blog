@@ -2,7 +2,7 @@
 id: minecraft
 title: Minecraft Server
 sidebar_label: Minecraft Server
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 # Minecraft Server with Docker Compose

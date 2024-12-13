@@ -2,7 +2,7 @@
 id: truck-signs-api
 title: Truck Signs API
 sidebar_label: Truck Signs API
-sidebar_position: 2
+sidebar_position: 4
 ---
 
 <div align="center">
