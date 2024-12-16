@@ -102,6 +102,10 @@ const config: Config = {
     },
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
+      logo: {
+        alt: 'My Site Logo',
+        src: 'img/favicon.ico',
+      },
       items: [
         {
           type: 'docSidebar',
