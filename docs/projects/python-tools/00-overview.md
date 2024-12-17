@@ -6,6 +6,12 @@ sidebar_position: 1
 
 Pentesting tools in Python are scripts or applications designed to identify vulnerabilities and assess the security of systems, networks, or applications. These tools automate tasks like network scanning, password cracking, and exploitation, making them essential for ethical hacking and security testing.
 
+import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
+
+<GithubLinkAdmonition link="https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5" text="Github Repository" type="info">
+**Reach me out via** [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)**,** [Portfolio Contact Form](https://pascal-nehlsen.de/#contact) **or** [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
+</GithubLinkAdmonition>
+
 ## Featured Projects
 
 - **CVE 2023_32764 Exploit** [GitHub](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/2023_32784_exploit) | [Docs Link](exploit/overview):  

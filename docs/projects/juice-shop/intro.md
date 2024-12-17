@@ -2,7 +2,14 @@
 
 This repository contains the documentation of specific OWASP Juice Shop Challenges designed to help users understand and mitigate common web vulnerabilities. Each challenge provides hands-on experience in identifying and exploiting security flaws in a safe and educational environment.
 
-:::info[Only for Testing Purposes]
+import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
+
+<GithubLinkAdmonition link="https://github.com/PascalNehlsen/juice-shop-challenges/tree/main" text="Github Repository" type="info">
+**Reach me out via** [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)**,** [Portfolio Contact Form](https://pascal-nehlsen.de/#contact) **or** [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
+</GithubLinkAdmonition>
+# Admin Registration Challenge Report
+
+:::danger[Only for Testing Purposes]
 This tool is intended for educational and authorized penetration testing purposes only. Unauthorized use of this tool against systems that you do not have explicit permission to test is illegal and unethical.
 :::
 

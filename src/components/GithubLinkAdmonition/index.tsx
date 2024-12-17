@@ -36,7 +36,7 @@ const GithubLinkAdmonition = ({
             fontWeight: 'bold',
           }}
         >
-          YOUR URL
+          Link:
         </span>
         :&nbsp;
         <a
