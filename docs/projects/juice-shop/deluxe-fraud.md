@@ -5,6 +5,13 @@ sidebar_label: Deluxe Fraud
 sidebar_position: 4
 ---
 
+import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
+
+<GithubLinkAdmonition link="https://github.com/PascalNehlsen/juice-shop-challenges/blob/main/challenges/deluxe-fraud.md" text="Github Repository" type="info">
+**Reach me out via** [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)**,** [Portfolio Contact Form](https://pascal-nehlsen.de/#contact) **or** [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
+</GithubLinkAdmonition>
+# Admin Registration Challenge Report
+
 # Deluxe Fraud Challenge Report
 
 :::danger[Only for Testing Purposes]

@@ -5,6 +5,12 @@ sidebar_label: Baby Tools Shop
 sidebar_position: 3
 ---
 
+import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
+
+<GithubLinkAdmonition link="https://github.com/PascalNehlsen/baby-tools-shop" text="Github Repository" type="info">
+**Reach me out via** [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)**,** [Portfolio Contact Form](https://pascal-nehlsen.de/#contact) **or** [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
+</GithubLinkAdmonition>
+
 # Baby Tools Shop
 
 In this blog post, we’ll explore the setup and deployment of the `Baby Tools Shop`, a `Django-based` e-commerce application for managing and purchasing baby tools. This project is containerized using Docker and can be deployed to a virtual machine (VM) with ease. We'll cover how to set up the environment, configure the app, and run it in `Docker`.
@@ -262,8 +268,3 @@ Now, you can log into the admin panel at:
 The Baby Tools Shop project showcases how to create and deploy a Django e-commerce application using Docker. By containerizing the app, you ensure a smooth and consistent deployment process. Docker volumes help persist data, while Docker’s flexibility allows for easy scaling and management in a production environment.
 
 If you need further assistance, feel free to reach out!
-
-## Contact
-
-- Pascal Nehlsen - [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen) - [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
-- Project Link: [https://github.com/PascalNehlsen/baby-tools-shop](https://github.com/PascalNehlsen/baby-tools-shop)

@@ -5,6 +5,12 @@ sidebar_label: Minecraft Server
 sidebar_position: 2
 ---
 
+import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
+
+<GithubLinkAdmonition link="https://github.com/PascalNehlsen/minecraft-server" text="Github Repository" type="info">
+**Reach me out via** [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)**,** [Portfolio Contact Form](https://pascal-nehlsen.de/#contact) **or** [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
+</GithubLinkAdmonition>
+
 # Minecraft Server with Docker Compose
 
 Welcome to your personal Minecraft Server! This repository provides an easy-to-use setup for running a customizable Minecraft server using Docker Compose. Deploy it locally or to a virtual machine (VM) with minimal effort.
@@ -15,7 +21,6 @@ Welcome to your personal Minecraft Server! This repository provides an easy-to-u
 2. [Quickstart](#quickstart)
 3. [Usage](#usage)
    - [Configuration](#configuration)
-4. [Contact](#contact)
 
 ## Description
 
@@ -78,8 +83,3 @@ The server settings can be customized in the [example.env](https://github.com/Pa
 | `DIFFICULTY`  | Difficulty level of the server.                         | easy          | easy, normal, hard                       |
 | `GAMEMODE`    | Default game mode for players.                          | creative      | survival, creative, adventure, spectator |
 | `ONLINE_MODE` | Authenticate players using Minecraft's online services. | true          | true, false                              |
-
-## Contact
-
-- Pascal Nehlsen - [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen) - [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
-- Project Link: [https://github.com/PascalNehlsen/minecraft-server](https://github.com/PascalNehlsen/minecraft-server)

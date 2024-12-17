@@ -5,6 +5,12 @@ sidebar_label: VM Setup
 sidebar_position: 5
 ---
 
+import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
+
+<GithubLinkAdmonition link="https://github.com/PascalNehlsen/v-server-setup" text="Github Repository" type="info">
+**Reach me out via** [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)**,** [Portfolio Contact Form](https://pascal-nehlsen.de/#contact) **or** [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
+</GithubLinkAdmonition>
+
 # Virtual Machine Setup with Nginx and SSH Configuration
 
 In this blog post, you’ll learn how to configure an existing virtual machine (VM) with nginx as a web server while also setting up a secure SSH configuration. We will walk through generating SSH keys, disabling password-based authentication, using SSH aliases, and managing multiple SSH identities.
@@ -197,8 +203,3 @@ ssh myserver
 By following this guide, you can set up a secure and efficient virtual machine with nginx for web hosting and SSH keys for access control. Implementing SSH aliases and multiple identities further streamlines server management, especially when dealing with multiple environments.
 
 If you have any questions or need further assistance, feel free to reach out!
-
-## Contact
-
-- Pascal Nehlsen - [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen) - [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
-- Project Link: [https://github.com/PascalNehlsen/v-server-setup](https://github.com/PascalNehlsen/v-server-setup)

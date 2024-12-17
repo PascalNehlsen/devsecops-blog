@@ -6,11 +6,14 @@ sidebar_position: 1
 
 Welcome to my DevSecOps portfolio! On this page, you'll find an overview of my latest projects in the DevSecOps space. From integrating security practices into CI/CD pipelines to automating compliance and monitoring, I focus on building secure, scalable, and efficient solutions that blend development, security, and operations. Explore my work to see how I apply DevSecOps principles to enhance software delivery while maintaining a strong security posture.
 
-**If you're interested in discussing any of my projects or exploring potential collaborations, feel free to reach out via**
+import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
 
-- [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)
-- [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
-- [Portfolio](https://pascal-nehlsen.de/)
+<GithubLinkAdmonition link="https://github.com/PascalNehlsen" text="Github Profile" type="info">
+  **If you're interested in discussing any of my projects or exploring potential collaborations, feel free to reach out via**
+  - [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)
+  - [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
+  - [Portfolio Contact Form](https://pascal-nehlsen.de/#contact)
+</GithubLinkAdmonition>
 
 ## Featured Projects
 

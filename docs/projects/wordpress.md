@@ -5,6 +5,12 @@ sidebar_label: Wordpress Container
 sidebar_position: 1
 ---
 
+import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
+
+<GithubLinkAdmonition link="https://github.com/PascalNehlsen/wordpress-container" text="Github Repository" type="info">
+**Reach me out via** [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)**,** [Portfolio Contact Form](https://pascal-nehlsen.de/#contact) **or** [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
+</GithubLinkAdmonition>
+
 # WordPress with MariaDB Using Docker Compose
 
 Welcome to your WordPress and MariaDB setup! This repository provides an easy-to-use configuration for hosting a WordPress website backed by a MariaDB database using Docker Compose.
@@ -15,7 +21,6 @@ Welcome to your WordPress and MariaDB setup! This repository provides an easy-to
 2. [Quickstart](#quickstart)
 3. [Usage](#usage)
    - [Configuration](#configuration)
-4. [Contact](#contact)
 
 ## Description
 
@@ -89,8 +94,3 @@ To modify the configuration, edit the `.env` file and restart the containers:
     docker compose down
     docker compose up -d
     ```
-
-## Contact
-
-- Pascal Nehlsen - [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen) - [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
-- Project Link: [https://github.com/PascalNehlsen/wordpress-container](https://github.com/PascalNehlsen/wordpress-container)
