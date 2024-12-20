@@ -1,4 +1,17 @@
-﻿# PDF Remove Metadata
+﻿---
+id: remove-metadata
+title: PDF Remove Metadata Tool
+sidebar_label: PDF Remove Metadata Tool
+sidebar_position: 7
+---
+
+import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
+
+<GithubLinkAdmonition link="https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/remove-metadata" text="Github Repository" type="info">
+**Reach me out via** [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)**,** [Portfolio Contact Form](https://pascal-nehlsen.de/#contact) **or** [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
+</GithubLinkAdmonition>
+
+# PDF Remove Metadata
 
 This repository contains a Python tool that cleans metadata from a specified PDF document and linearizes it for improved web performance. The original file is replaced with the cleaned version.
 

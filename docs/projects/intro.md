@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Projects Intro
+# DevSecOps Projects Documentation
 
 Welcome to my DevSecOps portfolio! On this page, you'll find an overview of my latest projects in the DevSecOps space. From integrating security practices into CI/CD pipelines to automating compliance and monitoring, I focus on building secure, scalable, and efficient solutions that blend development, security, and operations. Explore my work to see how I apply DevSecOps principles to enhance software delivery while maintaining a strong security posture.
 
@@ -32,7 +32,7 @@ import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
 - **VM Setup** [GitHub](https://github.com/PascalNehlsen/v-server-setup) | [Docs Link](/docs/projects/vm-setup.md):  
   This project demonstrates how to configure an existing server with **nginx**, generate and use **SSH keys** for secure login, disable password-based authentication, use **aliases** for SSH connections, and manage multiple **SSH identities**.
 
-- **Python Tools** [GitHub](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/) | [Docs Folder](/docs/projects/python-tools/00-overview.md):  
+- **Python Tools** [GitHub](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/) | [Docs Folder](/docs/projects/python-tools/intro.md):  
   This projects demonstrates how to create Pentesting tools in **Python**, including scripts and applications designed to identify vulnerabilities and assess the security of systems, networks, or applications. It automates tasks such as network scanning, password cracking, and exploitation, making it essential for ethical hacking and security testing.
 
 - **Juice Shop Challenges** [GitHub](https://github.com/PascalNehlsen/juice-shop-challenges) | [Docs Folder](/docs/projects/juice-shop/intro.md):  

@@ -1,4 +1,17 @@
-﻿# My Hash cracker Tool
+﻿---
+id: hashcat
+title: Hashcat Tool
+sidebar_label: Hashcat Tool
+sidebar_position: 2
+---
+
+import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
+
+<GithubLinkAdmonition link="https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/hashcat" text="Github Repository" type="info">
+**Reach me out via** [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)**,** [Portfolio Contact Form](https://pascal-nehlsen.de/#contact) **or** [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
+</GithubLinkAdmonition>
+
+# My Hash cracker Tool
 
 This repository contains the source code for my own implementation of the **hashcat** tool.
 
