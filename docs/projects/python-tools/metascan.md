@@ -1,4 +1,17 @@
-﻿# PDF Download/ Scan Metadata Tool
+﻿---
+id: metascan
+title: PDF Download Tool
+sidebar_label: PDF Download Tool
+sidebar_position: 5
+---
+
+import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
+
+<GithubLinkAdmonition link="https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/metascan" text="Github Repository" type="info">
+**Reach me out via** [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)**,** [Portfolio Contact Form](https://pascal-nehlsen.de/#contact) **or** [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
+</GithubLinkAdmonition>
+
+# PDF Download/ Scan Metadata Tool
 
 This repository contains a Python tool that automates the process of downloading all PDF documents from a given webpage and extracting their metadata. The extracted metadata is then saved into a CSV file.
 

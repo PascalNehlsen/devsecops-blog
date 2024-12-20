@@ -1,4 +1,17 @@
-﻿# My Nmap - Portscanner Tool
+﻿---
+id: nmap
+title: Portscanner Tool
+sidebar_label: Portscanner Tool
+sidebar_position: 6
+---
+
+import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
+
+<GithubLinkAdmonition link="https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/nmap" text="Github Repository" type="info">
+**Reach me out via** [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)**,** [Portfolio Contact Form](https://pascal-nehlsen.de/#contact) **or** [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
+</GithubLinkAdmonition>
+
+# My Nmap - Portscanner Tool
 
 This repository contains the source code for my custom implementation of the `nmap` tool. This lightweight implementation focuses on port scanning and service detection, offering a basic feature set to identify open ports and running services on a target machine.
 

@@ -1,5 +1,0 @@
-label: 'Nmap - Portscanner'
-position: 5
-link:
-  type: 'doc'
-  id: projects/python-tools/nmap/overview

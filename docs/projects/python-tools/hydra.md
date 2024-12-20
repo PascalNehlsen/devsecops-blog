@@ -1,4 +1,17 @@
-﻿# My SSH cracker Tool
+﻿---
+id: hydra
+title: Hydra Tool
+sidebar_label: Hydra Tool
+sidebar_position: 3
+---
+
+import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
+
+<GithubLinkAdmonition link="https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/hydra" text="Github Repository" type="info">
+**Reach me out via** [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)**,** [Portfolio Contact Form](https://pascal-nehlsen.de/#contact) **or** [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
+</GithubLinkAdmonition>
+
+# My SSH cracker Tool
 
 This repository contains the source code for my own implementation of the `hydra` tool, a network logon cracker used for brute-force attacks against various protocols. This lightweight implementation focuses on SSH brute-force and dictionary attacks.
 
