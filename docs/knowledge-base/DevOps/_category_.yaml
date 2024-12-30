@@ -1,0 +1,5 @@
+label: 'DevOps'
+position: 2
+link:
+  type: 'doc'
+  id: knowledge-base/DevOps/intro
