@@ -78,15 +78,15 @@ Once the application is running, you can interact with the Conduit API via the *
 
 You need to configure several environment variables for the Django project to work properly. Below is an example of the necessary variables to set in your example.env file:
 
-| Variable                    | Description                                                                                  | Default value                            |
-| --------------------------- | -------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| `DJANGO_SUPERUSER_USERNAME` | The username for the Django admin superuser.                                                 | admin                                    |
-| `DJANGO_SUPERUSER_EMAIL`    | The email address associated with the Django admin superuser.                                | admin@example.com                        |
-| `DJANGO_SUPERUSER_PASSWORD` | The password for the Django admin superuser                                                  | adminpassword                            |
-| `SECRET_KEY`                | A crucial security key used by Django for cryptographic signing                              | [example.env/#SECRET_KEY](./example.env) |
-| `DEBUG`                     | Set to True for local development to enable debugging features.                              | False                                    |
-| `ALLOWED_HOSTS`             | A comma-separated list of allowed hostnames or IP addresses that your Django site can serve. | 127.0.0.1, localhost                     |
-| `CORS_ALLOWED_ORIGINS`      | A list of allowed origins for cross-origin requests.                                         | http://localhost:8282                    |
+| Variable                    | Description                                                                                  | Default value          |
+| --------------------------- | -------------------------------------------------------------------------------------------- | ---------------------- |
+| `DJANGO_SUPERUSER_USERNAME` | The username for the Django admin superuser.                                                 | admin                  |
+| `DJANGO_SUPERUSER_EMAIL`    | The email address associated with the Django admin superuser.                                | admin@example.com      |
+| `DJANGO_SUPERUSER_PASSWORD` | The password for the Django admin superuser                                                  | adminpassword          |
+| `SECRET_KEY`                | A crucial security key used by Django for cryptographic signing                              | example.env#SECRET_KEY |
+| `DEBUG`                     | Set to True for local development to enable debugging features.                              | False                  |
+| `ALLOWED_HOSTS`             | A comma-separated list of allowed hostnames or IP addresses that your Django site can serve. | 127.0.0.1, localhost   |
+| `CORS_ALLOWED_ORIGINS`      | A list of allowed origins for cross-origin requests.                                         | http://localhost:8282  |
 
 ## Contact
 
