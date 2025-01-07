@@ -2,7 +2,7 @@
 id: vm-setup
 title: VM Setup
 sidebar_label: VM Setup
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
