@@ -76,7 +76,7 @@ Once the application is running, you can interact with the Conduit API via the *
 
 ### Configuration
 
-You need to configure several environment variables for the Django project to work properly. Below is an example of the necessary variables to set in your [example.env](./example.env) file:
+You need to configure several environment variables for the Django project to work properly. Below is an example of the necessary variables to set in your example.env file:
 
 | Variable                    | Description                                                                                  | Default value                            |
 | --------------------------- | -------------------------------------------------------------------------------------------- | ---------------------------------------- |
