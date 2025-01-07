@@ -17,6 +17,9 @@ import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
 
 ## Featured Projects
 
+- **Conduit Container** [GitHub](https://github.com/PascalNehlsen/conduit) | [Docs Link](/docs/projects/conduit.md):  
+  This repository includes a Docker Compose setup for deploying a Frontend Application with a Django Backend.
+
 - **Wordpress Container** [GitHub](https://github.com/PascalNehlsen/wordpress-container) | [Docs Link](/docs/projects/wordpress.md):  
   This repository includes a Docker Compose setup for quickly launching a WordPress instance with a MariaDB database. It simplifies the process of setting up and maintaining a WordPress site with an underlying database.
 

@@ -2,7 +2,7 @@
 id: minecraft
 title: Minecraft Server
 sidebar_label: Minecraft Server
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';

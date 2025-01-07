@@ -2,7 +2,7 @@
 id: baby-tools-shop
 title: Baby Tools Shop
 sidebar_label: Baby Tools Shop
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
