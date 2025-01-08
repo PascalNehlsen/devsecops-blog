@@ -30,7 +30,6 @@ This tool is intended for educational and authorized penetration testing purpose
   - [Examples](#examples)
 - [Output CSV](#output-csv)
 - [Error Handling](#error-handling)
-- [Contact](#contact)
 
 ## Features
 
@@ -136,8 +135,3 @@ Example error message:
 ```shell
 Error reading metadata from pdf_downloads/document.pdf: EOF marker not found
 ```
-
-## Contact
-
-- Pascal Nehlsen - [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen) - [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
-- Project Link: [https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/metascan](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/metascan)

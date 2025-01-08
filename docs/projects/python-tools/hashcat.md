@@ -28,7 +28,6 @@ This tool is intended for educational and authorized penetration testing purpose
   - [Dictionary Attack](#dictionary-attack)
   - [Hashcat-Options](#options)
 - [Logging](#logging)
-- [Contact](#contact)
 
 ## Features
 
@@ -99,8 +98,3 @@ python hashcat.py \
 ## Logging
 
 Logs are written to the console. You can modify the logging level in the code if you need to adjust the verbosity of the output.
-
-## Contact
-
-- Pascal Nehlsen - [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen) - [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
-- Project Link: [https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/hashcat](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/hashcat)

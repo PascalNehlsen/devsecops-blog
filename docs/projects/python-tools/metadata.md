@@ -27,7 +27,6 @@ This tool is intended for educational and authorized penetration testing purpose
   - [Options](#options)
   - [Extract Metadata from a Single File](#extract-metadata-from-a-single-file)
   - [Extract Metadata from a Directory](#extract-metadata-from-a-directory)
-- [Contact](#contact)
 
 ## Features
 
@@ -117,8 +116,3 @@ The output CSV file will contain the following metadata fields for each PDF:
 - PDF Version
 
 Each entry will be separated by a semicolon (`;`) as per your specification.
-
-## Contact
-
-- Pascal Nehlsen - [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen) - [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
-- Project Link: [https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/metadata](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/metadata)

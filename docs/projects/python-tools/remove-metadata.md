@@ -29,7 +29,6 @@ This tool is intended for educational and authorized penetration testing purpose
   - [Adjusting the Script](#adjusting-the-script)
   - [Running the Tool](#running-the-tool)
 - [Output](#output)
-- [Contact](#contact)
 
 ## Features
 
@@ -81,8 +80,3 @@ python remove-metadata.py
 ## Output
 
 The script will print the old and cleaned metadata in the console, allowing you to compare the changes. The original PDF file will be replaced by the cleaned version.
-
-## Contact
-
-- Pascal Nehlsen - [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen) - [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
-- Project Link: [https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/remove-metadata](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/remove-metadata)

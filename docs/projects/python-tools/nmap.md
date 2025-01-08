@@ -27,7 +27,6 @@ This tool is intended for educational and authorized penetration testing purpose
   - [Options](#options)
   - [Scanning Ports](#scanning-ports)
 - [Creating DNS name](#creating-dns-name)
-- [Contact](#contact)
 
 ## Features
 
@@ -142,8 +141,3 @@ sudo vi /etc/hosts
 
 - Replace `<IP_ADDRESS>` with the actual IP address of your target machine.
   Save and exit the editor (`Ctrl+X` then `Y` for `nano`, or `:wq` for `vi`).
-
-## Contact
-
-- Pascal Nehlsen - [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen) - [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
-- Project Link: [https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/nmap](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/nmap)

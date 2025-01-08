@@ -34,11 +34,3 @@ import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
 
 - **Hashcat** [GitHub](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/hashcat) | [Docs Link](hashcat):  
   This project contains the source code for my own implementation of the **hashcat** tool. Hashcat is a powerful password recovery tool that uses brute-force or dictionary attacks to crack hashed passwords by leveraging the processing power of CPUs, GPUs, or other hardware.
-
-## Contact Me
-
-If you're interested in discussing any of my projects or exploring potential collaborations, feel free to reach out via
-
-- [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)
-- [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
-- [Portfolio Contact Form](https://pascal-nehlsen.de/)
