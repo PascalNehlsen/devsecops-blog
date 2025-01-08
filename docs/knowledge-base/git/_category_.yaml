@@ -2,4 +2,4 @@ label: 'Git'
 position: 4
 link:
   type: 'doc'
-  id: knowledge-base/intro
+  id: knowledge-base/git/intro

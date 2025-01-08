@@ -28,7 +28,6 @@ This tool is intended for educational and authorized penetration testing purpose
   - [Dictionary Attack](#dictionary-attack)
   - [All Hydra-Options](#all-hydra-options)
 - [Logging](#logging)
-- [Contact](#contact)
 
 ## Features
 
@@ -156,8 +155,3 @@ python hydra.py \
 ## Logging
 
 Logs are written to **hydra.log**. The **hydra.log** will be placed in your source code folder. If there is already a **hydra.log** in this folder, the generated log files are appended to the content You can check this file to review detailed information about the connection attempts and outcomes.
-
-## Contact
-
-- Pascal Nehlsen - [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen) - [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
-- Project Link: [https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/hydra](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/hydra)
