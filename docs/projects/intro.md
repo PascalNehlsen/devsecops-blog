@@ -17,6 +17,9 @@ import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
 
 ## Featured Projects
 
+- **Conduit Pipeline** [GitHub](https://github.com/PascalNehlsen/conduit) | [Docs Link](/docs/projects/conduit-pipeline.md):  
+  This GitHub Actions pipeline automates the process of cloning a repository, building Docker images, and deploying an application to a remote server using Docker Compose.
+
 - **Conduit Container** [GitHub](https://github.com/PascalNehlsen/conduit) | [Docs Link](/docs/projects/conduit.md):  
   This repository includes a Docker Compose setup for deploying a Frontend Application with a Django Backend.
 
