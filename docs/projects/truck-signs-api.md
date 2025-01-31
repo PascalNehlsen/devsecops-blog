@@ -2,7 +2,7 @@
 id: truck-signs-api
 title: Truck Signs API
 sidebar_label: Truck Signs API
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';

@@ -2,7 +2,7 @@
 id: conduit
 title: Conduit Deploy with Docker Compose
 sidebar_label: Conduit Deploy
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
