@@ -11,16 +11,11 @@ on:
 permissions:
   contents: write
   pull-requests: write
-  # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
-  pages: write # to deploy to Github Pages
+  pages: write
   id-token: write
 
 jobs:
-  create-or-update-pr:
-    name: Create or update PR
-    uses: ./.github/workflows/create-pr.yaml
-
   build-and-deploy-to-pages:
     name: Build website and deploy to GitHub Pages
-    needs: create-or-update-pr
     uses: ./.github/workflows/deploy.yaml
+    secrets: inherit

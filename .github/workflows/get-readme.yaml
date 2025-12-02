@@ -1,8 +1,6 @@
 name: Get new Readme Files
 
 on:
-  #  schedule:
-  #    - cron: '0 * * * *'
   workflow_dispatch:
 
 jobs:
@@ -10,20 +8,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v6.0.1
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v6.0.0
         with:
-          node-version: '14'
+          node-version: "18"
 
       - name: Install dependencies
         run: npm install
 
       - name: Run the script
-        run: |
-          node src/components/GitHubWorkFlowScripts/updateMenu.cjs
-        # env:
-        #   GITHUB_TOKEN: ${{ secrets.TOKEN }}
-        #   GITHUB_ORG: ${{ secrets.ORG }}
-        #   GITHUB_EMAIL: ${{ secrets.EMAIL }}
+        run: node src/components/GitHubWorkFlowScripts/updateMenu.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          GITHUB_ORG: ${{ secrets.ORG }}
+          GITHUB_EMAIL: ${{ secrets.EMAIL }}

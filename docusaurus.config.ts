@@ -2,19 +2,29 @@ import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
-/* TODO: change to read configuration from environment */
 const blogEnabled = true;
 
+const DEPLOYMENT_URL =
+  process.env.DEPLOYMENT_URL ||
+  'https://pascalnehlsen.github.io/';
+const BASE_URL = process.env.BASE_URL || '/';
+const GITHUB_ORG =
+  process.env.GITHUB_ORG ||
+  process.env.ORG ||
+  'PascalNehlsen';
+const GITHUB_PROJECT =
+  process.env.GITHUB_PROJECT ||
+  process.env.PROJECT ||
+  'devsecops-blog';
+const DEPLOYMENT_BRANCH =
+  process.env.DEPLOYMENT_BRANCH || 'main';
+
 const moreColumn = {
-  title: 'More',
+  title: 'Social',
   items: [
     {
       label: 'GitHub',
-      href: 'https://github.com/PascalNehlsen/',
-    },
-    {
-      label: 'Portfolio',
-      href: 'https://pascal-nehlsen.de/',
+      href: `https://github.com/${GITHUB_ORG}/`,
     },
     {
       label: 'LinkedIn',
@@ -31,21 +41,16 @@ if (blogEnabled) {
 
 const config: Config = {
   title: 'Pascal Nehlsen',
-  tagline: 'DevSecOps/ Frontend Developer',
+  tagline: 'DevSecOps Fullstack Developer',
   favicon: '/img/favicon.ico',
 
-  // Set the production url of your site here
-  url: 'https://pascalnehlsen.github.io/',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  url: DEPLOYMENT_URL,
+  baseUrl: BASE_URL,
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'PascalNehlsen', // Usually your GitHub org/user name.
-  projectName: 'devsecops-blog', // Usually your repo name.
+  organizationName: GITHUB_ORG,
+  projectName: GITHUB_PROJECT,
 
-  deploymentBranch: 'main',
+  deploymentBranch: DEPLOYMENT_BRANCH,
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -72,8 +77,7 @@ const config: Config = {
                 type: ['rss', 'atom'],
                 xslt: true,
               },
-              authorsMapPath:
-                '/devsecops-blog/blog/authors/authors.yml',
+              authorsMapPath: 'authors.yml',
             }
           : false,
         theme: {
@@ -101,21 +105,16 @@ const config: Config = {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'DevSecOps Docs',
+          label: 'Docs',
         },
         {
           to: 'blog',
-          label: 'Personal IT Blog',
+          label: 'Blog',
           position: 'left',
         },
         {
           href: 'https://github.com/PascalNehlsen/',
           label: 'GitHub',
-          position: 'right',
-        },
-        {
-          href: 'https://pascal-nehlsen.de/',
-          label: 'Portfolio',
           position: 'right',
         },
       ],
@@ -141,23 +140,23 @@ const config: Config = {
           ],
         },
 
-        {
-          title: 'Community',
-          items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Docusaurus Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'Docusaurus Twitter',
-              href: 'https://twitter.com/docusaurus',
-            },
-          ],
-        },
+        // {
+        //   title: 'Community',
+        //   items: [
+        //     {
+        //       label: 'Stack Overflow',
+        //       href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+        //     },
+        //     {
+        //       label: 'Docusaurus Discord',
+        //       href: 'https://discordapp.com/invite/docusaurus',
+        //     },
+        //     {
+        //       label: 'Docusaurus Twitter',
+        //       href: 'https://twitter.com/docusaurus',
+        //     },
+        //   ],
+        // },
         moreColumn,
         // {
         //   title: 'More',
@@ -173,7 +172,7 @@ const config: Config = {
         //   ],
         // },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Pascal Nehlsen, Inc. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,
