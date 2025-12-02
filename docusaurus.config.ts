@@ -3,7 +3,7 @@ import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 /* TODO: change to read configuration from environment */
-const blogEnabled = false;
+const blogEnabled = true;
 
 const moreColumn = {
   title: 'More',
@@ -38,7 +38,7 @@ const config: Config = {
   url: 'https://pascalnehlsen.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/devsecops-blog/',
+  baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -64,10 +64,6 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          //editUrl:
-          //  'https://github.com/PascalNehlsen/devsecops-blog',
         },
         blog: blogEnabled
           ? {
@@ -76,14 +72,8 @@ const config: Config = {
                 type: ['rss', 'atom'],
                 xslt: true,
               },
-              // Please change this to your repo.
-              // Remove this to remove the "edit this page" links.
-              // editUrl:
-              //  'https://github.com/PascalNehlsen/devsecops-blog',
-              // Useful options to enforce blogging best practices
-              //onInlineTags: 'warn',
-              //onInlineAuthors: 'warn',
-              //onUntruncatedBlogPosts: 'warn',
+              authorsMapPath:
+                '/devsecops-blog/blog/authors/authors.yml',
             }
           : false,
         theme: {
@@ -113,10 +103,14 @@ const config: Config = {
           position: 'left',
           label: 'DevSecOps Docs',
         },
-        // {to: '/blog', label: 'Blog', position: 'left'},
+        {
+          to: 'blog',
+          label: 'Personal IT Blog',
+          position: 'left',
+        },
         {
           href: 'https://github.com/PascalNehlsen/',
-          label: 'Github',
+          label: 'GitHub',
           position: 'right',
         },
         {
