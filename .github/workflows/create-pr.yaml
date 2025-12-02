@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pull-requests: write
 
 jobs:
@@ -19,51 +19,17 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Check if PR already exists
-        id: check-pr
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO_OWNER: ${{ github.repository_owner }}
-          REPO_NAME: ${{ github.event.repository.name }}
-          BRANCH_NAME: ${{ github.ref_name }}
-        run: |
-          PR_EXISTS=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
-            -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/repos/$REPO_OWNER/$REPO_NAME/pulls?head=$REPO_OWNER:$BRANCH_NAME&state=open" \
-            | jq '. | length')
-          echo "pr_exists=$PR_EXISTS" >> $GITHUB_OUTPUT
-          echo "Found $PR_EXISTS open PR(s) for branch $BRANCH_NAME"
-
       - name: Create Pull Request
-        if: steps.check-pr.outputs.pr_exists == '0'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO_OWNER: ${{ github.repository_owner }}
-          REPO_NAME: ${{ github.event.repository.name }}
-          BRANCH_NAME: ${{ github.ref_name }}
-          BASE_BRANCH: main
-        run: |
-          RESPONSE=$(curl -s -X POST \
-            -H "Authorization: token $GITHUB_TOKEN" \
-            -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/repos/$REPO_OWNER/$REPO_NAME/pulls" \
-            -d "$(jq -n \
-              --arg title "feat: $BRANCH_NAME" \
-              --arg head "$BRANCH_NAME" \
-              --arg base "$BASE_BRANCH" \
-              --arg body "Automated PR from branch \`$BRANCH_NAME\` to \`$BASE_BRANCH\`" \
-              '{title: $title, head: $head, base: $base, body: $body}')")
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: automated updates from ${{ github.ref_name }}"
+          title: "feat: ${{ github.ref_name }}"
+          body: |
+            Automated PR from branch `${{ github.ref_name }}` to `main`
 
-          PR_URL=$(echo "$RESPONSE" | jq -r '.html_url // empty')
-
-          if [ -n "$PR_URL" ]; then
-            echo "Pull Request created successfully: $PR_URL"
-          else
-            ERROR=$(echo "$RESPONSE" | jq -r '.message // "Unknown error"')
-            echo "Failed to create PR: $ERROR"
-            exit 1
-          fi
-
-      - name: PR already exists
-        if: steps.check-pr.outputs.pr_exists != '0'
-        run: echo "Pull Request already exists for this branch, skipping creation"
+            Branch: `${{ github.ref_name }}`
+            Triggered by: @${{ github.actor }}
+          branch: ${{ github.ref_name }}
+          base: main
+          delete-branch: false
