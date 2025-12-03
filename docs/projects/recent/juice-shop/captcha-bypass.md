@@ -26,12 +26,12 @@ This tool is intended for educational and authorized penetration testing purpose
 
 ## Table of Contents
 
-1. [Introduction](#Introduction)
-2. [Objective](#Objective)
-3. [Approach](#Approach)
+1. [Introduction](#introduction)
+2. [Objective](#objective)
+3. [Approach](#approach)
    - [Step 1: Writing Customer Feedback](#step-1-writing-customer-feedback)
    - [Step 2: Bypassing CAPTCHA with Burp Suite Intruder](#step-2-bypassing-captcha-with-burp-suite-intruder)
-4. [Conclusion](#Conclusion)
+4. [Conclusion](#conclusion)
 
 ### Introduction
 

@@ -1,9 +1,9 @@
 ---
-title: Starting My DevSecOps Journey - From Developer to Security Champion
+title: "Starting My DevSecOps Journey - From Developer to Security Champion"
 slug: starting-devsecops-journey
 authors: pascal
 tags: [devsecops, career, learning, security]
-date: 2024-01-15
+date: "2024-01-15"
 ---
 
 # Starting My DevSecOps Journey
@@ -50,14 +50,6 @@ The real power came from automation:
 2. **Practice Daily**: Set up a home lab, break things, fix them
 3. **Community Matters**: Join security communities, attend meetups
 4. **Document Everything**: Your future self will thank you
-
-## What's Next?
-
-In upcoming posts, I'll dive deeper into:
-- Setting up your first security pipeline
-- Common vulnerabilities in Python/Django applications
-- Container security best practices
-- Kubernetes security hardening
 
 The journey is just beginning, and I'm excited to share what I learn along the way.
 

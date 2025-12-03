@@ -1,9 +1,9 @@
 ---
-title: Secrets Management Done Right - No More Hardcoded Passwords
+title: "Secrets Management Done Right - No More Hardcoded Passwords"
 slug: secrets-management-done-right
 authors: pascal
 tags: [secrets, security, vault, kubernetes]
-date: 2024-04-12
+date: "2024-04-12"
 ---
 
 # Secrets Management Done Right

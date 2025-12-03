@@ -26,12 +26,12 @@ This tool is intended for educational and authorized penetration testing purpose
 
 ## Table of Contents
 
-1. [Introduction](#Introduction)
-2. [Objective](#Objective)
-3. [Approach](#Approach)
+1. [Introduction](#introduction)
+2. [Objective](#objective)
+3. [Approach](#approach)
    - [Step 1: Information Gathering](#step-1-information-gathering)
    - [Step 2: Manipulating the Purchase Request](#step-2-manipulating-the-purchase-request)
-4. [Conclusion](#Conclusion)
+4. [Conclusion](#conclusion)
 
 ### Introduction
 

@@ -1,9 +1,9 @@
 ---
-title: Implementing SAST in Your CI/CD Pipeline - A Practical Guide
+title: "Implementing SAST in Your CI/CD Pipeline - A Practical Guide"
 slug: implementing-sast-pipeline
 authors: pascal
 tags: [sast, cicd, security, automation]
-date: 2024-02-10
+date: "2024-02-10"
 ---
 
 # Implementing SAST in Your CI/CD Pipeline

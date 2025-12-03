@@ -1,9 +1,9 @@
 ---
-title: Docker Security Best Practices - Lessons from Production
+title: "Docker Security Best Practices - Lessons from Production"
 slug: docker-security-best-practices
 authors: pascal
 tags: [docker, containers, security, devops]
-date: 2024-03-05
+date: "2024-03-05"
 ---
 
 # Docker Security Best Practices
@@ -291,8 +291,6 @@ docker pull myregistry.io/myapp:latest
 - [Docker Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Docker_Security_Cheat_Sheet.html)
 - [CIS Docker Benchmark](https://www.cisecurity.org/benchmark/docker)
 - [Trivy Documentation](https://aquasecurity.github.io/trivy/)
-
-Next week: **Kubernetes Security Hardening**
 
 ---
 
