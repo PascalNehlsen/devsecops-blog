@@ -4,10 +4,33 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const blogEnabled = true;
 
-const DEPLOYMENT_URL =
+let DEPLOYMENT_URL =
   process.env.DEPLOYMENT_URL ||
   'https://pascalnehlsen.github.io/';
-const BASE_URL = process.env.BASE_URL || '/';
+let BASE_URL = process.env.BASE_URL || '/';
+
+// Ensure URL has protocol
+if (!/^https?:\/\//i.test(DEPLOYMENT_URL)) {
+  DEPLOYMENT_URL = 'https://pascalnehlsen.github.io/';
+}
+// Normalize baseUrl shape
+if (!BASE_URL.startsWith('/')) {
+  BASE_URL = `/${BASE_URL}`;
+}
+if (!BASE_URL.endsWith('/')) {
+  BASE_URL = `${BASE_URL}/`;
+}
+// If using a custom domain (not *.github.io), force baseUrl to '/'
+try {
+  const u = new URL(DEPLOYMENT_URL);
+  const isGithubPages = /github\.io$/i.test(
+    u.hostname
+  );
+  if (!isGithubPages) {
+    BASE_URL = '/';
+  }
+} catch {}
+
 const GITHUB_ORG =
   process.env.GITHUB_ORG ||
   process.env.ORG ||
