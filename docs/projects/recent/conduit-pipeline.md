@@ -54,7 +54,7 @@ The workflow consists of two main jobs (using existing github actions):
 - Set up Docker Buildx with [docker/setup-buildx-action](https://github.com/docker/setup-buildx-action/tree/v3.8.0/) for advanced build features
 - Authenticate with GHCR using [docker/login-action](https://github.com/docker/login-action/tree/v3.3.0/)
 - Extract metadata with [docker/metadata-action](https://github.com/docker/metadata-action/tree/v5.6.1/) to extract metadata
-- Create .env file from [example.env](../../example.env)
+- Create .env file from [example.env](../../../example.env)
 - Build and push frontend & backend images with [docker/build-push-action](https://github.com/docker/build-push-action/tree/v6.12.0/)
 - Upload deployment artifacts with [actions/download-artifact](https://github.com/actions/upload-artifact/tree/v4.6.0/) (`.env` and `docker-compose.yaml`)
 

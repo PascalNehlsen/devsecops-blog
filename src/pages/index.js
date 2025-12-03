@@ -34,7 +34,7 @@ const FeatureList = [
         icon: '',
         description: (
             <>
-                Streamlining deployment pipelines with Docker, Kubernetes, and automated testing.
+                Streamlining deployment pipelines with Container and automated testing.
                 Building infrastructure as code for reliable and reproducible deployments.
             </>
         ),
@@ -66,7 +66,7 @@ function HomepageHeader() {
         { type: 'command', text: 'cat role.txt' },
         { type: 'output', text: siteConfig.tagline },
         { type: 'command', text: 'ls skills/' },
-        { type: 'output', text: 'DevSecOps  Python  Django  Flask  Docker  Kubernetes' },
+        { type: 'output', text: 'DevSecOps  Python  Django  Flask  Docker  Linux' },
         { type: 'output', text: 'Angular  React  TypeScript  CI/CD  Security-Audits' },
     ];
 

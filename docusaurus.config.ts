@@ -78,6 +78,14 @@ const config: Config = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
+  scripts: [
+    {
+      src: 'https://chatbot-mit-pascal.de/dist/widget.iife.js',
+      defer: true,
+      'data-bot-id': 'cmiprhmf0000olg2msmj8dx0c',
+    },
+  ],
+
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
@@ -96,6 +104,9 @@ const config: Config = {
         blog: blogEnabled
           ? {
               showReadingTime: true,
+              postsPerPage: 10,
+              blogSidebarCount: 'ALL',
+              blogSidebarTitle: 'All Posts',
               feedOptions: {
                 type: ['rss', 'atom'],
                 xslt: true,

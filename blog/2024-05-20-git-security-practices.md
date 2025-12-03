@@ -1,9 +1,9 @@
 ---
-title: Git Security - Protecting Your Source Code and Commits
+title: "Git Security - Protecting Your Source Code and Commits"
 slug: git-security-practices
 authors: pascal
 tags: [git, security, version-control, devsecops]
-date: 2024-05-20
+date: "2024-05-20"
 ---
 
 # Git Security - Beyond Just Commits
