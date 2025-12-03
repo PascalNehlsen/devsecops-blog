@@ -156,10 +156,6 @@ const config: Config = {
               label: 'Knowledge Base',
               to: '/docs/knowledge-base/intro',
             },
-            {
-              label: 'Docusaurus Guides',
-              to: '/docs/docusaurus/intro',
-            },
           ],
         },
 
