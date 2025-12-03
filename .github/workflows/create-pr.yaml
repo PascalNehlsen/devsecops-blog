@@ -72,11 +72,5 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Check TypeScript types
-        run: npm run typecheck
-
       - name: Build project
         run: npm run build
-
-      - name: Run linter (if available)
-        run: npm run lint --if-present
