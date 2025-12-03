@@ -2,8 +2,8 @@ name: Create or Update PR
 
 on:
   push:
-    branches-ignore:
-      - main
+    branches:
+      - development
   workflow_dispatch:
 
 permissions:
@@ -19,17 +19,39 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7.0.9
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore: automated updates from ${{ github.ref_name }}"
-          title: "feat: ${{ github.ref_name }}"
-          body: |
-            Automated PR from branch `${{ github.ref_name }}` to `main`
+      - name: Fetch main branch
+        run: |
+          git fetch origin main:refs/remotes/origin/main
 
-            Branch: `${{ github.ref_name }}`
-            Triggered by: @${{ github.actor }}
-          branch: ${{ github.ref_name }}
-          base: main
-          delete-branch: false
+      - name: Check for differences
+        id: diff
+        run: |
+          if git diff --quiet HEAD origin/main; then
+            echo "has_diff=false" >> $GITHUB_OUTPUT
+            echo "No differences between ${{ github.ref_name }} and main"
+          else
+            echo "has_diff=true" >> $GITHUB_OUTPUT
+            echo "Differences found between ${{ github.ref_name }} and main"
+          fi
+
+      - name: Create Pull Request
+        if: steps.diff.outputs.has_diff == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Check if PR already exists
+          existing_pr=$(gh pr list --head ${{ github.ref_name }} --base main --json number --jq '.[0].number')
+
+          if [ -z "$existing_pr" ]; then
+            echo "Creating new PR from ${{ github.ref_name }} to main"
+            gh pr create \
+              --title "feat: ${{ github.ref_name }}" \
+              --body "Automated PR from branch \`${{ github.ref_name }}\` to \`main\`
+
+            Branch: \`${{ github.ref_name }}\`
+            Triggered by: @${{ github.actor }}" \
+              --base main \
+              --head ${{ github.ref_name }}
+          else
+            echo "PR #$existing_pr already exists for ${{ github.ref_name }} -> main"
+          fi
