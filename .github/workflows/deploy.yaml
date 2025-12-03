@@ -1,6 +1,9 @@
 name: Deploy to GitHub Pages
 
 on:
+  push:
+    branches:
+      - main
   workflow_call:
   workflow_dispatch:
 
@@ -18,16 +21,6 @@ jobs:
 
       - name: Install dependencies
         run: npm install --frozen-lockfile
-
-      - name: Create .env config file
-        run: |
-          cat > .env << EOF
-          DEPLOYMENT_URL=${{ secrets.DEPLOYMENT_URL }}
-          DEPLOYMENT_BRANCH=${{ secrets.DEPLOYMENT_BRANCH }}
-          BASE_URL=${{ secrets.BASE_URL }}
-          GITHUB_ORG=${{ secrets.ORG }}
-          GITHUB_PROJECT=${{ secrets.PROJECT }}
-          EOF
 
       - name: Build website
         env:

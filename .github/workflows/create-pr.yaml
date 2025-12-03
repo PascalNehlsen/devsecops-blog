@@ -9,6 +9,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  actions: write
 
 jobs:
   create-pull-request:
@@ -37,7 +38,7 @@ jobs:
       - name: Create Pull Request
         if: steps.diff.outputs.has_diff == 'true'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           # Check if PR already exists
           existing_pr=$(gh pr list --head ${{ github.ref_name }} --base main --json number --jq '.[0].number')
