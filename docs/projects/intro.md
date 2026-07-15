@@ -16,11 +16,29 @@ import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
   - **Book an appointment directly using the AI Chatbot** (bottom-right corner) - just type "Termin" or "appointment"
 </GithubLinkAdmonition>
 
-## Featured Projects
+## Work — DevSecOps Engineering
 
-- **HepaAssist** [Prod Link](https://hepa-assist.de/) | [Docs Link](/docs/projects/hepa-assist.md): HepaAssist is a multi-tenant application for healthcare facilities supporting digital resident documentation and care management.
+Selected engineering work from my role as a DevSecOps / Platform Engineer:
 
-- **AI Chatbot** [Docs Link](/docs/projects/chatbot.md): This is a production-ready, multi-tenant AI chatbot platform with appointment booking capabilities, integrated into this website and visible in the bottom-right corner.
+- **Self-Service Cloud Platform**: Full Terraform modularisation of a GCP environment (Cloud Run, Cloud SQL, GCS, IAM) with golden-path workflows, guardrails, and automated test gates. Cut provisioning time from ~4h to under 45min (**−80%**) and reduced infrastructure support tickets by 40%.
+
+- **Agentic DevOps Runbook Automation**: A secure runbook executor with a human-approval layer — an MCP-based remote server integrating GitHub, GCP Cloud Run/Logging, and Terraform state. Every critical action is auditable, reversible, and requires explicit approval. Cut incident response time for known failure classes by ~60%.
+
+- **Per-Student Cloud Sandboxes on AWS**: Provisioned isolated, production-like n8n automation sandboxes on AWS burstable EC2 (t3/t4g) with automated lifecycle management — giving 80+ trainees their own environment while keeping compute costs **50% below** fixed-size instances.
+
+- **Security Pipeline Integration**: SAST (Bandit, Semgrep) and DAST (OWASP ZAP) integrated into GitHub Actions with Docker image hardening before deployment. An automated rollback trigger on SLO breach kept the deployment error rate below 2%.
+
+## Featured Products
+
+- **HepaAssist** [Docs Link](/docs/projects/hepa-assist.md): A barrier-free, multi-tenant Progressive Web App for assisted-living facilities — residents track daily mood, staff monitor well-being trends and generate reports. Next.js + Django, containerised, with Web-Push.
+
+- **AI Chatbot Platform** [Docs Link](/docs/projects/chatbot.md): A production-ready, multi-tenant AI chatbot platform with appointment-booking capabilities, integrated into this website and visible in the bottom-right corner.
+
+- **Standly**: An AI trade-fair-stand designer SaaS for exhibition builders — prompt/RFQ to a buildable, editable, quotable 3D booth. Parametric catalog core with diffusion hero-renders and an RFQ → BOM → quote workflow.
+
+- **CaptureDesk**: An Electron desktop app for screen recording built on the Loom Record SDK, with a custom drawing overlay and a lightweight local Express backend.
+
+- **n8n Workflow Workspace**: A versioned workspace for n8n automations — personal and per-client — with strict client separation via tags and prefixes, and secrets kept out of git.
 
 - **DevSecOps Blog & Portfolio** [Live Site](https://docs.pascal-nehlsen.de/) | [Docs Link](devsecops-blog): A production-ready DevSecOps knowledge platform built with Docusaurus, showcasing security best practices, automated CI/CD pipelines with GitHub Actions, and comprehensive technical documentation.
 

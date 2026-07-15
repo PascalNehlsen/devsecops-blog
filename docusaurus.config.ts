@@ -64,7 +64,7 @@ if (blogEnabled) {
 
 const config: Config = {
   title: 'Pascal Nehlsen',
-  tagline: 'DevSecOps Fullstack Developer',
+  tagline: 'Infrastructure & Platform Engineer · DevSecOps',
   favicon: '/img/favicon.ico',
 
   url: DEPLOYMENT_URL,
