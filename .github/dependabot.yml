@@ -19,6 +19,15 @@ updates:
       patch-updates:
         update-types:
           - patch
+    ignore:
+      # package.json pins typescript to ~5.5.2 on purpose. Dependabot proposes
+      # past a declared range by default, and TypeScript 7 removes tsconfig
+      # options that Docusaurus's shared config still sets, so the proposal
+      # cannot pass. Majors here need to follow a Docusaurus release, not a
+      # weekly bot.
+      - dependency-name: typescript
+        update-types:
+          - version-update:semver-major
 
   - package-ecosystem: github-actions
     directory: /
@@ -29,3 +38,10 @@ updates:
     commit-message:
       prefix: chore
       include: scope
+    groups:
+      # One pull request for all of them. Four separate bumps of first-party
+      # actions is four reviews of the same decision, and every one of them
+      # also rewrites a pinned SHA, so they are best read together.
+      actions:
+        patterns:
+          - '*'
