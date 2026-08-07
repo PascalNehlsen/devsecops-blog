@@ -4,14 +4,20 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const blogEnabled = true;
 
-let DEPLOYMENT_URL =
-  process.env.DEPLOYMENT_URL ||
-  'https://pascalnehlsen.github.io/';
+// The canonical origin. This must stay in sync with three other things:
+//   - the CNAME file in this repo (what GitHub Pages actually serves)
+//   - the DEPLOYMENT_URL repository secret, which overrides this default in CI
+//   - the DNS records for the domain
+// Getting it wrong is not cosmetic: every canonical URL and the whole sitemap
+// are generated from it.
+const CANONICAL_URL = 'https://pascal-nehlsen.de';
+
+let DEPLOYMENT_URL = process.env.DEPLOYMENT_URL || CANONICAL_URL;
 let BASE_URL = process.env.BASE_URL || '/';
 
 // Ensure URL has protocol
 if (!/^https?:\/\//i.test(DEPLOYMENT_URL)) {
-  DEPLOYMENT_URL = 'https://pascalnehlsen.github.io/';
+  DEPLOYMENT_URL = CANONICAL_URL;
 }
 // Normalize baseUrl shape
 if (!BASE_URL.startsWith('/')) {
@@ -43,7 +49,7 @@ const DEPLOYMENT_BRANCH =
   process.env.DEPLOYMENT_BRANCH || 'main';
 
 const moreColumn = {
-  title: 'Social',
+  title: 'Elsewhere',
   items: [
     {
       label: 'GitHub',
@@ -57,18 +63,21 @@ const moreColumn = {
 };
 if (blogEnabled) {
   moreColumn.items.push({
-    label: 'Blog',
-    href: '/blog',
+    label: 'RSS',
+    // pathname:// — the feed is a generated asset, not a route, so the
+    // broken-link checker must not try to resolve it.
+    href: 'pathname:///blog/rss.xml',
   });
 }
 
 const config: Config = {
   title: 'Pascal Nehlsen',
-  tagline: 'Infrastructure & Platform Engineer · DevSecOps',
-  favicon: '/img/favicon.ico',
+  tagline: 'Platform & Security Engineering',
+  favicon: 'img/favicon.ico',
 
   url: DEPLOYMENT_URL,
   baseUrl: BASE_URL,
+  trailingSlash: false,
 
   organizationName: GITHUB_ORG,
   projectName: GITHUB_PROJECT,
@@ -76,15 +85,15 @@ const config: Config = {
   deploymentBranch: DEPLOYMENT_BRANCH,
 
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenAnchors: 'throw',
 
-  scripts: [
-    {
-      src: 'https://chatbot-mit-pascal.de/dist/widget.iife.js',
-      defer: true,
-      'data-bot-id': 'cmiprhmf0000olg2msmj8dx0c',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
     },
-  ],
+  },
+
+  clientModules: ['./src/clientModules/console-notice.js'],
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -107,9 +116,16 @@ const config: Config = {
               postsPerPage: 10,
               blogSidebarCount: 'ALL',
               blogSidebarTitle: 'All Posts',
+              onUntruncatedBlogPosts: 'throw',
               feedOptions: {
                 type: ['rss', 'atom'],
                 xslt: true,
+                title: 'Pascal Nehlsen — Writing',
+                description:
+                  'Build notes on platform and security engineering.',
+                language: 'en',
+                copyright: `© ${new Date().getFullYear()} Pascal Nehlsen`,
+                limit: false,
               },
               authorsMapPath: 'authors.yml',
             }
@@ -117,21 +133,43 @@ const config: Config = {
         theme: {
           customCss: './src/css/custom.css',
         },
+        sitemap: {
+          lastmod: 'date',
+          // Google ignores changefreq, and a uniform priority conveys nothing.
+          changefreq: null,
+          priority: null,
+          ignorePatterns: [
+            '/blog/tags/**',
+            '/blog/archive',
+            '/blog/authors/**',
+            '/blog/page/**',
+            '/search',
+            '/docs/category/**',
+          ],
+        },
       } satisfies Preset.Options,
     ],
   ],
 
   themeConfig: {
-    // Replace with your project's social card
     colorMode: {
       defaultMode: 'dark',
       disableSwitch: false,
       respectPrefersColorScheme: false,
     },
     image: 'img/docusaurus-social-card.jpg',
+    metadata: [
+      { name: 'author', content: 'Pascal Nehlsen' },
+      {
+        name: 'keywords',
+        content:
+          'platform engineering, devsecops, terraform, gcp, aws, ci/cd, observability, site reliability',
+      },
+      { name: 'twitter:card', content: 'summary_large_image' },
+    ],
     navbar: {
       logo: {
-        alt: 'My Site Logo',
+        alt: 'Pascal Nehlsen',
         src: 'img/favicon.ico',
       },
       items: [
@@ -154,7 +192,9 @@ const config: Config = {
       ],
     },
     footer: {
-      style: 'dark',
+      // 'light' lets the footer follow the theme tokens. 'dark' makes Infima
+      // hardcode its own dark palette and ignore --ifm-footer-*.
+      style: 'light',
       links: [
         {
           title: 'Docs',
@@ -169,40 +209,9 @@ const config: Config = {
             },
           ],
         },
-
-        // {
-        //   title: 'Community',
-        //   items: [
-        //     {
-        //       label: 'Stack Overflow',
-        //       href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-        //     },
-        //     {
-        //       label: 'Docusaurus Discord',
-        //       href: 'https://discordapp.com/invite/docusaurus',
-        //     },
-        //     {
-        //       label: 'Docusaurus Twitter',
-        //       href: 'https://twitter.com/docusaurus',
-        //     },
-        //   ],
-        // },
         moreColumn,
-        // {
-        //   title: 'More',
-        //   items: [
-        //     {
-        //       label: 'GitHub',
-        //       href: 'https://github.com/facebook/docusaurus',
-        //     },
-        //     blogEnabled && {
-        //       label: 'Blog',
-        //       to: '/blog',
-        //     },
-        //   ],
-        // },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Pascal Nehlsen, Inc. Built with Docusaurus.`,
+      copyright: `© ${new Date().getFullYear()} Pascal Nehlsen`,
     },
     prism: {
       theme: prismThemes.github,
