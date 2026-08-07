@@ -14,7 +14,7 @@ keywords: [docusaurus, github pages, csp, self-hosted fonts, ci security, detect
 :::
 
 A Docusaurus site on GitHub Pages. That part is unremarkable, and most of what
-a page like this usually contains (how to run `npm start`, what a static site
+a page like this usually contains (how to run the dev server, what a static site
 generator is) belongs in the [README](https://github.com/PascalNehlsen/devsecops-blog),
 not here.
 
@@ -68,11 +68,11 @@ this repository can go weeks without one.
 
 ### The dependency gate
 
-`npm audit --audit-level=high` would be the obvious answer, and it is not
+`pnpm audit --audit-level=high` would be the obvious answer, and it is not
 quite enough. When I added it, four high advisories existed. Three were fixed
-by `npm audit fix`. The fourth, `serialize-javascript`, is reached only
-through webpack plugins inside `@docusaurus/bundler` at build time, where it
-serialises this site's own output rather than untrusted input, and npm's only
+by an audit fix. The fourth, `serialize-javascript`, is reached only through
+webpack plugins inside `@docusaurus/bundler` at build time, where it
+serialises this site's own output rather than untrusted input, and the only
 proposed remedy is downgrading `@docusaurus/core` by five minor versions.
 That is a downgrade, not a fix.
 
@@ -87,6 +87,25 @@ So the gate is a script, and an exception needs three things:
 
 The third rule is the one I would keep if I could only keep one. Allowlists
 rot quietly.
+
+### Why pnpm
+
+The package manager is part of the supply chain, so it gets a decision rather
+than a default.
+
+npm hoists every transitive dependency into one flat `node_modules`, which
+means code can import packages the manifest never declared. This repository
+had exactly that: a component used `@types/react` without depending on it, and
+nothing noticed until pnpm's strict tree refused to resolve it. An undeclared
+dependency is one nobody audits, because nobody knows it is there.
+
+pnpm also blocks `postinstall` scripts unless each is approved. A postinstall
+hook runs arbitrary code on every machine that installs, CI included, and npm
+runs them all without asking.
+
+A side effect worth recording: npm reported 26 advisories against this tree
+and pnpm reports 3. The difference is not that one is more lenient. npm was
+counting the same advisory once per hoisted path.
 
 ### Secrets
 
