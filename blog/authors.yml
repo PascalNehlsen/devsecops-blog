@@ -1,8 +1,12 @@
 pascal:
   name: Pascal Nehlsen
-  title: DevSecOps Engineer
+  title: Platform & Security Engineering
   url: https://github.com/PascalNehlsen
-  image_url: https://github.com/PascalNehlsen.png
+  # Served from this origin, not from github.com. An avatar hotlinked from
+  # GitHub is a third-party request on every blog page — it leaks the reader's
+  # IP and it would force img-src to allow an external host.
+  image_url: /img/pascal-nehlsen.jpg
   email: mail@pascal-nehlsen.de
   socials:
     github: PascalNehlsen
+    linkedin: pascal-nehlsen
