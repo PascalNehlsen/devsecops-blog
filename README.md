@@ -4,7 +4,7 @@ A [Docusaurus](https://docusaurus.io/) site that serves as my portfolio, DevSecO
 knowledge base, and technical blog. It showcases my work as a DevSecOps / Platform
 Engineer and my own products, and is deployed to GitHub Pages behind a custom domain.
 
-**Live:** https://docs.pascal-nehlsen.de/
+**Live:** https://pascal-nehlsen.de/
 
 ---
 
@@ -20,11 +20,32 @@ Engineer and my own products, and is deployed to GitHub Pages behind a custom do
 - [Deployment](#deployment)
 - [Contributing](#contributing)
 
+## Ground rules
+
+Three constraints this site is built to hold. They are checkable, which is
+the point:
+
+1. **No third-party requests.** No font CDN, no analytics, no hosted search,
+   no embedded widgets, no hotlinked avatar. Open the network tab: every
+   request goes to this origin. This is what allows a `script-src 'self'` CSP
+   with no exceptions.
+2. **Nothing on the page that isn't true.** Metrics link to the write-up that
+   documents them. Exercises are labelled as exercises. Gaps are stated.
+3. **Every check that can block, blocks.** `onBrokenLinks`, `onBrokenAnchors`,
+   `onBrokenMarkdownLinks`, `onInlineTags` and `onUntruncatedBlogPosts` are all
+   `throw`. A broken internal link fails the build rather than reaching
+   production.
+
 ## Tech Stack
 
 - **Framework:** Docusaurus 3 (React 18, MDX)
 - **Language:** TypeScript (config) + JavaScript (pages/components)
-- **Styling:** Infima + custom CSS (`src/css/custom.css`) — cyberpunk theme
+- **Styling:** Infima, driven entirely from a token layer
+  (`src/css/tokens.css`) — slate + signal green, dark default, both themes
+  designed rather than inverted
+- **Fonts:** JetBrains Mono + IBM Plex Sans, self-hosted from `static/fonts/`
+- **Search:** `@easyops-cn/docusaurus-search-local` — offline lunr index, no
+  third-party request
 - **Hosting:** GitHub Pages (custom domain via `CNAME`)
 - **CI/CD:** GitHub Actions (`.github/`)
 
@@ -33,8 +54,8 @@ Engineer and my own products, and is deployed to GitHub Pages behind a custom do
 
 ## Prerequisites
 
-- Node.js **18+**
-- npm (or pnpm — a `pnpm-lock.yaml` is present)
+- Node.js **24+** (see `engines` in `package.json`; CI uses 24)
+- npm — `package-lock.json` is the only lockfile, and CI runs `npm ci`
 - Git
 
 ## Quickstart
@@ -58,6 +79,7 @@ npm run build       # Production build into build/
 npm run serve       # Serve the production build locally
 npm run typecheck   # tsc — type-check the config
 npm run clear       # Clear the Docusaurus cache
+npm run og          # Regenerate Open Graph cards into static/img/og/
 ```
 
 ## Project Structure
