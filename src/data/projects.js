@@ -83,14 +83,6 @@ const projects = [
     docsUrl: '/docs/projects/chatbot',
   },
   {
-    title: 'Standly',
-    category: 'product',
-    description:
-      'AI trade-fair-stand designer SaaS for exhibition builders: prompt/RFQ → buildable, editable, quotable 3D booth. Parametric catalog core with diffusion hero-renders, RFQ → BOM → quote workflow.',
-    impact: 'In development',
-    tags: ['SaaS', 'AI', '3D', 'Monorepo', 'TypeScript'],
-  },
-  {
     title: 'CaptureDesk',
     category: 'product',
     description:
