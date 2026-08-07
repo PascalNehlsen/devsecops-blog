@@ -1,364 +1,403 @@
-/* Shared styles for homepage sections. Cyberpunk-refined. */
+/**
+ * Homepage section styles.
+ *
+ * Rewritten onto the token layer. Every colour is a --c- token, every
+ * measurement a --space- or --fs- token. What is gone and why:
+ *
+ *   - the cyan→violet→pink gradient (6 occurrences here, 10 across the two
+ *     module files). Gradient-clipped text is also invisible in
+ *     forced-colors mode, so it was an accessibility bug, not just a taste
+ *     one.
+ *   - every !important (9). They only existed to fight the global
+ *     `* { font-size: max(16px, 1em) }` rule, which is gone.
+ *   - translateY hover lifts and their drop shadows. Hover is now a border
+ *     and surface step: it reads as state without moving the layout.
+ *   - hardcoded 'Courier New'.
+ */
 
 .section {
-  padding: 5rem 0;
+  padding: var(--space-20) 0;
 }
 
 .sectionAlt {
-  background: var(--ifm-color-emphasis-100);
+  background: var(--c-bg-alt);
 }
 
-[data-theme='dark'] .sectionAlt {
-  background: var(--ifm-background-surface-color);
-}
+/* ── Section header ───────────────────────────────────────────────────── */
 
-/* ── Section header ─────────────────────────────────────── */
 .header {
   text-align: center;
-  max-width: 720px;
-  margin: 0 auto 3rem;
+  max-width: 44rem;
+  margin: 0 auto var(--space-12);
 }
 
 .eyebrow {
   display: inline-block;
-  font-family: 'Courier New', monospace;
-  font-size: 0.95rem !important;
-  letter-spacing: 0.15em;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
-  color: var(--ifm-color-primary);
-  margin-bottom: 0.75rem;
+  color: var(--c-accent);
+  margin-bottom: var(--space-3);
 }
 
 .header h2 {
-  font-size: 2.5rem;
-  margin-bottom: 0.75rem;
-  background: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 50%, #ec4899 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-[data-theme='dark'] .header h2 {
-  background: linear-gradient(135deg, #22d3ee 0%, #a78bfa 50%, #f472b6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 0 20px rgba(34, 211, 238, 0.25));
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-tight);
+  color: var(--c-text);
+  margin-bottom: var(--space-3);
+  text-wrap: balance;
 }
 
 .subtitle {
-  font-size: 1.15rem;
-  color: var(--ifm-color-emphasis-600);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-light);
+  line-height: 1.6;
+  color: var(--c-text-muted);
 }
 
-/* ── Stats bar ──────────────────────────────────────────── */
+/* ── Stats ────────────────────────────────────────────────────────────── */
+
 .statsSection {
-  padding: 3.5rem 0;
-  border-top: 1px solid var(--ifm-color-emphasis-200);
-  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  padding: var(--space-12) 0;
+  border-top: var(--border-w) solid var(--c-border);
+  border-bottom: var(--border-w) solid var(--c-border);
 }
 
 .statsGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
   text-align: center;
 }
 
 .statValue {
-  font-size: 3rem;
-  font-weight: 800;
+  font-family: var(--font-mono);
+  font-size: var(--fs-3xl);
+  font-weight: var(--fw-bold);
   line-height: 1;
-  background: linear-gradient(135deg, #06b6d4, #8b5cf6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-[data-theme='dark'] .statValue {
-  background: linear-gradient(135deg, #22d3ee, #a78bfa);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  letter-spacing: var(--tracking-display);
+  font-variant-numeric: tabular-nums;
+  color: var(--c-text);
 }
 
 .statLabel {
-  margin-top: 0.5rem;
-  color: var(--ifm-color-emphasis-600);
-  font-size: 1rem;
+  margin-top: var(--space-2);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-normal);
+  color: var(--c-text-muted);
+}
+
+/* A stat that links to the write-up documenting it. */
+.statLink {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.statLink:hover {
+  text-decoration: none;
+}
+
+.statLink:hover .statValue {
+  color: var(--c-accent);
+}
+
+.statLink:hover .statLabel {
+  color: var(--c-text);
 }
 
 @media screen and (max-width: 768px) {
   .statsGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem 1rem;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
   }
+
   .statValue {
-    font-size: 2.25rem;
+    font-size: var(--fs-2xl);
   }
 }
 
-/* ── Project cards ──────────────────────────────────────── */
+/* ── Project cards ────────────────────────────────────────────────────── */
+
 .cardGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1.75rem;
+  gap: var(--space-6);
 }
 
 .projectCard {
   display: flex;
   flex-direction: column;
-  background: var(--ifm-card-background-color);
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 14px;
-  padding: 1.75rem;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  background: var(--c-surface);
+  border: var(--border-w) solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  transition: border-color var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) var(--ease);
 }
 
-.projectCard::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #06b6d4, #8b5cf6, #ec4899);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
-}
-
-.projectCard:hover {
-  transform: translateY(-6px);
-  border-color: rgba(6, 182, 212, 0.4);
-  box-shadow: 0 20px 30px -12px rgba(6, 182, 212, 0.25);
-}
-
-.projectCard:hover::before {
-  transform: scaleX(1);
+.projectCard:hover,
+.projectCard:focus-within {
+  border-color: var(--c-border-strong);
+  background: var(--c-elevated);
 }
 
 .cardTop {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 0.75rem;
-  margin-bottom: 0.75rem;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
 }
 
 .cardTitle {
-  font-size: 1.3rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-tight);
+  color: var(--c-text);
   margin: 0;
-  color: var(--ifm-heading-color);
 }
 
 .impact {
   flex-shrink: 0;
-  font-family: 'Courier New', monospace;
-  font-size: 0.8rem !important;
-  padding: 0.25rem 0.6rem;
-  border-radius: 999px;
-  color: var(--ifm-color-primary);
-  background: rgba(6, 182, 212, 0.1);
-  border: 1px solid rgba(6, 182, 212, 0.3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-wide);
+  padding: var(--space-1) var(--space-2);
+  border: var(--border-w) solid var(--c-accent);
+  border-radius: var(--radius-xs);
+  background: var(--c-accent-quiet);
+  color: var(--c-accent);
   white-space: nowrap;
 }
 
 .cardDesc {
-  color: var(--ifm-color-emphasis-700);
-  line-height: 1.6;
+  color: var(--c-text-muted);
+  line-height: var(--lh-relaxed);
   flex-grow: 1;
-  margin-bottom: 1.25rem;
+  margin-bottom: var(--space-5);
 }
 
 .tagRow {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1.25rem;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
 }
 
 .tag {
-  font-size: 0.8rem !important;
-  padding: 0.2rem 0.6rem;
-  border-radius: 6px;
-  color: var(--ifm-color-emphasis-700);
-  background: var(--ifm-color-emphasis-100);
-  border: 1px solid var(--ifm-color-emphasis-200);
-}
-
-[data-theme='dark'] .tag {
-  background: rgba(139, 92, 246, 0.08);
-  border-color: rgba(139, 92, 246, 0.2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-wide);
+  line-height: 1.4;
+  padding: var(--space-1) var(--space-2);
+  border: var(--border-w) solid var(--c-border);
+  border-radius: var(--radius-xs);
+  background: var(--c-elevated);
+  color: var(--c-text-muted);
+  white-space: nowrap;
 }
 
 .cardLinks {
   display: flex;
-  gap: 1rem;
+  gap: var(--space-4);
   margin-top: auto;
 }
 
 .cardLink {
-  font-weight: 600;
-  font-size: 0.95rem !important;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-wide);
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: var(--space-1);
 }
 
-/* ── Skills grid ────────────────────────────────────────── */
+/* ── Skills ───────────────────────────────────────────────────────────── */
+
 .skillsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
+  gap: var(--space-6);
 }
 
 .skillGroup {
-  background: var(--ifm-card-background-color);
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 14px;
-  padding: 1.5rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background: var(--c-surface);
+  border: var(--border-w) solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  transition: border-color var(--dur-fast) var(--ease);
 }
 
 .skillGroup:hover {
-  border-color: rgba(139, 92, 246, 0.4);
-  box-shadow: 0 10px 25px -12px rgba(139, 92, 246, 0.3);
+  border-color: var(--c-border-strong);
 }
 
 .skillGroupTitle {
-  font-size: 1.05rem;
-  margin-bottom: 1rem;
-  color: var(--ifm-color-primary);
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--c-accent);
+  margin-bottom: var(--space-4);
 }
 
 .skillBadges {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: var(--space-2);
 }
 
 .skillBadge {
-  font-size: 0.9rem !important;
-  padding: 0.35rem 0.75rem;
-  border-radius: 8px;
-  background: var(--ifm-color-emphasis-100);
-  border: 1px solid var(--ifm-color-emphasis-200);
-  color: var(--ifm-color-emphasis-800);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  line-height: 1.4;
+  padding: var(--space-1) var(--space-2);
+  border: var(--border-w) solid var(--c-border);
+  border-radius: var(--radius-xs);
+  background: var(--c-elevated);
+  color: var(--c-text-muted);
 }
 
-[data-theme='dark'] .skillBadge {
-  background: rgba(6, 182, 212, 0.07);
-  border-color: rgba(6, 182, 212, 0.2);
-  color: var(--ifm-color-emphasis-700);
-}
+/* ── Blog preview ─────────────────────────────────────────────────────── */
 
-/* ── Blog preview ───────────────────────────────────────── */
 .blogGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
+  gap: var(--space-6);
 }
 
 .blogCard {
   display: flex;
   flex-direction: column;
-  background: var(--ifm-card-background-color);
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 14px;
-  padding: 1.5rem;
-  text-decoration: none !important;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  background: var(--c-surface);
+  border: var(--border-w) solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  text-decoration: none;
+  transition: border-color var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) var(--ease);
 }
 
 .blogCard:hover {
-  transform: translateY(-4px);
-  border-color: rgba(6, 182, 212, 0.4);
-  box-shadow: 0 15px 25px -12px rgba(6, 182, 212, 0.25);
+  border-color: var(--c-border-strong);
+  background: var(--c-elevated);
+  text-decoration: none;
 }
 
 .blogDate {
-  font-family: 'Courier New', monospace;
-  font-size: 0.85rem !important;
-  color: var(--ifm-color-primary);
-  margin-bottom: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  letter-spacing: var(--tracking-wide);
+  color: var(--c-text-muted);
+  margin-bottom: var(--space-2);
 }
 
 .blogTitle {
-  font-size: 1.15rem;
-  color: var(--ifm-heading-color);
-  margin-bottom: 0.6rem;
-  line-height: 1.35;
+  font-family: var(--font-mono);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-tight);
+  color: var(--c-text);
+  margin-bottom: var(--space-2);
 }
 
 .blogDesc {
-  color: var(--ifm-color-emphasis-700);
-  line-height: 1.55;
+  color: var(--c-text-muted);
+  line-height: var(--lh-relaxed);
   flex-grow: 1;
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-4);
 }
 
-/* ── CTA ────────────────────────────────────────────────── */
+/* ── CTA ──────────────────────────────────────────────────────────────── */
+
 .cta {
   text-align: center;
-  max-width: 640px;
+  max-width: 40rem;
   margin: 0 auto;
 }
 
 .cta h2 {
-  font-size: 2.25rem;
-  margin-bottom: 1rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-tight);
+  color: var(--c-text);
+  margin-bottom: var(--space-4);
 }
 
 .cta p {
-  font-size: 1.15rem;
-  color: var(--ifm-color-emphasis-600);
-  margin-bottom: 2rem;
+  font-size: var(--fs-md);
+  font-weight: var(--fw-light);
+  line-height: 1.6;
+  color: var(--c-text-muted);
+  margin-bottom: var(--space-8);
 }
 
 .ctaButtons {
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: var(--space-4);
   flex-wrap: wrap;
+}
+
+.ctaMail {
+  margin-top: var(--space-6);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--c-text-muted);
 }
 
 .centerMore {
   text-align: center;
-  margin-top: 2.5rem;
+  margin-top: var(--space-10);
 }
 
-/* ── Feature icons ──────────────────────────────────────── */
+/* A single line under the work grid, replacing the old eleven-card
+   "Also on the Bench" section. */
+.alsoLine {
+  margin-top: var(--space-8);
+  text-align: center;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-relaxed);
+  color: var(--c-text-muted);
+}
+
+/* Removed together with the features section in the homepage rewrite. */
 .featureIconWrap {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto 1.25rem;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto var(--space-5);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 16px;
-  background: linear-gradient(135deg, rgba(6, 182, 212, 0.12), rgba(139, 92, 246, 0.12));
-  border: 1px solid var(--ifm-color-emphasis-200);
-  color: var(--ifm-color-primary);
+  border: var(--border-w) solid var(--c-border);
+  border-radius: var(--radius-md);
+  background: var(--c-elevated);
+  color: var(--c-accent);
 }
 
 .featureIconWrap svg {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .projectCard,
-  .projectCard::before,
   .blogCard,
   .skillGroup {
     transition: none;
-  }
-  .projectCard:hover,
-  .blogCard:hover {
-    transform: none;
   }
 }
