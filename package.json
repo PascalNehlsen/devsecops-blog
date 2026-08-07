@@ -37,7 +37,7 @@
     "@types/react-dom": "^19.2.4",
     "gray-matter": "^4.0.3",
     "satori": "^0.29.0",
-    "typescript": "~5.5.2",
+    "typescript": "~5.9.3",
     "wawoff2": "^2.0.1"
   },
   "browserslist": {
