@@ -30,21 +30,44 @@ identical between projects. What differs is the build date.
 
 Two ideas carry the product.
 
-**Workflow blocks.** A reusable unit of work with an offset relative to the
-build date rather than an absolute date. "Lock print files, minus 21 days."
-Blocks compose into a template, a template is applied to a project, and the
-concrete task dates fall out of the build date automatically. Move the build
-date and every derived deadline moves with it.
+**Workflow blocks.** A reusable unit of work carrying an offset relative to
+the event rather than an absolute date, plus its own status chain. Technical
+registration is 56 days before the event and moves through
+`prüfen → anmelden → freigegeben → erledigt`. Booking the freight is 21 days
+and runs `offen → angefragt → bestätigt → abgeschlossen`. The offset encodes
+the scheduling rule and the chain encodes what "done" means for that
+particular kind of work, which is not the same for a floor order as it is
+for a power connection.
+
+![Six reusable workflow blocks, each with its lead time in days before the event and its own status chain.](../assets/images/runnz/02-workflow-blocks.png)
+
+Blocks apply to a project, and the concrete deadlines fall out of the event
+date automatically. Move the date and the whole chain moves with it.
+
+![Project edit view showing the automatically derived deadlines, with a note that they can still be adjusted by hand.](../assets/images/runnz/04-derived-deadlines.png)
+
+Derived, not locked. The note under the computed dates says they can be
+overridden later, which matters: the model is a default that is right most of
+the time, not a constraint that fights the planner when a hall changes its
+access times.
+
+![Project overview: brief, progress, and the deadline list for a single trade fair.](../assets/images/runnz/03-project-detail.png)
 
 **A year at a glance.** Exhibition companies run many projects with
 overlapping crews and overlapping halls, so the calendar is the primary
-interface, not a list. Setup and teardown windows are grouped so a planner
-can see where two projects want the same people in the same week.
+interface, not a list. Each project renders as its run time plus separate
+bars for setup and teardown, and the official windows the organiser dictates
+are drawn apart from the ones the company plans itself. A planner sees in one
+row where two fairs want the same crew in the same week.
+
+![Year calendar for 2026: run time, official setup, setup and teardown drawn as separate bars per project across the whole year.](../assets/images/runnz/01-year-calendar.png)
 
 Fourteen backend modules cover the surrounding domain: customers, employees
 and their vacations, subcontractors, suppliers, file attachments, and the
 task instances themselves. Thirty-two migrations, so the schema has been
 through real change rather than being generated once.
+
+Screenshots are from the staging environment with test data.
 
 ## Stack
 
