@@ -1,72 +1,72 @@
 ---
+id: intro
+title: Projects
+sidebar_label: Projects
 sidebar_position: 1
+description: Everything I've built and documented — platform work at Developer Akademie, my own products, and the security exercises behind the write-ups.
+keywords: [platform engineering, devsecops, terraform, gcp, aws, portfolio]
 ---
 
-# DevSecOps Projects Documentation
+# Projects
 
-Welcome to my DevSecOps portfolio! On this page, you'll find an overview of my latest projects in the DevSecOps space. From integrating security practices into CI/CD pipelines to automating compliance and monitoring, I focus on building secure, scalable, and efficient solutions that blend development, security, and operations. Explore my work to see how I apply DevSecOps principles to enhance software delivery while maintaining a strong security posture.
+Everything here is documented, not just listed. Where a project has a
+write-up, the last column links to it; where the code is public, so does the
+repo. Private employer and client work has no repo link — the write-up is the
+artifact.
 
-import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
+For the three-minute version, the [homepage](/) has the highlights.
 
-<GithubLinkAdmonition link="https://github.com/PascalNehlsen" text="Github Profile" type="info">
-  **If you're interested in discussing any of my projects or exploring potential collaborations, feel free to reach out via**
-  - [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)
-  - [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
-  - [Portfolio Contact Form](https://pascal-nehlsen.de/#contact)
-  - **Book an appointment directly using the AI Chatbot** (bottom-right corner) - just type "Termin" or "appointment"
-</GithubLinkAdmonition>
+## Platform & DevSecOps work
 
-## Work — DevSecOps Engineering
+From my role at Developer Akademie GmbH. The repositories are private; the
+write-ups and the numbers are not.
 
-Selected engineering work from my role as a DevSecOps / Platform Engineer:
+| Project | Outcome | Stack | Write-up |
+| --- | --- | --- | --- |
+| Terraform golden paths on GCP | Provisioning 4 h → 45 min | Terraform, Cloud Run, Cloud SQL, IAM | [Blog](/blog/terraform-golden-paths-gcp) |
+| Agentic runbooks with an approval gate | Response time −60% on known failures | Go, MCP, GCP, Terraform state | [Blog](/blog/agentic-runbooks-mcp-human-approval) |
+| Ephemeral per-user AWS sandboxes | 80+ envs, compute spend −50% | AWS EC2 (t3/t4g), Terraform, n8n | [Blog](/blog/ephemeral-aws-sandboxes-cost) |
+| SLO-gated deploys with automatic rollback | Deploy error rate under 2% | Prometheus, Grafana, GitHub Actions | [Blog](/blog/slo-driven-automated-rollback) |
+| Security scanning in the delivery path | SAST and DAST blocking, not advisory | Bandit, Semgrep, OWASP ZAP, Trivy | — |
 
-- **Self-Service Cloud Platform**: Full Terraform modularisation of a GCP environment (Cloud Run, Cloud SQL, GCS, IAM) with golden-path workflows, guardrails, and automated test gates. Cut provisioning time from ~4h to under 45min (**−80%**) and reduced infrastructure support tickets by 40%.
+## Products
 
-- **Agentic DevOps Runbook Automation**: A secure runbook executor with a human-approval layer — an MCP-based remote server integrating GitHub, GCP Cloud Run/Logging, and Terraform state. Every critical action is auditable, reversible, and requires explicit approval. Cut incident response time for known failure classes by ~60%.
+Things I build and run myself.
 
-- **Per-Student Cloud Sandboxes on AWS**: Provisioned isolated, production-like n8n automation sandboxes on AWS burstable EC2 (t3/t4g) with automated lifecycle management — giving 80+ trainees their own environment while keeping compute costs **50% below** fixed-size instances.
+| Project | What it is | Stack | Links |
+| --- | --- | --- | --- |
+| **Emavi** (formerly HepaAssist) | Barrier-free multi-tenant PWA for assisted-living facilities: residents log daily mood, staff see trends and generate reports. | Next.js, Django, PostgreSQL, Docker, Web Push | [Docs](/docs/projects/hepa-assist) |
+| **AI Chatbot Platform** | Multi-tenant chatbot with appointment booking, embeddable as a widget with Shadow DOM isolation and per-tenant CORS validation. | Next.js, Prisma, OpenAI, Shadow DOM | [Docs](/docs/projects/chatbot) |
+| **Standly** | AI trade-fair-stand designer: prompt or RFQ in, buildable and quotable 3D booth out. Parametric catalog core, RFQ → BOM → quote. In development. | TypeScript monorepo, 3D, diffusion renders | — |
+| **CaptureDesk** | Linux-first Electron screen recorder on the Loom Record SDK, with a drawing overlay and a local Express backend. | Electron, Node.js, Express | — |
+| **n8n Workflow Workspace** | Versioned workspace for personal and per-client n8n automations. Strict client separation by tag and name prefix; secrets never in git. | n8n | — |
+| **This site** | Docusaurus on GitHub Pages behind a custom domain. Zero third-party requests, self-hosted fonts, offline search. | Docusaurus 3, GitHub Actions | [Docs](/docs/projects/devsecops-blog) |
 
-- **Security Pipeline Integration**: SAST (Bandit, Semgrep) and DAST (OWASP ZAP) integrated into GitHub Actions with Docker image hardening before deployment. An automated rollback trigger on SLO breach kept the deployment error rate below 2%.
+## Smaller projects
 
-## Featured Products
+Containers and deployment work. Older and smaller, still documented.
 
-- **HepaAssist** [Docs Link](/docs/projects/hepa-assist.md): A barrier-free, multi-tenant Progressive Web App for assisted-living facilities — residents track daily mood, staff monitor well-being trends and generate reports. Next.js + Django, containerised, with Web-Push.
+| Project | What it covers | Links |
+| --- | --- | --- |
+| Conduit pipeline | GitHub Actions: clone → build image → deploy over SSH with Compose | [Docs](/docs/projects/recent/conduit-pipeline) · [Repo](https://github.com/PascalNehlsen/conduit) |
+| Conduit container | Compose stack for an Angular frontend and a Django backend | [Docs](/docs/projects/recent/conduit) · [Repo](https://github.com/PascalNehlsen/conduit) |
+| Truck Signs API | Django + DRF store with Stripe, containerised | [Docs](/docs/projects/recent/truck-signs-api) · [Repo](https://github.com/PascalNehlsen/truck_signs_api) |
+| VM setup & hardening | nginx, SSH keys, disabling password auth, managing multiple identities | [Docs](/docs/projects/recent/vm-setup) · [Repo](https://github.com/PascalNehlsen/v-server-setup) |
 
-- **AI Chatbot Platform** [Docs Link](/docs/projects/chatbot.md): A production-ready, multi-tenant AI chatbot platform with appointment-booking capabilities, integrated into this website and visible in the bottom-right corner.
+## Security exercises
 
-- **Standly**: An AI trade-fair-stand designer SaaS for exhibition builders — prompt/RFQ to a buildable, editable, quotable 3D booth. Parametric catalog core with diffusion hero-renders and an RFQ → BOM → quote workflow.
+Deliberate practice against intentionally vulnerable targets, documented as I
+worked through them. These are exercises, not client engagements — labelling
+them as anything else would be dishonest, and they are more useful this way:
+the value is in the reasoning, not the trophy.
 
-- **CaptureDesk**: An Electron desktop app for screen recording built on the Loom Record SDK, with a custom drawing overlay and a lightweight local Express backend.
+| Set | What it covers | Links |
+| --- | --- | --- |
+| OWASP Juice Shop | Four challenges end to end — API-only XSS, CAPTCHA bypass, admin registration, deluxe fraud — with the request traces | [Docs](/docs/projects/recent/juice-shop/intro) · [Repo](https://github.com/PascalNehlsen/juice-shop-challenges) |
+| Python security tooling | Scripted scanning, cracking and metadata extraction — nmap, hydra, hashcat, exiftool-style metadata handling — one page per tool | [Docs](/docs/projects/recent/python-tools/intro) · [Repo](https://github.com/PascalNehlsen/dso-python-tasks) |
 
-- **n8n Workflow Workspace**: A versioned workspace for n8n automations — personal and per-client — with strict client separation via tags and prefixes, and secrets kept out of git.
-
-- **DevSecOps Blog & Portfolio** [Live Site](https://docs.pascal-nehlsen.de/) | [Docs Link](devsecops-blog): A production-ready DevSecOps knowledge platform built with Docusaurus, showcasing security best practices, automated CI/CD pipelines with GitHub Actions, and comprehensive technical documentation.
-
-## Recent Projects
-
-- **Conduit Pipeline** [GitHub](https://github.com/PascalNehlsen/conduit) | [Docs Link](/docs/projects/recent/conduit-pipeline.md):
-  This GitHub Actions pipeline automates the process of cloning a repository, building Docker images, and deploying an application to a remote server using Docker Compose.
-
-- **Conduit Container** [GitHub](https://github.com/PascalNehlsen/conduit) | [Docs Link](/docs/projects/recent/conduit.md):
-  This repository includes a Docker Compose setup for deploying a Frontend Application with a Django Backend.
-
-- **Wordpress Container** [GitHub](https://github.com/PascalNehlsen/wordpress-container) | [Docs Link](/docs/projects/recent/wordpress.md):
-  This repository includes a Docker Compose setup for quickly launching a WordPress instance with a MariaDB database. It simplifies the process of setting up and maintaining a WordPress site with an underlying database.
-
-- **Minecraft Server** [GitHub](https://github.com/PascalNehlsen/minecraft-server) | [Docs Link](/docs/projects/recent/minecraft.md):
-  This repository provides an easy-to-use setup for running a customizable Minecraft server using Docker Compose. Deploy it locally or to a virtual machine (VM) with minimal effort.
-
-- **Truck Signs API** [GitHub](https://github.com/PascalNehlsen/truck_signs_api) | [Docs Link](/docs/projects/recent/truck-signs-api.md):
-  This project is an online store called "Signs for Trucks," designed to sell pre-designed and customizable vinyl truck signs. It allows customers to purchase vinyls with truck logos, numbers, or custom text, as well as upload and customize their own designs. The backend is built with **Django** and **Django Rest Framework**, with payment integration via Stripe and Dockerized for deployment.
-
-- **Baby Tools Shop** [GitHub](https://github.com/PascalNehlsen/baby-tools-shop) | [Docs Link](/docs/projects/recent/baby-tools-shop.md):
-  This project contains a **Django** application designed for managing a baby tools e-commerce store. The project uses **Docker** to containerize the application and deploy it to a virtual machine (VM).
-
-- **VM Setup** [GitHub](https://github.com/PascalNehlsen/v-server-setup) | [Docs Link](/docs/projects/recent/vm-setup.md):
-  This project demonstrates how to configure an existing server with **nginx**, generate and use **SSH keys** for secure login, disable password-based authentication, use **aliases** for SSH connections, and manage multiple **SSH identities**.
-
-- **Python Tools** [GitHub](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/) | [Docs Folder](/docs/projects/recent/python-tools/intro.md):
-  This projects demonstrates how to create Pentesting tools in **Python**, including scripts and applications designed to identify vulnerabilities and assess the security of systems, networks, or applications. It automates tasks such as network scanning, password cracking, and exploitation, making it essential for ethical hacking and security testing.
-
-- **Juice Shop Challenges** [GitHub](https://github.com/PascalNehlsen/juice-shop-challenges) | [Docs Folder](/docs/projects/recent/juice-shop/intro.md):
-  This projects contains the documentation of specific OWASP Juice Shop Challenges designed to help users understand and mitigate common web vulnerabilities. Each challenge provides hands-on experience in identifying and exploiting security flaws in a safe and educational environment.
+:::warning[Authorised testing only]
+Everything in that section was run against targets I own or that exist to be
+attacked. Running these techniques against systems you have no written
+permission to test is illegal.
+:::

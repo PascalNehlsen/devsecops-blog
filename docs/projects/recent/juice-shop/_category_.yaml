@@ -1,5 +1,5 @@
-label: 'Juice Shop Challenges'
-position: 5
+label: 'OWASP Juice Shop'
+position: 6
 link:
   type: 'doc'
   id: projects/recent/juice-shop/intro

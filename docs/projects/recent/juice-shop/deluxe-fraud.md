@@ -5,11 +5,6 @@ sidebar_label: Deluxe Fraud
 sidebar_position: 4
 ---
 
-import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
-
-<GithubLinkAdmonition link="https://github.com/PascalNehlsen/juice-shop-challenges/blob/main/challenges/deluxe-fraud.md" text="Github Repository" type="info">
-**Reach me out via** [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)**,** [Portfolio Contact Form](https://pascal-nehlsen.de/#contact) **or** [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
-</GithubLinkAdmonition>
 # Admin Registration Challenge Report
 
 # Deluxe Fraud Challenge Report
@@ -21,7 +16,6 @@ This tool is intended for educational and authorized penetration testing purpose
 **Project**: OWASP Juice Shop - Deluxe Fraud Challenge (Improper Input Validation) <br/ >
 **Tools**: Kali Linux with Burp Suite, Firefox Developer Tools <br/ >
 **Author**: Pascal Nehlsen <br/ >
-**Portfolio**: [https://www.pascal-nehlsen.de/](https://www.pascal-nehlsen.de/) <br/ >
 **GitHub Link**: [https://github.com/PascalNehlsen/juice-shop-challenges/blob/main/challenges/deluxe-fraud.md](https://github.com/PascalNehlsen/juice-shop-challenges/blob/main/challenges/deluxe-fraud.md)
 
 ## Table of Contents
@@ -104,3 +98,7 @@ This challenge was successfully completed by modifying the `POST` request, allow
 ![Challenge Accepted](../../../assets/images/juice-shop/captcha-bypass/challenge-accept.png)
 
 </div>
+
+---
+
+**Repository:** [https://github.com/PascalNehlsen/juice-shop-challenges/blob/main/challenges/deluxe-fraud.md](https://github.com/PascalNehlsen/juice-shop-challenges/blob/main/challenges/deluxe-fraud.md)

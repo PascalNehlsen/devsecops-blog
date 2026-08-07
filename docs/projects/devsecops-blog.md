@@ -2,7 +2,7 @@
 id: devsecops-blog
 title: DevSecOps Blog & Portfolio
 sidebar_label: DevSecOps Blog
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
@@ -11,7 +11,6 @@ import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
 
 [Click for Live View](https://docs.pascal-nehlsen.de/)
 
-**Reach me out via** [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)**,** [Portfolio Contact Form](https://pascal-nehlsen.de/#contact) **or** [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
 
 **Book an appointment directly using the AI Chatbot** (bottom-right corner) - just type "Termin" or "appointment"
 </GithubLinkAdmonition>
@@ -944,7 +943,7 @@ The platform serves as both a knowledge repository and a demonstration of DevSec
 - **Role**: DevSecOps Engineer
 - **GitHub**: [@PascalNehlsen](https://github.com/PascalNehlsen)
 - **Email**: mail@pascal-nehlsen.de
-- **Portfolio**: [pascal-nehlsen.de](https://pascal-nehlsen.de)
+- 
 
 ### Technologies Used
 - [Docusaurus](https://docusaurus.io/) - Static site generator

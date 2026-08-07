@@ -2,11 +2,10 @@
 id: chatbot
 title: AI Chatbot
 sidebar_label: AI Chatbot
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 :::info[Try out the chatbot at the bottom right]
-**Reach me out via** [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)**,** [Portfolio Contact Form](https://pascal-nehlsen.de/#contact) **or** [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
 
 **Book an appointment directly using the AI Chatbot** (bottom-right corner) - just type "Termin" or "appointment"
 :::

@@ -2,14 +2,14 @@
 id: docker-in-devops
 title: Docker in DevOps
 sidebar_label: Docker in DevOps
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 # The Role of Docker in DevOps
 
 ## Introduction
 
-[Docker](../Container/container.md) has transformed the way developers build, ship, and run applications. In the DevOps ecosystem, Docker serves as a key enabler for automation, consistency, and scalability. By providing lightweight, portable containers, Docker streamlines collaboration between development and operations teams, reducing friction in the software delivery lifecycle.
+[Docker](../Container/intro.md) has transformed the way developers build, ship, and run applications. In the DevOps ecosystem, Docker serves as a key enabler for automation, consistency, and scalability. By providing lightweight, portable containers, Docker streamlines collaboration between development and operations teams, reducing friction in the software delivery lifecycle.
 
 This document explores how Docker fits into DevOps workflows and highlights best practices for leveraging Docker effectively.
 

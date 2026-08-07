@@ -5,11 +5,6 @@ sidebar_label: Captcha Bypass
 sidebar_position: 3
 ---
 
-import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
-
-<GithubLinkAdmonition link="https://github.com/PascalNehlsen/juice-shop-challenges/blob/main/challenges/captcha-bypass.md" text="Github Repository" type="info">
-**Reach me out via** [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)**,** [Portfolio Contact Form](https://pascal-nehlsen.de/#contact) **or** [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
-</GithubLinkAdmonition>
 # Admin Registration Challenge Report
 
 # CAPTCHA Bypass Challenge Report
@@ -21,7 +16,6 @@ This tool is intended for educational and authorized penetration testing purpose
 **Project**: OWASP Juice Shop - CAPTCHA Bypass Challenge (Broken Anti Automation) <br/ >
 **Tools**: Kali Linux with Burp Suite <br/ >
 **Author**: Pascal Nehlsen <br/ >
-**Portfolio**: [https://www.pascal-nehlsen.de/](https://www.pascal-nehlsen.de/) <br/ >
 **GitHub Link**: [https://github.com/PascalNehlsen/juice-shop-challenges/blob/main/challenges/captcha-bypass.md](https://github.com/PascalNehlsen/juice-shop-challenges/blob/main/challenges/captcha-bypass.md)
 
 ## Table of Contents
@@ -112,3 +106,7 @@ This test successfully completed the CAPTCHA Bypass Challenge by solving the CAP
 ![Intruder Request](../../../assets/images/juice-shop/captcha-bypass/challenge-accept.png)
 
 </div>
+
+---
+
+**Repository:** [https://github.com/PascalNehlsen/juice-shop-challenges/blob/main/challenges/captcha-bypass.md](https://github.com/PascalNehlsen/juice-shop-challenges/blob/main/challenges/captcha-bypass.md)

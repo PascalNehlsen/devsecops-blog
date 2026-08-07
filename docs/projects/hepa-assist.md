@@ -2,11 +2,10 @@
 id: hepa-assist
 title: HepaAssist
 sidebar_label: HepaAssist
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 :::info[[Click for Live View](https://hepa-assist.de/)]
-**Reach me out via** [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)**,** [Portfolio Contact Form](https://pascal-nehlsen.de/#contact) **or** [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
 
 **Book an appointment directly using the AI Chatbot** (bottom-right corner) - just type "Termin" or "appointment"
 :::

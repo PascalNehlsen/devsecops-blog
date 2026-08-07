@@ -5,11 +5,6 @@ sidebar_label: PDF Metadata Scan Tool
 sidebar_position: 4
 ---
 
-import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
-
-<GithubLinkAdmonition link="https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/metadata" text="Github Repository" type="info">
-**Reach me out via** [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)**,** [Portfolio Contact Form](https://pascal-nehlsen.de/#contact) **or** [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
-</GithubLinkAdmonition>
 
 # My PDF Metadata Scan Tool
 
@@ -116,3 +111,7 @@ The output CSV file will contain the following metadata fields for each PDF:
 - PDF Version
 
 Each entry will be separated by a semicolon (`;`) as per your specification.
+
+---
+
+**Repository:** [https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/metadata](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/metadata)

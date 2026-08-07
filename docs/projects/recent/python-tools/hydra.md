@@ -5,11 +5,6 @@ sidebar_label: Hydra Tool
 sidebar_position: 3
 ---
 
-import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
-
-<GithubLinkAdmonition link="https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/hydra" text="Github Repository" type="info">
-**Reach me out via** [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)**,** [Portfolio Contact Form](https://pascal-nehlsen.de/#contact) **or** [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
-</GithubLinkAdmonition>
 
 # My SSH cracker Tool
 
@@ -155,3 +150,7 @@ python hydra.py \
 ## Logging
 
 Logs are written to **hydra.log**. The **hydra.log** will be placed in your source code folder. If there is already a **hydra.log** in this folder, the generated log files are appended to the content You can check this file to review detailed information about the connection attempts and outcomes.
+
+---
+
+**Repository:** [https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/hydra](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/hydra)

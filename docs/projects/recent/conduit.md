@@ -5,11 +5,6 @@ sidebar_label: Conduit Deploy
 sidebar_position: 2
 ---
 
-import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
-
-<GithubLinkAdmonition link="https://github.com/PascalNehlsen/conduit" text="Github Repository" type="info">
-**Reach me out via** [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)**,** [Portfolio Contact Form](https://pascal-nehlsen.de/#contact) **or** [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
-</GithubLinkAdmonition>
 
 # Conduit Deploy with Docker Compose
 
@@ -92,3 +87,7 @@ You need to configure several environment variables for the Django project to wo
 | `DEBUG`                     | Set to True for local development to enable debugging features.                              | False                  |
 | `ALLOWED_HOSTS`             | A comma-separated list of allowed hostnames or IP addresses that your Django site can serve. | 127.0.0.1, localhost   |
 | `CORS_ALLOWED_ORIGINS`      | A list of allowed origins for cross-origin requests.                                         | http://localhost:8282  |
+
+---
+
+**Repository:** [https://github.com/PascalNehlsen/conduit](https://github.com/PascalNehlsen/conduit)

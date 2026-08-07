@@ -1,61 +1,83 @@
 ---
 id: intro
-sidebar_label: Knowledge Base Intro
+title: Knowledge Base
+sidebar_label: Knowledge Base
 sidebar_position: 1
+description: Teaching notes on containers, DevOps practice, Git and environment handling — written for the engineers I mentor, kept public because they are useful to more than them.
+keywords: [docker, docker compose, devops, 12-factor, environment variables, teaching notes]
 ---
 
-# Knowledge Base Intro
+# Knowledge Base
 
-This knowledge base covers essential DevSecOps concepts, tools, and best practices for building secure, scalable, and maintainable systems. Explore the sections below to deepen your understanding of modern software development and operations.
+These are teaching notes. I mentor engineers at Developer Akademie, and a page
+lands here when I have had to explain something for the third time, or when I
+want to point at one canonical answer instead of retyping it in a code review.
 
-## What is DevSecOps?
+That makes the coverage uneven on purpose. Docker gets several pages because I
+use it daily and because most of the Dockerfiles I review have the same three
+problems. There is nothing at all on Kubernetes, because I don't run it.
 
-DevSecOps extends traditional DevOps practices by integrating security at every phase of the software development lifecycle. Rather than treating security as an afterthought, DevSecOps embeds security controls, testing, and validation throughout the development pipeline.
+If you want the applied version — real numbers, real postmortems — that is in
+the [blog](/blog) and the [project write-ups](/docs/projects/intro). This
+section is the reference layer underneath.
 
-### Core Principles
+## What's here
 
-**Shift Left Security**: Identify and address security issues early in development rather than waiting for production deployment. This includes static code analysis, dependency scanning, and security-focused code reviews.
+### [Containers](/docs/knowledge-base/Container/intro)
 
-**Automation First**: Automate security testing, vulnerability scanning, and compliance checks within CI/CD pipelines to maintain consistent security postures without manual intervention.
+Concepts, building your first image, and Compose. The one I'd point a
+colleague at is [**First Docker
+Image**](/docs/knowledge-base/Container/first-image) — it goes past
+`FROM python:3.9` into non-root users, multi-stage builds, minimal base
+images and where Trivy fits in the pipeline. Most Dockerfiles I review pick
+up at least three findings from that page.
 
-**Shared Responsibility**: Security becomes a collective responsibility across development, operations, and security teams rather than being siloed in a separate security department.
+### [DevOps](/docs/knowledge-base/DevOps/intro)
 
-**Continuous Monitoring**: Implement real-time security monitoring and logging to detect anomalies, unauthorized access attempts, and potential breaches in production systems.
+Practice-level notes: [where Docker actually sits in a delivery
+workflow](/docs/knowledge-base/DevOps/docker-in-devops), and [implementing
+DevOps against the 12-Factor
+principles](/docs/knowledge-base/DevOps/implementing-devops). The 12-Factor
+page is the one I keep returning to — most "we need DevOps" conversations
+turn out to be a config-in-the-code problem wearing a costume.
 
-### Key Security Practices
+### [Git](/docs/knowledge-base/git/intro)
 
-**Static Application Security Testing (SAST)**: Analyze source code for security vulnerabilities before runtime. Tools like SonarQube, Checkmarx, and Semgrep scan code for common security flaws including injection vulnerabilities, authentication issues, and insecure configurations.
+Branching and workflow. Deliberately short: Git basics are the
+best-documented topic on the internet and I have nothing to add to them. The
+security side — signed commits, scanning before the commit lands, what to do
+when a key *is* pushed — is in [Git
+Security](/blog/git-security-practices), which goes considerably deeper.
 
-**Dynamic Application Security Testing (DAST)**: Test running applications to identify security vulnerabilities that only appear during execution. Tools like OWASP ZAP and Burp Suite simulate attacks against live applications.
+### [Environment variables](/docs/knowledge-base/env-vars/)
 
-**Software Composition Analysis (SCA)**: Scan third-party libraries and dependencies for known vulnerabilities. Tools like Snyk, Dependabot, and OWASP Dependency-Check maintain databases of CVEs and provide automated alerts for vulnerable components.
+How to load them, and more importantly what not to put in them. Pairs with
+[Secrets Management](/blog/secrets-management-done-right), which is the longer
+argument for why `.env` files are a local-development convenience and not a
+secrets strategy.
 
-**Container Security**: Scan container images for vulnerabilities, misconfigurations, and embedded secrets. Tools like Trivy, Aqua Security, and Anchore analyze container layers and identify security risks before deployment.
+## Where I stand
 
-**Infrastructure as Code Security**: Validate infrastructure configurations for security misconfigurations, exposed credentials, and compliance violations. Tools like Checkov, tfsec, and Terraform Sentinel enforce security policies on infrastructure definitions.
+A few positions that run through all of this, so you know what you are
+reading:
 
-**Secrets Management**: Never store credentials, API keys, or certificates in source code or configuration files. Use dedicated secret management solutions like HashiCorp Vault, AWS Secrets Manager, or Azure Key Vault to secure sensitive data.
+- **A security check that only warns is not a check.** If a Semgrep finding
+  can't block a merge, it will be ignored by the third sprint. Pick fewer
+  rules and make them blocking.
+- **Golden paths beat guardrail documents.** Nobody reads the wiki page about
+  IAM. They do use the module that gets IAM right by default.
+- **If you can't measure the rollback, you don't have one.** An automated
+  rollback with no SLO behind it is a button nobody trusts enough to press.
+- **Agents propose, humans approve.** I'll let a model read every log in the
+  estate. It doesn't get to run `terraform apply`.
 
-### Security in CI/CD Pipelines
+## What's missing
 
-Integrate security gates at each pipeline stage:
-
-1. Pre-commit hooks validate code quality and scan for secrets before commits reach version control
-2. Build stage runs SAST tools and dependency scans to catch vulnerabilities early
-3. Test stage executes security-focused unit and integration tests
-4. Container image scanning validates base images and runtime configurations
-5. Pre-deployment DAST testing validates application security in staging environments
-6. Runtime security monitoring detects anomalies and unauthorized activities in production
-
-### Compliance and Governance
-
-DevSecOps practices support regulatory compliance requirements including GDPR, HIPAA, PCI-DSS, and SOC 2. Automated compliance checks ensure systems meet security standards consistently:
-
-**Policy as Code**: Define security policies in code using tools like Open Policy Agent (OPA) to enforce consistent security controls across all environments.
-
-**Audit Trails**: Maintain comprehensive logs of all system activities, configuration changes, and security events for compliance auditing and incident investigation.
-
-**Access Control**: Implement principle of least privilege and role-based access control (RBAC) to limit user permissions to only what is necessary for their role.
+Honest gaps, so you don't go looking: Kubernetes, service meshes, and
+anything about scale beyond a few dozen services. I work on platforms in the
+tens-of-services range. I would rather have nothing here than have you find
+out the hard way that a page was written from someone else's blog post
+instead of from production.
 
 import DocCardList from '@theme/DocCardList';
 
