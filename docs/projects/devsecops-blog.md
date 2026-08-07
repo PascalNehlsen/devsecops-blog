@@ -5,15 +5,9 @@ sidebar_label: DevSecOps Blog
 sidebar_position: 4
 ---
 
-import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
-
-<GithubLinkAdmonition link="https://github.com/PascalNehlsen/devsecops-blog" text="Github Repository" type="info">
-
-[Click for Live View](https://docs.pascal-nehlsen.de/)
-
-
-**Book an appointment directly using the AI Chatbot** (bottom-right corner) - just type "Termin" or "appointment"
-</GithubLinkAdmonition>
+:::info[Live]
+[pascal-nehlsen.de](https://pascal-nehlsen.de) — you are reading it.
+:::
 
 # DevSecOps Blog & Portfolio - Technical Documentation
 

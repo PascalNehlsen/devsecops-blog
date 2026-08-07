@@ -1,6 +1,6 @@
 # Contributing
 
-This repo powers [docs.pascal-nehlsen.de](https://docs.pascal-nehlsen.de/). It is a
+This repo powers [pascal-nehlsen.de](https://pascal-nehlsen.de/). It is a
 personal portfolio, but the workflow is documented here so contributions (and future
 me) stay consistent.
 
