@@ -1,11 +1,13 @@
 ---
 title: "Agentic DevOps Runbooks with a Human-Approval Layer"
+slug: agentic-runbooks-mcp-human-approval
 date: "2026-02-18"
-authors: pascal
-description: "Building an MCP-based runbook executor where an LLM gathers context and proposes remediation, but every critical action is auditable, reversible, and requires explicit human approval."
-tags: ["Agentic", "MCP", "Automation", "Go", "DevSecOps"]
+authors: [pascal]
+description: "An MCP server that gathers incident context and proposes a remediation, then stops. Every state-changing action needs human approval, is logged with its reasoning, and is reversible."
+keywords: [mcp, agentic devops, runbook automation, human in the loop, on-call]
+tags: [agents, devsecops, platform]
+image: /img/og/agentic-runbooks-mcp-human-approval.png
 ---
-
 # Agentic DevOps Runbooks with a Human-Approval Layer
 
 "Let the AI fix it" is a great way to turn a small incident into a large one. But most of the

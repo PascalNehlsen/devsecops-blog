@@ -14,19 +14,19 @@ export const stats = [
     value: 80,
     suffix: '%',
     label: 'GCP env provisioning: 4 h → 45 min',
-    href: '/blog/2026/01/20/terraform-golden-paths-gcp',
+    href: '/blog/terraform-golden-paths-gcp',
   },
   {
     value: 60,
     suffix: '%',
     label: 'Faster response on known failure classes',
-    href: '/blog/2026/02/18/agentic-runbooks-mcp-human-approval',
+    href: '/blog/agentic-runbooks-mcp-human-approval',
   },
   {
     value: 50,
     suffix: '%',
     label: 'Lower compute cost per sandbox env',
-    href: '/blog/2026/04/28/ephemeral-aws-sandboxes-cost',
+    href: '/blog/ephemeral-aws-sandboxes-cost',
   },
 ];
 

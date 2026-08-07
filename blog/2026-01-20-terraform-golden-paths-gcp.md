@@ -1,11 +1,13 @@
 ---
 title: "Golden Paths on GCP: Cutting Provisioning Time by 80% with Terraform"
+slug: terraform-golden-paths-gcp
 date: "2026-01-20"
-authors: pascal
-description: "How modularising a Google Cloud environment with Terraform and golden-path workflows turned a 4-hour manual setup into a sub-45-minute, self-service process."
-tags: ["Terraform", "GCP", "Platform Engineering", "GitOps", "DevSecOps"]
+authors: [pascal]
+description: "How modularising a Google Cloud environment around team intent rather than the resource catalogue turned a four-hour manual setup into a sub-45-minute self-service path."
+keywords: [terraform, gcp, golden paths, platform engineering, cloud run, iam]
+tags: [terraform, gcp, platform, cicd]
+image: /img/og/terraform-golden-paths-gcp.png
 ---
-
 # Golden Paths on GCP: Cutting Provisioning Time by 80% with Terraform
 
 The fastest way to slow a team down is to make them wait on infrastructure. When every new

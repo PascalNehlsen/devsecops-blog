@@ -134,6 +134,66 @@ const config: Config = {
     // Feeds the homepage's "Latest Writing" section from real blog data
     // instead of a hand-maintained copy in src/data/homepage.js.
     [require.resolve('./plugins/latest-posts'), { count: 3 }],
+
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        // Every `to` below is validated at build time, so this table cannot
+        // silently rot. Two groups:
+        //
+        //  1. Slug flattening. Half the corpus already used flat slugs; the
+        //     newer half used dated permalinks, which visibly age a post in
+        //     search results. Now all flat.
+        //  2. Removed posts. Seven were deleted because they were thin or
+        //     content-free — see the commit that removed them. Their URLs
+        //     were live and indexed, so they redirect rather than 404.
+        redirects: [
+          {
+            from: '/blog/2026/01/20/terraform-golden-paths-gcp',
+            to: '/blog/terraform-golden-paths-gcp',
+          },
+          {
+            from: '/blog/2026/02/18/agentic-runbooks-mcp-human-approval',
+            to: '/blog/agentic-runbooks-mcp-human-approval',
+          },
+          {
+            from: '/blog/2026/03/24/slo-driven-automated-rollback',
+            to: '/blog/slo-driven-automated-rollback',
+          },
+          {
+            from: '/blog/2026/04/28/ephemeral-aws-sandboxes-cost',
+            to: '/blog/ephemeral-aws-sandboxes-cost',
+          },
+
+          // Removed posts.
+          { from: '/blog/starting-devsecops-journey', to: '/blog' },
+          {
+            from: '/blog/implementing-sast-pipeline',
+            to: '/docs/knowledge-base/Container/first-image',
+          },
+          {
+            from: '/blog/docker-security-best-practices',
+            to: '/docs/knowledge-base/Container/first-image',
+          },
+          {
+            from: '/blog/2025/09/15/integrating-ai-chatbots',
+            to: '/docs/projects/chatbot',
+          },
+          {
+            from: '/blog/2025/10/01/security-chatbot-platforms',
+            to: '/docs/projects/chatbot',
+          },
+          {
+            from: '/blog/2025/11/01/scalable-appointment-booking',
+            to: '/docs/projects/chatbot',
+          },
+          {
+            from: '/blog/2025/10/15/healthcare-saas-devsecops',
+            to: '/docs/projects/hepa-assist',
+          },
+        ],
+      },
+    ],
   ],
 
   presets: [
@@ -150,6 +210,9 @@ const config: Config = {
               blogSidebarCount: 'ALL',
               blogSidebarTitle: 'All Posts',
               onUntruncatedBlogPosts: 'throw',
+              // A typo can no longer mint a new tag page — see blog/tags.yml.
+              onInlineTags: 'throw',
+              tags: 'tags.yml',
               feedOptions: {
                 type: ['rss', 'atom'],
                 xslt: true,

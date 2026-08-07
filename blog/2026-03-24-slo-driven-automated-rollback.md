@@ -1,11 +1,13 @@
 ---
 title: "SLO-Driven Automated Rollback: Let the Metrics Pull the Cord"
+slug: slo-driven-automated-rollback
 date: "2026-03-24"
-authors: pascal
-description: "Wiring Prometheus, Grafana and structured logging into a deployment pipeline so that an SLO breach triggers an automatic rollback — and keeps the deployment error rate under 2%."
-tags: ["Observability", "SLO", "Prometheus", "Grafana", "DevSecOps"]
+authors: [pascal]
+description: "Wiring Prometheus, Grafana and structured logging into a deployment pipeline so an SLO breach triggers rollback automatically — and why a rollback without an SLO behind it is a button nobody trusts."
+keywords: [slo, automated rollback, prometheus, grafana, deployment safety]
+tags: [observability, cicd, devsecops]
+image: /img/og/slo-driven-automated-rollback.png
 ---
-
 # SLO-Driven Automated Rollback: Let the Metrics Pull the Cord
 
 A deploy that breaks production at 02:00 shouldn't wait for a human to wake up, read a dashboard,

@@ -1,11 +1,13 @@
 ---
 title: "Secrets Management Done Right - No More Hardcoded Passwords"
 slug: secrets-management-done-right
-authors: pascal
-tags: [secrets, security, vault, kubernetes]
 date: "2024-04-12"
+authors: [pascal]
+description: "Why .env files are a local-development convenience and not a secrets strategy, and what to use instead: a secrets manager, short-lived credentials, and scanning before the commit lands."
+keywords: [secrets management, vault, env files, credential rotation, devsecops]
+tags: [secrets, devsecops, cicd]
+image: /img/og/secrets-management-done-right.png
 ---
-
 # Secrets Management Done Right
 
 Hardcoded secrets are a security nightmare. Here's how I implemented proper secrets management across development, staging, and production.
