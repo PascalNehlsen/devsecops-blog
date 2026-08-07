@@ -58,7 +58,7 @@ const projects = [
     description:
       'Barrier-free multi-tenant PWA for assisted-living facilities. Residents log daily mood; staff see well-being trends and generate reports. Web Push, containerised. Shipped as HepaAssist, now runs as Emavi.',
     impact: 'Case study',
-    tags: ['Next.js', 'Django', 'Docker', 'PWA', 'PostgreSQL'],
+    tags: ['Next.js', 'FastAPI', 'PostgreSQL', 'Docker', 'PWA'],
     docsUrl: '/docs/projects/hepa-assist',
   },
   {
@@ -114,33 +114,6 @@ const projects = [
     tags: ['Django', 'DRF', 'Stripe', 'Docker'],
     githubUrl: 'https://github.com/PascalNehlsen/truck_signs_api',
     docsUrl: '/docs/projects/recent/truck-signs-api',
-  },
-  {
-    title: 'Baby Tools Shop',
-    category: 'recent',
-    description:
-      'Django e-commerce store for baby tools, containerised with Docker and deployed to a VM.',
-    tags: ['Django', 'Docker', 'E-Commerce'],
-    githubUrl: 'https://github.com/PascalNehlsen/baby-tools-shop',
-    docsUrl: '/docs/projects/recent/baby-tools-shop',
-  },
-  {
-    title: 'WordPress Container',
-    category: 'recent',
-    description:
-      'Docker Compose setup for launching a WordPress instance backed by MariaDB — reproducible setup and maintenance.',
-    tags: ['Docker Compose', 'WordPress', 'MariaDB'],
-    githubUrl: 'https://github.com/PascalNehlsen/wordpress-container',
-    docsUrl: '/docs/projects/recent/wordpress',
-  },
-  {
-    title: 'Minecraft Server',
-    category: 'recent',
-    description:
-      'Customizable Minecraft server via Docker Compose, deployable locally or to a VM with minimal effort.',
-    tags: ['Docker Compose', 'Self-Hosting'],
-    githubUrl: 'https://github.com/PascalNehlsen/minecraft-server',
-    docsUrl: '/docs/projects/recent/minecraft',
   },
   {
     title: 'VM Setup & Hardening',

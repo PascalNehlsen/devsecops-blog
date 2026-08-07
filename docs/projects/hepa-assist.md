@@ -4,7 +4,7 @@ title: Emavi
 sidebar_label: Emavi
 sidebar_position: 2
 description: Multi-tenant, barrier-free documentation platform for assisted-living facilities — resident mood tracking, care trends and reporting.
-keywords: [multi-tenant saas, healthcare, django, next.js, accessibility, pwa]
+keywords: [multi-tenant saas, healthcare, fastapi, next.js, accessibility, pwa]
 ---
 
 # Emavi
@@ -20,6 +20,45 @@ link lands on a sign-in page. The architecture and the decisions are below.
 ## Project Overview
 
 **Emavi** is a multi-tenant application for healthcare facilities that supports digital resident documentation and care management. This project demonstrates modern DevSecOps practices and full-stack development with a focus on security, scalability, and user experience.
+
+---
+
+## The two interfaces
+
+The product has one hard constraint that shaped everything else: the same
+data is entered by residents and read by care staff, and those two groups
+have almost nothing in common in terms of what they can operate. So there are
+two interfaces, not one with a role switch.
+
+### Resident view
+
+Everything is one decision per screen, large targets, no nesting. A check-in
+is three taps and can be finished after the first one: the comment step is
+explicitly optional, because a required field is a reason to stop using
+something.
+
+![Role selection on the landing page: separate entry points for residents, care staff and administrators.](../assets/images/emavi/01-role-select.png)
+
+![Mood check-in: five faces, one tap, no free-text required.](../assets/images/emavi/02-client-mood-picker.png)
+
+![After picking a mood, optional tags and a free-text field. Both can be skipped.](../assets/images/emavi/03-client-mood-detail.png)
+
+![The resident's own calendar. Their history belongs to them, not only to staff.](../assets/images/emavi/04-client-mood-calendar.png)
+
+The calendar is deliberately available to the resident and not just to staff.
+Documentation that only flows upward is surveillance; the point of the
+product is that the person being documented can see their own record.
+
+### Staff view
+
+Same data, opposite priorities: density, comparison, and trend over a cohort.
+
+![Staff dashboard: client list with the latest check-in per person, and the full check-in log for the selected client.](../assets/images/emavi/05-staff-dashboard-checkins.png)
+
+![Mood trend for a single client over 7, 14 or 30 days.](../assets/images/emavi/06-staff-mood-trend.png)
+
+Screenshots use seeded demo data. No real resident information appears in
+this write-up.
 
 ---
 
