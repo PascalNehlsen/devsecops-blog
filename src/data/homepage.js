@@ -27,30 +27,7 @@ export const skillGroups = [
   },
 ];
 
-// Curated newest posts (mirrors blog/ frontmatter). Update on new posts.
-export const latestPosts = [
-  {
-    title: 'Ephemeral AWS Sandboxes: 80+ Isolated Environments at Half the Cost',
-    date: '2026-04-28',
-    description:
-      'Per-user n8n sandboxes on AWS burstable EC2 with automated lifecycle management — isolated environments at 50% lower compute cost.',
-    tags: ['AWS', 'Cost', 'Automation'],
-    to: '/blog/2026/04/28/ephemeral-aws-sandboxes-cost',
-  },
-  {
-    title: 'SLO-Driven Automated Rollback: Let the Metrics Pull the Cord',
-    date: '2026-03-24',
-    description:
-      'Wiring Prometheus, Grafana and structured logging into the pipeline so an SLO breach triggers automatic rollback.',
-    tags: ['Observability', 'SLO', 'Prometheus'],
-    to: '/blog/2026/03/24/slo-driven-automated-rollback',
-  },
-  {
-    title: 'Agentic DevOps Runbooks with a Human-Approval Layer',
-    date: '2026-02-18',
-    description:
-      'An MCP-based runbook executor: the agent gathers context and proposes, a human approves every critical action.',
-    tags: ['Agentic', 'MCP', 'Automation'],
-    to: '/blog/2026/02/18/agentic-runbooks-mcp-human-approval',
-  },
-];
+// Latest posts are no longer listed here. They come from the blog plugin at
+// build time via plugins/latest-posts — see BlogPreview.js. Duplicating them
+// meant the homepage drifted from blog/ and, worse, that re-slugging a post
+// broke the build.

@@ -1,20 +1,37 @@
 import React from 'react';
 import Link from '@docusaurus/Link';
+import { usePluginData } from '@docusaurus/useGlobalData';
 import styles from './styles.module.css';
-import { latestPosts } from '@site/src/data/homepage';
 
 export default function BlogPreview() {
+  // Sourced from the blog plugin at build time — see plugins/latest-posts.
+  // Permalinks come from the plugin, so these links cannot go stale.
+  const { posts } = usePluginData('latest-posts');
+
+  if (!posts?.length) {
+    return null;
+  }
+
   return (
     <div className={styles.blogGrid}>
-      {latestPosts.map((post) => (
-        <Link key={post.to} to={post.to} className={styles.blogCard}>
-          <span className={styles.blogDate}>{post.date}</span>
+      {posts.map((post) => (
+        <Link
+          key={post.permalink}
+          to={post.permalink}
+          className={styles.blogCard}
+        >
+          <span className={styles.blogDate}>
+            {post.formattedDate}
+            {post.readingTime
+              ? ` · ${Math.ceil(post.readingTime)} min`
+              : null}
+          </span>
           <h3 className={styles.blogTitle}>{post.title}</h3>
           <p className={styles.blogDesc}>{post.description}</p>
           <div className={styles.tagRow}>
-            {post.tags.map((t) => (
-              <span key={t} className={styles.tag}>
-                {t}
+            {post.tags.map((tag) => (
+              <span key={tag.permalink} className={styles.tag}>
+                {tag.label}
               </span>
             ))}
           </div>

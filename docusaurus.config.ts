@@ -130,6 +130,12 @@ const config: Config = {
     locales: ['en'],
   },
 
+  plugins: [
+    // Feeds the homepage's "Latest Writing" section from real blog data
+    // instead of a hand-maintained copy in src/data/homepage.js.
+    [require.resolve('./plugins/latest-posts'), { count: 3 }],
+  ],
+
   presets: [
     [
       'classic',
