@@ -17,9 +17,9 @@ ersetzt dieser Text nicht.
 
 ## Angaben gemäß § 5 DDG
 
-TODO: Vor- und Nachname
-TODO: Straße und Hausnummer
-TODO: PLZ und Ort
+Pascal Nehlsen
+Am Stadtwald 18
+42897 Remscheid
 Deutschland
 
 ## Kontakt
@@ -39,7 +39,7 @@ entfernen.
 
 ## Verantwortlich für den Inhalt
 
-TODO: Name und Anschrift (in der Regel identisch mit den Angaben oben).
+Pascal Nehlsen, Anschrift wie oben.
 
 ## Haftung für Inhalte
 

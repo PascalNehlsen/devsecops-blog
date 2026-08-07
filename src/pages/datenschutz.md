@@ -13,12 +13,12 @@ insbesondere den Abschnitt zu Cloudflare, sobald der Proxy aktiv ist. Der
 Stand unten muss beim Veröffentlichen aktualisiert werden.
 :::
 
-**Stand:** TODO
+**Stand:** 7. August 2026
 
 ## Verantwortlicher
 
-TODO: Name
-TODO: Anschrift
+Pascal Nehlsen
+Am Stadtwald 18, 42897 Remscheid
 E-Mail: [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
 
 ## Grundsatz: was diese Seite *nicht* tut
@@ -111,7 +111,9 @@ E-Mail-Adresse.
 Unabhängig davon steht Ihnen ein Beschwerderecht bei einer
 Datenschutz-Aufsichtsbehörde zu (Art. 77 DSGVO).
 
-TODO: zuständige Aufsichtsbehörde nach Wohnsitz-Bundesland ergänzen.
+Zuständig ist die Landesbeauftragte für Datenschutz und Informationsfreiheit
+Nordrhein-Westfalen, Kavalleriestraße 2–4, 40213 Düsseldorf —
+[ldi.nrw.de](https://www.ldi.nrw.de/).
 
 ## Sicherheitslücken melden
 
