@@ -253,13 +253,13 @@ permissions:
 
 ```typescript
 // docusaurus.config.ts
-let DEPLOYMENT_URL = process.env.DEPLOYMENT_URL ||
-  'https://pascalnehlsen.github.io/';
+const CANONICAL_URL = 'https://pascal-nehlsen.de';
+let DEPLOYMENT_URL = process.env.DEPLOYMENT_URL || CANONICAL_URL;
 let BASE_URL = process.env.BASE_URL || '/';
 
 // Ensure URL has protocol
 if (!/^https?:\/\//i.test(DEPLOYMENT_URL)) {
-  DEPLOYMENT_URL = 'https://pascalnehlsen.github.io/';
+  DEPLOYMENT_URL = CANONICAL_URL;
 }
 
 // Normalize baseUrl shape
@@ -457,9 +457,9 @@ build/
 // docusaurus.config.ts
 const config = {
   title: 'DevSecOps Blog',
-  tagline: 'Security-First Development',
-  favicon: 'img/favicon.ico',
-  url: 'https://pascalnehlsen.github.io',
+  tagline: 'Platform & Security Engineering',
+  favicon: 'img/favicon.svg',
+  url: 'https://pascal-nehlsen.de',
   baseUrl: '/',
   organizationName: 'PascalNehlsen',
   projectName: 'devsecops-blog',
@@ -478,9 +478,8 @@ const config = {
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://pascalnehlsen.github.io/</loc>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
+    <loc>https://pascal-nehlsen.de/</loc>
+    <lastmod>2026-08-07</lastmod>
   </url>
   <!-- Blog posts, docs pages... -->
 </urlset>
@@ -497,8 +496,8 @@ feedOptions: {
 ```
 
 **Feed URLs:**
-- RSS: `https://pascalnehlsen.github.io/blog/rss.xml`
-- Atom: `https://pascalnehlsen.github.io/blog/atom.xml`
+- RSS: `https://pascal-nehlsen.de/blog/rss.xml`
+- Atom: `https://pascal-nehlsen.de/blog/atom.xml`
 
 ---
 
@@ -734,7 +733,7 @@ npm run serve
 
 ```bash
 # .env (for local development)
-DEPLOYMENT_URL=https://pascalnehlsen.github.io/
+DEPLOYMENT_URL=https://pascal-nehlsen.de
 BASE_URL=/
 GITHUB_ORG=PascalNehlsen
 GITHUB_PROJECT=devsecops-blog
@@ -856,7 +855,7 @@ DEPLOYMENT_BRANCH=main
        - uses: treosh/lighthouse-ci-action@v9
          with:
            urls: |
-             https://pascalnehlsen.github.io/
+             https://pascal-nehlsen.de/
    ```
 
 3. **Dependency Update Automation**
@@ -928,13 +927,13 @@ The platform serves as both a knowledge repository and a demonstration of DevSec
 ## Resources & Links
 
 ### Project Links
-- **Live Site**: [https://pascalnehlsen.github.io/](https://pascalnehlsen.github.io/)
+- **Live Site**: [https://pascal-nehlsen.de](https://pascal-nehlsen.de)
 - **GitHub Repository**: [https://github.com/PascalNehlsen/devsecops-blog](https://github.com/PascalNehlsen/devsecops-blog)
 - **GitHub Actions**: [View Workflows](https://github.com/PascalNehlsen/devsecops-blog/actions)
 
 ### Author
 - **Name**: Pascal Nehlsen
-- **Role**: DevSecOps Engineer
+- **Role**: Platform & Security Engineering
 - **GitHub**: [@PascalNehlsen](https://github.com/PascalNehlsen)
 - **Email**: mail@pascal-nehlsen.de
 - 
