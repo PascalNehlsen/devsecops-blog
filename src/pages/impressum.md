@@ -26,12 +26,6 @@ Deutschland
 
 E-Mail: [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
 
-TODO: Telefonnummer — § 5 DDG verlangt Angaben, die eine schnelle
-elektronische Kontaktaufnahme und unmittelbare Kommunikation ermöglichen. Eine
-E-Mail-Adresse allein wird von Gerichten unterschiedlich bewertet; eine
-Telefonnummer oder ein Kontaktformular mit zugesicherter Reaktionszeit ist die
-sichere Variante.
-
 ## Umsatzsteuer-Identifikationsnummer
 
 TODO: falls vorhanden, gemäß § 27 a UStG. Andernfalls diesen Abschnitt
