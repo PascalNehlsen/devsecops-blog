@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdso_dev_blog=self.webpackChunkdso_dev_blog||[]).push([[634],{192:(s,e,o)=>{o.r(e),o.d(e,{default:()=>t});o(6540);var d=o(6347),c=o(4848);const t=()=>(0,c.jsx)(d.rd,{to:"/devsecops-blog/docs/projects/intro"})}}]);

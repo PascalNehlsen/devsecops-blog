@@ -15,6 +15,15 @@
 
 !example.env
 
+# Stale GitHub Pages artifacts from the old /docs-folder deploy.
+# The live site is built to build/ and uploaded by .github/workflows/deploy.yaml.
+# None of these are served — never re-commit them.
+/index.html
+/sitemap.xml
+/.nojekyll
+docs/assets/js/
+docs/assets/css/
+
 # Misc
 .DS_Store
 .env.local
