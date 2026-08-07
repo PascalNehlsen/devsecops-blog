@@ -95,6 +95,33 @@ const config: Config = {
 
   clientModules: ['./src/clientModules/console-notice.js'],
 
+  // Only the two faces that block first paint: Plex 400 is every paragraph,
+  // JetBrains Mono 700 is every h1/h2 above the fold. Preloading more would
+  // delay these. crossorigin is required on font preloads even same-origin,
+  // otherwise the browser fetches twice.
+  headTags: [
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preload',
+        as: 'font',
+        type: 'font/woff2',
+        href: '/fonts/ibm-plex-sans-latin-400-normal.woff2',
+        crossorigin: 'anonymous',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preload',
+        as: 'font',
+        type: 'font/woff2',
+        href: '/fonts/jetbrains-mono-latin-700-normal.woff2',
+        crossorigin: 'anonymous',
+      },
+    },
+  ],
+
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
@@ -131,7 +158,14 @@ const config: Config = {
             }
           : false,
         theme: {
-          customCss: './src/css/custom.css',
+          // An array, not @import: injection order is deterministic, the
+          // diffs stay separate, and @font-face is guaranteed to be parsed
+          // before anything references a font-family.
+          customCss: [
+            './src/css/fonts.css',
+            './src/css/tokens.css',
+            './src/css/custom.css',
+          ],
         },
         sitemap: {
           lastmod: 'date',
@@ -214,9 +248,25 @@ const config: Config = {
       copyright: `© ${new Date().getFullYear()} Pascal Nehlsen`,
     },
     prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
-      additionalLanguages: ['powershell', 'hcl'],
+      // dracula (#282A36, purple/pink) clashes hard with the slate palette —
+      // it was the main reason code blocks looked like a different site.
+      // nightOwl's #011627 sits two luminance steps from --c-bg and its
+      // accents are green/teal. nightOwlLight shares the same token→role map,
+      // so both themes highlight the same things the same way.
+      // Failing tokens in both are repaired in custom.css.
+      theme: prismThemes.nightOwlLight,
+      darkTheme: prismThemes.nightOwl,
+      additionalLanguages: [
+        'powershell',
+        'hcl',
+        'bash',
+        'yaml',
+        'docker',
+        'json',
+        'ini',
+        'nginx',
+        'diff',
+      ],
       magicComments: [
         // Remember to extend the default highlight class name as well!
         {
