@@ -5,11 +5,6 @@ sidebar_label: Conduit Pipeline
 sidebar_position: 1
 ---
 
-import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
-
-<GithubLinkAdmonition link="https://github.com/PascalNehlsen/conduit" text="Github Repository" type="info">
-**Reach me out via** [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)**,** [Portfolio Contact Form](https://pascal-nehlsen.de/#contact) **or** [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
-</GithubLinkAdmonition>
 
 # Conduit Pipeline with Github Actions
 
@@ -75,3 +70,7 @@ The workflow consists of two main jobs (using existing github actions):
 - `REMOTE_USER`: The username used to access the remote server.
 - `TARGET`: The target directory on the remote server where the application will be deployed.
 - `GHCR_PAT`: A GitHub Personal Access Token for authenticating with the GitHub Container Registry.
+
+---
+
+**Repository:** [https://github.com/PascalNehlsen/conduit](https://github.com/PascalNehlsen/conduit)

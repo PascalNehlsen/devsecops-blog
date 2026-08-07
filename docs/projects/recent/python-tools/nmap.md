@@ -5,11 +5,6 @@ sidebar_label: Portscanner Tool
 sidebar_position: 6
 ---
 
-import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
-
-<GithubLinkAdmonition link="https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/nmap" text="Github Repository" type="info">
-**Reach me out via** [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)**,** [Portfolio Contact Form](https://pascal-nehlsen.de/#contact) **or** [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
-</GithubLinkAdmonition>
 
 # My Nmap - Portscanner Tool
 
@@ -141,3 +136,7 @@ sudo vi /etc/hosts
 
 - Replace `<IP_ADDRESS>` with the actual IP address of your target machine.
   Save and exit the editor (`Ctrl+X` then `Y` for `nano`, or `:wq` for `vi`).
+
+---
+
+**Repository:** [https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/nmap](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/nmap)

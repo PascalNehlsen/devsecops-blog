@@ -6,11 +6,6 @@ sidebar_position: 1
 
 Pentesting tools in Python are scripts or applications designed to identify vulnerabilities and assess the security of systems, networks, or applications. These tools automate tasks like network scanning, password cracking, and exploitation, making them essential for ethical hacking and security testing.
 
-import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
-
-<GithubLinkAdmonition link="https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5" text="Github Repository" type="info">
-**Reach me out via** [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)**,** [Portfolio Contact Form](https://pascal-nehlsen.de/#contact) **or** [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
-</GithubLinkAdmonition>
 
 ## Featured Projects
 
@@ -34,3 +29,7 @@ import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
 
 - **Hashcat** [GitHub](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/hashcat) | [Docs Link](hashcat):  
   This project contains the source code for my own implementation of the **hashcat** tool. Hashcat is a powerful password recovery tool that uses brute-force or dictionary attacks to crack hashed passwords by leveraging the processing power of CPUs, GPUs, or other hardware.
+
+---
+
+**Repository:** [https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5)

@@ -1,5 +1,5 @@
-label: 'Python Tools'
-position: 6
+label: 'Python Security Tooling'
+position: 7
 link:
   type: 'doc'
   id: projects/recent/python-tools/intro

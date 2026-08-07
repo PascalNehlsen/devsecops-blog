@@ -1,11 +1,13 @@
 ---
 title: "Ephemeral AWS Sandboxes: 80+ Isolated Environments at Half the Cost"
+slug: ephemeral-aws-sandboxes-cost
 date: "2026-04-28"
-authors: pascal
-description: "Provisioning per-user, production-like n8n sandboxes on AWS burstable EC2 with automated lifecycle management — isolated environments for 80+ trainees while keeping compute costs 50% below fixed-size instances."
-tags: ["AWS", "EC2", "Cost Optimization", "Automation", "Terraform"]
+authors: [pascal]
+description: "Per-user n8n sandboxes on AWS burstable EC2, sized for the median rather than the peak, with lifecycle automation that reclaims idle instances — 80+ real environments at half the compute cost."
+keywords: [aws, ec2 burstable, cost optimization, ephemeral environments, terraform]
+tags: [aws, cost, terraform, platform]
+image: /img/og/ephemeral-aws-sandboxes-cost.png
 ---
-
 # Ephemeral AWS Sandboxes: 80+ Isolated Environments at Half the Cost
 
 Giving every learner a shared environment is cheap and miserable — one person breaks it and

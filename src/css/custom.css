@@ -1,409 +1,775 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * Global styles.
+ *
+ * Loaded after fonts.css and tokens.css (see docusaurus.config.ts). Every
+ * colour here comes from a --c-* token; there are no hex literals below
+ * except inside the Prism contrast repairs, which are documented with their
+ * computed ratios.
+ *
+ * Sections:
+ *    1. Reset & document          7. Content chrome
+ *    2. Motion                    8. Code
+ *    3. Typography                9. Blog
+ *    4. Focus & a11y             10. Primitives
+ *    5. Navbar                   11. Scrollbar
+ *    6. Sidebar / TOC / crumbs
  */
 
-/* Modern DevSecOps Cyberpunk Color Scheme */
-:root {
-  /* Primary Colors - Cyan Theme */
-  --ifm-color-primary: #06b6d4;
-  --ifm-color-primary-dark: #0597b3;
-  --ifm-color-primary-darker: #058ba8;
-  --ifm-color-primary-darkest: #04738b;
-  --ifm-color-primary-light: #22d3ee;
-  --ifm-color-primary-lighter: #38d9f2;
-  --ifm-color-primary-lightest: #67e8f9;
+/* ══════════════════════════════════════════════════════════════════════
+   1. RESET & DOCUMENT
+   ══════════════════════════════════════════════════════════════════════ */
 
-  /* Secondary Colors - Purple/Pink Accents */
-  --ifm-color-secondary: #8b5cf6;
-  --ifm-color-secondary-dark: #7c3aed;
-  --ifm-color-secondary-darker: #6d28d9;
-  --ifm-color-secondary-darkest: #5b21b6;
-  --ifm-color-secondary-light: #a78bfa;
-  --ifm-color-secondary-lighter: #c4b5fd;
-  --ifm-color-secondary-lightest: #ddd6fe;
-
-  /* Accent Colors */
-  --ifm-color-accent: #ec4899;
-  --ifm-color-accent-dark: #db2777;
-  --ifm-color-accent-darker: #be185d;
-  --ifm-color-accent-darkest: #9f1239;
-  --ifm-color-accent-light: #f472b6;
-  --ifm-color-accent-lighter: #f9a8d4;
-  --ifm-color-accent-lightest: #fce7f3;
-
-  /* Success/Green */
-  --ifm-color-success: #10b981;
-  --ifm-color-success-dark: #059669;
-  --ifm-color-success-darker: #047857;
-  --ifm-color-success-darkest: #065f46;
-  --ifm-color-success-light: #34d399;
-  --ifm-color-success-lighter: #6ee7b7;
-  --ifm-color-success-lightest: #d1fae5;
-
-  /* Background & Surface Colors */
-  --ifm-background-color: #ffffff;
-  --ifm-background-surface-color: #f8fafc;
-  --ifm-card-background-color: #ffffff;
-
-  /* Text Colors */
-  --ifm-heading-color: #0f172a;
-  --ifm-font-color-base: #334155;
-  --ifm-font-size-base: 16px;
-
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(6, 182, 212, 0.1);
-
-  /* Navbar */
-  --ifm-navbar-background-color: #ffffff;
-  --ifm-navbar-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
-
-  /* Links */
-  --ifm-link-color: #06b6d4;
-  --ifm-link-hover-color: #0891b2;
-
-  /* Borders */
-  --ifm-color-emphasis-200: rgba(6, 182, 212, 0.15);
-  --ifm-color-emphasis-300: rgba(6, 182, 212, 0.25);
-}
-
-/* Dark Mode - Enhanced Cyberpunk Theme */
-[data-theme='dark'] {
-  /* Primary Colors - Brighter Cyan for dark mode */
-  --ifm-color-primary: #22d3ee;
-  --ifm-color-primary-dark: #06b6d4;
-  --ifm-color-primary-darker: #0891b2;
-  --ifm-color-primary-darkest: #0e7490;
-  --ifm-color-primary-light: #67e8f9;
-  --ifm-color-primary-lighter: #a5f3fc;
-  --ifm-color-primary-lightest: #cffafe;
-
-  /* Secondary Colors - Brighter Purple */
-  --ifm-color-secondary: #a78bfa;
-  --ifm-color-secondary-dark: #8b5cf6;
-  --ifm-color-secondary-darker: #7c3aed;
-  --ifm-color-secondary-darkest: #6d28d9;
-  --ifm-color-secondary-light: #c4b5fd;
-  --ifm-color-secondary-lighter: #ddd6fe;
-  --ifm-color-secondary-lightest: #ede9fe;
-
-  /* Accent Colors - Pink */
-  --ifm-color-accent: #f472b6;
-  --ifm-color-accent-dark: #ec4899;
-  --ifm-color-accent-darker: #db2777;
-  --ifm-color-accent-darkest: #be185d;
-  --ifm-color-accent-light: #f9a8d4;
-  --ifm-color-accent-lighter: #fbcfe8;
-  --ifm-color-accent-lightest: #fce7f3;
-
-  /* Success/Green */
-  --ifm-color-success: #34d399;
-  --ifm-color-success-dark: #10b981;
-  --ifm-color-success-darker: #059669;
-  --ifm-color-success-darkest: #047857;
-  --ifm-color-success-light: #6ee7b7;
-  --ifm-color-success-lighter: #a7f3d0;
-  --ifm-color-success-lightest: #d1fae5;
-
-  /* Background & Surface Colors - Deep Dark */
-  --ifm-background-color: #0a0e27;
-  --ifm-background-surface-color: #0f1629;
-  --ifm-card-background-color: #1a1f3a;
-
-  /* Text Colors */
-  --ifm-heading-color: #e5e7eb;
-  --ifm-font-color-base: #cbd5e1;
-  --ifm-font-size-base: 16px;
-  --ifm-color-emphasis-600: #94a3b8;
-  --ifm-color-emphasis-700: #cbd5e1;
-
-  --docusaurus-highlighted-code-line-bg: rgba(6, 182, 212, 0.15);
-
-  /* Navbar */
-  --ifm-navbar-background-color: rgba(15, 22, 41, 0.95);
-  --ifm-navbar-shadow: 0 4px 6px -1px rgba(6, 182, 212, 0.1), 0 2px 4px -2px rgba(6, 182, 212, 0.1);
-
-  /* Links */
-  --ifm-link-color: #22d3ee;
-  --ifm-link-hover-color: #67e8f9;
-
-  /* Borders */
-  --ifm-color-emphasis-200: rgba(6, 182, 212, 0.2);
-  --ifm-color-emphasis-300: rgba(6, 182, 212, 0.3);
-
-  /* Code Blocks */
-  --ifm-code-background: rgba(26, 31, 58, 0.8);
-}
-
-/* Global Enhancements */
-html[data-theme='dark'] {
-  color-scheme: dark;
-}
-
-/* Enforce minimum font size of 16px */
 html {
-  font-size: 16px;
+  /* 100%, not 16px: a hard px value overrides the reader's browser setting. */
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
-  font-size: 16px;
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: var(--lh-relaxed);
+  color: var(--c-text);
+  background-color: var(--c-bg);
+  font-feature-settings: 'kern' 1, 'liga' 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Override any smaller font sizes */
-* {
+::selection {
+  background: var(--c-selection);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   2. MOTION
+   Named transitions on interactive elements only. The previous
+   `* { transition: ... }` put a transition on every node in the document.
+   ══════════════════════════════════════════════════════════════════════ */
+
+a,
+button,
+.button,
+.card,
+.menu__link,
+.navbar__link,
+.pagination-nav__link,
+.tabs__item,
+.table-of-contents__link,
+.breadcrumbs__link,
+.footer__link-item {
+  transition: color var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   3. TYPOGRAPHY
+   ══════════════════════════════════════════════════════════════════════ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-mono);
+  color: var(--c-text);
+}
+
+h1 {
+  letter-spacing: var(--tracking-display);
+  line-height: var(--lh-tight);
+}
+
+h2 {
+  letter-spacing: var(--tracking-tight);
+}
+
+h3,
+h4 {
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-tight);
+}
+
+h1,
+h2 {
+  text-wrap: balance;
+}
+
+/* Readable measure for long-form prose. */
+.markdown > p,
+.markdown > ul,
+.markdown > ol {
+  max-width: var(--prose-measure);
+}
+
+a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+/* The old `* { font-size: max(16px, 1em) }` was a shotgun fix for three
+   separate problems. It destroyed the type scale and, because 1em inherits,
+   made it impossible for any element to be smaller than its parent — which
+   is why nested font sizes needed !important. Replaced by three targeted
+   rules that solve the same three problems. */
+
+/* (1) The actual reason for a 16px floor: iOS Safari zooms the viewport when
+       a focused form control is under 16px. */
+input,
+select,
+textarea {
   font-size: max(16px, 1em);
 }
 
-/* Specific overrides for small text elements */
-small,
-.small-text,
-.navbar__item,
-.menu__link,
+/* (2) Infima chrome that is genuinely too small at its defaults. */
 .table-of-contents__link,
-.pagination-nav__label,
+.breadcrumbs__link,
+.pagination-nav__sublabel,
 .footer__link-item,
+.theme-doc-version-badge {
+  font-size: var(--fs-sm);
+}
+
+/* (3) Comfortable touch targets on small screens. */
+@media (max-width: 996px) {
+  .menu__link,
+  .navbar__link,
+  .footer__link-item {
+    font-size: var(--fs-base);
+  }
+}
+
+/* Ligatures off in code: in a security context `!=` must read as `!=`. */
 code,
-pre {
-  font-size: 16px !important;
+pre,
+kbd,
+samp {
+  font-variant-ligatures: none;
 }
 
-/* Smooth Transitions */
-* {
-  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+/* ══════════════════════════════════════════════════════════════════════
+   4. FOCUS & A11Y
+   ══════════════════════════════════════════════════════════════════════ */
+
+:focus-visible {
+  outline: var(--border-w-focus) solid var(--c-accent);
+  outline-offset: var(--focus-offset);
 }
 
-/* Card Enhancements */
-.card {
-  border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 12px;
-  transition: all 0.3s ease;
+/* Defensive: nothing in this stylesheet uses background-clip: text any more,
+   but if it ever comes back, forced-colors mode must still win. */
+@media (forced-colors: active) {
+  * {
+    forced-color-adjust: auto;
+  }
 }
 
-.card:hover {
-  border-color: var(--ifm-color-primary);
-  box-shadow: 0 10px 20px -5px rgba(6, 182, 212, 0.2);
-}
-
-[data-theme='dark'] .card:hover {
-  box-shadow: 0 10px 20px -5px rgba(6, 182, 212, 0.3), 0 0 15px rgba(139, 92, 246, 0.1);
-}
-
-/* Button Enhancements */
-.button--primary {
-  background: linear-gradient(135deg, var(--ifm-color-primary), var(--ifm-color-secondary));
-  border: none;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-.button--primary:hover {
-  background: linear-gradient(135deg, var(--ifm-color-primary-dark), var(--ifm-color-secondary-dark));
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px -5px rgba(6, 182, 212, 0.4);
-}
-
-.button--secondary {
-  border: 2px solid var(--ifm-color-primary);
-  color: var(--ifm-color-primary);
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-.button--secondary:hover {
-  background: var(--ifm-color-primary);
-  color: white;
-  transform: translateY(-2px);
-}
-
-/* Navbar Glow Effect */
-[data-theme='dark'] .navbar {
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(6, 182, 212, 0.2);
-  z-index: 1000;
-  position: sticky !important;
-  top: 0;
-}
+/* ══════════════════════════════════════════════════════════════════════
+   5. NAVBAR
+   ══════════════════════════════════════════════════════════════════════ */
 
 .navbar {
-  z-index: 1000;
-  position: sticky !important;
+  position: sticky;
   top: 0;
+  z-index: 200;
+  border-bottom: var(--border-w) solid var(--c-border);
+  box-shadow: none;
 }
 
-/* Improved mobile navbar */
+.navbar__title,
+.navbar__brand {
+  font-family: var(--font-mono);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-tight);
+  color: var(--c-text);
+}
+
+.navbar__link {
+  font-weight: var(--fw-medium);
+}
+
+.navbar__link--active {
+  color: var(--c-text);
+}
+
+.navbar__items--right {
+  gap: var(--space-2);
+}
+
 @media (max-width: 996px) {
   .navbar__toggle {
-    color: var(--ifm-navbar-link-color);
-    z-index: 1002;
+    color: var(--c-text-muted);
     position: relative;
+    z-index: 202;
   }
 
-  /* Hide burger icon when sidebar is open */
+  /* The burger would otherwise sit on top of the open drawer. */
   .navbar-sidebar--show .navbar__toggle {
     display: none;
   }
 
   .navbar__item {
-    padding: 0.5rem 0;
+    padding: var(--space-2) 0;
   }
 
   .navbar-sidebar {
-    background: var(--ifm-navbar-background-color);
-    z-index: 1001 !important;
     position: fixed;
-    height: 100vh !important;
-    height: 100dvh !important;
+    z-index: 201;
     max-width: 300px;
+    height: 100dvh;
+    background: var(--c-bg);
+    border-right: var(--border-w) solid var(--c-border);
   }
 
   .navbar-sidebar__backdrop {
-    z-index: 1000 !important;
     position: fixed;
+    z-index: 200;
+    background: var(--c-overlay);
   }
 
-  [data-theme='dark'] .navbar-sidebar {
-    background: #0a0e27 !important;
-    border-right: 1px solid rgba(6, 182, 212, 0.2);
-  }
-
-  [data-theme='dark'] .navbar-sidebar__backdrop {
-    z-index: 1000 !important;
-  }
-
-  .navbar-sidebar__brand {
-    padding: 1rem;
-  }
-
+  .navbar-sidebar__brand,
   .navbar-sidebar__items {
-    padding: 1rem;
-  }
-
-  .menu__link {
-    border-radius: 6px;
-    padding: 0.5rem 0.75rem;
-  }
-
-  .menu__link:hover {
-    background: rgba(6, 182, 212, 0.1);
-  }
-
-  [data-theme='dark'] .menu__link:hover {
-    background: rgba(6, 182, 212, 0.15);
+    padding: var(--space-4);
   }
 }
 
-/* Link Glow Effect in Dark Mode */
-[data-theme='dark'] a:hover {
-  text-shadow: 0 0 8px rgba(34, 211, 238, 0.5);
+/* ══════════════════════════════════════════════════════════════════════
+   6. SIDEBAR / TOC / BREADCRUMBS
+   ══════════════════════════════════════════════════════════════════════ */
+
+.theme-doc-sidebar-container {
+  border-right: var(--border-w) solid var(--c-border);
 }
 
-/* Code Block Enhancements */
-[data-theme='dark'] pre {
-  background: var(--ifm-code-background);
-  border: 1px solid rgba(6, 182, 212, 0.2);
-  border-radius: 8px;
+.menu {
+  font-size: var(--fs-sm);
+  padding: var(--space-4);
 }
 
-/* Sidebar Enhancements */
-[data-theme='dark'] .menu__link--active {
-  background: linear-gradient(90deg, rgba(6, 182, 212, 0.15), transparent);
-  border-left: 3px solid var(--ifm-color-primary);
-  color: var(--ifm-color-primary);
+.menu__link {
+  border-radius: var(--radius-sm);
+  line-height: var(--lh-normal);
 }
 
-/* Table of Contents */
-[data-theme='dark'] .table-of-contents__link--active {
-  color: var(--ifm-color-primary);
-  font-weight: 600;
+.menu__link--active {
+  font-weight: var(--fw-medium);
 }
 
-/* Scrollbar Styling */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+.menu__list-item-collapsible > .menu__link {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--c-text-muted);
 }
 
-::-webkit-scrollbar-track {
-  background: var(--ifm-background-color);
+.table-of-contents {
+  border-left: var(--border-w) solid var(--c-border);
+  font-size: var(--fs-sm);
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--ifm-color-primary);
-  border-radius: 5px;
+.table-of-contents__link--active {
+  color: var(--c-accent);
+  font-weight: var(--fw-medium);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--ifm-color-primary-dark);
+.breadcrumbs__item--active .breadcrumbs__link {
+  background: var(--c-accent-quiet);
+  color: var(--c-accent);
 }
 
-[data-theme='dark'] ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--ifm-color-primary), var(--ifm-color-secondary));
+.breadcrumbs__link {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
 }
 
-/* Admonitions/Callouts */
-.admonition {
-  border-left-width: 4px;
-  border-radius: 8px;
+/* ══════════════════════════════════════════════════════════════════════
+   7. CONTENT CHROME
+   ══════════════════════════════════════════════════════════════════════ */
+
+.theme-admonition {
+  border: var(--border-w) solid var(--c-border);
+  border-left-width: 3px;
+  box-shadow: none;
 }
 
-/* Footer Enhancements */
-[data-theme='dark'] .footer {
-  background: var(--ifm-background-surface-color);
-  border-top: 1px solid rgba(6, 182, 212, 0.2);
+/* The heading class is CSS-module-hashed upstream; the stable part of the
+   generated name is the prefix, so match on that. */
+.theme-admonition div[class*='admonitionHeading_'] {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
 }
 
-/* Search Bar */
-[data-theme='dark'] .navbar__search-input {
-  background: rgba(26, 31, 58, 0.8);
-  border: 1px solid rgba(6, 182, 212, 0.3);
+table {
+  display: table;
+  width: 100%;
+  font-size: var(--fs-sm);
 }
 
-[data-theme='dark'] .navbar__search-input:focus {
-  border-color: var(--ifm-color-primary);
-  box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.2);
+table th {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
 }
 
-/* Markdown Content Headings with Gradient */
-[data-theme='dark'] article h1,
-[data-theme='dark'] article h2 {
-  background: linear-gradient(135deg, #22d3ee 0%, #a78bfa 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Wide tables scroll inside their own container rather than the page. */
+.markdown > table,
+.theme-doc-markdown table {
+  display: block;
+  overflow-x: auto;
 }
 
-/* Tabs Enhancement */
-[data-theme='dark'] .tabs__item--active {
-  border-bottom-color: var(--ifm-color-primary);
-  color: var(--ifm-color-primary);
+blockquote {
+  font-style: normal;
+  box-shadow: none;
 }
 
-/* Badge/Pill Enhancement */
+.pagination-nav__link {
+  border: var(--border-w) solid var(--c-border);
+  box-shadow: none;
+}
+
+.pagination-nav__link:hover {
+  border-color: var(--c-border-strong);
+  background: var(--c-elevated);
+}
+
+.pagination-nav__sublabel {
+  font-family: var(--font-mono);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+}
+
+.pagination-nav__label {
+  font-family: var(--font-mono);
+  font-weight: var(--fw-medium);
+}
+
+.tabs__item {
+  border-radius: 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+}
+
 .badge {
-  border-radius: 6px;
-  font-weight: 600;
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
 }
 
-.badge--primary {
-  background: linear-gradient(135deg, var(--ifm-color-primary), var(--ifm-color-secondary));
+hr {
+  border: 0;
+  height: 1px;
+  background: var(--c-border);
 }
 
-/* Pagination */
-[data-theme='dark'] .pagination-nav__link:hover {
-  border-color: var(--ifm-color-primary);
-  box-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
+/* Buttons — flat fills, hairline outlines, no gradients, no lift. */
+.button--primary {
+  background: var(--c-accent);
+  border-color: var(--c-accent);
+  color: var(--c-on-accent);
 }
 
-/* Blog Post Cards */
-[data-theme='dark'] .card {
-  background: var(--ifm-card-background-color);
-  border: 1px solid rgba(6, 182, 212, 0.2);
+.button--primary:hover {
+  background: var(--c-accent-hover);
+  border-color: var(--c-accent-hover);
+  color: var(--c-on-accent);
 }
 
-/* Glow on Focus */
-[data-theme='dark'] *:focus-visible {
-  outline: 2px solid var(--ifm-color-primary);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.2);
+/* Doubled class for specificity: Infima derives .button--secondary's text
+   colour from --ifm-color-secondary-contrast-foreground, which our secondary
+   mapping turns into near-invisible dark-on-dark. */
+.button.button--secondary,
+.button.button--secondary:visited {
+  background: transparent;
+  border: var(--border-w) solid var(--c-border-strong);
+  color: var(--c-text);
+}
+
+.button.button--secondary:hover,
+.button.button--secondary:active {
+  background: var(--c-elevated);
+  border-color: var(--c-text-muted);
+  color: var(--c-text);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   8. CODE
+   Prism contrast repairs. Both stock themes ship tokens below 4.5:1;
+   github had three under 2.8:1. Ratios below are computed against the
+   token background actually used (--c-code-bg), not the theme's own.
+   ══════════════════════════════════════════════════════════════════════ */
+
+pre[class*='codeBlock_'],
+.theme-code-block pre {
+  border: var(--border-w) solid var(--c-border);
+}
+
+div[class*='codeBlockTitle_'] {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tracking-wide);
+  border-bottom-color: var(--c-border);
+}
+
+/* The magic comment registered in docusaurus.config.ts had no styling. */
+.code-block-error-line {
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+  background: var(--c-error-quiet);
+  border-left: 3px solid var(--c-error);
+}
+
+.theme-code-block-highlighted-line {
+  border-left: 3px solid var(--c-accent);
+}
+
+/* Dark: nightOwl's comment token is 4.03 on #0A0F1F. Everything else in
+   the theme already clears 4.5 (plain 14.08, string 11.90, keyword 11.71,
+   class-name 12.87, function 8.30, number 8.10, boolean 6.27). */
+[data-theme='dark'] .token.comment,
+[data-theme='dark'] .token.prolog,
+[data-theme='dark'] .token.cdata {
+  color: #7a8b94; /* 5.40 */
+  font-style: normal;
+}
+
+/* Light: nightOwlLight fails on several tokens against #F5F5F4. */
+[data-theme='light'] .token.plain,
+[data-theme='light'] .token.punctuation,
+[data-theme='light'] .token.operator {
+  color: #44403c; /* 9.42 */
+}
+
+[data-theme='light'] .token.comment,
+[data-theme='light'] .token.prolog,
+[data-theme='light'] .token.cdata {
+  color: #57534e; /* was 2.43 → 6.99 */
+  font-style: normal;
+}
+
+[data-theme='light'] .token.string,
+[data-theme='light'] .token.inserted,
+[data-theme='light'] .token.attr-value {
+  color: #15803d; /* was 3.98 → 4.60; ties code to the accent */
+}
+
+[data-theme='light'] .token.keyword,
+[data-theme='light'] .token.selector,
+[data-theme='light'] .token.atrule {
+  color: #6d28d9; /* 6.51 */
+}
+
+[data-theme='light'] .token.number,
+[data-theme='light'] .token.boolean,
+[data-theme='light'] .token.constant {
+  color: #b45309; /* was 4.25 → 4.60 */
+}
+
+[data-theme='light'] .token.function,
+[data-theme='light'] .token.variable,
+[data-theme='light'] .token.attr-name {
+  color: #1d4ed8; /* 6.14 */
+}
+
+[data-theme='light'] .token.tag,
+[data-theme='light'] .token.property,
+[data-theme='light'] .token.deleted,
+[data-theme='light'] .token.symbol {
+  color: #b91c1c; /* 5.93 */
+}
+
+[data-theme='light'] .token.url,
+[data-theme='light'] .token.entity,
+[data-theme='light'] .token.namespace {
+  color: #0e7490; /* was 3.29 → 4.91 */
+}
+
+[data-theme='light'] .token.class-name {
+  color: #92400e; /* 6.50 */
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   9. BLOG
+   BlogPostItem/Container renders a bare <article> with no stable theme-*
+   class, so the page-level wrapper is the anchor.
+   ══════════════════════════════════════════════════════════════════════ */
+
+.theme-blog-list-page article {
+  padding-bottom: var(--space-10);
+  margin-bottom: var(--space-10);
+  border-bottom: var(--border-w) solid var(--c-border);
+}
+
+.theme-blog-list-page article:last-of-type {
+  border-bottom: 0;
+}
+
+.theme-blog-list-page article header h2 {
+  font-size: var(--fs-xl);
+  letter-spacing: var(--tracking-tight);
+}
+
+.theme-blog-list-page article header h2 a {
+  color: var(--c-text);
+}
+
+.theme-blog-list-page article header h2 a:hover {
+  color: var(--c-accent);
+  text-decoration: none;
+}
+
+/* Date / reading-time row. No stable class exists on it upstream. */
+.theme-blog-list-page article header > div,
+.theme-blog-post-page article header > div {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tracking-wide);
+  color: var(--c-text-muted);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   10. PRIMITIVES
+   Global classes, not CSS modules: these are used from MDX content as well
+   as from React components, and module hashing would make them unusable
+   from Markdown.
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* ── Status dot — the pass/fail language of the site ─────────────────── */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+}
+
+.status::before {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--radius-pill);
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.status--pass {
+  color: var(--c-accent);
+}
+.status--fail {
+  color: var(--c-error);
+}
+.status--warn {
+  color: var(--c-warn);
+}
+.status--idle {
+  color: var(--c-text-dim);
+}
+
+/* Colour is never the only channel. */
+.status--fail::after {
+  content: '✕';
+  font-size: 0.85em;
+}
+.status--warn::after {
+  content: '▲';
+  font-size: 0.75em;
+}
+
+/* ── Metric ──────────────────────────────────────────────────────────── */
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.metric__value {
+  font-family: var(--font-mono);
+  font-size: var(--fs-3xl);
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  letter-spacing: var(--tracking-display);
+  font-variant-numeric: tabular-nums;
+  color: var(--c-text);
+}
+
+.metric__label {
+  font-size: var(--fs-sm);
+  line-height: var(--lh-normal);
+  color: var(--c-text-muted);
+}
+
+/* ── Tag / pill ──────────────────────────────────────────────────────── */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-wide);
+  line-height: 1.4;
+  padding: var(--space-1) var(--space-2);
+  border: var(--border-w) solid var(--c-border);
+  border-radius: var(--radius-xs);
+  background: var(--c-elevated);
+  color: var(--c-text-muted);
+  white-space: nowrap;
+}
+
+.pill--accent {
+  border-color: var(--c-accent);
+  background: var(--c-accent-quiet);
+  color: var(--c-accent);
+}
+
+/* ── Card ────────────────────────────────────────────────────────────── */
+.u-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--c-surface);
+  border: var(--border-w) solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+}
+
+.u-card--interactive {
+  transition: border-color var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) var(--ease);
+}
+
+/* Hover is a border and surface step, never a transform or a shadow. */
+.u-card--interactive:hover,
+.u-card--interactive:focus-within {
+  border-color: var(--c-border-strong);
+  background: var(--c-elevated);
+}
+
+.u-card__title {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-tight);
+  color: var(--c-text);
+  margin: 0 0 var(--space-2);
+}
+
+.u-card__body {
+  color: var(--c-text-muted);
+  line-height: var(--lh-relaxed);
+  flex: 1;
+}
+
+.u-card__footer {
+  margin-top: var(--space-4);
+  display: flex;
+  gap: var(--space-4);
+}
+
+/* ── Section header ──────────────────────────────────────────────────── */
+.section-head {
+  max-width: 44rem;
+  margin: 0 0 var(--space-10);
+}
+
+.section-head--center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.section-head__eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--c-accent);
+  margin-bottom: var(--space-3);
+}
+
+.section-head__title {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-tight);
+  color: var(--c-text);
+  margin: 0 0 var(--space-3);
+  text-wrap: balance;
+}
+
+.section-head__subtitle {
+  font-size: var(--fs-md);
+  font-weight: var(--fw-light);
+  line-height: 1.6;
+  color: var(--c-text-muted);
+  margin: 0;
+}
+
+/* ── Rules ───────────────────────────────────────────────────────────── */
+.rule {
+  border: 0;
+  height: 1px;
+  background: var(--c-border);
+  margin-block: var(--space-12);
+}
+
+.rule-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-block: var(--space-12);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+}
+
+.rule-label::before,
+.rule-label::after {
+  content: '';
+  height: 1px;
+  background: var(--c-border);
+  flex: 1;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   11. SCROLLBAR
+   Driven by --ifm-scrollbar-* now; this adds the Firefox equivalent.
+   ══════════════════════════════════════════════════════════════════════ */
+
+html {
+  scrollbar-color: var(--c-border-strong) var(--c-bg);
+  scrollbar-width: thin;
 }

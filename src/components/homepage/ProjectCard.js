@@ -11,7 +11,16 @@ function ArrowIcon() {
 }
 
 export default function ProjectCard({ project }) {
-  const { title, description, impact, tags = [], liveUrl, githubUrl, docsUrl } = project;
+  const {
+    title,
+    description,
+    impact,
+    tags = [],
+    liveUrl,
+    githubUrl,
+    docsUrl,
+    blogUrl,
+  } = project;
   return (
     <article className={styles.projectCard}>
       <div className={styles.cardTop}>
@@ -29,6 +38,11 @@ export default function ProjectCard({ project }) {
         </div>
       )}
       <div className={styles.cardLinks}>
+        {blogUrl && (
+          <Link className={styles.cardLink} to={blogUrl}>
+            Write-up <ArrowIcon />
+          </Link>
+        )}
         {liveUrl && (
           <Link className={styles.cardLink} href={liveUrl}>
             Live <ArrowIcon />

@@ -1,11 +1,13 @@
 ---
 title: "Git Security - Protecting Your Source Code and Commits"
 slug: git-security-practices
-authors: pascal
-tags: [git, security, version-control, devsecops]
 date: "2024-05-20"
+authors: [pascal]
+description: "Signed commits, secret scanning before a push, protected branches, and what to actually do when a key does make it into history."
+keywords: [git security, signed commits, secret scanning, branch protection, git hooks]
+tags: [git, devsecops, secrets]
+image: /img/og/git-security-practices.png
 ---
-
 # Git Security - Beyond Just Commits
 
 Your Git repository is more than code—it's credentials, API keys, intellectual property, and your company's crown jewels. Let's secure it properly.

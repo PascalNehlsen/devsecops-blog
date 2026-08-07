@@ -1,9 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Link from '@docusaurus/Link';
 import styles from './styles.module.css';
 import { stats } from '@site/src/data/homepage';
 
 function useCountUp(target, active) {
-  const [value, setValue] = useState(0);
+  // Starts at the target, not at zero. The server-rendered HTML therefore
+  // contains the real number, so a reader with JavaScript disabled, a slow
+  // hydration, or an IntersectionObserver that never fires still sees "80%"
+  // rather than "0%" — which would be the three most important numbers on
+  // the page silently reading as nothing.
+  const [value, setValue] = useState(target);
+
   useEffect(() => {
     if (!active) return;
     const reduce =
@@ -29,16 +36,26 @@ function useCountUp(target, active) {
   return value;
 }
 
-function Stat({ value, suffix, label, active }) {
+function Stat({ value, suffix, label, href, active }) {
   const current = useCountUp(value, active);
-  return (
-    <div>
+  const body = (
+    <>
       <div className={styles.statValue}>
         {current}
         {suffix}
       </div>
       <div className={styles.statLabel}>{label}</div>
-    </div>
+    </>
+  );
+
+  // A number that links to the post documenting it is a claim a reader can
+  // check. One that doesn't is a claim they have to trust.
+  return href ? (
+    <Link to={href} className={styles.statLink}>
+      {body}
+    </Link>
+  ) : (
+    <div>{body}</div>
   );
 }
 

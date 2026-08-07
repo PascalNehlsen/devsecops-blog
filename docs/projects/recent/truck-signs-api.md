@@ -2,14 +2,9 @@
 id: truck-signs-api
 title: Truck Signs API
 sidebar_label: Truck Signs API
-sidebar_position: 6
+sidebar_position: 3
 ---
 
-import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
-
-<GithubLinkAdmonition link="https://github.com/PascalNehlsen/truck_signs_api" text="Github Repository" type="info">
-**Reach me out via** [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)**,** [Portfolio Contact Form](https://pascal-nehlsen.de/#contact) **or** [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
-</GithubLinkAdmonition>
 
 <div align="center">
 
@@ -234,3 +229,7 @@ The behavior of some of the views had to be modified to address functionalities 
 - Create Virual Environment with Virtualenv and Virtualenvwrapper: [Link](https://docs.python-guide.org/dev/virtualenvs/)
 - [Configure CORS](https://www.stackhawk.com/blog/django-cors-guide/)
 - [Setup Django with Cloudinary](https://cloudinary.com/documentation/django_integration)
+
+---
+
+**Repository:** [https://github.com/PascalNehlsen/truck_signs_api](https://github.com/PascalNehlsen/truck_signs_api)

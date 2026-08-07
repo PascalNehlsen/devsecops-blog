@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Pascal Nehlsen">
+  <title>Pascal Nehlsen</title>
+  <!-- A terminal prompt: the mark says what the site is about, not whose it is.
+       Two files rather than one currentColor file, because Docusaurus renders
+       the navbar logo in an <img> tag — an SVG loaded that way is an isolated
+       document and cannot inherit the page's colour. -->
+  <rect x="0.75" y="0.75" width="30.5" height="30.5" rx="5"
+        fill="none" stroke="#22C55E" stroke-width="1.5" opacity="0.35"/>
+  <path d="M8 10.5 L13.5 16 L8 21.5"
+        fill="none" stroke="#22C55E" stroke-width="2.25"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M16.5 22 H24"
+        fill="none" stroke="#22C55E" stroke-width="2.25"
+        stroke-linecap="round"/>
+</svg>

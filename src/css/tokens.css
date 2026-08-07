@@ -1,0 +1,407 @@
+/**
+ * Design tokens.
+ *
+ * Two layers:
+ *   1. Primitives — theme-independent scales (type, space, radius, motion).
+ *   2. Semantic colours — one set per theme, then bridged onto the --ifm-*
+ *      variables Infima actually reads.
+ *
+ * Nothing outside this file should contain a raw hex value. Component CSS
+ * refers to --c-* / --fs-* / --space-* and never to a colour literal.
+ *
+ * Contrast ratios in the comments are computed (WCAG 2.1 relative luminance),
+ * not estimated. Anything marked FAILS must not be used for body text.
+ */
+
+/* ══════════════════════════════════════════════════════════════════════
+   1. PRIMITIVES
+   ══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Type families ────────────────────────────────────────────────── */
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo,
+    Consolas, monospace;
+  --font-sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI',
+    sans-serif;
+
+  /* ── Type scale ───────────────────────────────────────────────────── */
+  --fs-2xs: 0.75rem; /* 12 — badge/pill only, never prose */
+  --fs-xs: 0.8125rem; /* 13 */
+  --fs-sm: 0.875rem; /* 14 */
+  --fs-base: 1rem; /* 16 */
+  --fs-md: 1.125rem; /* 18 */
+  --fs-lg: 1.25rem; /* 20 */
+  --fs-xl: 1.5rem; /* 24 */
+  --fs-2xl: 1.875rem; /* 30 */
+  --fs-3xl: 2.25rem; /* 36 */
+  --fs-4xl: clamp(2.25rem, 1.55rem + 2.8vw, 3.25rem); /* 36 → 52 */
+
+  --lh-tight: 1.12;
+  --lh-snug: 1.25;
+  --lh-normal: 1.5;
+  --lh-relaxed: 1.7;
+  --lh-code: 1.6;
+
+  --tracking-display: -0.022em;
+  --tracking-tight: -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.06em;
+  --tracking-eyebrow: 0.14em;
+
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* ── Space — 4/8 rhythm ───────────────────────────────────────────── */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* ── Radius — nothing above 8px except pills ──────────────────────── */
+  --radius-xs: 2px; /* inline code, tags */
+  --radius-sm: 4px; /* buttons, inputs */
+  --radius-md: 6px; /* cards, code blocks */
+  --radius-lg: 8px; /* terminal window only */
+  --radius-pill: 999px; /* status pill only */
+
+  /* ── Border — 1px everywhere ──────────────────────────────────────── */
+  --border-w: 1px;
+  --border-w-focus: 2px;
+  --focus-offset: 2px;
+
+  /* ── Motion ───────────────────────────────────────────────────────── */
+  --dur-fast: 120ms;
+  --dur-base: 180ms;
+  --ease: cubic-bezier(0.2, 0, 0.13, 1);
+
+  /* ── Layout ───────────────────────────────────────────────────────── */
+  --prose-measure: 68ch;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   2a. SEMANTIC COLOUR — DARK (default)
+   ══════════════════════════════════════════════════════════════════════ */
+
+html,
+html[data-theme='dark'] {
+  color-scheme: dark;
+
+  --c-bg: #020617;
+  --c-bg-alt: #070b18;
+  --c-surface: #0e1223;
+  --c-elevated: #151b2e;
+  --c-border: #1e293b;
+  --c-border-strong: #334155;
+
+  --c-text: #f8fafc; /* 19.28 on bg — AAA */
+  --c-text-muted: #94a3b8; /*  7.87 on bg — AAA */
+  /* --c-text-dim FAILS AA for text (4.24 on bg, 3.91 on surface).
+     Clears 3:1, so it is legal for decorative rules, disabled fills,
+     icons >= 24px and >= 19px-bold text. Never body copy. */
+  --c-text-dim: #64748b;
+
+  --c-accent: #22c55e; /*  8.85 on bg — AAA */
+  --c-accent-hover: #16a34a; /* CTA *fill* hover; text on it = 4.52 */
+  --c-accent-link-h: #4ade80; /* 11.58 — text-link hover must go LIGHTER */
+  --c-accent-quiet: rgba(34, 197, 94, 0.1);
+  --c-on-accent: #052e16;
+
+  --c-error: #ef4444; /* 5.36 on bg; 4.54 on elevated — see note below */
+  --c-error-quiet: rgba(239, 68, 68, 0.1);
+  --c-warn: #f59e0b;
+  --c-warn-quiet: rgba(245, 158, 11, 0.1);
+  --c-info: #38bdf8;
+  --c-info-quiet: rgba(56, 189, 248, 0.1);
+
+  --c-code-bg: #0a0f1f;
+  --c-selection: rgba(34, 197, 94, 0.25);
+  --c-overlay: rgba(2, 6, 23, 0.72);
+
+  /* Infima tints its breadcrumb chevron and sidebar caret with a filter.
+     Without these the glyphs stay near-black on a dark background. */
+  --ifm-breadcrumb-separator-filter: invert(64%) sepia(11%) saturate(500%)
+    hue-rotate(175deg) brightness(95%) contrast(88%);
+  --ifm-menu-link-sublist-icon-filter: invert(64%) sepia(11%) saturate(500%)
+    hue-rotate(175deg) brightness(95%) contrast(88%);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   2b. SEMANTIC COLOUR — LIGHT (derived, not inverted)
+   ══════════════════════════════════════════════════════════════════════ */
+
+html[data-theme='light'] {
+  color-scheme: light;
+
+  --c-bg: #fafaf9;
+  --c-bg-alt: #f5f5f4;
+  --c-surface: #ffffff;
+  --c-elevated: #f5f5f4;
+  --c-border: #e7e5e4;
+  --c-border-strong: #d6d3d1;
+
+  --c-text: #1c1917; /* 16.74 on bg — AAA */
+  --c-text-muted: #57534e; /*  7.30 on bg — AAA */
+  --c-text-dim: #78716c; /* FAILS on bg-alt (4.40). Decorative only. */
+
+  /* #22C55E is 2.28:1 on white — unusable. #15803D is the lightest green
+     that clears 4.5:1 on all three light surfaces (5.02 / 4.80 / 4.60). */
+  --c-accent: #15803d;
+  --c-accent-hover: #166534; /* 7.13 on white */
+  --c-accent-link-h: #166534;
+  --c-accent-quiet: rgba(21, 128, 61, 0.08);
+  --c-on-accent: #ffffff; /* 5.02 on --c-accent */
+
+  --c-error: #b91c1c;
+  --c-error-quiet: rgba(185, 28, 28, 0.07);
+  --c-warn: #b45309;
+  --c-warn-quiet: rgba(180, 83, 9, 0.08);
+  --c-info: #0e7490;
+  --c-info-quiet: rgba(14, 116, 144, 0.08);
+
+  --c-code-bg: #f5f5f4;
+  --c-selection: rgba(21, 128, 61, 0.18);
+  --c-overlay: rgba(28, 25, 23, 0.45);
+
+  --ifm-breadcrumb-separator-filter: invert(35%) sepia(6%) saturate(400%)
+    hue-rotate(340deg) brightness(93%) contrast(85%);
+  --ifm-menu-link-sublist-icon-filter: invert(35%) sepia(6%) saturate(400%)
+    hue-rotate(340deg) brightness(93%) contrast(85%);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   3. INFIMA BRIDGE
+   Every --ifm-* variable Infima actually reads, driven from the semantic
+   tokens above. Note there is no --ifm-color-accent: Infima has no such
+   variable, and the 15 declarations that used to define it were dead.
+   ══════════════════════════════════════════════════════════════════════ */
+
+html,
+html[data-theme='dark'],
+html[data-theme='light'] {
+  /* Brand */
+  --ifm-color-primary: var(--c-accent);
+  --ifm-color-primary-dark: var(--c-accent-hover);
+  --ifm-color-primary-darker: var(--c-accent-hover);
+  --ifm-color-primary-darkest: var(--c-accent-hover);
+  --ifm-color-primary-light: var(--c-accent-link-h);
+  --ifm-color-primary-lighter: var(--c-accent-link-h);
+  --ifm-color-primary-lightest: var(--c-accent-link-h);
+
+  /* Status — drives admonitions and badges */
+  --ifm-color-success: var(--c-accent);
+  --ifm-color-danger: var(--c-error);
+  --ifm-color-warning: var(--c-warn);
+  --ifm-color-info: var(--c-info);
+  --ifm-color-secondary: var(--c-elevated);
+  --ifm-color-success-contrast-background: var(--c-accent-quiet);
+  --ifm-color-success-contrast-foreground: var(--c-text);
+  --ifm-color-danger-contrast-background: var(--c-error-quiet);
+  --ifm-color-danger-contrast-foreground: var(--c-text);
+  --ifm-color-warning-contrast-background: var(--c-warn-quiet);
+  --ifm-color-warning-contrast-foreground: var(--c-text);
+  --ifm-color-info-contrast-background: var(--c-info-quiet);
+  --ifm-color-info-contrast-foreground: var(--c-text);
+
+  /* Surfaces */
+  --ifm-background-color: var(--c-bg);
+  --ifm-background-surface-color: var(--c-bg-alt);
+  --ifm-card-background-color: var(--c-surface);
+  --ifm-hover-overlay: var(--c-accent-quiet);
+
+  /* Emphasis ramp — Infima uses 100/200/300 for rules, 600+ for text */
+  --ifm-color-emphasis-0: var(--c-bg);
+  --ifm-color-emphasis-100: var(--c-bg-alt);
+  --ifm-color-emphasis-200: var(--c-border);
+  --ifm-color-emphasis-300: var(--c-border);
+  --ifm-color-emphasis-400: var(--c-border-strong);
+  --ifm-color-emphasis-500: var(--c-border-strong);
+  --ifm-color-emphasis-600: var(--c-text-muted);
+  --ifm-color-emphasis-700: var(--c-text-muted);
+  --ifm-color-emphasis-800: var(--c-text);
+  --ifm-color-emphasis-900: var(--c-text);
+  --ifm-color-emphasis-1000: var(--c-text);
+  --ifm-color-content: var(--c-text);
+  --ifm-color-content-secondary: var(--c-text-muted);
+
+  /* Type */
+  --ifm-font-family-base: var(--font-sans);
+  --ifm-font-family-monospace: var(--font-mono);
+  --ifm-heading-font-family: var(--font-mono);
+  --ifm-font-size-base: var(--fs-base);
+  --ifm-font-weight-base: var(--fw-regular);
+  --ifm-font-weight-light: var(--fw-light);
+  --ifm-font-weight-normal: var(--fw-regular);
+  --ifm-font-weight-semibold: var(--fw-semibold);
+  --ifm-font-weight-bold: var(--fw-bold);
+  --ifm-heading-font-weight: var(--fw-bold);
+  --ifm-heading-line-height: var(--lh-snug);
+  --ifm-line-height-base: var(--lh-relaxed);
+  --ifm-font-color-base: var(--c-text);
+  --ifm-font-color-secondary: var(--c-text-muted);
+  --ifm-heading-color: var(--c-text);
+  --ifm-h1-font-size: var(--fs-3xl);
+  --ifm-h2-font-size: var(--fs-2xl);
+  --ifm-h3-font-size: var(--fs-xl);
+  --ifm-h4-font-size: var(--fs-lg);
+  --ifm-h5-font-size: var(--fs-md);
+  --ifm-h6-font-size: var(--fs-base);
+  --ifm-paragraph-margin-bottom: var(--space-4);
+
+  /* Links */
+  --ifm-link-color: var(--c-accent);
+  --ifm-link-hover-color: var(--c-accent-link-h);
+  --ifm-link-decoration: none;
+  --ifm-link-hover-decoration: underline;
+
+  /* Geometry — depth comes from surface steps plus a hairline, not shadow */
+  --ifm-global-radius: var(--radius-md);
+  --ifm-global-border-width: var(--border-w);
+  --ifm-global-spacing: var(--space-4);
+  --ifm-spacing-horizontal: var(--space-4);
+  --ifm-spacing-vertical: var(--space-4);
+  --ifm-global-shadow-lw: none;
+  --ifm-global-shadow-md: none;
+  --ifm-global-shadow-tl: none;
+
+  /* Transitions — replaces the old global `*` transition rule */
+  --ifm-transition-fast: var(--dur-fast);
+  --ifm-transition-slow: var(--dur-base);
+  --ifm-transition-timing-default: var(--ease);
+  --ifm-button-transition-duration: var(--dur-fast);
+
+  /* Navbar */
+  --ifm-navbar-height: 3.75rem;
+  --ifm-navbar-background-color: var(--c-bg);
+  --ifm-navbar-link-color: var(--c-text-muted);
+  --ifm-navbar-link-hover-color: var(--c-text);
+  --ifm-navbar-shadow: none;
+  --ifm-navbar-item-padding-horizontal: var(--space-3);
+  --ifm-navbar-sidebar-width: 20rem;
+
+  /* Dropdown */
+  --ifm-dropdown-background-color: var(--c-surface);
+  --ifm-dropdown-hover-background-color: var(--c-elevated);
+  --ifm-dropdown-link-color: var(--c-text-muted);
+  --ifm-dropdown-font-weight: var(--fw-regular);
+
+  /* Sidebar menu */
+  --ifm-menu-color: var(--c-text-muted);
+  --ifm-menu-color-active: var(--c-accent);
+  --ifm-menu-color-background-active: var(--c-accent-quiet);
+  --ifm-menu-color-background-hover: var(--c-elevated);
+  --ifm-menu-link-padding-vertical: var(--space-2);
+  --ifm-menu-link-padding-horizontal: var(--space-3);
+
+  /* TOC */
+  --ifm-toc-border-color: var(--c-border);
+  --ifm-toc-link-color: var(--c-text-muted);
+  --ifm-toc-padding-vertical: var(--space-2);
+  --ifm-toc-padding-horizontal: var(--space-3);
+
+  /* Breadcrumbs */
+  --ifm-breadcrumb-color-active: var(--c-accent);
+  --ifm-breadcrumb-item-background-active: var(--c-accent-quiet);
+  --ifm-breadcrumb-border-radius: var(--radius-sm);
+  --ifm-breadcrumb-padding-horizontal: var(--space-2);
+  --ifm-breadcrumb-padding-vertical: var(--space-1);
+  --ifm-breadcrumb-size-multiplier: 1;
+
+  /* Code */
+  --ifm-code-background: var(--c-code-bg);
+  --ifm-code-border-radius: var(--radius-xs);
+  --ifm-code-font-size: 0.9em;
+  --ifm-code-padding-horizontal: 0.35em;
+  --ifm-code-padding-vertical: 0.15em;
+  --ifm-pre-background: var(--c-code-bg);
+  --ifm-pre-color: var(--c-text);
+  --ifm-pre-border-radius: var(--radius-md);
+  --ifm-pre-line-height: var(--lh-code);
+  --ifm-pre-padding: var(--space-4);
+  --docusaurus-highlighted-code-line-bg: var(--c-accent-quiet);
+
+  /* Admonitions */
+  --ifm-alert-border-width: var(--border-w);
+  --ifm-alert-border-left-width: 3px;
+  --ifm-alert-border-radius: var(--radius-md);
+  --ifm-alert-padding-vertical: var(--space-4);
+  --ifm-alert-padding-horizontal: var(--space-4);
+  --ifm-alert-shadow: none;
+
+  /* Blockquote */
+  --ifm-blockquote-border-color: var(--c-border-strong);
+  --ifm-blockquote-border-left-width: 2px;
+  --ifm-blockquote-color: var(--c-text-muted);
+  --ifm-blockquote-font-size: var(--fs-base);
+  --ifm-blockquote-shadow: none;
+
+  /* Table */
+  --ifm-table-background: transparent;
+  --ifm-table-border-color: var(--c-border);
+  --ifm-table-border-width: var(--border-w);
+  --ifm-table-head-background: var(--c-bg-alt);
+  --ifm-table-head-color: var(--c-text);
+  --ifm-table-head-font-weight: var(--fw-medium);
+  --ifm-table-cell-color: var(--c-text);
+  --ifm-table-cell-padding: var(--space-2) var(--space-3);
+  --ifm-table-stripe-background: transparent;
+
+  /* Tabs */
+  --ifm-tabs-color: var(--c-text-muted);
+  --ifm-tabs-color-active: var(--c-text);
+  --ifm-tabs-color-active-border: var(--c-accent);
+  --ifm-tabs-padding-vertical: var(--space-2);
+  --ifm-tabs-padding-horizontal: var(--space-3);
+
+  /* Pagination */
+  --ifm-pagination-nav-border-radius: var(--radius-md);
+  --ifm-pagination-nav-color-hover: var(--c-accent);
+  --ifm-pagination-color-active: var(--c-accent);
+  --ifm-pagination-item-active-background: var(--c-accent-quiet);
+  --ifm-pagination-border-radius: var(--radius-sm);
+  --ifm-pagination-font-size: var(--fs-sm);
+
+  /* Buttons */
+  --ifm-button-border-radius: var(--radius-sm);
+  --ifm-button-border-width: var(--border-w);
+  --ifm-button-font-weight: var(--fw-medium);
+  --ifm-button-padding-vertical: var(--space-2);
+  --ifm-button-padding-horizontal: var(--space-4);
+
+  /* Card, badge, hr, footer, scrollbar */
+  --ifm-card-border-radius: var(--radius-md);
+  --ifm-card-vertical-spacing: var(--space-5);
+  --ifm-card-horizontal-spacing: var(--space-5);
+  --ifm-badge-border-radius: var(--radius-xs);
+  --ifm-badge-border-width: var(--border-w);
+  --ifm-badge-padding-vertical: var(--space-1);
+  --ifm-badge-padding-horizontal: var(--space-2);
+  --ifm-hr-background-color: var(--c-border);
+  --ifm-hr-height: 1px;
+  --ifm-hr-margin-vertical: var(--space-12);
+  --ifm-footer-background-color: var(--c-bg-alt);
+  --ifm-footer-color: var(--c-text-muted);
+  --ifm-footer-link-color: var(--c-text-muted);
+  --ifm-footer-link-hover-color: var(--c-accent);
+  --ifm-footer-title-color: var(--c-text);
+  --ifm-footer-padding-vertical: var(--space-12);
+  --ifm-scrollbar-size: 10px;
+  --ifm-scrollbar-track-background-color: var(--c-bg);
+  --ifm-scrollbar-thumb-background-color: var(--c-border-strong);
+  --ifm-scrollbar-thumb-hover-background-color: var(--c-text-dim);
+
+  /* Search input — mapped now so a future search plugin inherits the system */
+  --ifm-navbar-search-input-background-color: var(--c-elevated);
+  --ifm-navbar-search-input-color: var(--c-text);
+  --ifm-navbar-search-input-placeholder-color: var(--c-text-muted);
+}

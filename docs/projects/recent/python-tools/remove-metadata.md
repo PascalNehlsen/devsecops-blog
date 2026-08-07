@@ -5,11 +5,6 @@ sidebar_label: PDF Remove Metadata Tool
 sidebar_position: 7
 ---
 
-import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
-
-<GithubLinkAdmonition link="https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/remove-metadata" text="Github Repository" type="info">
-**Reach me out via** [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)**,** [Portfolio Contact Form](https://pascal-nehlsen.de/#contact) **or** [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
-</GithubLinkAdmonition>
 
 # PDF Remove Metadata
 
@@ -80,3 +75,7 @@ python remove-metadata.py
 ## Output
 
 The script will print the old and cleaned metadata in the console, allowing you to compare the changes. The original PDF file will be replaced by the cleaned version.
+
+---
+
+**Repository:** [https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/remove-metadata](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/remove-metadata)

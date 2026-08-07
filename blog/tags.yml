@@ -1,0 +1,61 @@
+# Canonical tag vocabulary.
+#
+# Before this file existed, tags were free text, and the two generations of
+# posts used different casing: `devsecops` vs `DevSecOps`, `cicd` vs `CI/CD`.
+# Docusaurus slugifies those differently, so the live sitemap contained both
+# /blog/tags/devsecops and /blog/tags/dev-sec-ops — the same tag, two pages,
+# split link equity.
+#
+# onInlineTags: 'throw' in docusaurus.config.ts means a typo can no longer
+# mint a new tag page. Add a key here first, then use it.
+
+platform:
+  label: Platform Engineering
+  permalink: /platform
+  description: Golden paths, self-service infrastructure, internal platforms.
+
+devsecops:
+  label: DevSecOps
+  permalink: /devsecops
+  description: Security inside the delivery path, not bolted on after it.
+
+terraform:
+  label: Terraform
+  permalink: /terraform
+
+gcp:
+  label: GCP
+  permalink: /gcp
+
+aws:
+  label: AWS
+  permalink: /aws
+
+cicd:
+  label: CI/CD
+  permalink: /cicd
+
+observability:
+  label: Observability
+  permalink: /observability
+  description: SLOs, metrics, and what to do when they are breached.
+
+secrets:
+  label: Secrets
+  permalink: /secrets
+
+git:
+  label: Git
+  permalink: /git
+
+agents:
+  label: Agents & MCP
+  permalink: /agents
+
+cost:
+  label: Cost
+  permalink: /cost
+
+containers:
+  label: Containers
+  permalink: /containers

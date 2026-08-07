@@ -14,7 +14,7 @@ Building your first Docker image might seem intimidating at first, but it’s an
 Before you start, make sure you have the following installed:
 
 - Docker: [Install Docker](https://docs.docker.com/engine/install/) if it’s not already on your system.
-- A basic understanding of containers and images ([this post will help you](./container.md)).
+- A basic understanding of containers and images ([start here](./intro.md)).
 
 ## Step-by-Step: Creating Your First Docker Image
 

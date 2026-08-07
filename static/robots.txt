@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Generated surfaces — no value in indexing these, and they dilute the
+# real pages in the index.
+Disallow: /blog/tags/
+Disallow: /blog/page/
+Disallow: /search
+
+Sitemap: https://pascal-nehlsen.de/sitemap.xml

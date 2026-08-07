@@ -5,11 +5,6 @@ sidebar_label: Hashcat Tool
 sidebar_position: 2
 ---
 
-import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
-
-<GithubLinkAdmonition link="https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/hashcat" text="Github Repository" type="info">
-**Reach me out via** [LinkedIn](https://www.linkedin.com/in/pascal-nehlsen)**,** [Portfolio Contact Form](https://pascal-nehlsen.de/#contact) **or** [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
-</GithubLinkAdmonition>
 
 # My Hash cracker Tool
 
@@ -98,3 +93,7 @@ python hashcat.py \
 ## Logging
 
 Logs are written to the console. You can modify the logging level in the code if you need to adjust the verbosity of the output.
+
+---
+
+**Repository:** [https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/hashcat](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/hashcat)

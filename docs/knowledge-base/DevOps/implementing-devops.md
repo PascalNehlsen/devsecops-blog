@@ -1,8 +1,8 @@
 ---
-id: implementing-devpos
+id: implementing-devops
 title: Implementing DevOps
 sidebar_label: Implementing DevOps
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 # Implementing DevOps with DevSecOps (Inspired by 12-Factor App Principles)
