@@ -191,6 +191,10 @@ const config: Config = {
             from: '/blog/2025/10/15/healthcare-saas-devsecops',
             to: '/docs/projects/hepa-assist',
           },
+          {
+            from: '/blog/secrets-management-done-right',
+            to: '/docs/knowledge-base/env-vars/',
+          },
         ],
       },
     ],

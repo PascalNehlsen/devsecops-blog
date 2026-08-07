@@ -555,8 +555,6 @@ fi
 echo "Emergency response complete"
 ```
 
-Next week: **Kubernetes Security Deep Dive**
-
 ---
 
 *Securing your Git workflows? Share your tips on [GitHub](https://github.com/PascalNehlsen)!*

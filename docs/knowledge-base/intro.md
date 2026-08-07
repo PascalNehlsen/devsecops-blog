@@ -15,7 +15,7 @@ want to point at one canonical answer instead of retyping it in a code review.
 
 That makes the coverage uneven on purpose. Docker gets several pages because I
 use it daily and because most of the Dockerfiles I review have the same three
-problems. There is nothing at all on Kubernetes, because I don't run it.
+problems.
 
 If you want the applied version, with real numbers and real postmortems, that is in
 the [blog](/blog) and the [project write-ups](/docs/projects/intro). This
@@ -51,10 +51,10 @@ Security](/blog/git-security-practices), which goes considerably deeper.
 
 ### [Environment variables](/docs/knowledge-base/env-vars/)
 
-How to load them, and more importantly what not to put in them. Pairs with
-[Secrets Management](/blog/secrets-management-done-right), which is the longer
+How to load them, and more importantly what not to put in them. The longer
 argument for why `.env` files are a local-development convenience and not a
-secrets strategy.
+secrets strategy is not written yet; it belongs to a project that is still
+running.
 
 ## Where I stand
 
