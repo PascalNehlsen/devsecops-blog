@@ -73,7 +73,7 @@ if (blogEnabled) {
 const config: Config = {
   title: 'Pascal Nehlsen',
   tagline: 'Platform & Security Engineering',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.svg',
 
   url: DEPLOYMENT_URL,
   baseUrl: BASE_URL,
@@ -197,7 +197,7 @@ const config: Config = {
       disableSwitch: false,
       respectPrefersColorScheme: false,
     },
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/og/default.png',
     metadata: [
       { name: 'author', content: 'Pascal Nehlsen' },
       {
@@ -210,7 +210,7 @@ const config: Config = {
     navbar: {
       logo: {
         alt: 'Pascal Nehlsen',
-        src: 'img/favicon.ico',
+        src: 'img/logo.svg',
       },
       items: [
         {
