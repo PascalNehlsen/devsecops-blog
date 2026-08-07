@@ -1,950 +1,158 @@
 ---
 id: devsecops-blog
-title: DevSecOps Blog & Portfolio
-sidebar_label: DevSecOps Blog
+title: "This Site"
+sidebar_label: "This Site"
 sidebar_position: 5
+description: "How this site is built and what it enforces: zero third-party requests, a build that fails on a broken link, and a dependency gate whose exceptions expire."
+keywords: [docusaurus, github pages, csp, self-hosted fonts, ci security, detect-secrets]
 ---
+
+# This Site
 
 :::info[Live]
 [pascal-nehlsen.de](https://pascal-nehlsen.de). You are reading it.
 :::
 
-# DevSecOps Blog & Portfolio - Technical Documentation
-
-## Executive Summary
-
-A production-ready DevSecOps knowledge platform built with Docusaurus, showcasing security best practices, automated CI/CD pipelines, and modern web development techniques. The platform serves as both a technical blog and a comprehensive portfolio demonstrating DevSecOps expertise.
-
-**Tech Stack:** Docusaurus 3.6.3, React 18, TypeScript 5.5, Node.js 18+, GitHub Actions, GitHub Pages
-
-**Key Features:**
-- Technical blog with 9+ DevSecOps articles
-- Security-focused content and implementation
-- Automated CI/CD with GitHub Actions
-- Comprehensive documentation system
-- Dark mode support with custom theming
-- Fully responsive design
-- SEO optimized with sitemap and RSS feeds
-
----
-
-## Architecture Overview
-
-### Platform Components
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                      GitHub Repository                       │
-│  ┌────────────────────────────────────────────────────────┐ │
-│  │  Source Code (development branch)                      │ │
-│  │  • Blog Posts (Markdown)                               │ │
-│  │  • Documentation Pages                                 │ │
-│  │  • Custom Components                                   │ │
-│  │  • Configuration Files                                 │ │
-│  └────────────────────────────────────────────────────────┘ │
-└───────────────────────┬─────────────────────────────────────┘
-                        │
-                        │ Push Event / Manual Trigger
-                        ▼
-┌─────────────────────────────────────────────────────────────┐
-│              GitHub Actions CI/CD Pipeline                   │
-│  ┌────────────────────────────────────────────────────────┐ │
-│  │  Build Job                                             │ │
-│  │  • Checkout code (fetch-depth: 0)                     │ │
-│  │  • Setup Node.js 18                                   │ │
-│  │  • Install dependencies (npm install)                 │ │
-│  │  • Build static site (Docusaurus build)               │ │
-│  │  • Upload artifacts                                   │ │
-│  └────────────────────────────────────────────────────────┘ │
-│  ┌────────────────────────────────────────────────────────┐ │
-│  │  Deploy Job                                            │ │
-│  │  • Deploy to GitHub Pages                             │ │
-│  │  • CNAME configuration                                │ │
-│  └────────────────────────────────────────────────────────┘ │
-└───────────────────────┬─────────────────────────────────────┘
-                        │
-                        │ HTTPS
-                        ▼
-┌─────────────────────────────────────────────────────────────┐
-│                    GitHub Pages CDN                          │
-│  • Static HTML/CSS/JS files                                 │
-│  • Global CDN distribution                                  │
-│  • HTTPS enabled (GitHub SSL)                               │
-│  • Custom domain support                                    │
-└─────────────────────────────────────────────────────────────┘
-                        │
-                        │
-                        ▼
-┌─────────────────────────────────────────────────────────────┐
-│                    End Users / Visitors                      │
-└─────────────────────────────────────────────────────────────┘
-```
-
----
-
-## DevSecOps Implementation
-
-### 1. CI/CD Pipeline Architecture
-
-#### **Workflow Structure**
-
-The project implements a multi-stage CI/CD pipeline using GitHub Actions with workflow composition for modularity and reusability.
-
-**Main Workflow** (`.github/workflows/main.yml`)
-```yaml
-name: CI/CD Workflow
-
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
-
-permissions:
-  contents: write
-  pull-requests: write
-  pages: write
-  id-token: write
-
-jobs:
-  build-and-deploy-to-pages:
-    name: Build website and deploy to GitHub Pages
-    uses: ./.github/workflows/deploy.yaml
-    secrets: inherit
-```
-
-**Deploy Workflow** (`.github/workflows/deploy.yaml`)
-```yaml
-name: Deploy to GitHub Pages
-
-on:
-  workflow_call:
-  workflow_dispatch:
-
-jobs:
-  build:
-    name: Build Docusaurus
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6.0.1
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v6.0.0
-        with:
-          node-version: 18
-
-      - name: Install dependencies
-        run: npm install --frozen-lockfile
-
-      - name: Build website
-        env:
-          DEPLOYMENT_URL: ${{ secrets.DEPLOYMENT_URL }}
-          DEPLOYMENT_BRANCH: ${{ secrets.DEPLOYMENT_BRANCH }}
-          BASE_URL: ${{ secrets.BASE_URL }}
-          GITHUB_ORG: ${{ secrets.ORG }}
-          GITHUB_PROJECT: ${{ secrets.PROJECT }}
-        run: npm run build && cp -r build github-pages
-
-      - name: Upload Build Artifact
-        uses: actions/upload-pages-artifact@v4.0.0
-        with:
-          path: github-pages
-
-  deploy:
-    name: Deploy to GitHub Pages
-    needs: build
-    if: ${{  github.event_name  != 'pull_request' }}
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4.0.5
-```
-
-#### **Pipeline Stages Breakdown**
-
-##### **Stage 1: Trigger Events**
-- **Push to `main` branch**: Automatic deployment on merge
-- **Manual workflow dispatch**: On-demand deployments for testing
-- **Branch protection**: Only authorized pushes trigger production deployments
-
-##### **Stage 2: Build Process**
-1. **Code Checkout**
-   - Full git history (`fetch-depth: 0`) for proper versioning
-   - Uses `actions/checkout@v6.0.1` (latest stable)
-
-2. **Environment Setup**
-   - Node.js 18 (LTS) for stability
-   - Deterministic builds with `npm install --frozen-lockfile`
-
-3. **Build Execution**
-   - Environment variables injected from GitHub Secrets
-   - Static site generation via `docusaurus build`
-   - Build artifacts copied to `github-pages` directory
-
-4. **Artifact Management**
-   - Build output uploaded using `actions/upload-pages-artifact@v4.0.0`
-   - Artifacts preserved for deployment stage
-
-##### **Stage 3: Deployment**
-1. **Environment Configuration**
-   - Dedicated `github-pages` environment
-   - URL output for verification
-   - Conditional execution (skips on PRs)
-
-2. **Pages Deployment**
-   - Uses `actions/deploy-pages@v4.0.5`
-   - Automatic HTTPS configuration
-   - CDN distribution via GitHub infrastructure
-
----
-
-### 2. Security Best Practices
-
-#### **Pipeline Security**
-
-**Least Privilege Permissions**
-```yaml
-permissions:
-  contents: write        # Required for repository operations
-  pull-requests: write   # Required for PR comments
-  pages: write          # Required for GitHub Pages deployment
-  id-token: write       # Required for OIDC authentication
-```
-
-**Secret Management**
-- All sensitive configuration stored in GitHub Secrets
-- Environment-specific secrets (DEPLOYMENT_URL, BASE_URL)
-- No hardcoded credentials in codebase
-- Secret rotation capability without code changes
-
-**Dependency Security**
-- `npm install --frozen-lockfile`: Prevents unexpected dependency updates
-- Lockfile committed to repository for reproducible builds
-- Regular dependency audits via `npm audit`
-
-#### **Application Security**
-
-**Content Security**
-- All blog posts reviewed before merge
-- Markdown sanitization by Docusaurus
-- XSS prevention through React's built-in escaping
-
-**HTTPS Enforcement**
-- GitHub Pages provides automatic HTTPS
-- Custom domain support with SSL
-- HSTS headers enabled
-
-**Access Control**
-- Branch protection on `main` and `development`
-- Required reviews for merge to production
-- No direct commits to protected branches
-
----
-
-### 3. Configuration Management
-
-#### **Dynamic Environment Configuration**
-
-```typescript
-// docusaurus.config.ts
-const CANONICAL_URL = 'https://pascal-nehlsen.de';
-let DEPLOYMENT_URL = process.env.DEPLOYMENT_URL || CANONICAL_URL;
-let BASE_URL = process.env.BASE_URL || '/';
-
-// Ensure URL has protocol
-if (!/^https?:\/\//i.test(DEPLOYMENT_URL)) {
-  DEPLOYMENT_URL = CANONICAL_URL;
-}
-
-// Normalize baseUrl shape
-if (!BASE_URL.startsWith('/')) {
-  BASE_URL = `/${BASE_URL}`;
-}
-if (!BASE_URL.endsWith('/')) {
-  BASE_URL = `${BASE_URL}/`;
-}
-
-// Auto-detect GitHub Pages vs custom domain
-try {
-  const u = new URL(DEPLOYMENT_URL);
-  const isGithubPages = /github\.io$/i.test(u.hostname);
-  if (!isGithubPages) {
-    BASE_URL = '/';
-  }
-} catch {}
-
-const GITHUB_ORG = process.env.GITHUB_ORG || 'PascalNehlsen';
-const GITHUB_PROJECT = process.env.GITHUB_PROJECT || 'devsecops-blog';
-const DEPLOYMENT_BRANCH = process.env.DEPLOYMENT_BRANCH || 'main';
-```
-
-**Benefits:**
-- Environment-agnostic configuration
-- Supports both GitHub Pages and custom domains
-- Automatic baseUrl detection
-- Fallback values for local development
-
----
-
-### 4. Blog Content Management
-
-#### **Content Structure**
-
-```
-blog/
-├── authors.yml                               # Author metadata
-├── 2024-01-15-starting-devsecops-journey.md
-├── 2024-02-10-implementing-sast-pipeline.md
-├── 2024-03-05-docker-security-best-practices.md
-├── 2024-04-12-secrets-management-done-right.md
-├── 2024-05-20-git-security-practices.md
-├── 2025-09-15-integrating-ai-chatbots.md
-├── 2025-10-01-security-chatbot-platforms.md
-├── 2025-10-15-healthcare-saas-devsecops.md
-└── 2025-11-01-scalable-appointment-booking.md
-```
-
-#### **Consistent Frontmatter Format**
-
-```yaml
----
-title: "Post Title"
-slug: url-friendly-slug
-authors: pascal
-tags: [tag1, tag2, tag3]
-date: "YYYY-MM-DD"
----
-```
-
-**Key Features:**
-- Chronological ordering by date
-- Author attribution via `authors.yml`
-- Tag-based categorization
-- SEO-friendly slugs
-- Reading time calculation
-
-#### **Blog Configuration**
-
-```typescript
-blog: {
-  showReadingTime: true,
-  postsPerPage: 10,
-  blogSidebarCount: 'ALL',      // Show all posts in sidebar
-  blogSidebarTitle: 'All Posts',
-  feedOptions: {
-    type: ['rss', 'atom'],
-    xslt: true,
-  },
-  authorsMapPath: 'authors.yml',
-}
-```
-
----
-
-### 5. Documentation System
-
-#### **Docs Structure**
-
-```
-docs/
-├── knowledge-base/
-│   ├── intro.md
-│   ├── Container/          # Docker, Kubernetes guides
-│   ├── DevOps/            # CI/CD, automation
-│   ├── env-vars/          # Configuration management
-│   └── git/               # Version control best practices
-└── projects/
-    ├── intro.md
-    ├── chatbot.md         # AI Chatbot project
-    ├── hepa-assist.md     # Healthcare SaaS project
-    ├── devsecops-blog.md  # This document
-    └── recent/            # Latest projects
-```
-
-#### **Sidebar Configuration**
-
-```typescript
-// sidebars.ts
-const sidebars = {
-  tutorialSidebar: [
-    {
-      type: 'category',
-      label: 'Knowledge Base',
-      items: ['knowledge-base/intro', /* ... */],
-    },
-    {
-      type: 'category',
-      label: 'Projects',
-      items: ['projects/intro', /* ... */],
-    },
-  ],
-};
-```
-
----
-
-## Technical Implementation Details
-
-### 1. Build Process
-
-#### **Build Command Breakdown**
-
-```bash
-# Production build
-npm run build
-```
-
-**What happens:**
-1. **TypeScript Compilation**: `tsc` validates types
-2. **Static Site Generation**: Docusaurus generates HTML/CSS/JS
-3. **Asset Optimization**: Images compressed, CSS minified
-4. **Bundle Generation**: Webpack creates optimized bundles
-5. **Sitemap Generation**: SEO sitemap created
-6. **RSS Feed Generation**: Blog feeds generated
-
-#### **Build Output**
-
-```
-build/
-├── index.html
-├── sitemap.xml
-├── assets/
-│   ├── css/              # Minified stylesheets
-│   ├── js/               # Optimized JavaScript bundles
-│   ├── images/           # Compressed images
-│   └── files/            # Static assets
-├── blog/                 # Blog post pages
-├── docs/                 # Documentation pages
-└── img/                  # Static images
-```
-
----
-
-### 2. Performance Optimizations
-
-#### **Build-Time Optimizations**
-- **Code Splitting**: Automatic route-based splitting
-- **Tree Shaking**: Unused code elimination
-- **Minification**: CSS and JS minification
-- **Image Optimization**: Automatic responsive images
-- **Lazy Loading**: Components loaded on demand
-
-#### **Runtime Optimizations**
-- **Prefetching**: Link prefetching for faster navigation
-- **Service Worker**: Offline support (optional)
-- **CDN Delivery**: GitHub Pages CDN for global distribution
-- **Caching Headers**: Optimal cache control
-
-#### **Performance Metrics**
-- **Time to First Byte (TTFB)**: < 200ms (GitHub Pages CDN)
-- **First Contentful Paint (FCP)**: < 1.5s
-- **Largest Contentful Paint (LCP)**: < 2.5s
-- **Total Blocking Time (TBT)**: < 200ms
-
----
-
-### 3. SEO & Discoverability
-
-#### **SEO Configuration**
-
-```typescript
-// docusaurus.config.ts
-const config = {
-  title: 'DevSecOps Blog',
-  tagline: 'Platform & Security Engineering',
-  favicon: 'img/favicon.svg',
-  url: 'https://pascal-nehlsen.de',
-  baseUrl: '/',
-  organizationName: 'PascalNehlsen',
-  projectName: 'devsecops-blog',
-
-  metadata: [
-    { name: 'keywords', content: 'devsecops, security, devops, blog' },
-    { name: 'description', content: 'DevSecOps best practices and tutorials' },
-  ],
-};
-```
-
-#### **Sitemap Generation**
-
-```xml
-<!-- sitemap.xml -->
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://pascal-nehlsen.de/</loc>
-    <lastmod>2026-08-07</lastmod>
-  </url>
-  <!-- Blog posts, docs pages... -->
-</urlset>
-```
-
-#### **RSS/Atom Feeds**
-
-```typescript
-feedOptions: {
-  type: ['rss', 'atom'],
-  xslt: true,
-  copyright: `Copyright © ${new Date().getFullYear()} Pascal Nehlsen`,
-}
-```
-
-**Feed URLs:**
-- RSS: `https://pascal-nehlsen.de/blog/rss.xml`
-- Atom: `https://pascal-nehlsen.de/blog/atom.xml`
-
----
-
-### 4. Custom Theming
-
-#### **Dark Mode Implementation**
-
-```typescript
-colorMode: {
-  defaultMode: 'dark',
-  disableSwitch: false,
-  respectPrefersColorScheme: false,
-}
-```
-
-#### **Custom CSS**
-
-```css
-/* src/css/custom.css */
-:root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
-}
-
-[data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-}
-```
-
----
-
-## Content Strategy
-
-### Blog Topics Covered
-
-#### **2024 Series: DevSecOps Fundamentals**
-
-1. **Starting My DevSecOps Journey** (Jan 2024)
-   - Career transition from developer to security champion
-   - Learning path and resources
-   - First security incident lessons
-
-2. **Implementing SAST in CI/CD** (Feb 2024)
-   - Static Application Security Testing setup
-   - Tool comparison (SonarQube, Checkmarx, Semgrep)
-   - Pipeline integration examples
-
-3. **Docker Security Best Practices** (Mar 2024)
-   - Container image hardening
-   - Vulnerability scanning
-   - Runtime security
-   - 247 vulnerabilities → 3 case study
-
-4. **Secrets Management Done Right** (Apr 2024)
-   - $50,000 AWS incident analysis
-   - HashiCorp Vault implementation
-   - Kubernetes secrets management
-   - Secret rotation strategies
-
-5. **Git Security Practices** (May 2024)
-   - GPG commit signing
-   - Branch protection rules
-   - Pre-commit hooks for secret detection
-   - Git history cleaning techniques
-
-#### **2025 Series: Advanced Projects**
-
-6. **Integrating AI Chatbots** (Sep 2025)
-   - Multi-tenant chatbot architecture
-   - Shadow DOM isolation
-   - Next.js implementation
-
-7. **Security for Chatbot Platforms** (Oct 2025)
-   - JWT authentication
-   - Rate limiting
-   - Data isolation in multi-tenant systems
-
-8. **Healthcare SaaS DevSecOps** (Oct 2025)
-   - HIPAA compliance considerations
-   - FastAPI security patterns
-   - Healthcare data protection
-
-9. **Scalable Appointment Booking** (Nov 2025)
-   - Race condition prevention
-   - Real-time availability systems
-   - Database transaction patterns
-
----
-
-## Deployment Strategy
-
-### Branching Strategy
-
-```
-main (production)
-  ├── Protected branch
-  ├── Requires PR review
-  ├── Triggers CI/CD pipeline
-  └── Deploys to GitHub Pages
-
-development (staging)
-  ├── Integration branch
-  ├── Feature PRs merge here first
-  └── Manual testing before production
-```
-
-### Deployment Workflow
-
-```
-1. Feature Development
-   ├── Create feature branch from development
-   ├── Make changes
-   ├── Local testing (npm run start)
-   └── Push to GitHub
-
-2. Code Review
-   ├── Create PR to development
-   ├── Automated checks run
-   ├── Review by team
-   └── Merge to development
-
-3. Staging Verification
-   ├── Test on development branch
-   ├── Verify all features
-   └── Fix any issues
-
-4. Production Deployment
-   ├── Create PR from development to main
-   ├── Final review
-   ├── Merge to main
-   ├── CI/CD pipeline triggers automatically
-   └── Deployment to GitHub Pages
-```
-
-### Rollback Strategy
-
-```bash
-# Emergency rollback via GitHub Actions
-# 1. Navigate to Actions tab
-# 2. Find last successful deployment
-# 3. Re-run workflow
-
-# Or via Git
-git revert HEAD
-git push origin main
-# CI/CD automatically deploys previous version
-```
-
----
-
-## Monitoring & Analytics
-
-### Build Monitoring
-
-**GitHub Actions Dashboard:**
-- Build success/failure rates
-- Build duration trends
-- Deployment frequency
-- Workflow run history
-
-### Performance Monitoring
-
-**Lighthouse CI Metrics:**
-- Performance Score: 95+
-- Accessibility Score: 100
-- Best Practices Score: 100
-- SEO Score: 100
-
-### User Analytics (Optional Integration)
-
-```typescript
-// docusaurus.config.ts
-gtag: {
-  trackingID: 'G-XXXXXXXXXX',
-  anonymizeIP: true,
-}
-```
-
----
-
-## Local Development
-
-### Setup Instructions
-
-```bash
-# Clone repository
-git clone https://github.com/PascalNehlsen/devsecops-blog.git
-cd devsecops-blog
-
-# Install dependencies
-npm install
-
-# Start development server
-npm run start
-# Opens http://localhost:3000
-
-# Build for production
-npm run build
-
-# Serve production build locally
-npm run serve
-```
-
-### Development Scripts
-
-```json
-{
-  "scripts": {
-    "start": "docusaurus start",
-    "build": "docusaurus build",
-    "serve": "docusaurus serve",
-    "clear": "docusaurus clear",
-    "typecheck": "tsc",
-    "write-translations": "docusaurus write-translations",
-    "write-heading-ids": "docusaurus write-heading-ids"
-  }
-}
-```
-
-### Environment Variables
-
-```bash
-# .env (for local development)
-DEPLOYMENT_URL=https://pascal-nehlsen.de
-BASE_URL=/
-GITHUB_ORG=PascalNehlsen
-GITHUB_PROJECT=devsecops-blog
-DEPLOYMENT_BRANCH=main
-```
-
----
-
-## DevSecOps Principles Demonstrated
-
-### 1. Security as Code
-- Infrastructure configuration in version control
-- Automated security checks in pipeline
-- Reproducible builds with lockfiles
-- Secret management via GitHub Secrets
-
-### 2. Continuous Integration
-- Automated builds on every push
-- Fast feedback loops (< 5 minute builds)
-- Artifact preservation for debugging
-- Parallel job execution where possible
-
-### 3. Continuous Deployment
-- Automated deployments to production
-- Zero-downtime deployments
-- Rollback capability
-- Environment parity (dev/staging/prod)
-
-### 4. Shift-Left Security
-- Security considered from project inception
-- HTTPS by default
-- Dependency vulnerability scanning
-- Content sanitization
-
-### 5. Infrastructure as Code
-- GitHub Actions workflows as code
-- Docusaurus configuration as code
-- Version controlled infrastructure
-- Declarative configuration
-
-### 6. Documentation as Code
-- Docs live with source code
-- Version controlled documentation
-- Automated docs deployment
-- Markdown-based content
-
-### 7. Observability
-- Build logs preserved in GitHub Actions
-- Deployment status visible in UI
-- Error tracking in pipeline
-- Performance metrics via Lighthouse
-
----
-
-## Lessons Learned
-
-### What Worked Well
-
-1. **GitHub Actions Workflow Composition**
-   - Reusable workflows reduce duplication
-   - Easier maintenance and updates
-   - Clear separation of concerns
-
-2. **Docusaurus for Technical Content**
-   - Excellent developer experience
-   - Built-in features (search, versioning, i18n)
-   - Strong React ecosystem integration
-
-3. **GitHub Pages for Hosting**
-   - Zero-cost hosting for static sites
-   - Automatic HTTPS and CDN
-   - Seamless GitHub integration
-
-4. **Consistent Frontmatter Format**
-   - Ensures all blog posts render correctly
-   - Makes content management easier
-   - Enables better sorting and filtering
-
-### Challenges and Solutions
-
-1. **Challenge: Blog posts not showing in sidebar**
-   - **Cause**: Default `blogSidebarCount` only shows 5 posts
-   - **Solution**: Set `blogSidebarCount: 'ALL'` in config
-
-2. **Challenge: Inconsistent date formatting**
-   - **Cause**: Mixed formats (quoted vs unquoted dates)
-   - **Solution**: Standardized to `"YYYY-MM-DD"` format
-
-3. **Challenge: Environment-specific configuration**
-   - **Cause**: Different URLs for GitHub Pages vs custom domain
-   - **Solution**: Dynamic config with auto-detection logic
-
-4. **Challenge: Build reproducibility**
-   - **Cause**: Floating dependency versions
-   - **Solution**: Use `--frozen-lockfile` flag in CI
-
----
-
-## Future Enhancements
-
-### Planned Features
-
-1. **Security Scanning in Pipeline**
-   ```yaml
-   security-scan:
-     runs-on: ubuntu-latest
-     steps:
-       - name: Run Trivy vulnerability scanner
-         uses: aquasecurity/trivy-action@master
-       - name: Run npm audit
-         run: npm audit --audit-level=high
-   ```
-
-2. **Automated Lighthouse CI**
-   ```yaml
-   lighthouse:
-     runs-on: ubuntu-latest
-     steps:
-       - uses: treosh/lighthouse-ci-action@v9
-         with:
-           urls: |
-             https://pascal-nehlsen.de/
-   ```
-
-3. **Dependency Update Automation**
-   - Dependabot configuration
-   - Automated PR creation for updates
-   - Security vulnerability alerts
-
-4. **Content Preview for PRs**
-   - Deploy preview environments
-   - Comment on PR with preview URL
-   - Automatic cleanup after merge
-
-5. **Advanced Analytics**
-   - Google Analytics integration
-   - User journey tracking
-   - Content engagement metrics
-
-6. **Newsletter Integration**
-   - Email subscription widget
-   - Automated email on new posts
-   - RSS-to-email service
-
----
-
-## Key Metrics & Achievements
-
-### Technical Metrics
-
-- **Build Time**: ~3-4 minutes
-- **Deployment Frequency**: On-demand (push to main)
-- **Mean Time to Recovery**: < 5 minutes (instant rollback)
-- **Change Failure Rate**: < 5%
-- **Lighthouse Score**: 95+ across all categories
-
-### Content Metrics
-
-- **Total Blog Posts**: 9 (as of Dec 2025)
-- **Total Documentation Pages**: 20+
-- **Average Post Length**: 400-500 lines
-- **Topics Covered**: SAST, Docker, Secrets, Git, AI, Healthcare
-
-### DevSecOps Maturity
-
-- Automated CI/CD
-- Infrastructure as Code
-- Security as Code
-- Monitoring and Logging
-- Incident Response Capability
-- Advanced Security Scanning (planned)
-- Automated Testing (planned)
-
----
-
-## Conclusion
-
-This DevSecOps blog platform demonstrates a complete implementation of modern DevSecOps principles, from automated CI/CD pipelines to security-first development practices. The project showcases:
-
-1. **Technical Excellence**: Modern tech stack with TypeScript, React, and Docusaurus
-2. **Security Focus**: HTTPS by default, secret management, secure deployments
-3. **Automation**: Full CI/CD pipeline with GitHub Actions
-4. **Documentation**: Comprehensive docs for every aspect of the platform
-5. **Content Quality**: In-depth technical articles on DevSecOps topics
-6. **Best Practices**: Following industry standards for code, security, and deployment
-
-The platform serves as both a knowledge repository and a demonstration of DevSecOps expertise, making it an ideal portfolio project for showcasing technical and security skills.
-
----
-
-## Resources & Links
-
-### Project Links
-- **Live Site**: [https://pascal-nehlsen.de](https://pascal-nehlsen.de)
-- **GitHub Repository**: [https://github.com/PascalNehlsen/devsecops-blog](https://github.com/PascalNehlsen/devsecops-blog)
-- **GitHub Actions**: [View Workflows](https://github.com/PascalNehlsen/devsecops-blog/actions)
-
-### Author
-- **Name**: Pascal Nehlsen
-- **Role**: Platform & Security Engineering
-- **GitHub**: [@PascalNehlsen](https://github.com/PascalNehlsen)
-- **Email**: mail@pascal-nehlsen.de
-- 
-
-### Technologies Used
-- [Docusaurus](https://docusaurus.io/) - Static site generator
-- [React](https://react.dev/) - UI framework
-- [TypeScript](https://www.typescriptlang.org/) - Type safety
-- [GitHub Actions](https://github.com/features/actions) - CI/CD platform
-- [GitHub Pages](https://pages.github.com/) - Hosting platform
-
----
-
-*Last Updated: December 2025*
+A Docusaurus site on GitHub Pages. That part is unremarkable, and most of what
+a page like this usually contains (how to run `npm start`, what a static site
+generator is) belongs in the [README](https://github.com/PascalNehlsen/devsecops-blog),
+not here.
+
+What is worth writing down is the set of things the build refuses to let me
+get wrong, and how they got that way.
+
+## Three constraints
+
+Each of these is checked rather than asserted, which is the only reason they
+are worth stating.
+
+**No third-party requests.** No font CDN, no analytics, no hosted search, no
+embedded widget, no hotlinked avatar. Open the network tab: every request goes
+to this origin. `scripts/check-no-third-party.mjs` scans the built HTML and CSS
+for resource-loading attributes and fails the build if any of them points
+somewhere else. Outbound `<a href>` links are ignored, because a link is
+navigation, not a fetch your browser performs on page load.
+
+The check earned its place on the first run by finding three shields.io badges
+on a project page that had been loading from an external host on every visit.
+
+This constraint is also what allows the Content-Security-Policy to be
+`script-src 'self'` with no exceptions.
+
+**Nothing on the page that isn't true.** Metrics link to the write-up that
+documents them. Security exercises are labelled as exercises. The knowledge
+base says which topics it does not cover. Where a project has a limitation
+worth knowing, the page says so.
+
+**Every check that can block, blocks.** `onBrokenLinks`, `onBrokenAnchors`,
+`onBrokenMarkdownLinks`, `onInlineTags` and `onUntruncatedBlogPosts` are all
+set to `throw`. A broken internal link fails the build rather than reaching
+production. A blog post tagged with a word that is not in the vocabulary fails
+the build rather than minting a duplicate tag page.
+
+## The pipeline
+
+Four workflows, all actions pinned to commit SHAs rather than tags, because a
+tag can be moved to point at different code.
+
+| Workflow | Trigger | What it does |
+| --- | --- | --- |
+| `test.yaml` | PRs and `main` | Typecheck, build (which is also the link check), third-party verification |
+| `security.yml` | PRs, `main`, weekly | Dependency gate, secret scan, dependency review |
+| `main.yml` | push to `main` | Calls the deploy workflow |
+| `deploy.yaml` | called or manual | Build, verify, upload artifact, deploy to Pages |
+
+The weekly schedule on the security workflow exists because a vulnerability
+disclosed on a Tuesday should not wait for the next commit to be noticed, and
+this repository can go weeks without one.
+
+### The dependency gate
+
+`npm audit --audit-level=high` would be the obvious answer, and it is not
+quite enough. When I added it, four high advisories existed. Three were fixed
+by `npm audit fix`. The fourth, `serialize-javascript`, is reached only
+through webpack plugins inside `@docusaurus/bundler` at build time, where it
+serialises this site's own output rather than untrusted input, and npm's only
+proposed remedy is downgrading `@docusaurus/core` by five minor versions.
+That is a downgrade, not a fix.
+
+So the gate is a script, and an exception needs three things:
+
+1. **A written reason.** "Known issue" is not a reason.
+2. **An expiry date.** Once past it the build fails again, so the decision
+   gets made a second time instead of outliving the person who made it.
+3. **To still be necessary.** An exception that no longer matches any advisory
+   also fails the build. Otherwise the list only grows, and a long allowlist
+   is indistinguishable from having no gate.
+
+The third rule is the one I would keep if I could only keep one. Allowlists
+rot quietly.
+
+### Secrets
+
+`detect-secrets` runs against a committed baseline over the full history,
+because a credential that was committed and then removed is still a leaked
+credential. Only new findings fail. The baseline currently holds six values,
+all of them example strings in documentation about secrets management, and
+each was read before being accepted rather than batch-approved.
+
+## Fonts, search, and the CSP
+
+Two decisions carry the no-third-party constraint.
+
+**Fonts are self-hosted.** Eight `woff2` files, latin subset, about 212 KB
+total, vendored into `static/fonts/` with their OFL licences rather than
+resolved at build time, so what ships is what was reviewed. A
+`fonts.gstatic.com` request would leak every visitor's IP to a third party and
+would force `font-src` to allow an external host.
+
+**Search runs in the browser.** `@easyops-cn/docusaurus-search-local` builds a
+lunr index at compile time. Algolia DocSearch would mean an application, an
+approval, an externally scheduled crawler, and a request to someone else's
+server on every query. For six posts and thirty-two documents the local index
+is 1.2 MB and lazy-loaded on first use.
+
+## Theming
+
+Colours, type, spacing and motion live in `src/css/tokens.css` as two layers:
+theme-independent primitives, then semantic colours per theme, bridged onto
+the `--ifm-*` variables Infima actually reads. No component stylesheet
+contains a colour literal.
+
+Two things worth recording from building it.
+
+**Contrast ratios are computed, not eyeballed.** They sit in comments next to
+the values. The light-mode accent is `#15803D` because it is the lightest
+green clearing 4.5:1 on all three light surfaces; the dark-mode `#22C55E` is
+2.28:1 on white and unusable there. One token, `--c-text-dim`, fails AA for
+body text in both themes and is documented as decorative-only rather than
+silently used.
+
+**Infima's variables are declared under `html[data-theme='dark']`.** Selector
+specificity `(0,1,1)`. A token layer written as `[data-theme='dark']` is
+`(0,1,0)` and loses every single variable to it. The symptom was a background
+seam exactly one viewport down the page, and it was found by reading the
+computed styles of the built site rather than by trusting the stylesheet.
+
+## What this site does not do
+
+No analytics, so I do not know how many people read anything here. That is a
+deliberate trade and not a claim to virtue: the traffic numbers would be
+useful, and I decided the third-party request was not worth them.
+
+No tests. For a static site whose build fails on a broken link, a broken
+anchor, a broken markdown link, an unknown tag and an external resource, the
+build is the test suite. That reasoning would not survive contact with an
+application that has behaviour.
+
+No response headers. GitHub Pages cannot set them, so HSTS, a real CSP and
+`frame-ancestors` require a proxy in front. Until that is in place the CSP
+described above is a `<meta http-equiv>`, which is weaker: it cannot express
+`frame-ancestors` and it arrives after the first bytes of the document.
+
+## Resources
+
+- Live: [pascal-nehlsen.de](https://pascal-nehlsen.de)
+- Repository: [github.com/PascalNehlsen/devsecops-blog](https://github.com/PascalNehlsen/devsecops-blog)
+- Feeds: `/blog/rss.xml`, `/blog/atom.xml`
+- Security contact: [`/.well-known/security.txt`](pathname:///.well-known/security.txt)
