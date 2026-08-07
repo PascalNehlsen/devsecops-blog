@@ -22,10 +22,20 @@
  */
 
 import { execFileSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 const EXCEPTIONS = [
   {
     package: 'serialize-javascript',
+    // GitHub's dependency-review action needs the same exception expressed as
+    // an advisory id. Two gates disagreeing about one accepted risk is worse
+    // than either gate alone, so the id is recorded here and the check below
+    // verifies the workflow still carries it.
+    ghsa: 'GHSA-5c6j-r48x-rmvq',
     expires: '2026-11-07',
     reason:
       'Reached only through copy-webpack-plugin and css-minimizer-webpack-plugin inside @docusaurus/bundler, i.e. at build time, serialising our own build output rather than untrusted input. The only remediation npm offers is downgrading @docusaurus/core to 3.5.2, which is a downgrade, not a fix. Revisit when Docusaurus ships a bundler release that bumps it.',
@@ -89,6 +99,29 @@ for (const e of EXCEPTIONS) {
   if (!used.has(e.package)) {
     problems.push(
       `  STALE    ${e.package}\n      No longer flagged. Remove the exception so the list stays short.`
+    );
+  }
+}
+
+// Keep the two gates in step. dependency-review takes advisory ids in the
+// workflow file; this list takes package names. If they drift, one gate blocks
+// a risk the other has accepted, and whichever runs first decides.
+const workflow = readFileSync(
+  join(ROOT, '.github/workflows/security.yml'),
+  'utf8'
+);
+for (const e of EXCEPTIONS) {
+  if (e.ghsa && !workflow.includes(e.ghsa)) {
+    problems.push(
+      `  DRIFT    ${e.package}\n      ${e.ghsa} is accepted here but missing from allow-ghsas in security.yml.`
+    );
+  }
+}
+const declared = [...workflow.matchAll(/GHSA-[a-z0-9-]+/g)].map((m) => m[0]);
+for (const ghsa of new Set(declared)) {
+  if (!EXCEPTIONS.some((e) => e.ghsa === ghsa)) {
+    problems.push(
+      `  DRIFT    ${ghsa}\n      Allowed in security.yml with no matching exception here, so it has no reason and no expiry.`
     );
   }
 }

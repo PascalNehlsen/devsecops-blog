@@ -52,15 +52,6 @@ jobs:
       - name: Install detect-secrets
         run: pip install detect-secrets==1.5.0
 
-      # detect-secrets-hook, not `scan --baseline`. The scan subcommand
-      # rewrites the baseline in place, including a generated_at timestamp, so
-      # diffing the file afterwards fails on every run regardless of findings.
-      # The hook compares against the baseline and modifies nothing.
-      #
-      # The baseline holds six example values in documentation about secrets
-      # management, each read before being accepted. Lockfiles are excluded:
-      # sha512 integrity hashes read as high-entropy strings, and 8000 accepted
-      # entries would make the baseline meaningless.
       - name: Scan against baseline
         run: detect-secrets-hook --baseline .secrets.baseline $(git ls-files)
 
@@ -78,3 +69,4 @@ jobs:
         with:
           fail-on-severity: high
           comment-summary-in-pr: always
+          allow-ghsas: GHSA-5c6j-r48x-rmvq
