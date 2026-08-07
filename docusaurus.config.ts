@@ -300,6 +300,7 @@ const config: Config = {
       logo: {
         alt: 'Pascal Nehlsen',
         src: 'img/logo.svg',
+        srcDark: 'img/logo-dark.svg',
       },
       items: [
         {
