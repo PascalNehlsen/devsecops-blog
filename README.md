@@ -34,7 +34,22 @@ the point:
 3. **Every check that can block, blocks.** `onBrokenLinks`, `onBrokenAnchors`,
    `onBrokenMarkdownLinks`, `onInlineTags` and `onUntruncatedBlogPosts` are all
    `throw`. A broken internal link fails the build rather than reaching
-   production.
+   production. The dependency gate fails on high and above, and its exceptions
+   carry an expiry date so an accepted risk gets re-decided rather than
+   inherited.
+
+## Why pnpm
+
+Not for the install speed. Two reasons that matter here:
+
+- **A strict module tree.** npm hoists everything into a flat
+  `node_modules`, so code can import packages the manifest never declared.
+  This repository had exactly that: it used `@types/react` without depending
+  on it, and only noticed when pnpm refused to resolve it. Undeclared
+  dependencies are the ones nobody audits.
+- **Install scripts are blocked by default.** A `postinstall` hook runs
+  arbitrary code on every machine that installs, including CI. pnpm requires
+  each one to be approved explicitly; npm runs them all.
 
 ## Tech Stack
 
@@ -55,7 +70,9 @@ the point:
 ## Prerequisites
 
 - Node.js **24+** (see `engines` in `package.json`; CI uses 24)
-- npm. `package-lock.json` is the only lockfile, and CI runs `npm ci`
+- pnpm, pinned in `package.json` via `packageManager`. `corepack enable` will
+  fetch the right version; CI runs `pnpm install --frozen-lockfile`, which
+  fails rather than silently resolving something different from local
 - Git
 
 ## Quickstart
@@ -66,20 +83,22 @@ git clone git@github.com:PascalNehlsen/devsecops-blog.git
 cd devsecops-blog
 
 # Install
-npm install
+pnpm install
 
 # Start dev server (http://localhost:3000)
-npm start
+pnpm start
 ```
 
 Other scripts:
 
 ```bash
-npm run build       # Production build into build/
-npm run serve       # Serve the production build locally
-npm run typecheck   # tsc, type-check the config
-npm run clear       # Clear the Docusaurus cache
-npm run og          # Regenerate Open Graph cards into static/img/og/
+pnpm run build                # Production build into build/
+pnpm run serve                # Serve the production build locally
+pnpm run typecheck            # tsc, type-check the config
+pnpm run clear                # Clear the Docusaurus cache
+pnpm run og                   # Regenerate Open Graph cards into static/img/og/
+pnpm run audit                # Dependency gate: high and above, exceptions expire
+pnpm run check:no-third-party # Fails if the build references an external host
 ```
 
 ## Project Structure
@@ -148,11 +167,11 @@ Deployment is parameterised via env vars (see `example.env`), consumed in
 Deployed to **GitHub Pages** via GitHub Actions on push to `main`. Manual deploy:
 
 ```bash
-GIT_USER=PascalNehlsen npm run deploy
+GIT_USER=PascalNehlsen pnpm run deploy
 ```
 
 ## Contributing
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for the local workflow, content conventions
-and the pre-merge checklist (`npm run build` must pass; `onBrokenLinks` is set to
+and the pre-merge checklist (`pnpm run build` must pass; `onBrokenLinks` is set to
 `throw`).

@@ -1,6 +1,7 @@
 version: 2
 
 updates:
+  # 'npm' is the ecosystem name; it reads pnpm-lock.yaml too.
   - package-ecosystem: npm
     directory: /
     schedule:

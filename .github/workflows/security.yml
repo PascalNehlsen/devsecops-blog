@@ -24,22 +24,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      - uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
       - uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
           node-version: 24
-          cache: npm
+          cache: pnpm
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Audit gate (high and above)
-        run: npm run audit
+        run: pnpm run audit
 
-      # Everything below the gate, for visibility. Not a failure condition.
       - name: Full advisory list
         if: always()
         continue-on-error: true
-        run: npm audit || true
+        run: pnpm audit || true
 
   secrets:
     name: Secret scan

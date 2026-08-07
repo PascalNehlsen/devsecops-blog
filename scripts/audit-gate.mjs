@@ -14,11 +14,11 @@
  *      only ever grows, and a long allowlist is indistinguishable from having
  *      no gate at all.
  *
- * Note on --omit=dev: for a static site generator that distinction does not
- * mean what it usually means. Nothing here reaches a visitor's browser or a
- * server; the output is HTML. Every advisory below is build-time by nature,
- * so the question is not "is it a dev dependency" but "can untrusted input
- * reach it during our build".
+ * A note on scope: for a static site generator the dependency versus
+ * devDependency split does not mean what it usually means. Nothing here
+ * reaches a visitor's browser or a server; the output is HTML. Every advisory
+ * is build-time by nature, so the question is not "is this a dev dependency"
+ * but "can untrusted input reach it during our build".
  */
 
 import { execFileSync } from 'node:child_process';
@@ -35,13 +35,13 @@ const EXCEPTIONS = [
 function audit() {
   try {
     return JSON.parse(
-      execFileSync('npm', ['audit', '--json'], {
+      execFileSync('pnpm', ['audit', '--json'], {
         encoding: 'utf8',
         maxBuffer: 32 * 1024 * 1024,
       })
     );
   } catch (error) {
-    // npm exits non-zero when it finds anything; the report is still on stdout.
+    // pnpm exits non-zero when it finds anything; the report is still on stdout.
     if (error.stdout) return JSON.parse(error.stdout);
     throw error;
   }
@@ -49,20 +49,30 @@ function audit() {
 
 const today = new Date().toISOString().slice(0, 10);
 const report = audit();
-const blocking = Object.entries(report.vulnerabilities ?? {}).filter(
-  ([, v]) => v.severity === 'high' || v.severity === 'critical'
+
+const RANK = { info: 0, low: 1, moderate: 2, high: 3, critical: 4 };
+const worst = new Map();
+for (const advisory of Object.values(report.advisories ?? {})) {
+  const name = advisory.module_name;
+  const previous = worst.get(name);
+  if (!previous || RANK[advisory.severity] > RANK[previous.severity]) {
+    worst.set(name, advisory);
+  }
+}
+
+const blocking = [...worst.entries()].filter(
+  ([, a]) => a.severity === 'high' || a.severity === 'critical'
 );
 
 const problems = [];
 const used = new Set();
 
-for (const [name, v] of blocking) {
+for (const [name, advisory] of blocking) {
   const exception = EXCEPTIONS.find((e) => e.package === name);
   if (!exception) {
-    const titles = (v.via ?? [])
-      .map((x) => (typeof x === 'object' ? x.title : x))
-      .slice(0, 1);
-    problems.push(`  ${v.severity.toUpperCase()}  ${name}\n      ${titles[0] ?? ''}`);
+    problems.push(
+      `  ${advisory.severity.toUpperCase()}  ${name}\n      ${advisory.title ?? ''}`
+    );
     continue;
   }
   used.add(name);
