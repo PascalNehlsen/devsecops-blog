@@ -1,21 +1,25 @@
 ---
 id: hepa-assist
-title: HepaAssist
-sidebar_label: HepaAssist
+title: Emavi
+sidebar_label: Emavi
 sidebar_position: 2
+description: Multi-tenant, barrier-free documentation platform for assisted-living facilities — resident mood tracking, care trends and reporting.
+keywords: [multi-tenant saas, healthcare, django, next.js, accessibility, pwa]
 ---
 
-:::info[[Click for Live View](https://hepa-assist.de/)]
+# Emavi
 
-**Book an appointment directly using the AI Chatbot** (bottom-right corner) - just type "Termin" or "appointment"
+Shipped as **HepaAssist**; now runs as **Emavi**. The write-up keeps the old
+name where it describes decisions made under it.
+
+:::info[Live · login required]
+[emavi.de](https://emavi.de) — the product is behind authentication, so the
+link lands on a sign-in page. The architecture and the decisions are below.
 :::
-
-
-# HepaAssist
 
 ## Project Overview
 
-**HepaAssist** is a multi-tenant application for healthcare facilities that supports digital resident documentation and care management. This project demonstrates modern DevSecOps practices and full-stack development with a focus on security, scalability, and user experience.
+**Emavi** is a multi-tenant application for healthcare facilities that supports digital resident documentation and care management. This project demonstrates modern DevSecOps practices and full-stack development with a focus on security, scalability, and user experience.
 
 ---
 

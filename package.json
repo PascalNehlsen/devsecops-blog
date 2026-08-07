@@ -31,6 +31,7 @@
     "@docusaurus/plugin-client-redirects": "^3.10.2",
     "@docusaurus/tsconfig": "^3.6.3",
     "@docusaurus/types": "^3.6.3",
+    "@easyops-cn/docusaurus-search-local": "^0.55.3",
     "@resvg/resvg-js": "^2.6.2",
     "gray-matter": "^4.0.3",
     "satori": "^0.29.0",

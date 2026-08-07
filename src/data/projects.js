@@ -52,11 +52,11 @@ const projects = [
 
   // ── Products (private) ──────────────────────────────────────────
   {
-    title: 'HepaAssist',
+    title: 'Emavi',
     category: 'product',
     featured: true,
     description:
-      'Barrier-free Progressive Web App for assisted-living facilities. Residents track daily mood; staff monitor well-being trends and generate reports. Multi-tenant, Web-Push, containerised.',
+      'Barrier-free multi-tenant PWA for assisted-living facilities. Residents log daily mood; staff see well-being trends and generate reports. Web Push, containerised. Shipped as HepaAssist, now runs as Emavi.',
     impact: 'Case study',
     tags: ['Next.js', 'Django', 'Docker', 'PWA', 'PostgreSQL'],
     docsUrl: '/docs/projects/hepa-assist',
@@ -66,7 +66,7 @@ const projects = [
     category: 'product',
     featured: true,
     description:
-      'Production-ready, multi-tenant AI chatbot platform with appointment-booking. Configurable per client, embeddable widget, integrated into this site (bottom-right corner).',
+      'Multi-tenant AI chatbot platform with appointment booking. Configurable per client, embedded via a script tag with Shadow DOM isolation so host CSS cannot reach it, and per-tenant CORS validation on every endpoint.',
     impact: 'Case study',
     tags: ['Next.js', 'OpenAI', 'Prisma', 'Multi-Tenant', 'TypeScript'],
     docsUrl: '/docs/projects/chatbot',

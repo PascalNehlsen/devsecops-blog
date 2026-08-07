@@ -1,16 +1,21 @@
 ---
 id: chatbot
-title: AI Chatbot
-sidebar_label: AI Chatbot
+title: AI Chatbot Platform
+sidebar_label: AI Chatbot Platform
 sidebar_position: 3
+description: Multi-tenant chatbot platform embeddable via a script tag — Shadow DOM isolation, per-tenant CORS validation, appointment booking.
+keywords: [multi-tenant, shadow dom, chatbot, next.js, prisma, tenant isolation]
 ---
 
-:::info[Try out the chatbot at the bottom right]
+# AI Chatbot Platform
 
-**Book an appointment directly using the AI Chatbot** (bottom-right corner) - just type "Termin" or "appointment"
+:::info[Not embedded here]
+The widget used to load on every page of this site. It was removed: a
+third-party script with full DOM access on forty content pages is not
+something I want to defend on a site about securing delivery pipelines, and
+this site does not sell anything. It runs at
+[chatbot-mit-pascal.de](https://chatbot-mit-pascal.de).
 :::
-
-# AI Chatbot - Technical Documentation
 
 ## Executive Summary
 

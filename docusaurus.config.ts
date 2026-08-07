@@ -196,6 +196,32 @@ const config: Config = {
     ],
   ],
 
+  // A theme, not a plugin — the usual mistake with this package.
+  //
+  // Chosen over Algolia DocSearch: DocSearch needs an application, an
+  // approval, and an externally scheduled crawler that breaks when the crawl
+  // config drifts. For six posts and ~25 docs the lunr index is tiny, works
+  // offline, and — the reason that matters here — makes no third-party
+  // request, which is what keeps the CSP at script-src 'self'.
+  themes: [
+    [
+      require.resolve('@easyops-cn/docusaurus-search-local'),
+      {
+        hashed: true,
+        indexDocs: true,
+        indexBlog: true,
+        indexPages: true,
+        docsRouteBasePath: '/docs',
+        blogRouteBasePath: '/blog',
+        language: ['en'],
+        highlightSearchTermsOnTargetPage: true,
+        searchResultLimits: 8,
+        searchResultContextMaxLength: 60,
+        explicitSearchResultPath: true,
+      },
+    ],
+  ],
+
   presets: [
     [
       'classic',
@@ -313,6 +339,17 @@ const config: Config = {
           ],
         },
         moreColumn,
+        {
+          title: 'Legal',
+          items: [
+            { label: 'Impressum', to: '/impressum' },
+            { label: 'Datenschutz', to: '/datenschutz' },
+            {
+              label: 'security.txt',
+              href: 'pathname:///.well-known/security.txt',
+            },
+          ],
+        },
       ],
       copyright: `© ${new Date().getFullYear()} Pascal Nehlsen`,
     },
