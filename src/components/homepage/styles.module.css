@@ -375,25 +375,6 @@
   color: var(--c-text-muted);
 }
 
-/* Removed together with the features section in the homepage rewrite. */
-.featureIconWrap {
-  width: 56px;
-  height: 56px;
-  margin: 0 auto var(--space-5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: var(--border-w) solid var(--c-border);
-  border-radius: var(--radius-md);
-  background: var(--c-elevated);
-  color: var(--c-accent);
-}
-
-.featureIconWrap svg {
-  width: 28px;
-  height: 28px;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .projectCard,
   .blogCard,

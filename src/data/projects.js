@@ -2,28 +2,42 @@
 // Edit this file to add / update / reorder projects — the homepage reads from here.
 //
 // category: 'work' | 'product' | 'recent'
-// featured: bring the card into the top "Featured Work" grid
+// featured: 'selected' — one of the three cards on the homepage. Three, not
+//           six: the homepage argues, the projects index enumerates.
+// featured: true — surfaced by the projects docs page, not the homepage.
 // Omit githubUrl for private repositories (only live/docs links render).
 
 const projects = [
   // ── Work (Developer Akademie GmbH) ──────────────────────────────
   {
-    title: 'Self-Service Cloud Platform',
+    title: 'Terraform Golden Paths on GCP',
     category: 'work',
-    featured: true,
+    featured: 'selected',
     description:
-      'Full Terraform modularisation of a GCP environment (Cloud Run, Cloud SQL, GCS, IAM) with golden-path workflows, guardrails and automated test gates. Provisioning time cut from ~4h to under 45min.',
-    impact: 'Provisioning time −80%',
-    tags: ['Terraform', 'GCP', 'GitOps', 'Argo CD', 'IAM'],
+      'Every new service environment was a four-hour ticket: someone hand-clicked Cloud Run, Cloud SQL, a bucket and six IAM bindings, and got it subtly wrong about a third of the time. I modularised the GCP estate around one opinionated golden path per service shape, put the guardrails in the module instead of in a wiki, and gated every plan behind automated policy checks. A team now provisions its own environment in under 45 minutes without opening a ticket, and the drift that used to surface in production surfaces in terraform plan.',
+    impact: 'Provisioning 4 h → 45 min',
+    tags: ['Terraform', 'GCP', 'Cloud Run', 'IAM', 'GitOps'],
+    blogUrl: '/blog/2026/01/20/terraform-golden-paths-gcp',
   },
   {
-    title: 'Agentic DevOps Runbook Automation',
+    title: 'Agentic Runbooks with a Human-Approval Gate',
     category: 'work',
-    featured: true,
+    featured: 'selected',
     description:
-      'Secure runbook executor with a human-approval layer: an MCP-based remote server integrating GitHub, GCP Cloud Run/Logging and Terraform state. Every critical action is auditable, reversible and requires explicit approval.',
-    impact: 'Incident response −60%',
-    tags: ['Go', 'Python', 'MCP', 'GCP'],
+      'Known failure classes were eating on-call time not because the fix was hard, but because assembling the context — logs, Terraform state, recent deploys — took twenty minutes at 3 a.m. I built an MCP server that does the gathering and proposes a remediation, and then stops. A human approves or rejects every state-changing action, each one is logged with the reasoning that produced it, and each one is reversible. The agent is allowed to be wrong; it is not allowed to be wrong unsupervised.',
+    impact: 'Response time −60%',
+    tags: ['Go', 'MCP', 'GCP', 'Terraform', 'On-Call'],
+    blogUrl: '/blog/2026/02/18/agentic-runbooks-mcp-human-approval',
+  },
+  {
+    title: 'Ephemeral Per-User Sandboxes on AWS',
+    category: 'work',
+    featured: 'selected',
+    description:
+      '80+ trainees each needed a production-like n8n environment, and a fixed t3.medium per person was both wasteful and, at cohort scale, expensive. The workloads are bursty by nature — idle for hours, then a spike — so I put them on burstable instances sized for the median rather than the peak, and wrote lifecycle automation that stops and reclaims anything idle past a threshold. Everyone gets a real isolated environment; compute costs about half of the fixed-size equivalent.',
+    impact: '80+ envs, spend −50%',
+    tags: ['AWS', 'EC2', 'Terraform', 'n8n', 'Cost'],
+    blogUrl: '/blog/2026/04/28/ephemeral-aws-sandboxes-cost',
   },
   {
     title: 'Security Pipeline Integration',
@@ -33,16 +47,7 @@ const projects = [
       'SAST (Bandit, Semgrep) and DAST (OWASP ZAP) integrated into GitHub Actions with Docker image hardening before deployment. Automated rollback trigger on SLO breach cut the deployment error rate below 2%.',
     impact: 'Deploy error rate <2%',
     tags: ['GitHub Actions', 'SAST/DAST', 'Docker', 'OWASP ZAP'],
-  },
-
-  {
-    title: 'Per-Student Cloud Sandboxes on AWS',
-    category: 'work',
-    featured: true,
-    description:
-      'Provisioned isolated, production-like n8n automation sandboxes on AWS burstable EC2 (t3/t4g) with automated lifecycle management — giving 80+ trainees their own environment while keeping compute costs 50% below fixed-size instances.',
-    impact: 'Compute cost −50%',
-    tags: ['AWS', 'EC2', 'Terraform', 'n8n', 'Automation'],
+    blogUrl: '/blog/2026/03/24/slo-driven-automated-rollback',
   },
 
   // ── Products (private) ──────────────────────────────────────────

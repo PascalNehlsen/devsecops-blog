@@ -15,62 +15,6 @@ import Skills from '../components/homepage/Skills';
 import BlogPreview from '../components/homepage/BlogPreview';
 import projects from '../data/projects';
 
-const ShieldIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z" strokeLinejoin="round" />
-    <path d="M9 12l2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-const StackIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M12 3l9 5-9 5-9-5 9-5z" strokeLinejoin="round" />
-    <path d="M3 12l9 5 9-5M3 16l9 5 9-5" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-const PipelineIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <circle cx="5" cy="6" r="2" />
-    <circle cx="5" cy="18" r="2" />
-    <circle cx="19" cy="12" r="2" />
-    <path d="M7 6h6a4 4 0 0 1 4 4M7 18h6a4 4 0 0 0 4-4" strokeLinecap="round" />
-  </svg>
-);
-
-const FeatureList = [
-  {
-    title: 'Security First',
-    Icon: ShieldIcon,
-    description:
-      'Building secure applications from the ground up. DevSecOps practices, security audits, and robust protection against vulnerabilities baked into every stage.',
-  },
-  {
-    title: 'Full-Stack Development',
-    Icon: StackIcon,
-    description:
-      'Scalable full-stack applications with Python, Django, Go and modern frontend frameworks. Clean code, best practices, and cutting-edge technologies.',
-  },
-  {
-    title: 'CI/CD & Automation',
-    Icon: PipelineIcon,
-    description:
-      'Streamlining deployment pipelines with containers and automated testing. Infrastructure as code for reliable, reproducible deployments.',
-  },
-];
-
-function Feature({ Icon, title, description }) {
-  return (
-    <div className={clsx('col col--4')}>
-      <div className={styles.featureCard}>
-        <div className={sections.featureIconWrap}>
-          <Icon />
-        </div>
-        <h3>{title}</h3>
-        <p>{description}</p>
-      </div>
-    </div>
-  );
-}
-
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   const [displayedLines, setDisplayedLines] = useState([]);
@@ -78,14 +22,26 @@ function HomepageHeader() {
   const [currentText, setCurrentText] = useState('');
   const [isTypingComplete, setIsTypingComplete] = useState(false);
 
+  // The terminal prints three numbers a peer can argue with, phrased as
+  // commit subjects. The previous `ls skills/` output was a badge dump that
+  // the Stack section already does better, and it said nothing about the
+  // work.
   const terminalLines = [
     { type: 'command', text: 'whoami' },
-    { type: 'output', text: siteConfig.title },
-    { type: 'command', text: 'cat role.txt' },
-    { type: 'output', text: siteConfig.tagline },
-    { type: 'command', text: 'ls skills/' },
-    { type: 'output', text: 'GCP  AWS  Terraform  Ansible  Docker  Go  Python' },
-    { type: 'output', text: 'GitHub-Actions  Argo-CD  Prometheus  Grafana  SAST/DAST  MCP' },
+    { type: 'output', text: `${siteConfig.title} · ${siteConfig.tagline}` },
+    { type: 'command', text: 'git log --oneline -3' },
+    {
+      type: 'output',
+      text: 'a1c4f20  provisioning 4h -> 45min (terraform golden paths)',
+    },
+    {
+      type: 'output',
+      text: '7e9b13d  rollback on SLO breach, deploy errors <2%',
+    },
+    {
+      type: 'output',
+      text: 'f02d88e  80+ sandboxes per cohort, compute -50%',
+    },
   ];
 
   // Respect reduced-motion: render the full terminal instantly.
@@ -108,8 +64,8 @@ function HomepageHeader() {
 
     const currentLine = terminalLines[currentLineIndex];
     const fullText = currentLine.text;
-    const typingSpeed = currentLine.type === 'output' ? 20 : 50;
-    const pauseAfterLine = currentLine.type === 'output' ? 200 : 100;
+    const typingSpeed = currentLine.type === 'output' ? 12 : 45;
+    const pauseAfterLine = currentLine.type === 'output' ? 120 : 100;
 
     if (currentText.length < fullText.length) {
       const timeout = setTimeout(() => {
@@ -118,7 +74,10 @@ function HomepageHeader() {
       return () => clearTimeout(timeout);
     } else {
       const timeout = setTimeout(() => {
-        setDisplayedLines([...displayedLines, { ...currentLine, text: currentText }]);
+        setDisplayedLines([
+          ...displayedLines,
+          { ...currentLine, text: currentText },
+        ]);
         setCurrentText('');
         setCurrentLineIndex(currentLineIndex + 1);
       }, pauseAfterLine);
@@ -151,7 +110,7 @@ function HomepageHeader() {
               <span className={styles.terminalButton}></span>
               <span className={styles.terminalButton}></span>
               <span className={styles.terminalButton}></span>
-              <span className={styles.terminalTitle}>~/portfolio</span>
+              <span className={styles.terminalTitle}>~/platform</span>
             </div>
             <div className={styles.terminalBody}>
               {displayedLines.map((line, index) => renderLine(line, index))}
@@ -177,15 +136,28 @@ function HomepageHeader() {
               )}
             </div>
           </div>
+
+          <p className={styles.heroStatement}>
+            I build the paved road: self-service infrastructure and the
+            guardrails that let teams ship fast without shipping holes.
+          </p>
         </div>
+
+        {/* One primary CTA per view. The other two are secondary. */}
         <div className={styles.buttons}>
-          <Link className="button button--primary button--lg" to="/docs/projects/intro">
-            Explore Projects
+          {/* A plain anchor, not <Link>: this is a same-page jump that needs
+              no client-side routing, and the broken-anchor checker only
+              collects ids from MDX headings, not from JSX sections. */}
+          <a className="button button--primary button--lg" href="#work">
+            Selected work
+          </a>
+          <Link className="button button--secondary button--lg" to="/blog">
+            Writing
           </Link>
-          <Link className="button button--secondary button--lg" to="/docs/knowledge-base/intro">
-            Knowledge Base
-          </Link>
-          <Link className="button button--secondary button--lg" href="https://github.com/PascalNehlsen">
+          <Link
+            className="button button--secondary button--lg"
+            href="https://github.com/PascalNehlsen"
+          >
             GitHub
           </Link>
         </div>
@@ -194,39 +166,47 @@ function HomepageHeader() {
   );
 }
 
-function HomepageFeatures() {
+function SelectedWork() {
+  const selected = projects.filter((p) => p.featured === 'selected');
   return (
-    <section className={sections.section}>
+    <section id="work" className={clsx(sections.section, sections.sectionAlt)}>
       <div className="container">
         <SectionHeader
-          eyebrow="What I Do"
-          title="Development, Security & Operations"
-          subtitle="Bridging the gap between building fast and shipping safely."
+          eyebrow="Work"
+          title="Selected Work"
+          subtitle="Three problems I owned end to end — the constraint, what I changed, and the number it moved."
         />
-        <div className="row">
-          {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
+        <div className={sections.cardGrid}>
+          {selected.map((p) => (
+            <ProjectCard key={p.title} project={p} />
           ))}
         </div>
+        {/* Replaces the eleven-card "Also on the Bench" section. Eleven
+            learning projects below three real ones diluted the top. */}
+        <p className={sections.alsoLine}>
+          Also: a security pipeline gating SAST and DAST in GitHub Actions,
+          two SaaS products, and a set of smaller projects —{' '}
+          <Link to="/docs/projects/intro">all of it is documented</Link>.
+        </p>
       </div>
     </section>
   );
 }
 
-function FeaturedProjects() {
-  const featured = projects.filter((p) => p.featured);
+function LatestWriting() {
   return (
-    <section className={clsx(sections.section, sections.sectionAlt)}>
+    <section className={sections.section}>
       <div className="container">
         <SectionHeader
-          eyebrow="Portfolio"
-          title="Featured Work"
-          subtitle="Selected projects from my work as a DevSecOps Engineer and my own products."
+          eyebrow="Writing"
+          title="Latest Writing"
+          subtitle="Build notes from the work above — what broke, what I measured, what I'd do differently."
         />
-        <div className={sections.cardGrid}>
-          {featured.map((p) => (
-            <ProjectCard key={p.title} project={p} />
-          ))}
+        <BlogPreview />
+        <div className={sections.centerMore}>
+          <Link className="button button--secondary button--lg" to="/blog">
+            All posts
+          </Link>
         </div>
       </div>
     </section>
@@ -235,12 +215,12 @@ function FeaturedProjects() {
 
 function TechStack() {
   return (
-    <section className={sections.section}>
+    <section className={clsx(sections.section, sections.sectionAlt)}>
       <div className="container">
         <SectionHeader
-          eyebrow="Toolbox"
-          title="Tech Stack"
-          subtitle="The tools I reach for across the software delivery lifecycle."
+          eyebrow="Stack"
+          title="What I run"
+          subtitle="Grouped by where they sit in the delivery path. Everything here I've run in production, not just evaluated."
         />
         <Skills />
       </div>
@@ -248,69 +228,40 @@ function TechStack() {
   );
 }
 
-function RecentProjects() {
-  const recent = projects.filter((p) => !p.featured);
-  return (
-    <section className={clsx(sections.section, sections.sectionAlt)}>
-      <div className="container">
-        <SectionHeader
-          eyebrow="More Projects"
-          title="Also on the Bench"
-          subtitle="Products, containers, automation and security playgrounds."
-        />
-        <div className={sections.cardGrid}>
-          {recent.map((p) => (
-            <ProjectCard key={p.title} project={p} />
-          ))}
-        </div>
-        <div className={sections.centerMore}>
-          <Link className="button button--secondary button--lg" to="/docs/projects/intro">
-            All Projects & Docs
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function LatestBlog() {
+function CallToAction() {
   return (
     <section className={sections.section}>
       <div className="container">
-        <SectionHeader
-          eyebrow="Writing"
-          title="Latest from the Blog"
-          subtitle="Notes on DevSecOps, security and full-stack engineering."
-        />
-        <BlogPreview />
-        <div className={sections.centerMore}>
-          <Link className="button button--secondary button--lg" to="/blog">
-            Read the Blog
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function CallToAction() {
-  return (
-    <section className={clsx(sections.section, sections.sectionAlt)}>
-      <div className="container">
         <div className={sections.cta}>
-          <Heading as="h2">Let's build something secure</Heading>
+          <Heading as="h2">Talk shop</Heading>
           <p>
-            Interested in a project or collaboration? Reach out — or just type "Termin" in the AI
-            chatbot in the bottom-right corner to book a slot.
+            I'm up for comparing notes on platform work — golden paths,
+            approval gates on agents, what your rollback criteria actually
+            are.
           </p>
           <div className={sections.ctaButtons}>
-            <Link className="button button--primary button--lg" href="https://www.linkedin.com/in/pascal-nehlsen">
+            <Link
+              className="button button--primary button--lg"
+              href="https://www.linkedin.com/in/pascal-nehlsen"
+            >
               LinkedIn
             </Link>
-            <Link className="button button--secondary button--lg" href="mailto:mail@pascal-nehlsen.de">
-              Email Me
+            <Link
+              className="button button--secondary button--lg"
+              href="https://github.com/PascalNehlsen"
+            >
+              GitHub
+            </Link>
+            <Link
+              className="button button--secondary button--lg"
+              href="pathname:///blog/rss.xml"
+            >
+              RSS
             </Link>
           </div>
+          {/* Written out, not hidden behind "Email Me" — peers copy
+              addresses, they don't click labels. */}
+          <p className={sections.ctaMail}>mail@pascal-nehlsen.de</p>
         </div>
       </div>
     </section>
@@ -320,16 +271,16 @@ function CallToAction() {
 export default function Home() {
   return (
     <Layout
-      title="Home"
-      description="DevSecOps Engineer & Full-Stack Developer - Securing the software development lifecycle">
+      // No title prop: Docusaurus falls back to siteConfig.title, which gives
+      // "Pascal Nehlsen" instead of "Home | Pascal Nehlsen".
+      description="Platform and security engineering — Terraform golden paths on GCP, SLO-gated deploys, agentic runbooks with human approval."
+    >
       <HomepageHeader />
       <main>
         <StatsBar />
-        <HomepageFeatures />
-        <FeaturedProjects />
+        <SelectedWork />
+        <LatestWriting />
         <TechStack />
-        <RecentProjects />
-        <LatestBlog />
         <CallToAction />
       </main>
     </Layout>

@@ -399,13 +399,18 @@ hr {
   color: var(--c-on-accent);
 }
 
-.button--secondary {
+/* Doubled class for specificity: Infima derives .button--secondary's text
+   colour from --ifm-color-secondary-contrast-foreground, which our secondary
+   mapping turns into near-invisible dark-on-dark. */
+.button.button--secondary,
+.button.button--secondary:visited {
   background: transparent;
   border: var(--border-w) solid var(--c-border-strong);
   color: var(--c-text);
 }
 
-.button--secondary:hover {
+.button.button--secondary:hover,
+.button.button--secondary:active {
   background: var(--c-elevated);
   border-color: var(--c-text-muted);
   color: var(--c-text);

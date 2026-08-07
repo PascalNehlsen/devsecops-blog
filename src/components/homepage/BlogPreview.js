@@ -21,9 +21,9 @@ export default function BlogPreview() {
           className={styles.blogCard}
         >
           <span className={styles.blogDate}>
-            {post.formattedDate}
+            {post.date}
             {post.readingTime
-              ? ` · ${Math.ceil(post.readingTime)} min`
+              ? ` · ${Math.ceil(post.readingTime)} min read`
               : null}
           </span>
           <h3 className={styles.blogTitle}>{post.title}</h3>

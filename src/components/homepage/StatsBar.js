@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Link from '@docusaurus/Link';
 import styles from './styles.module.css';
 import { stats } from '@site/src/data/homepage';
 
@@ -29,16 +30,26 @@ function useCountUp(target, active) {
   return value;
 }
 
-function Stat({ value, suffix, label, active }) {
+function Stat({ value, suffix, label, href, active }) {
   const current = useCountUp(value, active);
-  return (
-    <div>
+  const body = (
+    <>
       <div className={styles.statValue}>
         {current}
         {suffix}
       </div>
       <div className={styles.statLabel}>{label}</div>
-    </div>
+    </>
+  );
+
+  // A number that links to the post documenting it is a claim a reader can
+  // check. One that doesn't is a claim they have to trust.
+  return href ? (
+    <Link to={href} className={styles.statLink}>
+      {body}
+    </Link>
+  ) : (
+    <div>{body}</div>
   );
 }
 

@@ -36,10 +36,11 @@ module.exports = function latestPostsPlugin(context, options) {
         .map(({ metadata }) => ({
           title: metadata.title,
           permalink: metadata.permalink,
-          // formattedDate respects the site locale. `date` is serialised to
-          // an ISO string by the global-data JSON round-trip, so it must not
-          // be treated as a Date on the client.
-          formattedDate: metadata.formattedDate,
+          // ISO date only. The global-data round-trip serialises Date to a
+          // string anyway, and rendering YYYY-MM-DD avoids a locale-dependent
+          // hydration mismatch — it also reads better in the mono type the
+          // cards use.
+          date: new Date(metadata.date).toISOString().slice(0, 10),
           description: metadata.description ?? '',
           readingTime: metadata.readingTime ?? null,
           tags: (metadata.tags ?? []).map((tag) => ({
