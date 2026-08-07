@@ -13,7 +13,9 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc",
-    "og": "node scripts/gen-og.mjs"
+    "og": "node scripts/gen-og.mjs",
+    "check:no-third-party": "node scripts/check-no-third-party.mjs",
+    "audit": "node scripts/audit-gate.mjs"
   },
   "dependencies": {
     "@docusaurus/core": "^3.10.2",

@@ -4,46 +4,48 @@ on:
   workflow_call:
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 jobs:
   build:
     name: Build Docusaurus
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6.0.1
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v6.0.0
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      - uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
           node-version: 24
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Build website
-        env:
-          DEPLOYMENT_URL: ${{ secrets.DEPLOYMENT_URL }}
-          DEPLOYMENT_BRANCH: ${{ secrets.DEPLOYMENT_BRANCH }}
-          BASE_URL: ${{ secrets.BASE_URL }}
-          GITHUB_ORG: ${{ secrets.ORG }}
-          GITHUB_PROJECT: ${{ secrets.PROJECT }}
-        run: npm run build && cp -r build github-pages
+      - name: Build
+        run: npm run build
 
-      - name: Upload Build Artifact
-        uses: actions/upload-pages-artifact@v4.0.0
+      - name: Verify no third-party resources
+        run: npm run check:no-third-party
+
+      - name: Upload build artifact
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4.0.0
         with:
-          path: github-pages
+          path: build
 
   deploy:
     name: Deploy to GitHub Pages
     needs: build
-    if: ${{  github.event_name  != 'pull_request' }}
-
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy
         id: deployment
-        uses: actions/deploy-pages@v4.0.5
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
