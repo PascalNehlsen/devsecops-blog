@@ -1,10 +1,10 @@
 // Central project registry powering the homepage showcase.
-// Edit this file to add / update / reorder projects — the homepage reads from here.
+// Edit this file to add / update / reorder projects. The homepage reads from here.
 //
 // category: 'work' | 'product' | 'recent'
-// featured: 'selected' — one of the three cards on the homepage. Three, not
+// featured: 'selected' = one of the three cards on the homepage. Three, not
 //           six: the homepage argues, the projects index enumerates.
-// featured: true — surfaced by the projects docs page, not the homepage.
+// featured: true = surfaced by the projects docs page, not the homepage.
 // Omit githubUrl for private repositories (only live/docs links render).
 
 const projects = [
@@ -24,7 +24,7 @@ const projects = [
     category: 'work',
     featured: 'selected',
     description:
-      'Known failure classes were eating on-call time not because the fix was hard, but because assembling the context — logs, Terraform state, recent deploys — took twenty minutes at 3 a.m. I built an MCP server that does the gathering and proposes a remediation, and then stops. A human approves or rejects every state-changing action, each one is logged with the reasoning that produced it, and each one is reversible. The agent is allowed to be wrong; it is not allowed to be wrong unsupervised.',
+      'Known failure classes were eating on-call time not because the fix was hard, but because assembling the context (logs, Terraform state, recent deploys) took twenty minutes at 3 a.m. I built an MCP server that does the gathering and proposes a remediation, and then stops. A human approves or rejects every state-changing action, each one is logged with the reasoning that produced it, and each one is reversible. The agent is allowed to be wrong; it is not allowed to be wrong unsupervised.',
     impact: 'Response time −60%',
     tags: ['Go', 'MCP', 'GCP', 'Terraform', 'On-Call'],
     blogUrl: '/blog/agentic-runbooks-mcp-human-approval',
@@ -34,7 +34,7 @@ const projects = [
     category: 'work',
     featured: 'selected',
     description:
-      '80+ trainees each needed a production-like n8n environment, and a fixed t3.medium per person was both wasteful and, at cohort scale, expensive. The workloads are bursty by nature — idle for hours, then a spike — so I put them on burstable instances sized for the median rather than the peak, and wrote lifecycle automation that stops and reclaims anything idle past a threshold. Everyone gets a real isolated environment; compute costs about half of the fixed-size equivalent.',
+      '80+ trainees each needed a production-like n8n environment, and a fixed t3.medium per person was both wasteful and, at cohort scale, expensive. The workloads are bursty by nature: idle for hours, then a spike. So I put them on burstable instances sized for the median rather than the peak, and wrote lifecycle automation that stops and reclaims anything idle past a threshold. Everyone gets a real isolated environment; compute costs about half of the fixed-size equivalent.',
     impact: '80+ envs, spend −50%',
     tags: ['AWS', 'EC2', 'Terraform', 'n8n', 'Cost'],
     blogUrl: '/blog/ephemeral-aws-sandboxes-cost',
@@ -91,7 +91,7 @@ const projects = [
     title: 'n8n Workflow Workspace',
     category: 'product',
     description:
-      'Versioned workspace for n8n automations — personal and per-client. Strict client separation via tags and name prefixes, secrets kept out of git, template-driven onboarding.',
+      'Versioned workspace for n8n automations, personal and per-client. Strict client separation via tags and name prefixes, secrets kept out of git, template-driven onboarding.',
     impact: 'Client automation',
     tags: ['n8n', 'Automation', 'Workflows'],
   },
@@ -101,7 +101,7 @@ const projects = [
     title: 'Conduit Pipeline & Container',
     category: 'recent',
     description:
-      'GitHub Actions pipeline that clones, builds Docker images and deploys via Docker Compose to a remote server — plus the Compose setup for an Angular frontend with a Django backend.',
+      'GitHub Actions pipeline that clones, builds Docker images and deploys via Docker Compose to a remote server, plus the Compose setup for an Angular frontend with a Django backend.',
     tags: ['GitHub Actions', 'Docker Compose', 'Django', 'Angular'],
     githubUrl: 'https://github.com/PascalNehlsen/conduit',
     docsUrl: '/docs/projects/recent/conduit-pipeline',
@@ -128,7 +128,7 @@ const projects = [
     title: 'Python Pentest Tools',
     category: 'recent',
     description:
-      'Pentesting tools in Python — network scanning, password cracking and exploitation scripts for ethical hacking and security testing.',
+      'Pentesting tools in Python: network scanning, password cracking and exploitation scripts for ethical hacking and security testing.',
     tags: ['Python', 'Pentesting', 'Security'],
     githubUrl: 'https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/',
     docsUrl: '/docs/projects/recent/python-tools/intro',
@@ -137,7 +137,7 @@ const projects = [
     title: 'OWASP Juice Shop Challenges',
     category: 'recent',
     description:
-      'Documented OWASP Juice Shop challenges — hands-on identification and mitigation of common web vulnerabilities in a safe environment.',
+      'Documented OWASP Juice Shop challenges: hands-on identification and mitigation of common web vulnerabilities in a safe environment.',
     tags: ['OWASP', 'Web Security', 'CTF'],
     githubUrl: 'https://github.com/PascalNehlsen/juice-shop-challenges',
     docsUrl: '/docs/projects/recent/juice-shop/intro',

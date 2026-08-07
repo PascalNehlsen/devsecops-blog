@@ -2,7 +2,7 @@
  * Self-XSS warning printed to the browser console.
  *
  * This is not decoration. Attackers talk people into pasting code into the
- * devtools console, which runs it with full access to the current session —
+ * devtools console, which runs it with full access to the current session:
  * the same class of attack Facebook, Google and Discord print this warning
  * for. The message costs nothing and occasionally stops someone.
  *

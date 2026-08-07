@@ -3,7 +3,7 @@ id: intro
 title: Knowledge Base
 sidebar_label: Knowledge Base
 sidebar_position: 1
-description: Teaching notes on containers, DevOps practice, Git and environment handling — written for the engineers I mentor, kept public because they are useful to more than them.
+description: Teaching notes on containers, DevOps practice, Git and environment handling, written for the engineers I mentor and kept public because they are useful to more than them.
 keywords: [docker, docker compose, devops, 12-factor, environment variables, teaching notes]
 ---
 
@@ -17,7 +17,7 @@ That makes the coverage uneven on purpose. Docker gets several pages because I
 use it daily and because most of the Dockerfiles I review have the same three
 problems. There is nothing at all on Kubernetes, because I don't run it.
 
-If you want the applied version — real numbers, real postmortems — that is in
+If you want the applied version, with real numbers and real postmortems, that is in
 the [blog](/blog) and the [project write-ups](/docs/projects/intro). This
 section is the reference layer underneath.
 
@@ -27,7 +27,7 @@ section is the reference layer underneath.
 
 Concepts, building your first image, and Compose. The one I'd point a
 colleague at is [**First Docker
-Image**](/docs/knowledge-base/Container/first-image) — it goes past
+Image**](/docs/knowledge-base/Container/first-image). It goes past
 `FROM python:3.9` into non-root users, multi-stage builds, minimal base
 images and where Trivy fits in the pipeline. Most Dockerfiles I review pick
 up at least three findings from that page.
@@ -38,15 +38,15 @@ Practice-level notes: [where Docker actually sits in a delivery
 workflow](/docs/knowledge-base/DevOps/docker-in-devops), and [implementing
 DevOps against the 12-Factor
 principles](/docs/knowledge-base/DevOps/implementing-devops). The 12-Factor
-page is the one I keep returning to — most "we need DevOps" conversations
+page is the one I keep returning to: most "we need DevOps" conversations
 turn out to be a config-in-the-code problem wearing a costume.
 
 ### [Git](/docs/knowledge-base/git/intro)
 
 Branching and workflow. Deliberately short: Git basics are the
 best-documented topic on the internet and I have nothing to add to them. The
-security side — signed commits, scanning before the commit lands, what to do
-when a key *is* pushed — is in [Git
+security side (signed commits, scanning before the commit lands, what to do
+when a key *is* pushed) is in [Git
 Security](/blog/git-security-practices), which goes considerably deeper.
 
 ### [Environment variables](/docs/knowledge-base/env-vars/)

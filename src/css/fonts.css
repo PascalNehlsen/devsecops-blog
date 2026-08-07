@@ -4,13 +4,13 @@
  * No request ever leaves this origin for a font. That is deliberate: a
  * fonts.gstatic.com request leaks every visitor's IP to a third party, and it
  * would force the CSP to allow an external font-src. The bytes are vendored
- * into static/fonts/ (see LICENSE-*.txt there — both families are OFL-1.1)
+ * into static/fonts/ (see LICENSE-*.txt there, both families are OFL-1.1)
  * rather than pulled at build time, so what ships is what was reviewed.
  *
  * The `latin` subset covers German (ä ö ü ß live in Latin-1 Supplement).
  * latin-ext is deliberately not shipped.
  *
- * font-display: swap on every face — never `optional` (headings would flash to
+ * font-display: swap on every face, never `optional` (headings would flash to
  * a fallback and stay there) and never `block` (FOIT).
  */
 

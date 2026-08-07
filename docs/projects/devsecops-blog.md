@@ -6,7 +6,7 @@ sidebar_position: 4
 ---
 
 :::info[Live]
-[pascal-nehlsen.de](https://pascal-nehlsen.de) — you are reading it.
+[pascal-nehlsen.de](https://pascal-nehlsen.de). You are reading it.
 :::
 
 # DevSecOps Blog & Portfolio - Technical Documentation

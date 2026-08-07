@@ -6,11 +6,11 @@ hide_table_of_contents: true
 
 # Impressum
 
-:::warning[Entwurf — vor Veröffentlichung ausfüllen und prüfen lassen]
+:::warning[Entwurf: vor Veröffentlichung ausfüllen und prüfen lassen]
 Dieses Gerüst listet die Felder, die § 5 DDG (früher § 5 TMG) verlangt. Die
 mit `TODO` markierten Angaben müssen ergänzt werden. Ob und in welchem Umfang
 eine Impressumspflicht besteht, hängt davon ab, ob die Seite als
-geschäftsmäßig gilt — bei einem beruflichen Portfolio wird das üblicherweise
+geschäftsmäßig gilt. Bei einem beruflichen Portfolio wird das üblicherweise
 bejaht. Rechtsverbindliche Prüfung durch eine Anwältin oder einen Anwalt
 ersetzt dieser Text nicht.
 :::

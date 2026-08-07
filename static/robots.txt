@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-# Generated surfaces — no value in indexing these, and they dilute the
+# Generated surfaces. No value in indexing these, and they dilute the
 # real pages in the index.
 Disallow: /blog/tags/
 Disallow: /blog/page/

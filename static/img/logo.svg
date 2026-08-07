@@ -2,7 +2,7 @@
   <title>Pascal Nehlsen</title>
   <!-- A terminal prompt: the mark says what the site is about, not whose it is.
        Two files rather than one currentColor file, because Docusaurus renders
-       the navbar logo in an <img> tag — an SVG loaded that way is an isolated
+       the navbar logo in an <img> tag, and an SVG loaded that way is an isolated
        document and cannot inherit the page's colour. -->
   <rect x="0.75" y="0.75" width="30.5" height="30.5" rx="5"
         fill="none" stroke="#15803D" stroke-width="1.5" opacity="0.35"/>

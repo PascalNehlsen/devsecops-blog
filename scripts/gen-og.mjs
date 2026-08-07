@@ -26,7 +26,7 @@ const FONT_DIR = join(ROOT, 'static/fonts');
 const OUT_DIR = join(ROOT, 'static/img/og');
 
 // Straight from src/css/tokens.css. If the palette changes there, change it
-// here — these cards are the site's face in every share.
+// here. These cards are the site's face in every share.
 const C = {
   bg: '#020617',
   surface: '#0E1223',
@@ -39,7 +39,7 @@ const C = {
 
 // satori cannot read woff2, and the site only ships woff2. Rather than
 // vendoring a second set of TTFs that nothing else uses, decompress the
-// served files in memory — the cards then provably use the same outlines
+// served files in memory, so the cards provably use the same outlines
 // the site does.
 async function ttf(file) {
   return Buffer.from(await decompress(readFileSync(join(FONT_DIR, file))));
@@ -66,7 +66,7 @@ const fonts = [
   },
 ];
 
-/** The card. One flat accent rule on top — no gradient, matching the site. */
+/** The card. One flat accent rule on top, no gradient, matching the site. */
 function card({ title, description, tags = [] }) {
   return {
     type: 'div',
@@ -201,7 +201,7 @@ async function main() {
     {
       title: 'Pascal Nehlsen',
       description:
-        'Platform and security engineering — Terraform golden paths on GCP, SLO-gated deploys, agentic runbooks with human approval.',
+        'Platform and security engineering. Terraform golden paths on GCP, SLO-gated deploys, agentic runbooks with human approval.',
       tags: ['platform', 'security'],
     },
     'default.png'

@@ -14,7 +14,7 @@ npm start          # dev server with hot reload at http://localhost:3000
 Before opening a PR:
 
 ```bash
-npm run build      # MUST pass — onBrokenLinks is set to "throw"
+npm run build      # MUST pass. onBrokenLinks is "throw"
 npm run typecheck  # tsc
 ```
 
@@ -29,7 +29,7 @@ A green `npm run build` is the hard gate: it fails on any broken internal link.
 
 ## Adding a project
 
-Edit **`src/data/projects.js`** — do not hand-edit the homepage layout.
+Edit **`src/data/projects.js`**. Do not hand-edit the homepage layout.
 
 ```js
 {

@@ -1,4 +1,4 @@
-# Pascal Nehlsen — Portfolio, Blog & Knowledge Base
+# Pascal Nehlsen · Portfolio, Blog & Knowledge Base
 
 A [Docusaurus](https://docusaurus.io/) site that serves as my portfolio, DevSecOps
 knowledge base, and technical blog. It showcases my work as a DevSecOps / Platform
@@ -41,21 +41,21 @@ the point:
 - **Framework:** Docusaurus 3 (React 18, MDX)
 - **Language:** TypeScript (config) + JavaScript (pages/components)
 - **Styling:** Infima, driven entirely from a token layer
-  (`src/css/tokens.css`) — slate + signal green, dark default, both themes
+  (`src/css/tokens.css`): slate + signal green, dark default, both themes
   designed rather than inverted
 - **Fonts:** JetBrains Mono + IBM Plex Sans, self-hosted from `static/fonts/`
-- **Search:** `@easyops-cn/docusaurus-search-local` — offline lunr index, no
+- **Search:** `@easyops-cn/docusaurus-search-local`, an offline lunr index with no
   third-party request
 - **Hosting:** GitHub Pages (custom domain via `CNAME`)
 - **CI/CD:** GitHub Actions (`.github/`)
 
-> This is a **static site**. There is no database, backend server or auth layer —
+> This is a **static site**. There is no database, backend server or auth layer;
 > earlier README versions describing `DATABASE_URL` / `JWT_SECRET` were inaccurate.
 
 ## Prerequisites
 
 - Node.js **24+** (see `engines` in `package.json`; CI uses 24)
-- npm — `package-lock.json` is the only lockfile, and CI runs `npm ci`
+- npm. `package-lock.json` is the only lockfile, and CI runs `npm ci`
 - Git
 
 ## Quickstart
@@ -77,7 +77,7 @@ Other scripts:
 ```bash
 npm run build       # Production build into build/
 npm run serve       # Serve the production build locally
-npm run typecheck   # tsc — type-check the config
+npm run typecheck   # tsc, type-check the config
 npm run clear       # Clear the Docusaurus cache
 npm run og          # Regenerate Open Graph cards into static/img/og/
 ```
@@ -115,12 +115,12 @@ npm run og          # Regenerate Open Graph cards into static/img/og/
 
 ## Homepage Data
 
-The homepage is **data-driven** — you rarely touch layout code:
+The homepage is **data-driven**, so you rarely touch layout code:
 
-- **`src/data/projects.js`** — every project card. Fields: `title`, `description`,
+- **`src/data/projects.js`**: every project card. Fields: `title`, `description`,
   `category` (`work` \| `product` \| `recent`), `featured`, `impact`, `tags[]`,
   `liveUrl`, `githubUrl`, `docsUrl`. Omit `githubUrl` for private repos.
-- **`src/data/homepage.js`** — `stats`, `skillGroups`, `latestPosts`.
+- **`src/data/homepage.js`**: `stats` and `skillGroups`.
 
 Homepage sections live in `src/components/homepage/`:
 
@@ -139,8 +139,8 @@ All share `src/components/homepage/styles.module.css`.
 Deployment is parameterised via env vars (see `example.env`), consumed in
 `docusaurus.config.ts`:
 
-- `DEPLOYMENT_URL` — full site URL (defaults to the GitHub Pages URL)
-- `BASE_URL` — base path (`/` for the custom domain, `/devsecops-blog/` on `*.github.io`)
+- `DEPLOYMENT_URL`: full site URL (defaults to the GitHub Pages URL)
+- `BASE_URL`: base path (`/` for the custom domain, `/devsecops-blog/` on `*.github.io`)
 - `GITHUB_ORG`, `GITHUB_PROJECT`, `DEPLOYMENT_BRANCH`
 
 ## Deployment
@@ -154,5 +154,5 @@ GIT_USER=PascalNehlsen npm run deploy
 ## Contributing
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for the local workflow, content conventions
-and the pre-merge checklist (`npm run build` must pass — `onBrokenLinks` is set to
+and the pre-merge checklist (`npm run build` must pass; `onBrokenLinks` is set to
 `throw`).

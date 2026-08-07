@@ -17,7 +17,7 @@
 
 # Stale GitHub Pages artifacts from the old /docs-folder deploy.
 # The live site is built to build/ and uploaded by .github/workflows/deploy.yaml.
-# None of these are served — never re-commit them.
+# None of these are served. Never re-commit them.
 /index.html
 /sitemap.xml
 /.nojekyll

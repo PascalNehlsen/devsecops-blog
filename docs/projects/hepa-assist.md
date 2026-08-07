@@ -1,9 +1,9 @@
 ---
 id: hepa-assist
-title: Emavi
-sidebar_label: Emavi
+title: "Emavi"
+sidebar_label: "Emavi"
 sidebar_position: 2
-description: Multi-tenant, barrier-free documentation platform for assisted-living facilities — resident mood tracking, care trends and reporting.
+description: "Multi-tenant, barrier-free documentation platform for assisted-living facilities: resident mood tracking, care trends and reporting."
 keywords: [multi-tenant saas, healthcare, fastapi, next.js, accessibility, pwa]
 ---
 
@@ -13,7 +13,7 @@ Shipped as **HepaAssist**; now runs as **Emavi**. The write-up keeps the old
 name where it describes decisions made under it.
 
 :::info[Live · login required]
-[emavi.de](https://emavi.de) — the product is behind authentication, so the
+[emavi.de](https://emavi.de). The product is behind authentication, so the
 link lands on a sign-in page. The architecture and the decisions are below.
 :::
 

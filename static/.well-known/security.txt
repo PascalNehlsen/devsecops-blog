@@ -1,4 +1,4 @@
-# RFC 9116 — https://www.rfc-editor.org/rfc/rfc9116
+# RFC 9116: https://www.rfc-editor.org/rfc/rfc9116
 #
 # Expires is a mandatory field and this file is worthless once it passes.
 # Renewing it is a calendar entry, not a nice-to-have: an expired security.txt

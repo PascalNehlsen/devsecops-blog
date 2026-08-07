@@ -4,7 +4,7 @@ import { usePluginData } from '@docusaurus/useGlobalData';
 import styles from './styles.module.css';
 
 export default function BlogPreview() {
-  // Sourced from the blog plugin at build time — see plugins/latest-posts.
+  // Sourced from the blog plugin at build time, see plugins/latest-posts.
   // Permalinks come from the plugin, so these links cannot go stale.
   const { posts } = usePluginData('latest-posts');
 

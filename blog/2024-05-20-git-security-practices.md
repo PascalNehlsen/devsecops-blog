@@ -10,7 +10,7 @@ image: /img/og/git-security-practices.png
 ---
 # Git Security - Beyond Just Commits
 
-Your Git repository is more than code—it's credentials, API keys, intellectual property, and your company's crown jewels. Let's secure it properly.
+Your Git repository is more than code. It holds credentials, API keys, intellectual property, and your company's crown jewels. Let's secure it properly.
 
 <!-- truncate -->
 

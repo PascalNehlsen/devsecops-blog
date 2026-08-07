@@ -6,9 +6,9 @@ hide_table_of_contents: true
 
 # Datenschutzerklärung
 
-:::warning[Entwurf — vor Veröffentlichung ausfüllen und prüfen lassen]
+:::warning[Entwurf: vor Veröffentlichung ausfüllen und prüfen lassen]
 Dieses Gerüst deckt die Verarbeitungen ab, die auf dieser Seite tatsächlich
-stattfinden. `TODO`-Stellen ergänzen und den Text rechtlich prüfen lassen —
+stattfinden. `TODO`-Stellen ergänzen und den Text rechtlich prüfen lassen,
 insbesondere den Abschnitt zu Cloudflare, sobald der Proxy aktiv ist. Der
 Stand unten muss beim Veröffentlichen aktualisiert werden.
 :::
@@ -112,7 +112,7 @@ Unabhängig davon steht Ihnen ein Beschwerderecht bei einer
 Datenschutz-Aufsichtsbehörde zu (Art. 77 DSGVO).
 
 Zuständig ist die Landesbeauftragte für Datenschutz und Informationsfreiheit
-Nordrhein-Westfalen, Kavalleriestraße 2–4, 40213 Düsseldorf —
+Nordrhein-Westfalen, Kavalleriestraße 2-4, 40213 Düsseldorf,
 [ldi.nrw.de](https://www.ldi.nrw.de/).
 
 ## Sicherheitslücken melden

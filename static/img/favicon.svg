@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
   <!-- Favicon variant: filled background so the mark stays legible at 16px
-       against an arbitrary browser-tab colour. Signal green on slate — the
+       against an arbitrary browser-tab colour. Signal green on slate: the
        same two values as the site's --c-accent and --c-bg. -->
   <rect width="32" height="32" rx="6" fill="#020617"/>
   <path d="M8 10.5 L13.5 16 L8 21.5"

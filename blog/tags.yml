@@ -3,7 +3,7 @@
 # Before this file existed, tags were free text, and the two generations of
 # posts used different casing: `devsecops` vs `DevSecOps`, `cicd` vs `CI/CD`.
 # Docusaurus slugifies those differently, so the live sitemap contained both
-# /blog/tags/devsecops and /blog/tags/dev-sec-ops — the same tag, two pages,
+# /blog/tags/devsecops and /blog/tags/dev-sec-ops: the same tag, two pages,
 # split link equity.
 #
 # onInlineTags: 'throw' in docusaurus.config.ts means a typo can no longer

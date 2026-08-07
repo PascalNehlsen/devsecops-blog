@@ -1,9 +1,9 @@
 ---
 id: chatbot
-title: AI Chatbot Platform
-sidebar_label: AI Chatbot Platform
+title: "AI Chatbot Platform"
+sidebar_label: "AI Chatbot Platform"
 sidebar_position: 3
-description: Multi-tenant chatbot platform embeddable via a script tag — Shadow DOM isolation, per-tenant CORS validation, appointment booking.
+description: "Multi-tenant chatbot platform embeddable via a script tag: Shadow DOM isolation, per-tenant CORS validation, appointment booking."
 keywords: [multi-tenant, shadow dom, chatbot, next.js, prisma, tenant isolation]
 ---
 
