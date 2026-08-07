@@ -52,6 +52,17 @@ const projects = [
 
   // ── Products (private) ──────────────────────────────────────────
   {
+    title: 'Runnz',
+    category: 'product',
+    featured: true,
+    description:
+      'Multi-tenant SaaS for trade-fair construction scheduling. Deadlines are derived from the build date via reusable workflow blocks, so moving the date moves the whole chain. Secret scanning and dependency audit run pre-commit and in CI, not as advisory steps.',
+    impact: 'Live product',
+    tags: ['NestJS', 'TypeScript', 'PostgreSQL', 'Docker', 'Multi-Tenant'],
+    liveUrl: 'https://runnz.de',
+    docsUrl: '/docs/projects/runnz',
+  },
+  {
     title: 'Emavi',
     category: 'product',
     featured: true,

@@ -2,7 +2,7 @@
 id: devsecops-blog
 title: DevSecOps Blog & Portfolio
 sidebar_label: DevSecOps Blog
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 :::info[Live]

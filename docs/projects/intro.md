@@ -35,6 +35,7 @@ Things I build and run myself.
 
 | Project | What it is | Stack | Links |
 | --- | --- | --- | --- |
+| **Runnz** | Multi-tenant SaaS for trade-fair construction scheduling. Reusable workflow blocks derive every deadline from the build date; secret scanning and dependency audit block in pre-commit and CI. | NestJS, PostgreSQL, React, Docker | [Docs](/docs/projects/runnz) · [Live](https://runnz.de) |
 | **Emavi** (formerly HepaAssist) | Barrier-free multi-tenant PWA for assisted-living facilities: residents log daily mood, staff see trends and generate reports. | Next.js, FastAPI, PostgreSQL, Docker, Web Push | [Docs](/docs/projects/hepa-assist) |
 | **AI Chatbot Platform** | Multi-tenant chatbot with appointment booking, embeddable as a widget with Shadow DOM isolation and per-tenant CORS validation. | Next.js, Prisma, OpenAI, Shadow DOM | [Docs](/docs/projects/chatbot) |
 | **Standly** | AI trade-fair-stand designer: prompt or RFQ in, buildable and quotable 3D booth out. Parametric catalog core, RFQ → BOM → quote. In development. | TypeScript monorepo, 3D, diffusion renders | none |
