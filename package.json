@@ -35,7 +35,7 @@
     "@easyops-cn/docusaurus-search-local": "^0.55.3",
     "@resvg/resvg-js": "^2.6.2",
     "@types/react": "^19.2.18",
-    "@types/react-dom": "^18.3.1",
+    "@types/react-dom": "^19.2.4",
     "gray-matter": "^4.0.3",
     "satori": "^0.29.0",
     "typescript": "~5.5.2",
