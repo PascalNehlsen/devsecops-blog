@@ -38,7 +38,7 @@ module.exports = function latestPostsPlugin(context, options) {
           permalink: metadata.permalink,
           // ISO date only. The global-data round-trip serialises Date to a
           // string anyway, and rendering YYYY-MM-DD avoids a locale-dependent
-          // hydration mismatch — it also reads better in the mono type the
+          // hydration mismatch: it also reads better in the mono type the
           // cards use.
           date: new Date(metadata.date).toISOString().slice(0, 10),
           description: metadata.description ?? '',

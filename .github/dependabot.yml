@@ -1,0 +1,31 @@
+version: 2
+
+updates:
+  # 'npm' is the ecosystem name; it reads pnpm-lock.yaml too.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '06:00'
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: chore
+      include: scope
+    groups:
+      docusaurus:
+        patterns:
+          - '@docusaurus/*'
+      patch-updates:
+        update-types:
+          - patch
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '06:00'
+    commit-message:
+      prefix: chore
+      include: scope

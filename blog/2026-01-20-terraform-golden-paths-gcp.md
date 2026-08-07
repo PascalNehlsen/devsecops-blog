@@ -13,7 +13,7 @@ image: /img/og/terraform-golden-paths-gcp.png
 The fastest way to slow a team down is to make them wait on infrastructure. When every new
 service means a four-hour manual walk through the GCP console, engineers batch their requests,
 context-switch while they wait, and quietly build snowflakes. This post is about replacing that
-ritual with a golden path — a paved, opinionated route that provisions a production-like
+ritual with a golden path: a paved, opinionated route that provisions a production-like
 environment in under 45 minutes, self-service.
 
 <!-- truncate -->
@@ -26,7 +26,7 @@ Manual provisioning fails in three predictable ways:
 - **It drifts.** No two environments end up identical, so "works in staging" stops meaning anything.
 - **It's opaque.** There's no review, no history, no way to answer "who changed this IAM binding and why".
 
-Infrastructure as Code fixes all three at once — but only if the modules are shaped so that
+Infrastructure as Code fixes all three at once, but only if the modules are shaped so that
 using them correctly is the path of least resistance.
 
 ## Modularise around intent, not resources
@@ -51,7 +51,7 @@ module "service" {
 
 A single `module "service"` block stands up Cloud Run, wires a least-privilege service account,
 connects Cloud SQL over a private IP, and exports logs and traces. The consumer specifies
-*intent* — a service for a team — not thirty individual resources.
+*intent*, a service for a team, not thirty individual resources.
 
 ## Guardrails belong in the module
 
@@ -59,7 +59,7 @@ A golden path is only golden if the safe choice is the default choice:
 
 - **IAM**: modules mint scoped service accounts; nobody hand-edits project-level bindings.
 - **Networking**: private IP by default, public egress opt-in and reviewed.
-- **Tagging/labels**: `team`, `cost-center`, and `environment` are required variables — no label, no plan.
+- **Tagging/labels**: `team`, `cost-center`, and `environment` are required variables. No label, no plan.
 
 Because these are enforced in code, a misconfiguration is a failed `terraform plan`, not a
 production incident discovered three weeks later.
@@ -79,7 +79,7 @@ The audit trail is the git history. "Who changed this and why" is answered by `g
 ## The result
 
 Consolidating the environment into intent-shaped modules with guardrails and GitOps delivery
-took provisioning from **~4 hours of manual work to under 45 minutes**, fully automated — an
+took provisioning from **~4 hours of manual work to under 45 minutes**, fully automated: an
 80% reduction. Just as importantly, infrastructure support tickets dropped sharply, because the
 common requests became self-service.
 

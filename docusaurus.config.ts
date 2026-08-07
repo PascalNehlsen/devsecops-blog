@@ -64,8 +64,8 @@ const moreColumn = {
 if (blogEnabled) {
   moreColumn.items.push({
     label: 'RSS',
-    // pathname:// — the feed is a generated asset, not a route, so the
-    // broken-link checker must not try to resolve it.
+    // pathname:// is required here: the feed is a generated asset, not a
+    // route, and the broken-link checker cannot resolve it.
     href: 'pathname:///blog/rss.xml',
   });
 }
@@ -145,7 +145,7 @@ const config: Config = {
         //     newer half used dated permalinks, which visibly age a post in
         //     search results. Now all flat.
         //  2. Removed posts. Seven were deleted because they were thin or
-        //     content-free — see the commit that removed them. Their URLs
+        //     content-free; see the commit that removed them. Their URLs
         //     were live and indexed, so they redirect rather than 404.
         redirects: [
           {
@@ -196,12 +196,12 @@ const config: Config = {
     ],
   ],
 
-  // A theme, not a plugin — the usual mistake with this package.
+  // A theme, not a plugin. That is the usual mistake with this package.
   //
   // Chosen over Algolia DocSearch: DocSearch needs an application, an
   // approval, and an externally scheduled crawler that breaks when the crawl
   // config drifts. For six posts and ~25 docs the lunr index is tiny, works
-  // offline, and — the reason that matters here — makes no third-party
+  // offline and, which is the reason that matters here, makes no third-party
   // request, which is what keeps the CSP at script-src 'self'.
   themes: [
     [
@@ -236,13 +236,13 @@ const config: Config = {
               blogSidebarCount: 'ALL',
               blogSidebarTitle: 'All Posts',
               onUntruncatedBlogPosts: 'throw',
-              // A typo can no longer mint a new tag page — see blog/tags.yml.
+              // A typo can no longer mint a new tag page; see blog/tags.yml.
               onInlineTags: 'throw',
               tags: 'tags.yml',
               feedOptions: {
                 type: ['rss', 'atom'],
                 xslt: true,
-                title: 'Pascal Nehlsen — Writing',
+                title: 'Pascal Nehlsen, Writing',
                 description:
                   'Build notes on platform and security engineering.',
                 language: 'en',
@@ -355,7 +355,7 @@ const config: Config = {
       copyright: `© ${new Date().getFullYear()} Pascal Nehlsen`,
     },
     prism: {
-      // dracula (#282A36, purple/pink) clashes hard with the slate palette —
+      // dracula (#282A36, purple/pink) clashes hard with the slate palette:
       // it was the main reason code blocks looked like a different site.
       // nightOwl's #011627 sits two luminance steps from --c-bg and its
       // accents are green/teal. nightOwlLight shares the same token→role map,

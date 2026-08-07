@@ -1,9 +1,9 @@
 ---
 id: chatbot
-title: AI Chatbot Platform
-sidebar_label: AI Chatbot Platform
+title: "AI Chatbot Platform"
+sidebar_label: "AI Chatbot Platform"
 sidebar_position: 3
-description: Multi-tenant chatbot platform embeddable via a script tag — Shadow DOM isolation, per-tenant CORS validation, appointment booking.
+description: "Multi-tenant chatbot platform embeddable via a script tag: Shadow DOM isolation, per-tenant CORS validation, appointment booking."
 keywords: [multi-tenant, shadow dom, chatbot, next.js, prisma, tenant isolation]
 ---
 
@@ -14,7 +14,7 @@ The widget used to load on every page of this site. It was removed: a
 third-party script with full DOM access on forty content pages is not
 something I want to defend on a site about securing delivery pipelines, and
 this site does not sell anything. It runs at
-[chatbot-mit-pascal.de](https://chatbot-mit-pascal.de).
+[start.chatbot-mit-pascal.de](https://start.chatbot-mit-pascal.de).
 :::
 
 ## Executive Summary
@@ -936,7 +936,7 @@ DB_PORT=5432
 
 # Application
 APP_PORT=3000
-FRONTEND_URL=https://chatbot-mit-pascal.de
+FRONTEND_URL=https://start.chatbot-mit-pascal.de
 
 # OpenAI
 OPENAI_API_KEY=sk-...

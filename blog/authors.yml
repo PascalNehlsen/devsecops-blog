@@ -3,7 +3,7 @@ pascal:
   title: Platform & Security Engineering
   url: https://github.com/PascalNehlsen
   # Served from this origin, not from github.com. An avatar hotlinked from
-  # GitHub is a third-party request on every blog page — it leaks the reader's
+  # GitHub is a third-party request on every blog page. It leaks the reader's
   # IP and it would force img-src to allow an external host.
   image_url: /img/pascal-nehlsen.jpg
   email: mail@pascal-nehlsen.de

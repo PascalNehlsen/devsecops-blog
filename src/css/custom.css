@@ -122,7 +122,7 @@ a {
 
 /* The old `* { font-size: max(16px, 1em) }` was a shotgun fix for three
    separate problems. It destroyed the type scale and, because 1em inherits,
-   made it impossible for any element to be smaller than its parent — which
+   made it impossible for any element to be smaller than its parent, which
    is why nested font sizes needed !important. Replaced by three targeted
    rules that solve the same three problems. */
 
@@ -386,7 +386,7 @@ hr {
   background: var(--c-border);
 }
 
-/* Buttons — flat fills, hairline outlines, no gradients, no lift. */
+/* Buttons, flat fills, hairline outlines, no gradients, no lift. */
 .button--primary {
   background: var(--c-accent);
   border-color: var(--c-accent);
@@ -559,7 +559,7 @@ div[class*='codeBlockTitle_'] {
    from Markdown.
    ══════════════════════════════════════════════════════════════════════ */
 
-/* ── Status dot — the pass/fail language of the site ─────────────────── */
+/* ── Status dot: the pass/fail language of the site ─────────────────── */
 .status {
   display: inline-flex;
   align-items: center;

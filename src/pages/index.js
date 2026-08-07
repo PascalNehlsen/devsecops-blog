@@ -174,7 +174,7 @@ function SelectedWork() {
         <SectionHeader
           eyebrow="Work"
           title="Selected Work"
-          subtitle="Three problems I owned end to end — the constraint, what I changed, and the number it moved."
+          subtitle="Three problems I owned end to end: the constraint, what I changed, and the number it moved."
         />
         <div className={sections.cardGrid}>
           {selected.map((p) => (
@@ -185,7 +185,7 @@ function SelectedWork() {
             learning projects below three real ones diluted the top. */}
         <p className={sections.alsoLine}>
           Also: a security pipeline gating SAST and DAST in GitHub Actions,
-          two SaaS products, and a set of smaller projects —{' '}
+          two SaaS products, and a set of smaller projects.{' '}
           <Link to="/docs/projects/intro">all of it is documented</Link>.
         </p>
       </div>
@@ -200,7 +200,7 @@ function LatestWriting() {
         <SectionHeader
           eyebrow="Writing"
           title="Latest Writing"
-          subtitle="Build notes from the work above — what broke, what I measured, what I'd do differently."
+          subtitle="Build notes from the work above: what broke, what I measured, what I'd do differently."
         />
         <BlogPreview />
         <div className={sections.centerMore}>
@@ -235,7 +235,7 @@ function CallToAction() {
         <div className={sections.cta}>
           <Heading as="h2">Talk shop</Heading>
           <p>
-            I'm up for comparing notes on platform work — golden paths,
+            I'm up for comparing notes on platform work: golden paths,
             approval gates on agents, what your rollback criteria actually
             are.
           </p>
@@ -259,7 +259,7 @@ function CallToAction() {
               RSS
             </Link>
           </div>
-          {/* Written out, not hidden behind "Email Me" — peers copy
+          {/* Written out, not hidden behind "Email Me". Peers copy
               addresses, they don't click labels. */}
           <p className={sections.ctaMail}>mail@pascal-nehlsen.de</p>
         </div>
@@ -273,7 +273,7 @@ export default function Home() {
     <Layout
       // No title prop: Docusaurus falls back to siteConfig.title, which gives
       // "Pascal Nehlsen" instead of "Home | Pascal Nehlsen".
-      description="Platform and security engineering — Terraform golden paths on GCP, SLO-gated deploys, agentic runbooks with human approval."
+      description="Platform and security engineering. Terraform golden paths on GCP, SLO-gated deploys, agentic runbooks with human approval."
     >
       <HomepageHeader />
       <main>

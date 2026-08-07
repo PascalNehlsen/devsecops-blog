@@ -7,7 +7,7 @@ function useCountUp(target, active) {
   // Starts at the target, not at zero. The server-rendered HTML therefore
   // contains the real number, so a reader with JavaScript disabled, a slow
   // hydration, or an IntersectionObserver that never fires still sees "80%"
-  // rather than "0%" — which would be the three most important numbers on
+  // rather than "0%", which would be the three most important numbers on
   // the page silently reading as nothing.
   const [value, setValue] = useState(target);
 

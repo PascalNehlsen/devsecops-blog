@@ -2,8 +2,8 @@
  * Design tokens.
  *
  * Two layers:
- *   1. Primitives — theme-independent scales (type, space, radius, motion).
- *   2. Semantic colours — one set per theme, then bridged onto the --ifm-*
+ *   1. Primitives: theme-independent scales (type, space, radius, motion).
+ *   2. Semantic colours: one set per theme, then bridged onto the --ifm-*
  *      variables Infima actually reads.
  *
  * Nothing outside this file should contain a raw hex value. Component CSS
@@ -25,7 +25,7 @@
     sans-serif;
 
   /* ── Type scale ───────────────────────────────────────────────────── */
-  --fs-2xs: 0.75rem; /* 12 — badge/pill only, never prose */
+  --fs-2xs: 0.75rem; /* 12px. Badge and pill only, never prose */
   --fs-xs: 0.8125rem; /* 13 */
   --fs-sm: 0.875rem; /* 14 */
   --fs-base: 1rem; /* 16 */
@@ -54,7 +54,7 @@
   --fw-semibold: 600;
   --fw-bold: 700;
 
-  /* ── Space — 4/8 rhythm ───────────────────────────────────────────── */
+  /* ── Space: 4/8 rhythm ───────────────────────────────────────────── */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -68,14 +68,14 @@
   --space-20: 5rem;
   --space-24: 6rem;
 
-  /* ── Radius — nothing above 8px except pills ──────────────────────── */
+  /* ── Radius: nothing above 8px except pills ──────────────────────── */
   --radius-xs: 2px; /* inline code, tags */
   --radius-sm: 4px; /* buttons, inputs */
   --radius-md: 6px; /* cards, code blocks */
   --radius-lg: 8px; /* terminal window only */
   --radius-pill: 999px; /* status pill only */
 
-  /* ── Border — 1px everywhere ──────────────────────────────────────── */
+  /* ── Border: 1px everywhere ──────────────────────────────────────── */
   --border-w: 1px;
   --border-w-focus: 2px;
   --focus-offset: 2px;
@@ -90,7 +90,7 @@
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   2a. SEMANTIC COLOUR — DARK (default)
+   2a. SEMANTIC COLOUR: DARK (default)
    ══════════════════════════════════════════════════════════════════════ */
 
 html,
@@ -104,20 +104,20 @@ html[data-theme='dark'] {
   --c-border: #1e293b;
   --c-border-strong: #334155;
 
-  --c-text: #f8fafc; /* 19.28 on bg — AAA */
-  --c-text-muted: #94a3b8; /*  7.87 on bg — AAA */
+  --c-text: #f8fafc; /* 19.28 on bg: AAA */
+  --c-text-muted: #94a3b8; /*  7.87 on bg: AAA */
   /* --c-text-dim FAILS AA for text (4.24 on bg, 3.91 on surface).
      Clears 3:1, so it is legal for decorative rules, disabled fills,
      icons >= 24px and >= 19px-bold text. Never body copy. */
   --c-text-dim: #64748b;
 
-  --c-accent: #22c55e; /*  8.85 on bg — AAA */
+  --c-accent: #22c55e; /*  8.85 on bg: AAA */
   --c-accent-hover: #16a34a; /* CTA *fill* hover; text on it = 4.52 */
-  --c-accent-link-h: #4ade80; /* 11.58 — text-link hover must go LIGHTER */
+  --c-accent-link-h: #4ade80; /* 11.58; text-link hover must go LIGHTER */
   --c-accent-quiet: rgba(34, 197, 94, 0.1);
   --c-on-accent: #052e16;
 
-  --c-error: #ef4444; /* 5.36 on bg; 4.54 on elevated — see note below */
+  --c-error: #ef4444; /* 5.36 on bg; 4.54 on elevated (see below) */
   --c-error-quiet: rgba(239, 68, 68, 0.1);
   --c-warn: #f59e0b;
   --c-warn-quiet: rgba(245, 158, 11, 0.1);
@@ -137,7 +137,7 @@ html[data-theme='dark'] {
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   2b. SEMANTIC COLOUR — LIGHT (derived, not inverted)
+   2b. SEMANTIC COLOUR: LIGHT (derived, not inverted)
    ══════════════════════════════════════════════════════════════════════ */
 
 html[data-theme='light'] {
@@ -150,11 +150,11 @@ html[data-theme='light'] {
   --c-border: #e7e5e4;
   --c-border-strong: #d6d3d1;
 
-  --c-text: #1c1917; /* 16.74 on bg — AAA */
-  --c-text-muted: #57534e; /*  7.30 on bg — AAA */
+  --c-text: #1c1917; /* 16.74 on bg: AAA */
+  --c-text-muted: #57534e; /*  7.30 on bg: AAA */
   --c-text-dim: #78716c; /* FAILS on bg-alt (4.40). Decorative only. */
 
-  /* #22C55E is 2.28:1 on white — unusable. #15803D is the lightest green
+  /* #22C55E is 2.28:1 on white, unusable. #15803D is the lightest green
      that clears 4.5:1 on all three light surfaces (5.02 / 4.80 / 4.60). */
   --c-accent: #15803d;
   --c-accent-hover: #166534; /* 7.13 on white */
@@ -198,7 +198,7 @@ html[data-theme='light'] {
   --ifm-color-primary-lighter: var(--c-accent-link-h);
   --ifm-color-primary-lightest: var(--c-accent-link-h);
 
-  /* Status — drives admonitions and badges */
+  /* Status: drives admonitions and badges */
   --ifm-color-success: var(--c-accent);
   --ifm-color-danger: var(--c-error);
   --ifm-color-warning: var(--c-warn);
@@ -219,7 +219,7 @@ html[data-theme='light'] {
   --ifm-card-background-color: var(--c-surface);
   --ifm-hover-overlay: var(--c-accent-quiet);
 
-  /* Emphasis ramp — Infima uses 100/200/300 for rules, 600+ for text */
+  /* Emphasis ramp: Infima uses 100/200/300 for rules, 600+ for text */
   --ifm-color-emphasis-0: var(--c-bg);
   --ifm-color-emphasis-100: var(--c-bg-alt);
   --ifm-color-emphasis-200: var(--c-border);
@@ -264,7 +264,7 @@ html[data-theme='light'] {
   --ifm-link-decoration: none;
   --ifm-link-hover-decoration: underline;
 
-  /* Geometry — depth comes from surface steps plus a hairline, not shadow */
+  /* Geometry. Depth comes from surface steps plus a hairline, not shadow */
   --ifm-global-radius: var(--radius-md);
   --ifm-global-border-width: var(--border-w);
   --ifm-global-spacing: var(--space-4);
@@ -274,7 +274,7 @@ html[data-theme='light'] {
   --ifm-global-shadow-md: none;
   --ifm-global-shadow-tl: none;
 
-  /* Transitions — replaces the old global `*` transition rule */
+  /* Transitions: replaces the old global `*` transition rule */
   --ifm-transition-fast: var(--dur-fast);
   --ifm-transition-slow: var(--dur-base);
   --ifm-transition-timing-default: var(--ease);
@@ -400,7 +400,7 @@ html[data-theme='light'] {
   --ifm-scrollbar-thumb-background-color: var(--c-border-strong);
   --ifm-scrollbar-thumb-hover-background-color: var(--c-text-dim);
 
-  /* Search input — mapped now so a future search plugin inherits the system */
+  /* Search input: mapped now so a future search plugin inherits the system */
   --ifm-navbar-search-input-background-color: var(--c-elevated);
   --ifm-navbar-search-input-color: var(--c-text);
   --ifm-navbar-search-input-placeholder-color: var(--c-text-muted);

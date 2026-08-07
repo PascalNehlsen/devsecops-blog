@@ -1,24 +1,24 @@
 # Contributing
 
-This repo powers [docs.pascal-nehlsen.de](https://docs.pascal-nehlsen.de/). It is a
+This repo powers [pascal-nehlsen.de](https://pascal-nehlsen.de/). It is a
 personal portfolio, but the workflow is documented here so contributions (and future
 me) stay consistent.
 
 ## Local workflow
 
 ```bash
-npm install
-npm start          # dev server with hot reload at http://localhost:3000
+pnpm install
+pnpm start          # dev server with hot reload at http://localhost:3000
 ```
 
 Before opening a PR:
 
 ```bash
-npm run build      # MUST pass — onBrokenLinks is set to "throw"
-npm run typecheck  # tsc
+pnpm run build      # MUST pass. onBrokenLinks is "throw"
+pnpm run typecheck  # tsc
 ```
 
-A green `npm run build` is the hard gate: it fails on any broken internal link.
+A green `pnpm run build` is the hard gate: it fails on any broken internal link.
 
 ## Branching & commits
 
@@ -29,7 +29,7 @@ A green `npm run build` is the hard gate: it fails on any broken internal link.
 
 ## Adding a project
 
-Edit **`src/data/projects.js`** — do not hand-edit the homepage layout.
+Edit **`src/data/projects.js`**. Do not hand-edit the homepage layout.
 
 ```js
 {
@@ -82,8 +82,10 @@ the sidebar label/position for a new topic folder.
 
 ## Checklist before merge
 
-- [ ] `npm run build` passes (no broken links)
-- [ ] `npm run typecheck` passes
+- [ ] `pnpm run build` passes (no broken links)
+- [ ] `pnpm run typecheck` passes
+- [ ] `pnpm run check:no-third-party` passes (no external hosts in the build)
+- [ ] `pnpm run audit` passes (no unaccepted high advisories)
 - [ ] Light **and** dark mode look correct
 - [ ] New links resolve; external links open the right target
 - [ ] Content proofread

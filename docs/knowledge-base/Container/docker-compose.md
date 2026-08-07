@@ -7,7 +7,7 @@ sidebar_position: 3
 
 # Simplifying Multi-Container Applications with Docker Compose
 
-As applications grow more complex, you often need multiple services running in separate containers—such as a database, backend, and frontend. Managing these services manually with `docker` run can quickly become overwhelming. Enter Docker Compose, a tool designed to simplify the management of multi-container Docker applications.
+As applications grow more complex, you often need multiple services running in separate containers, such as a database, backend, and frontend. Managing these services manually with `docker` run can quickly become overwhelming. Enter Docker Compose, a tool designed to simplify the management of multi-container Docker applications.
 
 ## What is Docker Compose?
 

@@ -3,7 +3,7 @@ title: "SLO-Driven Automated Rollback: Let the Metrics Pull the Cord"
 slug: slo-driven-automated-rollback
 date: "2026-03-24"
 authors: [pascal]
-description: "Wiring Prometheus, Grafana and structured logging into a deployment pipeline so an SLO breach triggers rollback automatically — and why a rollback without an SLO behind it is a button nobody trusts."
+description: "Wiring Prometheus, Grafana and structured logging into a deployment pipeline so an SLO breach triggers rollback automatically, and why a rollback without an SLO behind it is a button nobody trusts."
 keywords: [slo, automated rollback, prometheus, grafana, deployment safety]
 tags: [observability, cicd, devsecops]
 image: /img/og/slo-driven-automated-rollback.png
@@ -48,8 +48,8 @@ No separate, drifting "rollback logic".
 
 ## The rollback gate
 
-After a deploy promotes a new revision, the pipeline enters a **bake window** — say five minutes
-— during which it watches the SLO queries:
+After a deploy promotes a new revision, the pipeline enters a **bake window**, say five minutes,
+during which it watches the SLO queries:
 
 1. Promote new revision, shift traffic.
 2. Poll the SLO expressions across the bake window.
@@ -58,11 +58,11 @@ After a deploy promotes a new revision, the pipeline enters a **bake window** �
 4. Emit a structured event: revision, breached SLO, observed value, timestamp.
 
 Because rollback is just "route traffic back to the previous known-good revision", it's fast and
-boring — exactly what you want at 02:00.
+boring, which is exactly what you want at 02:00.
 
 ## Guard against false alarms
 
-Automation that rolls back on noise is worse than no automation — it erodes trust. Two guards:
+Automation that rolls back on noise is worse than no automation. It erodes trust. Two guards:
 
 - **Burn-rate, not instantaneous value**: a single spike shouldn't trigger; sustained burn should.
 - **Minimum traffic threshold**: don't compute an error *rate* on three requests.
@@ -70,7 +70,7 @@ Automation that rolls back on noise is worse than no automation — it erodes tr
 ## The result
 
 With SLOs defined as measurable queries and a bake-window rollback gate, the deployment error
-rate stayed **under 2%** — and the mean time to detect critical failures dropped to **under five
+rate stayed **under 2%**, and the mean time to detect critical failures dropped to **under five
 minutes**, because detection and remediation were the same automated step.
 
 ## Takeaways

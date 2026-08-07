@@ -50,6 +50,6 @@ export const skillGroups = [
 ];
 
 // Latest posts are no longer listed here. They come from the blog plugin at
-// build time via plugins/latest-posts — see BlogPreview.js. Duplicating them
+// build time via plugins/latest-posts (see BlogPreview.js). Duplicating them
 // meant the homepage drifted from blog/ and, worse, that re-slugging a post
 // broke the build.
