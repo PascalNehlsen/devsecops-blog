@@ -40,6 +40,23 @@ const EXCEPTIONS = [
     reason:
       'Reached only through copy-webpack-plugin and css-minimizer-webpack-plugin inside @docusaurus/bundler, i.e. at build time, serialising our own build output rather than untrusted input. The only remediation npm offers is downgrading @docusaurus/core to 3.5.2, which is a downgrade, not a fix. Revisit when Docusaurus ships a bundler release that bumps it.',
   },
+  // image-size has two open high advisories and one package, so it takes two
+  // entries: the block below matches on package name, but the drift check
+  // pairs one GHSA per exception with allow-ghsas in security.yml.
+  {
+    package: 'image-size',
+    ghsa: 'GHSA-w3rx-r6r6-pgpr',
+    expires: '2026-11-07',
+    reason:
+      'Pulled by @docusaurus/mdx-loader to read image dimensions at build time, from the repo\'s own committed images, not from anything an attacker supplies. The ICNS parser DoS therefore has no reachable path. image-size 2.0.2 is the latest release and no version fixes it yet, so there is nothing to bump to. Revisit when image-size ships a patched release.',
+  },
+  {
+    package: 'image-size',
+    ghsa: 'GHSA-5p2g-fcmc-qvqq',
+    expires: '2026-11-07',
+    reason:
+      'Same package, same build-time-only reachability from our own images: the JXL/HEIF parser DoS has no untrusted-input path either, and no fixed release exists yet.',
+  },
 ];
 
 function audit() {
