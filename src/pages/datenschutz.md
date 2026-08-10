@@ -6,19 +6,12 @@ hide_table_of_contents: true
 
 # Datenschutzerklärung
 
-:::warning[Entwurf: vor Veröffentlichung ausfüllen und prüfen lassen]
-Dieses Gerüst deckt die Verarbeitungen ab, die auf dieser Seite tatsächlich
-stattfinden. `TODO`-Stellen ergänzen und den Text rechtlich prüfen lassen,
-insbesondere den Abschnitt zu Cloudflare, sobald der Proxy aktiv ist. Der
-Stand unten muss beim Veröffentlichen aktualisiert werden.
-:::
-
-**Stand:** 7. August 2026
+**Stand:** 10. August 2026
 
 ## Verantwortlicher
 
-Pascal Nehlsen
-Am Stadtwald 18, 42897 Remscheid
+Pascal Nehlsen<br />
+Am Stadtwald 18, 42897 Remscheid<br />
 E-Mail: [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
 
 ## Grundsatz: was diese Seite *nicht* tut
@@ -57,29 +50,6 @@ unter dem EU-US Data Privacy Framework zertifiziert.
 
 Datenschutzerklärung von GitHub:
 [docs.github.com/site-policy/privacy-policies/github-privacy-statement](https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement)
-
-## Content Delivery Network: Cloudflare
-
-:::note
-Diesen Abschnitt erst veröffentlichen, wenn der Cloudflare-Proxy tatsächlich
-aktiv ist. Vorher ersatzlos streichen.
-:::
-
-Zur Auslieferung und zur Absicherung der Seite wird Cloudflare eingesetzt,
-ein Dienst der Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107,
-USA. Cloudflare ist als Reverse Proxy zwischengeschaltet und verarbeitet daher
-den gesamten Datenverkehr, insbesondere IP-Adresse, Zeitpunkt des Zugriffs und
-angeforderte Ressource. Zweck ist die Auslieferungsgeschwindigkeit sowie die
-Abwehr von Angriffen.
-
-**Rechtsgrundlage:** Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an
-Verfügbarkeit und Sicherheit).
-
-TODO: Auftragsverarbeitungsvertrag mit Cloudflare abschließen und hier
-erwähnen.
-
-Datenschutzerklärung von Cloudflare:
-[cloudflare.com/privacypolicy](https://www.cloudflare.com/privacypolicy/)
 
 ## Kontaktaufnahme per E-Mail
 

@@ -6,30 +6,16 @@ hide_table_of_contents: true
 
 # Impressum
 
-:::warning[Entwurf: vor Veröffentlichung ausfüllen und prüfen lassen]
-Dieses Gerüst listet die Felder, die § 5 DDG (früher § 5 TMG) verlangt. Die
-mit `TODO` markierten Angaben müssen ergänzt werden. Ob und in welchem Umfang
-eine Impressumspflicht besteht, hängt davon ab, ob die Seite als
-geschäftsmäßig gilt. Bei einem beruflichen Portfolio wird das üblicherweise
-bejaht. Rechtsverbindliche Prüfung durch eine Anwältin oder einen Anwalt
-ersetzt dieser Text nicht.
-:::
-
 ## Angaben gemäß § 5 DDG
 
-Pascal Nehlsen
-Am Stadtwald 18
-42897 Remscheid
+Pascal Nehlsen<br />
+Am Stadtwald 18<br />
+42897 Remscheid<br />
 Deutschland
 
 ## Kontakt
 
 E-Mail: [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
-
-## Umsatzsteuer-Identifikationsnummer
-
-TODO: falls vorhanden, gemäß § 27 a UStG. Andernfalls diesen Abschnitt
-entfernen.
 
 ## Verantwortlich für den Inhalt
 
