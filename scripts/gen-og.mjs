@@ -182,48 +182,77 @@ function card({ title, description, tags = [] }) {
   };
 }
 
-async function render(spec, outFile) {
+// outDir defaults to OUT_DIR so the English cards keep landing in
+// static/img/og/; the German pass points it at static/img/og/de/.
+async function render(spec, outFile, outDir = OUT_DIR) {
   const svg = await satori(card(spec), { width: 1200, height: 630, fonts });
   const png = new Resvg(svg, {
     fitTo: { mode: 'width', value: 1200 },
   })
     .render()
     .asPng();
-  writeFileSync(join(OUT_DIR, outFile), png);
-  console.log(`  ${outFile}`);
+  mkdirSync(outDir, { recursive: true });
+  writeFileSync(join(outDir, outFile), png);
+  console.log(`  ${outFile.replace(ROOT, '')}`);
+}
+
+// The Latin subsets of both faces carry ä/ö/ü/ß, so the German titles render
+// without a second font. Cards for a locale are generated from that locale's
+// own blog posts, so the shared title on a card matches the page it fronts.
+function cardsForBlog(blogDir, outDir, defaultCard) {
+  const posts = readdirSync(blogDir).filter(
+    (f) => f.endsWith('.md') || f.endsWith('.mdx')
+  );
+  return { blogDir, outDir, defaultCard, posts };
 }
 
 async function main() {
   mkdirSync(OUT_DIR, { recursive: true });
   console.log('Generating OG images:');
 
-  await render(
+  const locales = [
     {
-      title: 'Pascal Nehlsen',
-      description:
-        'Platform and security engineering. Terraform golden paths on GCP, SLO-gated deploys, agentic runbooks with human approval.',
-      tags: ['platform', 'security'],
-    },
-    'default.png'
-  );
-
-  const blogDir = join(ROOT, 'blog');
-  const posts = readdirSync(blogDir).filter(
-    (f) => f.endsWith('.md') || f.endsWith('.mdx')
-  );
-
-  for (const file of posts) {
-    const { data } = matter(readFileSync(join(blogDir, file), 'utf8'));
-    if (!data.title) continue;
-    const slug = data.slug || basename(file).replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.mdx?$/, '');
-    await render(
-      {
-        title: data.title,
-        description: data.description ?? '',
-        tags: Array.isArray(data.tags) ? data.tags : [],
+      ...cardsForBlog(join(ROOT, 'blog'), OUT_DIR),
+      defaultCard: {
+        title: 'Pascal Nehlsen',
+        description:
+          'Platform and security engineering. Terraform golden paths on GCP, SLO-gated deploys, agentic runbooks with human approval.',
+        tags: ['platform', 'security'],
       },
-      `${slug}.png`
-    );
+    },
+    {
+      ...cardsForBlog(
+        join(ROOT, 'i18n/de/docusaurus-plugin-content-blog'),
+        join(OUT_DIR, 'de')
+      ),
+      defaultCard: {
+        title: 'Pascal Nehlsen',
+        description:
+          'Platform- und Security-Engineering. Terraform Golden Paths auf GCP, SLO-gesteuerte Deploys, agentische Runbooks mit menschlicher Freigabe.',
+        tags: ['platform', 'security'],
+      },
+    },
+  ];
+
+  for (const { blogDir, outDir, defaultCard, posts } of locales) {
+    await render(defaultCard, 'default.png', outDir);
+
+    for (const file of posts) {
+      const { data } = matter(readFileSync(join(blogDir, file), 'utf8'));
+      if (!data.title) continue;
+      const slug =
+        data.slug ||
+        basename(file).replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.mdx?$/, '');
+      await render(
+        {
+          title: data.title,
+          description: data.description ?? '',
+          tags: Array.isArray(data.tags) ? data.tags : [],
+        },
+        `${slug}.png`,
+        outDir
+      );
+    }
   }
 }
 

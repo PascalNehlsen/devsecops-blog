@@ -1,123 +1,103 @@
 ---
-title: Datenschutzerklärung
-description: Informationen zur Verarbeitung personenbezogener Daten nach Art. 13 DSGVO.
+title: Privacy Policy
+description: How personal data is processed on this site, under Art. 13 GDPR.
 hide_table_of_contents: true
 ---
 
-# Datenschutzerklärung
+# Privacy Policy
 
-:::warning[Entwurf: vor Veröffentlichung ausfüllen und prüfen lassen]
-Dieses Gerüst deckt die Verarbeitungen ab, die auf dieser Seite tatsächlich
-stattfinden. `TODO`-Stellen ergänzen und den Text rechtlich prüfen lassen,
-insbesondere den Abschnitt zu Cloudflare, sobald der Proxy aktiv ist. Der
-Stand unten muss beim Veröffentlichen aktualisiert werden.
+:::info[The German version is the binding one]
+The version that counts legally is the German one:
+**[Datenschutzerklärung](pathname:///de/datenschutz)**. What follows is a
+translation for readers who do not read German. Where the two differ, the
+German text governs.
 :::
 
-**Stand:** 7. August 2026
+{/* pathname:// is deliberate: a build only knows the routes of the locale it
+    is building, so a plain cross-locale link fails the broken-link check. */}
 
-## Verantwortlicher
+**Effective:** 10 August 2026
 
-Pascal Nehlsen
-Am Stadtwald 18, 42897 Remscheid
-E-Mail: [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
+## Controller
 
-## Grundsatz: was diese Seite *nicht* tut
+Pascal Nehlsen<br />
+Am Stadtwald 18, 42897 Remscheid, Germany<br />
+Email: [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
 
-Diese Seite ist statisch. Es gibt kein Analyse-Tool, kein Tracking-Pixel,
-keine Cookies zu Werbe- oder Analysezwecken und keine Einbindung von
-Drittanbieter-Ressourcen:
+## The principle: what this site does *not* do
 
-- **Schriftarten** werden von diesem Server ausgeliefert, nicht von Google
-  Fonts. Es findet also keine Verbindung zu `fonts.gstatic.com` statt.
-- **Die Suche** läuft vollständig im Browser über einen mitgelieferten Index.
-  Suchanfragen verlassen das Gerät nicht.
-- **Es sind keine Social-Media-Plugins eingebunden.** Links zu LinkedIn und
-  GitHub sind normale Links; ein Aufruf findet erst statt, wenn Sie klicken.
+This site is static. There is no analytics tool, no tracking pixel, no cookies
+for advertising or analytics, and no third-party resource embedded anywhere:
 
-Ein einziges technisches Cookie beziehungsweise ein `localStorage`-Eintrag
-wird gesetzt: die Auswahl zwischen hellem und dunklem Erscheinungsbild. Dieser
-Eintrag enthält keine personenbezogenen Daten und wird nicht übertragen.
+- **Fonts** are served from this server, not from Google Fonts. No connection
+  to `fonts.gstatic.com` takes place.
+- **Search** runs entirely in your browser against an index shipped with the
+  page. Queries never leave your device.
+- **No social media plugins are embedded.** The links to LinkedIn and GitHub
+  are ordinary links; a request happens only once you click.
+
+A single technical cookie, or rather a `localStorage` entry, is set: your
+choice between the light and dark appearance. It contains no personal data and
+is never transmitted.
 
 ## Hosting: GitHub Pages
 
-Diese Website wird über GitHub Pages bereitgestellt, einen Dienst der GitHub
-Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA.
+This website is delivered via GitHub Pages, a service of GitHub Inc., 88 Colin
+P. Kelly Jr. Street, San Francisco, CA 94107, USA.
 
-Beim Aufruf der Seite verarbeitet GitHub in Server-Logfiles unter anderem:
-IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Datei,
-übertragene Datenmenge, Browsertyp und Betriebssystem sowie die zuvor besuchte
-Seite. Diese Verarbeitung ist technisch erforderlich, um die Seite
-auszuliefern.
+When the site is accessed, GitHub processes the following in server log files,
+among others: IP address, date and time of access, the file requested, the
+volume of data transferred, browser type and operating system, and the
+previously visited page. This processing is technically necessary in order to
+deliver the site.
 
-**Rechtsgrundlage:** Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an
-einer technisch fehlerfreien Bereitstellung).
+**Legal basis:** Art. 6 (1) (f) GDPR (legitimate interest in technically
+error-free provision).
 
-**Drittlandtransfer:** GitHub verarbeitet Daten auch in den USA. GitHub ist
-unter dem EU-US Data Privacy Framework zertifiziert.
+**Third-country transfer:** GitHub also processes data in the USA. GitHub is
+certified under the EU-US Data Privacy Framework.
 
-Datenschutzerklärung von GitHub:
+GitHub's privacy statement:
 [docs.github.com/site-policy/privacy-policies/github-privacy-statement](https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement)
 
-## Content Delivery Network: Cloudflare
+## Contact by email
 
-:::note
-Diesen Abschnitt erst veröffentlichen, wenn der Cloudflare-Proxy tatsächlich
-aktiv ist. Vorher ersatzlos streichen.
-:::
+If you write to me, I process your email address and the content of your
+message in order to answer it.
 
-Zur Auslieferung und zur Absicherung der Seite wird Cloudflare eingesetzt,
-ein Dienst der Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107,
-USA. Cloudflare ist als Reverse Proxy zwischengeschaltet und verarbeitet daher
-den gesamten Datenverkehr, insbesondere IP-Adresse, Zeitpunkt des Zugriffs und
-angeforderte Ressource. Zweck ist die Auslieferungsgeschwindigkeit sowie die
-Abwehr von Angriffen.
+**Legal basis:** Art. 6 (1) (b) GDPR for contract-related enquiries, otherwise
+Art. 6 (1) (f) GDPR.
 
-**Rechtsgrundlage:** Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an
-Verfügbarkeit und Sicherheit).
+**Retention:** until the matter is concluded and no statutory retention periods
+apply.
 
-TODO: Auftragsverarbeitungsvertrag mit Cloudflare abschließen und hier
-erwähnen.
+## RSS feed
 
-Datenschutzerklärung von Cloudflare:
-[cloudflare.com/privacypolicy](https://www.cloudflare.com/privacypolicy/)
+Fetching the RSS feed produces the same server log files as an ordinary page
+view. No processing beyond that takes place; in particular there are no
+tracking pixels in the feed.
 
-## Kontaktaufnahme per E-Mail
+## Your rights
 
-Wenn Sie mir schreiben, verarbeite ich Ihre E-Mail-Adresse und den Inhalt
-Ihrer Nachricht, um sie zu beantworten.
+Under the GDPR you have the right of access (Art. 15), rectification (Art. 16),
+erasure (Art. 17), restriction of processing (Art. 18), data portability
+(Art. 20), and **to object to processing based on legitimate interests**
+(Art. 21).
 
-**Rechtsgrundlage:** Art. 6 Abs. 1 lit. b DSGVO bei vertragsbezogenen
-Anfragen, sonst Art. 6 Abs. 1 lit. f DSGVO.
+An informal message to the email address above is enough to exercise them.
 
-**Speicherdauer:** bis der Vorgang abgeschlossen ist und keine gesetzlichen
-Aufbewahrungsfristen entgegenstehen.
+Independently of that, you have the right to lodge a complaint with a data
+protection supervisory authority (Art. 77 GDPR).
 
-## RSS-Feed
-
-Der Abruf des RSS-Feeds erzeugt dieselben Server-Logfiles wie ein normaler
-Seitenaufruf. Eine darüber hinausgehende Verarbeitung findet nicht statt; es
-gibt insbesondere keine Zählpixel im Feed.
-
-## Ihre Rechte
-
-Sie haben nach der DSGVO das Recht auf Auskunft (Art. 15), Berichtigung
-(Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18),
-Datenübertragbarkeit (Art. 20) sowie **Widerspruch gegen Verarbeitungen auf
-Grundlage berechtigter Interessen** (Art. 21).
-
-Zur Ausübung genügt eine formlose Nachricht an die oben genannte
-E-Mail-Adresse.
-
-Unabhängig davon steht Ihnen ein Beschwerderecht bei einer
-Datenschutz-Aufsichtsbehörde zu (Art. 77 DSGVO).
-
-Zuständig ist die Landesbeauftragte für Datenschutz und Informationsfreiheit
-Nordrhein-Westfalen, Kavalleriestraße 2-4, 40213 Düsseldorf,
+The competent authority is the State Commissioner for Data Protection and
+Freedom of Information of North Rhine-Westphalia (Landesbeauftragte für
+Datenschutz und Informationsfreiheit Nordrhein-Westfalen),
+Kavalleriestraße 2-4, 40213 Düsseldorf,
 [ldi.nrw.de](https://www.ldi.nrw.de/).
 
-## Sicherheitslücken melden
+## Reporting security issues
 
-Wenn Sie ein Sicherheitsproblem an dieser Seite finden, freue ich mich über
-eine Meldung. Die Kontaktdaten stehen in
+If you find a security problem with this site, I would like to hear about it.
+The contact details are in
 [`/.well-known/security.txt`](pathname:///.well-known/security.txt)
-nach RFC 9116.
+per RFC 9116.

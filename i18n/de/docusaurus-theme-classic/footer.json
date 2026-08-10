@@ -1,0 +1,50 @@
+{
+  "link.title.Docs": {
+    "message": "Docs",
+    "description": "The title of the footer links column with title=Docs in the footer"
+  },
+  "link.title.Elsewhere": {
+    "message": "Anderswo",
+    "description": "The title of the footer links column with title=Elsewhere in the footer"
+  },
+  "link.title.Legal": {
+    "message": "Rechtliches",
+    "description": "The title of the footer links column with title=Legal in the footer"
+  },
+  "link.item.label.Projects": {
+    "message": "Projekte",
+    "description": "The label of footer link with label=Projects linking to /docs/projects/intro"
+  },
+  "link.item.label.Knowledge Base": {
+    "message": "Wissensbasis",
+    "description": "The label of footer link with label=Knowledge Base linking to /docs/knowledge-base/intro"
+  },
+  "link.item.label.GitHub": {
+    "message": "GitHub",
+    "description": "The label of footer link with label=GitHub linking to https://github.com/PascalNehlsen/"
+  },
+  "link.item.label.LinkedIn": {
+    "message": "LinkedIn",
+    "description": "The label of footer link with label=LinkedIn linking to https://www.linkedin.com/in/pascal-nehlsen"
+  },
+  "link.item.label.RSS": {
+    "message": "RSS",
+    "description": "The label of footer link with label=RSS linking to pathname:///blog/rss.xml"
+  },
+  "link.item.label.Legal Notice": {
+    "message": "Impressum",
+    "description": "The label of footer link with label=Legal Notice linking to /impressum"
+  },
+  "link.item.label.Privacy": {
+    "message": "Datenschutz",
+    "description": "The label of footer link with label=Privacy linking to /datenschutz"
+  },
+  "link.item.label.security.txt": {
+    "message": "security.txt",
+    "description": "The label of footer link with label=security.txt linking to pathname:///.well-known/security.txt"
+  },
+  "copyright": {
+    "message": "© 2026 Pascal Nehlsen",
+    "description": "The footer copyright"
+  }
+}

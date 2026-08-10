@@ -2,9 +2,18 @@ User-agent: *
 Allow: /
 
 # Generated surfaces. No value in indexing these, and they dilute the
-# real pages in the index.
+# real pages in the index. Listed per locale rather than with a wildcard:
+# a two-language site is short enough to spell out, and a wildcard that
+# accidentally matches a real path fails silently.
 Disallow: /blog/tags/
 Disallow: /blog/page/
 Disallow: /search
+Disallow: /de/blog/tags/
+Disallow: /de/blog/page/
+Disallow: /de/search
 
+# One sitemap per locale: the sitemap plugin runs once per build and writes
+# into that locale's output directory. Without the second line the German
+# half of the site has no discoverable sitemap at all.
 Sitemap: https://pascal-nehlsen.de/sitemap.xml
+Sitemap: https://pascal-nehlsen.de/de/sitemap.xml

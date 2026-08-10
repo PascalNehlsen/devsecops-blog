@@ -87,16 +87,20 @@ pnpm install
 
 # Start dev server (http://localhost:3000)
 pnpm start
+
+# Start the dev server in German (http://localhost:3000/de/)
+pnpm run start:de
 ```
 
 Other scripts:
 
 ```bash
-pnpm run build                # Production build into build/
+pnpm run build                # Production build into build/ (both locales)
 pnpm run serve                # Serve the production build locally
 pnpm run typecheck            # tsc, type-check the config
 pnpm run clear                # Clear the Docusaurus cache
 pnpm run og                   # Regenerate Open Graph cards into static/img/og/
+pnpm run write-translations:de # Extract new UI strings into i18n/de/code.json
 pnpm run audit                # Dependency gate: high and above, exceptions expire
 pnpm run check:no-third-party # Fails if the build references an external host
 ```
@@ -119,10 +123,43 @@ pnpm run check:no-third-party # Fails if the build references an external host
 │   │   └── homepage.js       # Stats, skill groups, latest posts
 │   ├── css/custom.css        # Global theme
 │   └── pages/index.js        # Homepage
-├── docusaurus.config.ts      # Site config (URL, navbar, footer, theme)
+├── i18n/de/                  # German locale (see below)
+├── docusaurus.config.ts      # Site config (URL, navbar, footer, theme, i18n)
 ├── sidebars.ts               # Docs sidebar
 └── CNAME                     # Custom domain
 ```
+
+## Languages
+
+The site builds in English (default, at the root) and German (under `/de/`).
+`pnpm run build` builds both in one pass. Untranslated Markdown falls back to
+the English original, so a missing German file is a silent fallback, not a
+build error.
+
+```
+i18n/de/
+├── code.json                                  # UI strings from src/ (translate())
+├── docusaurus-theme-classic/{navbar,footer}.json
+├── docusaurus-plugin-content-blog/            # German blog: copy of blog/, same filenames
+├── docusaurus-plugin-content-docs/current/    # German docs: mirror of docs/
+└── docusaurus-plugin-content-pages/           # German Impressum + Datenschutz
+```
+
+Rules that are easy to get wrong:
+
+- **Keep filenames and slugs identical** to the English source. The locale
+  switcher relies on it, and so does the redirect table.
+- **Images are not duplicated.** German docs reference the images under `docs/`
+  with a relative path; there is no `i18n/de/**/assets`.
+- **`_category_.yaml` stays English-only.** Category labels are translated
+  through `docusaurus-plugin-content-docs/current.json`, not by copying the
+  YAML.
+- **The legal pages invert the direction.** The German Impressum/Datenschutz
+  are the originals and the binding versions; `src/pages/*.md` are English
+  translations with a precedence clause.
+- After adding a `translate()`/`<Translate>` call in `src/`, run
+  `pnpm run write-translations:de` to extract the new id, then translate it in
+  `code.json`.
 
 ## Content
 

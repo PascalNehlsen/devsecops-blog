@@ -1,73 +1,65 @@
 ---
-title: Impressum
-description: Angaben gemäß § 5 DDG.
+title: Legal Notice
+description: Provider identification under § 5 DDG (German Digital Services Act).
 hide_table_of_contents: true
 ---
 
-# Impressum
+# Legal Notice
 
-:::warning[Entwurf: vor Veröffentlichung ausfüllen und prüfen lassen]
-Dieses Gerüst listet die Felder, die § 5 DDG (früher § 5 TMG) verlangt. Die
-mit `TODO` markierten Angaben müssen ergänzt werden. Ob und in welchem Umfang
-eine Impressumspflicht besteht, hängt davon ab, ob die Seite als
-geschäftsmäßig gilt. Bei einem beruflichen Portfolio wird das üblicherweise
-bejaht. Rechtsverbindliche Prüfung durch eine Anwältin oder einen Anwalt
-ersetzt dieser Text nicht.
+:::info[The German version is the binding one]
+German law requires this page, and the version that counts legally is the
+German one: **[Impressum](pathname:///de/impressum)**. What follows is a
+translation for readers who do not read German. Where the two differ, the
+German text governs.
 :::
 
-## Angaben gemäß § 5 DDG
+{/* pathname:// is deliberate: a build only knows the routes of the locale it
+    is building, so a plain cross-locale link fails the broken-link check. */}
 
-Pascal Nehlsen
-Am Stadtwald 18
-42897 Remscheid
-Deutschland
+## Provider identification under § 5 DDG
 
-## Kontakt
+Pascal Nehlsen<br />
+Am Stadtwald 18<br />
+42897 Remscheid<br />
+Germany
 
-E-Mail: [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
+## Contact
 
-## Umsatzsteuer-Identifikationsnummer
+Email: [mail@pascal-nehlsen.de](mailto:mail@pascal-nehlsen.de)
 
-TODO: falls vorhanden, gemäß § 27 a UStG. Andernfalls diesen Abschnitt
-entfernen.
+## Responsible for the content
 
-## Verantwortlich für den Inhalt
+Pascal Nehlsen, address as above.
 
-Pascal Nehlsen, Anschrift wie oben.
+## Liability for content
 
-## Haftung für Inhalte
+As a service provider I am responsible for my own content on these pages under
+the general laws, in accordance with § 7 (1) DDG. Under §§ 8 to 10 DDG,
+however, I am not obliged as a service provider to monitor third-party
+information that is transmitted or stored, nor to investigate circumstances
+that indicate unlawful activity.
 
-Als Diensteanbieter bin ich gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen
-Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG bin
-ich als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder
-gespeicherte fremde Informationen zu überwachen oder nach Umständen zu
-forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+Obligations to remove or block the use of information under the general laws
+remain unaffected by this. Liability in this respect is possible only from the
+point at which a concrete infringement becomes known. Should I become aware of
+any such infringement, I will remove the content in question without delay.
 
-Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen
-nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche
-Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten
-Rechtsverletzung möglich. Bei Bekanntwerden entsprechender Rechtsverletzungen
-werde ich diese Inhalte umgehend entfernen.
+## Liability for links
 
-## Haftung für Links
+This site contains links to external third-party websites whose content is
+outside my control. I therefore cannot accept any responsibility for that
+third-party content. The provider or operator of a linked page is always
+responsible for its content.
 
-Diese Seite enthält Links zu externen Websites Dritter, auf deren Inhalte ich
-keinen Einfluss habe. Deshalb kann ich für diese fremden Inhalte auch keine
-Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der
-jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
+The linked pages were checked for possible legal violations at the time they
+were linked. No unlawful content was apparent at that time. Continuous
+monitoring of the content of linked pages is not reasonable without concrete
+indication of an infringement. Should an infringement become known, I will
+remove the link without delay.
 
-Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche
-Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der
-Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der
-verlinkten Seiten ist ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht
-zumutbar. Bei Bekanntwerden von Rechtsverletzungen werde ich derartige Links
-umgehend entfernen.
+## Copyright
 
-## Urheberrecht
+The content and works created by the site operator on these pages are subject
+to German copyright law. Contributions by third parties are marked as such.
 
-Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten
-unterliegen dem deutschen Urheberrecht. Beiträge Dritter sind als solche
-gekennzeichnet.
-
-Codebeispiele in Blogbeiträgen und in der Knowledge Base dürfen frei verwendet
-werden.
+Code samples in blog posts and in the knowledge base may be used freely.

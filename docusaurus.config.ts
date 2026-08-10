@@ -12,6 +12,17 @@ const blogEnabled = true;
 // are generated from it.
 const CANONICAL_URL = 'https://pascal-nehlsen.de';
 
+// Docusaurus builds one locale per pass and exports the locale it is currently
+// building. Anything that must differ per language but is not a translatable
+// string, such as the feed language or an asset path, is derived from these
+// two constants rather than duplicated across two config files.
+const LOCALE = process.env.DOCUSAURUS_CURRENT_LOCALE || 'en';
+// Route paths carry baseUrl, and in a non-default locale baseUrl is '/de/'.
+// Any config option matched against a route path therefore needs this prefix;
+// see the sitemap ignorePatterns below for the case where forgetting it is
+// silent.
+const ROUTE_PREFIX = LOCALE === 'en' ? '' : `/${LOCALE}`;
+
 let DEPLOYMENT_URL = process.env.DEPLOYMENT_URL || CANONICAL_URL;
 let BASE_URL = process.env.BASE_URL || '/';
 
@@ -65,8 +76,11 @@ if (blogEnabled) {
   moreColumn.items.push({
     label: 'RSS',
     // pathname:// is required here: the feed is a generated asset, not a
-    // route, and the broken-link checker cannot resolve it.
-    href: 'pathname:///blog/rss.xml',
+    // route, and the broken-link checker cannot resolve it. It also bypasses
+    // baseUrl, which is why the locale prefix has to be added by hand:
+    // otherwise the German footer advertises the English feed while
+    // /de/blog/rss.xml sits in the build unlinked.
+    href: `pathname://${ROUTE_PREFIX}/blog/rss.xml`,
   });
 }
 
@@ -122,12 +136,21 @@ const config: Config = {
     },
   ],
 
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
+  // English stays the default locale, so every URL that was ever indexed keeps
+  // working and no redirect table is needed for the switch. German lives under
+  // /de/. Untranslated files fall back to the English original silently, which
+  // is what makes it possible to ship the translation in stages.
+  //
+  // The German pages are not a nicety: § 5 DDG and Art. 13 GDPR address a
+  // German audience, and the binding version of a legal notice is the German
+  // one. See src/pages/impressum.md.
   i18n: {
     defaultLocale: 'en',
-    locales: ['en'],
+    locales: ['en', 'de'],
+    localeConfigs: {
+      en: { label: 'English', htmlLang: 'en' },
+      de: { label: 'Deutsch', htmlLang: 'de-DE' },
+    },
   },
 
   plugins: [
@@ -215,9 +238,17 @@ const config: Config = {
         indexDocs: true,
         indexBlog: true,
         indexPages: true,
+        // These two are matched against the route with baseUrl already
+        // stripped (processDocInfos.js), so unlike the sitemap patterns below
+        // they need no locale prefix.
         docsRouteBasePath: '/docs',
         blogRouteBasePath: '/blog',
-        language: ['en'],
+        // One stemmer per build, not both. Each locale build indexes only its
+        // own content, so listing two languages would make the plugin load
+        // lunr.multiLanguage and hand the English index a German stemmer and
+        // German stop words it never needs. Multi-language stemming is
+        // measurably less precise than a single one.
+        language: [LOCALE],
         highlightSearchTermsOnTargetPage: true,
         searchResultLimits: 8,
         searchResultContextMaxLength: 60,
@@ -243,13 +274,22 @@ const config: Config = {
               // A typo can no longer mint a new tag page; see blog/tags.yml.
               onInlineTags: 'throw',
               tags: 'tags.yml',
+              // Feed metadata is not translatable through the i18n JSON
+              // files, so it comes from the locale being built. A German
+              // subscriber gets the German posts with <language>de</language>,
+              // not an English feed under a German URL.
               feedOptions: {
                 type: ['rss', 'atom'],
                 xslt: true,
-                title: 'Pascal Nehlsen, Writing',
+                title:
+                  LOCALE === 'de'
+                    ? 'Pascal Nehlsen, Beiträge'
+                    : 'Pascal Nehlsen, Writing',
                 description:
-                  'Build notes on platform and security engineering.',
-                language: 'en',
+                  LOCALE === 'de'
+                    ? 'Notizen aus der Arbeit an Platform- und Security-Engineering.'
+                    : 'Build notes on platform and security engineering.',
+                language: LOCALE,
                 copyright: `© ${new Date().getFullYear()} Pascal Nehlsen`,
                 limit: false,
               },
@@ -271,13 +311,17 @@ const config: Config = {
           // Google ignores changefreq, and a uniform priority conveys nothing.
           changefreq: null,
           priority: null,
+          // Matched against the full route path, which carries baseUrl. In the
+          // German build that is '/de/', so a bare '/blog/tags/**' silently
+          // misses '/de/blog/tags/terraform' and every excluded page would
+          // reappear in the sitemap for half the site. Hence ROUTE_PREFIX.
           ignorePatterns: [
-            '/blog/tags/**',
-            '/blog/archive',
-            '/blog/authors/**',
-            '/blog/page/**',
-            '/search',
-            '/docs/category/**',
+            `${ROUTE_PREFIX}/blog/tags/**`,
+            `${ROUTE_PREFIX}/blog/archive`,
+            `${ROUTE_PREFIX}/blog/authors/**`,
+            `${ROUTE_PREFIX}/blog/page/**`,
+            `${ROUTE_PREFIX}/search`,
+            `${ROUTE_PREFIX}/docs/category/**`,
           ],
         },
       } satisfies Preset.Options,
@@ -290,13 +334,17 @@ const config: Config = {
       disableSwitch: false,
       respectPrefersColorScheme: false,
     },
-    image: 'img/og/default.png',
+    // Docs carry no per-page `image`, so this default card is what most pages
+    // share. The German one exists because the card renders the title.
+    image: LOCALE === 'de' ? 'img/og/de/default.png' : 'img/og/default.png',
     metadata: [
       { name: 'author', content: 'Pascal Nehlsen' },
       {
         name: 'keywords',
         content:
-          'platform engineering, devsecops, terraform, gcp, aws, ci/cd, observability, site reliability',
+          LOCALE === 'de'
+            ? 'platform engineering, devsecops, terraform, gcp, aws, ci/cd, observability, plattform-engineering, cloud-sicherheit, automatisierung'
+            : 'platform engineering, devsecops, terraform, gcp, aws, ci/cd, observability, site reliability',
       },
       { name: 'twitter:card', content: 'summary_large_image' },
     ],
@@ -317,6 +365,11 @@ const config: Config = {
           to: 'blog',
           label: 'Blog',
           position: 'left',
+        },
+        // Left of GitHub, so the outbound link stays the rightmost item.
+        {
+          type: 'localeDropdown',
+          position: 'right',
         },
         {
           href: 'https://github.com/PascalNehlsen/',
@@ -347,8 +400,11 @@ const config: Config = {
         {
           title: 'Legal',
           items: [
-            { label: 'Impressum', to: '/impressum' },
-            { label: 'Datenschutz', to: '/datenschutz' },
+            // The routes keep their German names because they were already
+            // linked and indexed under them. The labels follow the locale:
+            // these strings are translated back in i18n/de/.../footer.json.
+            { label: 'Legal Notice', to: '/impressum' },
+            { label: 'Privacy', to: '/datenschutz' },
             {
               label: 'security.txt',
               href: 'pathname:///.well-known/security.txt',

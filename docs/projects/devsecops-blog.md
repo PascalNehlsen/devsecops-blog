@@ -128,8 +128,44 @@ would force `font-src` to allow an external host.
 **Search runs in the browser.** `@easyops-cn/docusaurus-search-local` builds a
 lunr index at compile time. Algolia DocSearch would mean an application, an
 approval, an externally scheduled crawler, and a request to someone else's
-server on every query. For six posts and thirty-two documents the local index
-is 1.2 MB and lazy-loaded on first use.
+server on every query. For five posts and thirty-two documents the index is
+about 1.1 MB per language, lazy-loaded on first use, and a visitor only ever
+loads the one for the language they are reading.
+
+Both indexes are built with a single stemmer each rather than a combined one.
+The plugin switches to `lunr.multiLanguage` as soon as more than one language
+is listed, which would hand the English index a German stemmer it has no
+content for, at a cost in precision. The German stemmer and its stop words come
+from `lunr-languages`, a dependency of the search plugin: German search
+therefore costs zero third-party requests, which is what keeps the constraint
+above true in both languages.
+
+## Two languages
+
+The site is built in English and German: `docusaurus build` runs once per
+locale, English at the root and German under `/de/`. English stays the default,
+so no URL that was ever indexed moved.
+
+Three things were worth the effort of writing down, because in all three cases
+a green build proves nothing:
+
+- **The sitemap exclusions are per locale.** Route paths carry `baseUrl`, which
+  is `/de/` in the German build, so a pattern like `/blog/tags/**` silently
+  misses `/de/blog/tags/terraform`. Without the locale prefix every page this
+  site deliberately keeps out of the sitemap would reappear for half the
+  corpus. There is one sitemap per locale, and `robots.txt` names both.
+- **The feed links are per locale.** They use `pathname://`, which bypasses
+  `baseUrl` along with everything else, so the German footer would have
+  advertised the English feed while `/de/blog/rss.xml` sat in the build
+  unlinked.
+- **Cross-locale links have to use `pathname://` too.** A build only knows the
+  routes of the locale it is building, so a plain link from the English legal
+  notice to `/de/impressum` fails `onBrokenLinks: 'throw'`.
+
+The legal pages are the one place where the German version is the original: § 5
+DDG and Art. 13 GDPR address a German audience, and the binding version of a
+legal notice is the German one. The English `/impressum` and `/datenschutz` are
+translations carrying a precedence clause and a link to the German text.
 
 ## Theming
 
@@ -173,5 +209,6 @@ described above is a `<meta http-equiv>`, which is weaker: it cannot express
 
 - Live: [pascal-nehlsen.de](https://pascal-nehlsen.de)
 - Repository: [github.com/PascalNehlsen/devsecops-blog](https://github.com/PascalNehlsen/devsecops-blog)
-- Feeds: `/blog/rss.xml`, `/blog/atom.xml`
+- Feeds: `/blog/rss.xml`, `/blog/atom.xml`, and the German ones under
+  `/de/blog/`
 - Security contact: [`/.well-known/security.txt`](pathname:///.well-known/security.txt)

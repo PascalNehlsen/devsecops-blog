@@ -1,0 +1,42 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Projects": {
+    "message": "Projekte",
+    "description": "The label for category 'Projects' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Smaller Projects": {
+    "message": "Kleinere Projekte",
+    "description": "The label for category 'Smaller Projects' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Smaller Projects.link.generated-index.description": {
+    "message": "Container-, Deployment- und Security-Arbeit. Kleiner und älter, trotzdem dokumentiert.",
+    "description": "The generated-index page description for category 'Smaller Projects' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.OWASP Juice Shop": {
+    "message": "OWASP Juice Shop",
+    "description": "The label for category 'OWASP Juice Shop' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Python Security Tooling": {
+    "message": "Python-Security-Tooling",
+    "description": "The label for category 'Python Security Tooling' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Knowledge Base": {
+    "message": "Wissensbasis",
+    "description": "The label for category 'Knowledge Base' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Container": {
+    "message": "Container",
+    "description": "The label for category 'Container' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.DevOps": {
+    "message": "DevOps",
+    "description": "The label for category 'DevOps' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Git": {
+    "message": "Git",
+    "description": "The label for category 'Git' in sidebar 'tutorialSidebar'"
+  }
+}

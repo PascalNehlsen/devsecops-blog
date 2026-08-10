@@ -5,8 +5,6 @@ sidebar_label: API Only XSS
 sidebar_position: 2
 ---
 
-# Admin Registration Challenge Report
-
 # API-only XSS Challenge Report
 
 :::danger[Only for Testing Purposes]
