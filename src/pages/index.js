@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Translate, { translate } from '@docusaurus/Translate';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
 
@@ -138,8 +139,10 @@ function HomepageHeader() {
           </div>
 
           <p className={styles.heroStatement}>
-            I build the paved road: self-service infrastructure and the
-            guardrails that let teams ship fast without shipping holes.
+            <Translate id="homepage.hero.statement">
+              I build the paved road: self-service infrastructure and the
+              guardrails that let teams ship fast without shipping holes.
+            </Translate>
           </p>
         </div>
 
@@ -149,10 +152,10 @@ function HomepageHeader() {
               no client-side routing, and the broken-anchor checker only
               collects ids from MDX headings, not from JSX sections. */}
           <a className="button button--primary button--lg" href="#work">
-            Selected work
+            <Translate id="homepage.hero.ctaWork">Selected work</Translate>
           </a>
           <Link className="button button--secondary button--lg" to="/blog">
-            Writing
+            <Translate id="homepage.hero.ctaWriting">Writing</Translate>
           </Link>
           <Link
             className="button button--secondary button--lg"
@@ -172,9 +175,19 @@ function SelectedWork() {
     <section id="work" className={clsx(sections.section, sections.sectionAlt)}>
       <div className="container">
         <SectionHeader
-          eyebrow="Work"
-          title="Selected Work"
-          subtitle="Three problems I owned end to end: the constraint, what I changed, and the number it moved."
+          eyebrow={translate({
+            id: 'homepage.work.eyebrow',
+            message: 'Work',
+          })}
+          title={translate({
+            id: 'homepage.work.title',
+            message: 'Selected Work',
+          })}
+          subtitle={translate({
+            id: 'homepage.work.subtitle',
+            message:
+              'Three problems I owned end to end: the constraint, what I changed, and the number it moved.',
+          })}
         />
         <div className={sections.cardGrid}>
           {selected.map((p) => (
@@ -183,10 +196,25 @@ function SelectedWork() {
         </div>
         {/* Replaces the eleven-card "Also on the Bench" section. Eleven
             learning projects below three real ones diluted the top. */}
+        {/* The link is passed as a value rather than concatenated, so the
+            translation can move it to wherever the German sentence needs it. */}
         <p className={sections.alsoLine}>
-          Also: a security pipeline gating SAST and DAST in GitHub Actions,
-          two SaaS products, and a set of smaller projects.{' '}
-          <Link to="/docs/projects/intro">all of it is documented</Link>.
+          <Translate
+            id="homepage.work.alsoLine"
+            values={{
+              docsLink: (
+                <Link to="/docs/projects/intro">
+                  <Translate id="homepage.work.alsoLine.link">
+                    all of it is documented
+                  </Translate>
+                </Link>
+              ),
+            }}
+          >
+            {
+              'Also: a security pipeline gating SAST and DAST in GitHub Actions, two SaaS products, and a set of smaller projects. {docsLink}.'
+            }
+          </Translate>
         </p>
       </div>
     </section>
@@ -198,14 +226,24 @@ function LatestWriting() {
     <section className={sections.section}>
       <div className="container">
         <SectionHeader
-          eyebrow="Writing"
-          title="Latest Writing"
-          subtitle="Build notes from the work above: what broke, what I measured, what I'd do differently."
+          eyebrow={translate({
+            id: 'homepage.writing.eyebrow',
+            message: 'Writing',
+          })}
+          title={translate({
+            id: 'homepage.writing.title',
+            message: 'Latest Writing',
+          })}
+          subtitle={translate({
+            id: 'homepage.writing.subtitle',
+            message:
+              "Build notes from the work above: what broke, what I measured, what I'd do differently.",
+          })}
         />
         <BlogPreview />
         <div className={sections.centerMore}>
           <Link className="button button--secondary button--lg" to="/blog">
-            All posts
+            <Translate id="homepage.writing.allPosts">All posts</Translate>
           </Link>
         </div>
       </div>
@@ -218,9 +256,19 @@ function TechStack() {
     <section className={clsx(sections.section, sections.sectionAlt)}>
       <div className="container">
         <SectionHeader
-          eyebrow="Stack"
-          title="What I run"
-          subtitle="Grouped by where they sit in the delivery path. Everything here I've run in production, not just evaluated."
+          eyebrow={translate({
+            id: 'homepage.stack.eyebrow',
+            message: 'Stack',
+          })}
+          title={translate({
+            id: 'homepage.stack.title',
+            message: 'What I run',
+          })}
+          subtitle={translate({
+            id: 'homepage.stack.subtitle',
+            message:
+              "Grouped by where they sit in the delivery path. Everything here I've run in production, not just evaluated.",
+          })}
         />
         <Skills />
       </div>
@@ -229,15 +277,27 @@ function TechStack() {
 }
 
 function CallToAction() {
+  // Same trap as the footer link in docusaurus.config.ts: pathname:// skips
+  // baseUrl, so on /de/ this would point at the English feed unless the
+  // locale is added by hand.
+  const { i18n } = useDocusaurusContext();
+  const feedHref =
+    i18n.currentLocale === i18n.defaultLocale
+      ? 'pathname:///blog/rss.xml'
+      : `pathname:///${i18n.currentLocale}/blog/rss.xml`;
   return (
     <section className={sections.section}>
       <div className="container">
         <div className={sections.cta}>
-          <Heading as="h2">Talk shop</Heading>
+          <Heading as="h2">
+            <Translate id="homepage.cta.title">Talk shop</Translate>
+          </Heading>
           <p>
-            I'm up for comparing notes on platform work: golden paths,
-            approval gates on agents, what your rollback criteria actually
-            are.
+            <Translate id="homepage.cta.body">
+              I'm up for comparing notes on platform work: golden paths,
+              approval gates on agents, what your rollback criteria actually
+              are.
+            </Translate>
           </p>
           <div className={sections.ctaButtons}>
             <Link
@@ -252,10 +312,7 @@ function CallToAction() {
             >
               GitHub
             </Link>
-            <Link
-              className="button button--secondary button--lg"
-              href="pathname:///blog/rss.xml"
-            >
+            <Link className="button button--secondary button--lg" href={feedHref}>
               RSS
             </Link>
           </div>
@@ -273,7 +330,11 @@ export default function Home() {
     <Layout
       // No title prop: Docusaurus falls back to siteConfig.title, which gives
       // "Pascal Nehlsen" instead of "Home | Pascal Nehlsen".
-      description="Platform and security engineering. Terraform golden paths on GCP, SLO-gated deploys, agentic runbooks with human approval."
+      description={translate({
+        id: 'homepage.meta.description',
+        message:
+          'Platform and security engineering. Terraform golden paths on GCP, SLO-gated deploys, agentic runbooks with human approval.',
+      })}
     >
       <HomepageHeader />
       <main>

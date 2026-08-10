@@ -6,6 +6,12 @@
 //           six: the homepage argues, the projects index enumerates.
 // featured: true = surfaced by the projects docs page, not the homepage.
 // Omit githubUrl for private repositories (only live/docs links render).
+//
+// Only the three 'selected' entries have their prose wrapped in translate().
+// The rest is not rendered anywhere today, and an id in code.json that no page
+// ever reads is a translation nobody can check.
+
+import { translate } from '@docusaurus/Translate';
 
 const projects = [
   // ── Work (Developer Akademie GmbH) ──────────────────────────────
@@ -13,9 +19,15 @@ const projects = [
     title: 'Terraform Golden Paths on GCP',
     category: 'work',
     featured: 'selected',
-    description:
-      'Every new service environment was a four-hour ticket: someone hand-clicked Cloud Run, Cloud SQL, a bucket and six IAM bindings, and got it subtly wrong about a third of the time. I modularised the GCP estate around one opinionated golden path per service shape, put the guardrails in the module instead of in a wiki, and gated every plan behind automated policy checks. A team now provisions its own environment in under 45 minutes without opening a ticket, and the drift that used to surface in production surfaces in terraform plan.',
-    impact: 'Provisioning 4 h → 45 min',
+    description: translate({
+      id: 'projects.terraformGoldenPaths.description',
+      message:
+        'Every new service environment was a four-hour ticket: someone hand-clicked Cloud Run, Cloud SQL, a bucket and six IAM bindings, and got it subtly wrong about a third of the time. I modularised the GCP estate around one opinionated golden path per service shape, put the guardrails in the module instead of in a wiki, and gated every plan behind automated policy checks. A team now provisions its own environment in under 45 minutes without opening a ticket, and the drift that used to surface in production surfaces in terraform plan.',
+    }),
+    impact: translate({
+      id: 'projects.terraformGoldenPaths.impact',
+      message: 'Provisioning 4 h → 45 min',
+    }),
     tags: ['Terraform', 'GCP', 'Cloud Run', 'IAM', 'GitOps'],
     blogUrl: '/blog/terraform-golden-paths-gcp',
   },
@@ -23,9 +35,15 @@ const projects = [
     title: 'Agentic Runbooks with a Human-Approval Gate',
     category: 'work',
     featured: 'selected',
-    description:
-      'Known failure classes were eating on-call time not because the fix was hard, but because assembling the context (logs, Terraform state, recent deploys) took twenty minutes at 3 a.m. I built an MCP server that does the gathering and proposes a remediation, and then stops. A human approves or rejects every state-changing action, each one is logged with the reasoning that produced it, and each one is reversible. The agent is allowed to be wrong; it is not allowed to be wrong unsupervised.',
-    impact: 'Response time −60%',
+    description: translate({
+      id: 'projects.agenticRunbooks.description',
+      message:
+        'Known failure classes were eating on-call time not because the fix was hard, but because assembling the context (logs, Terraform state, recent deploys) took twenty minutes at 3 a.m. I built an MCP server that does the gathering and proposes a remediation, and then stops. A human approves or rejects every state-changing action, each one is logged with the reasoning that produced it, and each one is reversible. The agent is allowed to be wrong; it is not allowed to be wrong unsupervised.',
+    }),
+    impact: translate({
+      id: 'projects.agenticRunbooks.impact',
+      message: 'Response time −60%',
+    }),
     tags: ['Go', 'MCP', 'GCP', 'Terraform', 'On-Call'],
     blogUrl: '/blog/agentic-runbooks-mcp-human-approval',
   },
@@ -33,9 +51,15 @@ const projects = [
     title: 'Ephemeral Per-User Sandboxes on AWS',
     category: 'work',
     featured: 'selected',
-    description:
-      '80+ trainees each needed a production-like n8n environment, and a fixed t3.medium per person was both wasteful and, at cohort scale, expensive. The workloads are bursty by nature: idle for hours, then a spike. So I put them on burstable instances sized for the median rather than the peak, and wrote lifecycle automation that stops and reclaims anything idle past a threshold. Everyone gets a real isolated environment; compute costs about half of the fixed-size equivalent.',
-    impact: '80+ envs, spend −50%',
+    description: translate({
+      id: 'projects.ephemeralSandboxes.description',
+      message:
+        '80+ trainees each needed a production-like n8n environment, and a fixed t3.medium per person was both wasteful and, at cohort scale, expensive. The workloads are bursty by nature: idle for hours, then a spike. So I put them on burstable instances sized for the median rather than the peak, and wrote lifecycle automation that stops and reclaims anything idle past a threshold. Everyone gets a real isolated environment; compute costs about half of the fixed-size equivalent.',
+    }),
+    impact: translate({
+      id: 'projects.ephemeralSandboxes.impact',
+      message: '80+ envs, spend −50%',
+    }),
     tags: ['AWS', 'EC2', 'Terraform', 'n8n', 'Cost'],
     blogUrl: '/blog/ephemeral-aws-sandboxes-cost',
   },

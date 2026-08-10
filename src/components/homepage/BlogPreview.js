@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from '@docusaurus/Link';
+import { translate } from '@docusaurus/Translate';
 import { usePluginData } from '@docusaurus/useGlobalData';
 import styles from './styles.module.css';
 
@@ -23,7 +24,13 @@ export default function BlogPreview() {
           <span className={styles.blogDate}>
             {post.date}
             {post.readingTime
-              ? ` · ${Math.ceil(post.readingTime)} min read`
+              ? ` · ${translate(
+                  {
+                    id: 'homepage.blogPreview.readingTime',
+                    message: '{minutes} min read',
+                  },
+                  { minutes: Math.ceil(post.readingTime) }
+                )}`
               : null}
           </span>
           <h3 className={styles.blogTitle}>{post.title}</h3>
