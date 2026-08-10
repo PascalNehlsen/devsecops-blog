@@ -338,6 +338,23 @@ table th {
   overflow-x: auto;
 }
 
+/* Screenshots get equal margins left and right instead of hugging the left
+   edge. Two rules, because both are needed:
+   - the paragraph drops the prose measure, otherwise "centred" means centred
+     inside a column narrower than the content area, which still reads as
+     left-aligned;
+   - the image itself is centred in that full width.
+   `img:only-child` on purpose: an inline badge or icon inside a sentence is
+   left alone. */
+.markdown > p:has(> img:only-child) {
+  max-width: none;
+}
+
+.markdown > p > img:only-child {
+  display: block;
+  margin-inline: auto;
+}
+
 blockquote {
   font-style: normal;
   box-shadow: none;

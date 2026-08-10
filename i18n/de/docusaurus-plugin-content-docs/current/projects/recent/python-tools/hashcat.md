@@ -1,73 +1,73 @@
-﻿---
+---
 id: hashcat
-title: Hashcat Tool
-sidebar_label: Hashcat Tool
+title: Hashcat-Werkzeug
+sidebar_label: Hashcat-Werkzeug
 sidebar_position: 2
 ---
 
 
-# My Hash cracker Tool
+# Mein Hash-Cracker
 
-This repository contains the source code for my own implementation of the **hashcat** tool.
+Dieses Repository enthält den Quellcode meiner eigenen Umsetzung des **hashcat**-Werkzeugs.
 
-:::danger[Only for Testing Purposes]
-This tool is intended for educational and authorized penetration testing purposes only. Unauthorized use of this tool against systems that you do not have explicit permission to test is illegal and unethical.
+:::danger[Nur für Testzwecke]
+Dieses Werkzeug ist ausschließlich für Ausbildung und autorisierte Penetrationstests gedacht. Es gegen Systeme einzusetzen, für die du keine ausdrückliche Testerlaubnis hast, ist strafbar und unethisch.
 :::
 
-## Table of Contents
+## Inhalt
 
-- [Features](#features)
-- [Getting Started](#getting-started)
-- [Usage Examples](#usage-examples)
-  - [Brute-Force Attack](#brute-force-attack)
-  - [Dictionary Attack](#dictionary-attack)
-  - [Hashcat-Options](#options)
+- [Funktionen](#funktionen)
+- [Loslegen](#loslegen)
+- [Beispiele](#beispiele)
+  - [Brute-Force](#brute-force)
+  - [Wörterbuchangriff](#wörterbuchangriff)
+  - [Hashcat-Optionen](#optionen)
 - [Logging](#logging)
 
-## Features
+## Funktionen
 
-This implementation covers the following features/options:
+Diese Umsetzung deckt folgende Funktionen ab:
 
-- **Brute-Force Attack**: Attempts to crack passwords by trying all combinations within a given length and character set.
-- **Dictionary Attack**: Uses a provided wordlist to attempt to find the correct password.
-- **Configurability**: Allows customization of password length, character set, and hash modes (MD5, SHA-1, SHA-256, SHA-512).
-- **Logging**: Provides unstructured detailed logs of all connection attempts and outcomes.
+- **Brute-Force**: probiert alle Kombinationen innerhalb einer gegebenen Länge und eines Zeichensatzes.
+- **Wörterbuchangriff**: nutzt eine vorgegebene Wortliste, um das richtige Passwort zu finden.
+- **Konfigurierbar**: Passwortlänge, Zeichensatz und Hash-Modi (MD5, SHA-1, SHA-256, SHA-512) sind einstellbar.
+- **Logging**: liefert unstrukturierte, ausführliche Protokolle aller Versuche und Ergebnisse.
 
-**Technologies**:
+**Technologien**:
 
 - Python 3
 - Pip
 
-## Getting Started
+## Loslegen
 
-To get started with the `hashcat` tool, follow these steps:
+So kommst du mit dem `hashcat`-Werkzeug los:
 
-1. **Clone the Repository**:
+1. **Repository klonen**:
 
 ```shell
 git clone https://github.com/pascalnehlsen/hashcat.git
 cd hashcat
 ```
 
-## Usage Examples
+## Beispiele
 
-### Options
+### Optionen
 
-| Option         | Shorthand | Description                                     | Default value | Required |
+| Option         | Kurzform  | Beschreibung                                    | Standardwert  | Pflicht |
 | -------------- | --------- | ----------------------------------------------- | ------------- | -------- |
-| `--mode`       | `-m`      | Hash mode: 0=MD5, 1=SHA-1, 2=SHA-256, 3=SHA-512 | 2             |          |
-| `--attack`     | `-a`      | Attack mode: 0=Brute-Force, 1=Dictionary        | 0             |          |
-| `--hash`       | -         | Target hash                                     | -             | x        |
-| `--hash-file`  | -         | File path containing target hash                | -             | x        |
-| `--dictionary` | `-d`      | Dictionary file path for dictionary attack      | -             |          |
-| `--max-length` | `-ml`     | Maximum length for brute-force attack           | 4             |          |
-| `--charset`    | `-c`      | Charset for brute-force attack                  | alphanumeric  |          |
+| `--mode`       | `-m`      | Hash-Modus: 0=MD5, 1=SHA-1, 2=SHA-256, 3=SHA-512 | 2             |          |
+| `--attack`     | `-a`      | Angriffsmodus: 0=Brute-Force, 1=Wörterbuch      | 0             |          |
+| `--hash`       | -         | Ziel-Hash                                       | -             | x        |
+| `--hash-file`  | -         | Pfad zur Datei mit dem Ziel-Hash                | -             | x        |
+| `--dictionary` | `-d`      | Pfad zur Wortliste für den Wörterbuchangriff    | -             |          |
+| `--max-length` | `-ml`     | Maximale Länge beim Brute-Force                 | 4             |          |
+| `--charset`    | `-c`      | Zeichensatz beim Brute-Force                    | alphanumerisch |          |
 
-- One of the two is required: `--hash` or `--hash-file`
+- Eines von beiden ist Pflicht: `--hash` oder `--hash-file`
 
-### Brute-Force Attack
+### Brute-Force
 
-To perform a brute-force attack without a wordlist, use the following command:
+Für einen Brute-Force ohne Wortliste:
 
 ```shell
 python hashcat.py \
@@ -78,9 +78,9 @@ python hashcat.py \
     --charset 'abcdefghijklmnopqrstuvwxyz'
 ```
 
-### Dictionary Attack
+### Wörterbuchangriff
 
-To perform a dictionary attack using a wordlist, use the following command:
+Für einen Wörterbuchangriff mit Wortliste:
 
 ```shell
 python hashcat.py \
@@ -92,7 +92,7 @@ python hashcat.py \
 
 ## Logging
 
-Logs are written to the console. You can modify the logging level in the code if you need to adjust the verbosity of the output.
+Die Logs gehen auf die Konsole. Die Log-Stufe lässt sich im Code ändern, wenn du die Ausführlichkeit anpassen willst.
 
 ---
 

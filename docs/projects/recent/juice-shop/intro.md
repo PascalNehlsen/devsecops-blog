@@ -2,8 +2,6 @@
 
 This repository contains the documentation of specific OWASP Juice Shop Challenges designed to help users understand and mitigate common web vulnerabilities. Each challenge provides hands-on experience in identifying and exploiting security flaws in a safe and educational environment.
 
-# Admin Registration Challenge Report
-
 :::danger[Only for Testing Purposes]
 This tool is intended for educational and authorized penetration testing purposes only. Unauthorized use of this tool against systems that you do not have explicit permission to test is illegal and unethical.
 :::

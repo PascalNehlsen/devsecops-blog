@@ -5,8 +5,6 @@ sidebar_label: Captcha Bypass
 sidebar_position: 3
 ---
 
-# Admin Registration Challenge Report
-
 # CAPTCHA Bypass Challenge Report
 
 :::danger[Only for Testing Purposes]

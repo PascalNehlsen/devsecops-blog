@@ -1,177 +1,224 @@
 ---
 id: devsecops-blog
-title: "This Site"
-sidebar_label: "This Site"
+title: "Diese Seite"
+sidebar_label: "Diese Seite"
 sidebar_position: 5
-description: "How this site is built and what it enforces: zero third-party requests, a build that fails on a broken link, and a dependency gate whose exceptions expire."
+description: "Wie diese Seite gebaut ist und was sie erzwingt: keine Third-Party-Requests, ein Build, der an einem kaputten Link scheitert, und ein Dependency-Gate, dessen Ausnahmen ablaufen."
 keywords: [docusaurus, github pages, csp, self-hosted fonts, ci security, detect-secrets]
 ---
 
-# This Site
+# Diese Seite
 
 :::info[Live]
-[pascal-nehlsen.de](https://pascal-nehlsen.de). You are reading it.
+[pascal-nehlsen.de](https://pascal-nehlsen.de). Du liest sie gerade.
 :::
 
-A Docusaurus site on GitHub Pages. That part is unremarkable, and most of what
-a page like this usually contains (how to run the dev server, what a static site
-generator is) belongs in the [README](https://github.com/PascalNehlsen/devsecops-blog),
-not here.
+Eine Docusaurus-Seite auf GitHub Pages. Das ist unspektakulär, und das meiste,
+was auf einer solchen Seite üblicherweise steht (wie man den Dev-Server startet,
+was ein Static-Site-Generator ist), gehört in die
+[README](https://github.com/PascalNehlsen/devsecops-blog) und nicht hierher.
 
-What is worth writing down is the set of things the build refuses to let me
-get wrong, and how they got that way.
+Aufschreiben lohnt sich das, was der Build mich nicht falsch machen lässt, und
+wie es dazu kam.
 
-## Three constraints
+## Drei Zusagen
 
-Each of these is checked rather than asserted, which is the only reason they
-are worth stating.
+Jede davon wird geprüft und nicht behauptet, und nur deshalb lohnt es, sie
+hinzuschreiben.
 
-**No third-party requests.** No font CDN, no analytics, no hosted search, no
-embedded widget, no hotlinked avatar. Open the network tab: every request goes
-to this origin. `scripts/check-no-third-party.mjs` scans the built HTML and CSS
-for resource-loading attributes and fails the build if any of them points
-somewhere else. Outbound `<a href>` links are ignored, because a link is
-navigation, not a fetch your browser performs on page load.
+**Keine Third-Party-Requests.** Kein Font-CDN, keine Analytics, keine gehostete
+Suche, kein eingebettetes Widget, kein verlinkter Avatar. Öffne den
+Netzwerk-Tab: jeder Request geht an diesen Origin.
+`scripts/check-no-third-party.mjs` durchsucht das gebaute HTML und CSS nach
+Attributen, die Ressourcen laden, und lässt den Build scheitern, wenn eines
+davon woanders hinzeigt. Ausgehende `<a href>`-Links werden ignoriert, denn ein
+Link ist Navigation und kein Abruf, den der Browser beim Laden macht.
 
-The check earned its place on the first run by finding three shields.io badges
-on a project page that had been loading from an external host on every visit.
+Die Prüfung hat sich beim ersten Lauf verdient, indem sie drei
+shields.io-Badges auf einer Projektseite fand, die bei jedem Besuch von einem
+externen Host geladen wurden.
 
-This constraint is also what allows the Content-Security-Policy to be
-`script-src 'self'` with no exceptions.
+Diese Zusage ist auch der Grund, warum die Content-Security-Policy
+`script-src 'self'` ohne Ausnahmen sein kann.
 
-**Nothing on the page that isn't true.** Metrics link to the write-up that
-documents them. Security exercises are labelled as exercises. The knowledge
-base says which topics it does not cover. Where a project has a limitation
-worth knowing, the page says so.
+**Nichts auf der Seite, was nicht stimmt.** Metriken verlinken auf den
+Aufschrieb, der sie dokumentiert. Security-Übungen sind als Übungen
+gekennzeichnet. Die Wissensbasis sagt, welche Themen sie nicht abdeckt. Wo ein
+Projekt eine Einschränkung hat, die man kennen sollte, steht sie da.
 
-**Every check that can block, blocks.** `onBrokenLinks`, `onBrokenAnchors`,
-`onBrokenMarkdownLinks`, `onInlineTags` and `onUntruncatedBlogPosts` are all
-set to `throw`. A broken internal link fails the build rather than reaching
-production. A blog post tagged with a word that is not in the vocabulary fails
-the build rather than minting a duplicate tag page.
+**Jede Prüfung, die blockieren kann, blockiert.** `onBrokenLinks`,
+`onBrokenAnchors`, `onBrokenMarkdownLinks`, `onInlineTags` und
+`onUntruncatedBlogPosts` stehen alle auf `throw`. Ein kaputter interner Link
+lässt den Build scheitern, statt in Produktion zu landen. Ein Blogpost mit einem
+Tag, das nicht im Vokabular steht, lässt den Build scheitern, statt eine
+doppelte Tag-Seite anzulegen.
 
-## The pipeline
+## Die Pipeline
 
-Four workflows, all actions pinned to commit SHAs rather than tags, because a
-tag can be moved to point at different code.
+Vier Workflows, alle Actions auf Commit-SHAs gepinnt statt auf Tags, weil ein
+Tag auf anderen Code umgehängt werden kann.
 
-| Workflow | Trigger | What it does |
+| Workflow | Auslöser | Was er tut |
 | --- | --- | --- |
-| `test.yaml` | PRs and `main` | Typecheck, build (which is also the link check), third-party verification |
-| `security.yml` | PRs, `main`, weekly | Dependency gate, secret scan, dependency review |
-| `main.yml` | push to `main` | Calls the deploy workflow |
-| `deploy.yaml` | called or manual | Build, verify, upload artifact, deploy to Pages |
+| `test.yaml` | PRs und `main` | Typecheck, Build (der auch die Linkprüfung ist), Third-Party-Prüfung |
+| `security.yml` | PRs, `main`, wöchentlich | Dependency-Gate, Secret-Scan, Dependency Review |
+| `main.yml` | Push auf `main` | Ruft den Deploy-Workflow auf |
+| `deploy.yaml` | aufgerufen oder manuell | Bauen, prüfen, Artefakt hochladen, nach Pages ausrollen |
 
-The weekly schedule on the security workflow exists because a vulnerability
-disclosed on a Tuesday should not wait for the next commit to be noticed, and
-this repository can go weeks without one.
+Der wöchentliche Lauf des Security-Workflows existiert, weil eine am Dienstag
+veröffentlichte Schwachstelle nicht auf den nächsten Commit warten sollte, und
+dieses Repository kann wochenlang ohne einen bleiben.
 
-### The dependency gate
+### Das Dependency-Gate
 
-`pnpm audit --audit-level=high` would be the obvious answer, and it is not
-quite enough. When I added it, four high advisories existed. Three were fixed
-by an audit fix. The fourth, `serialize-javascript`, is reached only through
-webpack plugins inside `@docusaurus/bundler` at build time, where it
-serialises this site's own output rather than untrusted input, and the only
-proposed remedy is downgrading `@docusaurus/core` by five minor versions.
-That is a downgrade, not a fix.
+`pnpm audit --audit-level=high` wäre die naheliegende Antwort und reicht nicht
+ganz. Als ich es einbaute, existierten vier High-Advisories. Drei wurden durch
+einen Audit-Fix behoben. Die vierte, `serialize-javascript`, ist nur über
+Webpack-Plugins innerhalb von `@docusaurus/bundler` zur Build-Zeit erreichbar,
+wo sie die eigene Ausgabe dieser Seite serialisiert und keine fremde Eingabe,
+und das einzige vorgeschlagene Mittel ist, `@docusaurus/core` um fünf
+Minor-Versionen zurückzustufen. Das ist ein Downgrade, keine Behebung.
 
-So the gate is a script, and an exception needs three things:
+Also ist das Gate ein Script, und eine Ausnahme braucht drei Dinge:
 
-1. **A written reason.** "Known issue" is not a reason.
-2. **An expiry date.** Once past it the build fails again, so the decision
-   gets made a second time instead of outliving the person who made it.
-3. **To still be necessary.** An exception that no longer matches any advisory
-   also fails the build. Otherwise the list only grows, and a long allowlist
-   is indistinguishable from having no gate.
+1. **Eine schriftliche Begründung.** "Bekanntes Problem" ist keine Begründung.
+2. **Ein Ablaufdatum.** Danach scheitert der Build wieder, die Entscheidung wird
+   also ein zweites Mal getroffen, statt die Person zu überleben, die sie
+   getroffen hat.
+3. **Sie muss noch nötig sein.** Eine Ausnahme, die zu keinem Advisory mehr
+   passt, lässt den Build ebenfalls scheitern. Sonst wächst die Liste nur, und
+   eine lange Allowlist ist von "kein Gate" nicht zu unterscheiden.
 
-The third rule is the one I would keep if I could only keep one. Allowlists
-rot quietly.
+Die dritte Regel ist die, die ich behalten würde, wenn ich nur eine behalten
+dürfte. Allowlists verrotten leise.
 
-### Why pnpm
+### Warum pnpm
 
-The package manager is part of the supply chain, so it gets a decision rather
-than a default.
+Der Paketmanager ist Teil der Lieferkette, also bekommt er eine Entscheidung
+statt eines Defaults.
 
-npm hoists every transitive dependency into one flat `node_modules`, which
-means code can import packages the manifest never declared. This repository
-had exactly that: a component used `@types/react` without depending on it, and
-nothing noticed until pnpm's strict tree refused to resolve it. An undeclared
-dependency is one nobody audits, because nobody knows it is there.
+npm hebt jede transitive Abhängigkeit in ein flaches `node_modules`, womit Code
+Pakete importieren kann, die das Manifest nie deklariert hat. Genau das gab es
+hier: eine Komponente nutzte `@types/react`, ohne davon abzuhängen, und es fiel
+niemandem auf, bis pnpms strenger Baum es nicht mehr auflösen wollte. Eine nicht
+deklarierte Abhängigkeit ist eine, die niemand prüft, weil niemand weiß, dass
+sie da ist.
 
-pnpm also blocks `postinstall` scripts unless each is approved. A postinstall
-hook runs arbitrary code on every machine that installs, CI included, and npm
-runs them all without asking.
+pnpm blockiert außerdem `postinstall`-Scripte, solange sie nicht einzeln
+freigegeben sind. Ein Postinstall-Hook führt beliebigen Code auf jeder Maschine
+aus, die installiert, CI eingeschlossen, und npm führt sie alle ungefragt aus.
 
-A side effect worth recording: npm reported 26 advisories against this tree
-and pnpm reports 3. The difference is not that one is more lenient. npm was
-counting the same advisory once per hoisted path.
+Ein Nebeneffekt, der festgehalten werden sollte: npm meldete 26 Advisories gegen
+diesen Baum, pnpm meldet 3. Der Unterschied liegt nicht daran, dass eines
+großzügiger wäre. npm hat dasselbe Advisory einmal pro gehobenem Pfad gezählt.
 
 ### Secrets
 
-`detect-secrets` runs against a committed baseline over the full history,
-because a credential that was committed and then removed is still a leaked
-credential. Only new findings fail. The baseline currently holds six values,
-all of them example strings in documentation about secrets management, and
-each was read before being accepted rather than batch-approved.
+`detect-secrets` läuft gegen eine committete Baseline über die vollständige
+Historie, denn ein Credential, das committet und dann entfernt wurde, ist
+trotzdem geleakt. Nur neue Findings schlagen fehl. Die Baseline enthält
+derzeit sechs Werte, alle Beispielstrings aus Dokumentation über
+Secrets-Verwaltung, und jeder wurde gelesen, bevor er akzeptiert wurde, statt
+sie im Block abzunicken.
 
-## Fonts, search, and the CSP
+## Schriften, Suche und die CSP
 
-Two decisions carry the no-third-party constraint.
+Zwei Entscheidungen tragen die No-Third-Party-Zusage.
 
-**Fonts are self-hosted.** Eight `woff2` files, latin subset, about 212 KB
-total, vendored into `static/fonts/` with their OFL licences rather than
-resolved at build time, so what ships is what was reviewed. A
-`fonts.gstatic.com` request would leak every visitor's IP to a third party and
-would force `font-src` to allow an external host.
+**Schriften sind selbst gehostet.** Acht `woff2`-Dateien, Latin-Subset, rund
+212 KB zusammen, mit ihren OFL-Lizenzen nach `static/fonts/` gelegt statt zur
+Build-Zeit aufgelöst, damit ausgeliefert wird, was geprüft wurde. Ein Request an
+`fonts.gstatic.com` würde die IP jeder Besucherin an einen Dritten verraten und
+würde `font-src` zwingen, einen externen Host zuzulassen.
 
-**Search runs in the browser.** `@easyops-cn/docusaurus-search-local` builds a
-lunr index at compile time. Algolia DocSearch would mean an application, an
-approval, an externally scheduled crawler, and a request to someone else's
-server on every query. For six posts and thirty-two documents the local index
-is 1.2 MB and lazy-loaded on first use.
+**Die Suche läuft im Browser.** `@easyops-cn/docusaurus-search-local` baut zur
+Compile-Zeit einen lunr-Index. Algolia DocSearch bedeutete eine Bewerbung, eine
+Freigabe, einen extern getakteten Crawler und einen Request an fremde Server bei
+jeder Anfrage. Für fünf Beiträge und zweiunddreißig Dokumente ist der Index rund
+1,1 MB pro Sprache, wird beim ersten Gebrauch nachgeladen, und eine Besucherin
+lädt immer nur den der Sprache, die sie liest.
+
+Beide Indizes werden mit je einem einzelnen Stemmer gebaut und nicht mit einem
+kombinierten. Das Plugin schaltet auf `lunr.multiLanguage`, sobald mehr als eine
+Sprache gelistet ist, was dem englischen Index einen deutschen Stemmer
+mitgäbe, für den er keinen Inhalt hat, auf Kosten der Präzision. Der deutsche
+Stemmer und seine Stopwords kommen aus `lunr-languages`, einer Abhängigkeit des
+Suchplugins: die deutsche Suche kostet also null Third-Party-Requests, und genau
+das hält die Zusage oben in beiden Sprachen wahr.
+
+## Zwei Sprachen
+
+Die Seite wird auf Englisch und Deutsch gebaut: `docusaurus build` läuft einmal
+pro Locale, Englisch an der Wurzel, Deutsch unter `/de/`. Englisch bleibt die
+Standardsprache, damit keine je indexierte URL umzieht.
+
+Drei Dinge waren das Aufschreiben wert, weil in allen drei Fällen ein grüner
+Build nichts beweist:
+
+- **Die Sitemap-Ausschlüsse gelten pro Locale.** Routenpfade tragen `baseUrl`,
+  und im deutschen Build ist das `/de/`, also greift ein Muster wie
+  `/blog/tags/**` bei `/de/blog/tags/terraform` stillschweigend nicht. Ohne
+  Locale-Präfix wäre jede Seite, die diese Site bewusst aus der Sitemap hält,
+  für die halbe Sammlung wieder aufgetaucht. Es gibt eine Sitemap pro Locale,
+  und `robots.txt` nennt beide.
+- **Die Feed-Links gelten pro Locale.** Sie nutzen `pathname://`, was neben
+  allem anderen auch `baseUrl` umgeht, also hätte der deutsche Footer den
+  englischen Feed beworben, während `/de/blog/rss.xml` unverlinkt im Build lag.
+- **Links über Locale-Grenzen brauchen ebenfalls `pathname://`.** Ein Build
+  kennt nur die Routen der Locale, die er gerade baut, also lässt ein einfacher
+  Link vom englischen Impressum auf `/de/impressum` den Build an
+  `onBrokenLinks: 'throw'` scheitern.
+
+Die Legal-Seiten sind die einzige Stelle, an der die deutsche Fassung das
+Original ist: § 5 DDG und Art. 13 DSGVO richten sich an deutsches Publikum, und
+die verbindliche Fassung eines Impressums ist die deutsche. Das englische
+`/impressum` und `/datenschutz` sind Übersetzungen mit Vorrangklausel und Link
+auf den deutschen Text.
 
 ## Theming
 
-Colours, type, spacing and motion live in `src/css/tokens.css` as two layers:
-theme-independent primitives, then semantic colours per theme, bridged onto
-the `--ifm-*` variables Infima actually reads. No component stylesheet
-contains a colour literal.
+Farben, Typografie, Abstände und Bewegung liegen in `src/css/tokens.css` in zwei
+Schichten: themeunabhängige Primitive, dann semantische Farben pro Theme,
+gebrückt auf die `--ifm-*`-Variablen, die Infima tatsächlich liest. Kein
+Komponenten-Stylesheet enthält ein Farbliteral.
 
-Two things worth recording from building it.
+Zwei Dinge daraus sind festzuhalten.
 
-**Contrast ratios are computed, not eyeballed.** They sit in comments next to
-the values. The light-mode accent is `#15803D` because it is the lightest
-green clearing 4.5:1 on all three light surfaces; the dark-mode `#22C55E` is
-2.28:1 on white and unusable there. One token, `--c-text-dim`, fails AA for
-body text in both themes and is documented as decorative-only rather than
-silently used.
+**Kontrastverhältnisse werden gerechnet, nicht geschätzt.** Sie stehen als
+Kommentar neben den Werten. Der Akzent im Light-Mode ist `#15803D`, weil das das
+hellste Grün ist, das auf allen drei hellen Flächen 4,5:1 schafft; das
+`#22C55E` aus dem Dark-Mode liegt auf Weiß bei 2,28:1 und ist dort unbenutzbar.
+Ein Token, `--c-text-dim`, verfehlt AA für Fließtext in beiden Themes und ist
+als rein dekorativ dokumentiert, statt still verwendet zu werden.
 
-**Infima's variables are declared under `html[data-theme='dark']`.** Selector
-specificity `(0,1,1)`. A token layer written as `[data-theme='dark']` is
-`(0,1,0)` and loses every single variable to it. The symptom was a background
-seam exactly one viewport down the page, and it was found by reading the
-computed styles of the built site rather than by trusting the stylesheet.
+**Infimas Variablen sind unter `html[data-theme='dark']` deklariert.**
+Selektor-Spezifität `(0,1,1)`. Eine Token-Schicht, die als
+`[data-theme='dark']` geschrieben ist, hat `(0,1,0)` und verliert jede einzelne
+Variable dagegen. Das Symptom war eine Hintergrundnaht genau eine
+Viewport-Höhe weiter unten, und gefunden wurde sie beim Lesen der berechneten
+Styles der gebauten Seite, nicht durch Vertrauen in das Stylesheet.
 
-## What this site does not do
+## Was diese Seite nicht tut
 
-No analytics, so I do not know how many people read anything here. That is a
-deliberate trade and not a claim to virtue: the traffic numbers would be
-useful, and I decided the third-party request was not worth them.
+Keine Analytics, ich weiß also nicht, wie viele Menschen hier etwas lesen. Das
+ist ein bewusster Tausch und kein Tugendanspruch: die Zahlen wären nützlich, und
+ich habe entschieden, dass der Third-Party-Request sie nicht wert ist.
 
-No tests. For a static site whose build fails on a broken link, a broken
-anchor, a broken markdown link, an unknown tag and an external resource, the
-build is the test suite. That reasoning would not survive contact with an
-application that has behaviour.
+Keine Tests. Für eine statische Seite, deren Build an einem kaputten Link, einem
+kaputten Anker, einem kaputten Markdown-Link, einem unbekannten Tag und einer
+externen Ressource scheitert, ist der Build die Testsuite. Diese Begründung
+würde den Kontakt mit einer Anwendung, die Verhalten hat, nicht überleben.
 
-No response headers. GitHub Pages cannot set them, so HSTS, a real CSP and
-`frame-ancestors` require a proxy in front. Until that is in place the CSP
-described above is a `<meta http-equiv>`, which is weaker: it cannot express
-`frame-ancestors` and it arrives after the first bytes of the document.
+Keine Response-Header. GitHub Pages kann sie nicht setzen, also brauchen HSTS,
+eine echte CSP und `frame-ancestors` einen Proxy davor. Bis der steht, ist die
+oben beschriebene CSP ein `<meta http-equiv>`, und das ist schwächer: es kann
+`frame-ancestors` nicht ausdrücken und kommt erst nach den ersten Bytes des
+Dokuments an.
 
-## Resources
+## Ressourcen
 
 - Live: [pascal-nehlsen.de](https://pascal-nehlsen.de)
 - Repository: [github.com/PascalNehlsen/devsecops-blog](https://github.com/PascalNehlsen/devsecops-blog)
-- Feeds: `/blog/rss.xml`, `/blog/atom.xml`
-- Security contact: [`/.well-known/security.txt`](pathname:///.well-known/security.txt)
+- Feeds: `/de/blog/rss.xml`, `/de/blog/atom.xml`, und die englischen unter
+  `/blog/`
+- Security-Kontakt: [`/.well-known/security.txt`](pathname:///.well-known/security.txt)

@@ -1,75 +1,75 @@
 ---
 id: conduit-pipeline
-title: Conduit Pipeline with Github Actions
-sidebar_label: Conduit Pipeline
+title: Conduit-Pipeline mit GitHub Actions
+sidebar_label: Conduit-Pipeline
 sidebar_position: 1
 ---
 
 
-# Conduit Pipeline with Github Actions
+# Conduit-Pipeline mit GitHub Actions
 
-This repository builds upon [this Conduit project](./conduit.md) and integrates a CI/CD pipeline.
+Dieses Repository baut auf [diesem Conduit-Projekt](./conduit.md) auf und ergänzt eine CI/CD-Pipeline.
 
-This GitHub Actions pipeline automates the process of cloning a repository, building Docker images, and deploying an application to a remote server using Docker Compose.
+Die Pipeline in GitHub Actions automatisiert das Klonen des Repositories, das Bauen der Docker-Images und das Ausrollen der Anwendung auf einen entfernten Server per Docker Compose.
 
-## Table of Contents
+## Inhalt
 
-1. [Workflow Trigger](#workflow-trigger)
-2. [Workflow Overview](#workflow-overview)
-3. [Steps in the Build Job](#steps-in-the-build-job)
-4. [Steps in the Deploy Job](#steps-in-the-deploy-job)
-5. [Secrets Required for Deployment](#secrets-required-for-deployment)
+1. [Auslöser](#auslöser)
+2. [Überblick](#überblick)
+3. [Schritte im Build-Job](#schritte-im-build-job)
+4. [Schritte im Deploy-Job](#schritte-im-deploy-job)
+5. [Benötigte Secrets](#benötigte-secrets)
 
-## Workflow Trigger
+## Auslöser
 
-The workflow is triggered under the following conditions:
+Der Workflow startet unter diesen Bedingungen:
 
-1. `Manual Trigger (workflow_dispatch)`: The workflow can be manually triggered from the GitHub Actions dashboard.
+1. `Manuell (workflow_dispatch)`: Der Workflow kann im GitHub-Actions-Dashboard von Hand gestartet werden.
 
-2. `Push to the main Branch`: When a commit is pushed to the main branch, the workflow is automatically triggered.
+2. `Push auf den main-Branch`: Ein Commit auf main startet den Workflow automatisch.
 
-3. `Workflow Call`: The workflow can also be called from other workflows, requiring specific secrets:
+3. `Workflow-Aufruf`: Der Workflow kann aus anderen Workflows aufgerufen werden und braucht dann bestimmte Secrets:
 
-   - `SSH_PRIVATE_KEY`: The private SSH key for accessing the remote server.
-   - `REMOTE_HOST`: The IP address or hostname of the remote server.
-   - `REMOTE_USER`: The username for the remote server.
-   - `TARGET`: The target directory on the remote server where files will be uploaded.
+   - `SSH_PRIVATE_KEY`: der private SSH-Key für den Zugriff auf den entfernten Server.
+   - `REMOTE_HOST`: IP-Adresse oder Hostname des entfernten Servers.
+   - `REMOTE_USER`: Benutzername auf dem entfernten Server.
+   - `TARGET`: Zielverzeichnis auf dem entfernten Server, in das die Dateien geladen werden.
 
-## Workflow Overview
+## Überblick
 
-The workflow consists of two main jobs (using existing github actions):
+Der Workflow besteht aus zwei Jobs (auf Basis bestehender GitHub Actions):
 
-1. **Build Job**: This job builds and pushes Docker images for the frontend and backend of the application. The images are pushed to a Docker registry (GitHub Container Registry in this case).
+1. **Build-Job**: baut die Docker-Images für Frontend und Backend und pusht sie in eine Registry, hier die GitHub Container Registry.
 
-2. **Deploy Job**: This job handles the deployment of the application to the remote server. The necessary artifacts (.env, docker-compose.yaml) are transferred, and the application is started on the remote server using Docker Compose.
+2. **Deploy-Job**: rollt die Anwendung auf den entfernten Server aus. Die nötigen Artefakte (`.env`, `docker-compose.yaml`) werden übertragen, und die Anwendung wird dort per Docker Compose gestartet.
 
-## Steps in the Build Job:
+## Schritte im Build-Job:
 
-- Clone repository using [actions/checkout](https://github.com/actions/checkout/tree/v4/) to get the latest code
-- Set up Docker Buildx with [docker/setup-buildx-action](https://github.com/docker/setup-buildx-action/tree/v3.8.0/) for advanced build features
-- Authenticate with GHCR using [docker/login-action](https://github.com/docker/login-action/tree/v3.3.0/)
-- Extract metadata with [docker/metadata-action](https://github.com/docker/metadata-action/tree/v5.6.1/) to extract metadata
-- Create the `.env` file from the repository's own `example.env`
-- Build and push frontend & backend images with [docker/build-push-action](https://github.com/docker/build-push-action/tree/v6.12.0/)
-- Upload deployment artifacts with [actions/download-artifact](https://github.com/actions/upload-artifact/tree/v4.6.0/) (`.env` and `docker-compose.yaml`)
+- Repository klonen mit [actions/checkout](https://github.com/actions/checkout/tree/v4/), um den aktuellen Code zu holen
+- Docker Buildx einrichten mit [docker/setup-buildx-action](https://github.com/docker/setup-buildx-action/tree/v3.8.0/) für erweiterte Build-Funktionen
+- An GHCR anmelden mit [docker/login-action](https://github.com/docker/login-action/tree/v3.3.0/)
+- Metadaten ziehen mit [docker/metadata-action](https://github.com/docker/metadata-action/tree/v5.6.1/)
+- Die `.env` aus der `example.env` des Repositories erzeugen
+- Frontend- und Backend-Image bauen und pushen mit [docker/build-push-action](https://github.com/docker/build-push-action/tree/v6.12.0/)
+- Deployment-Artefakte hochladen mit [actions/download-artifact](https://github.com/actions/upload-artifact/tree/v4.6.0/) (`.env` und `docker-compose.yaml`)
 
-## Steps in the Deploy Job:
+## Schritte im Deploy-Job:
 
-- Clone repository using [actions/checkout](https://github.com/actions/checkout/tree/v4/) to get the latest code
-- Download deployment artifacts with [actions/download-artifact](https://github.com/actions/download-artifact/tree/v4.1.8/)
-- Transfer files via SCP using [appleboy/scp-action](https://github.com/appleboy/scp-action/tree/v0.1.7/) to copy `.env` and `docker-compose.yaml` to the remote server
-- Deploy with SSH using [appleboy/ssh-action](https://github.com/appleboy/ssh-action/tree/v1.2.0/):
-  - Stop old containers: `docker compose down --remove-orphans`
-  - Clean up unused resources: `docker system prune -af`
-  - Start containers: `docker compose up -d`
+- Repository klonen mit [actions/checkout](https://github.com/actions/checkout/tree/v4/), um den aktuellen Code zu holen
+- Deployment-Artefakte herunterladen mit [actions/download-artifact](https://github.com/actions/download-artifact/tree/v4.1.8/)
+- Dateien per SCP übertragen mit [appleboy/scp-action](https://github.com/appleboy/scp-action/tree/v0.1.7/), um `.env` und `docker-compose.yaml` auf den Server zu kopieren
+- Ausrollen per SSH mit [appleboy/ssh-action](https://github.com/appleboy/ssh-action/tree/v1.2.0/):
+  - alte Container stoppen: `docker compose down --remove-orphans`
+  - unbenutzte Ressourcen aufräumen: `docker system prune -af`
+  - Container starten: `docker compose up -d`
 
-## Secrets Required for Deployment:
+## Benötigte Secrets:
 
-- `SSH_PRIVATE_KEY`: Private SSH key used for authenticating with the remote server.
-- `REMOTE_HOST`: The IP address or domain of the remote server.
-- `REMOTE_USER`: The username used to access the remote server.
-- `TARGET`: The target directory on the remote server where the application will be deployed.
-- `GHCR_PAT`: A GitHub Personal Access Token for authenticating with the GitHub Container Registry.
+- `SSH_PRIVATE_KEY`: privater SSH-Key für die Anmeldung am entfernten Server.
+- `REMOTE_HOST`: IP-Adresse oder Domain des entfernten Servers.
+- `REMOTE_USER`: Benutzername für den Zugriff auf den Server.
+- `TARGET`: Zielverzeichnis auf dem Server, in das ausgerollt wird.
+- `GHCR_PAT`: ein GitHub Personal Access Token für die Anmeldung an der GitHub Container Registry.
 
 ---
 

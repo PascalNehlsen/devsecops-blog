@@ -3,92 +3,94 @@ id: hepa-assist
 title: "Emavi"
 sidebar_label: "Emavi"
 sidebar_position: 2
-description: "Multi-tenant, barrier-free documentation platform for assisted-living facilities: resident mood tracking, care trends and reporting."
+description: "Multi-Tenant-Dokumentationsplattform für Einrichtungen des betreuten Wohnens, barrierefrei: Stimmungserfassung durch Bewohnerinnen und Bewohner, Verläufe für das Personal, Berichte."
 keywords: [multi-tenant saas, healthcare, fastapi, next.js, accessibility, pwa]
 ---
 
 # Emavi
 
-Shipped as **HepaAssist**; now runs as **Emavi**. The write-up keeps the old
-name where it describes decisions made under it.
+Ausgeliefert als **HepaAssist**, läuft heute als **Emavi**. Dieser Aufschrieb
+behält den alten Namen dort, wo er Entscheidungen beschreibt, die unter ihm
+getroffen wurden.
 
-:::info[Live · login required]
-[emavi.de](https://emavi.de). The product is behind authentication, so the
-link lands on a sign-in page. The architecture and the decisions are below.
+:::info[Live · Login erforderlich]
+[emavi.de](https://emavi.de). Das Produkt liegt hinter einer Anmeldung, der Link
+landet also auf einer Login-Seite. Architektur und Entscheidungen stehen unten.
 :::
 
-## Project Overview
+## Überblick
 
-**Emavi** is a multi-tenant application for healthcare facilities that supports digital resident documentation and care management. This project demonstrates modern DevSecOps practices and full-stack development with a focus on security, scalability, and user experience.
-
----
-
-## The two interfaces
-
-The product has one hard constraint that shaped everything else: the same
-data is entered by residents and read by care staff, and those two groups
-have almost nothing in common in terms of what they can operate. So there are
-two interfaces, not one with a role switch.
-
-### Resident view
-
-Everything is one decision per screen, large targets, no nesting. A check-in
-is three taps and can be finished after the first one: the comment step is
-explicitly optional, because a required field is a reason to stop using
-something.
-
-![Role selection on the landing page: separate entry points for residents, care staff and administrators.](../assets/images/emavi/01-role-select.png)
-
-![Mood check-in: five faces, one tap, no free-text required.](../assets/images/emavi/02-client-mood-picker.png)
-
-![After picking a mood, optional tags and a free-text field. Both can be skipped.](../assets/images/emavi/03-client-mood-detail.png)
-
-![The resident's own calendar. Their history belongs to them, not only to staff.](../assets/images/emavi/04-client-mood-calendar.png)
-
-The calendar is deliberately available to the resident and not just to staff.
-Documentation that only flows upward is surveillance; the point of the
-product is that the person being documented can see their own record.
-
-### Staff view
-
-Same data, opposite priorities: density, comparison, and trend over a cohort.
-
-![Staff dashboard: client list with the latest check-in per person, and the full check-in log for the selected client.](../assets/images/emavi/05-staff-dashboard-checkins.png)
-
-![Mood trend for a single client over 7, 14 or 30 days.](../assets/images/emavi/06-staff-mood-trend.png)
-
-Screenshots use seeded demo data. No real resident information appears in
-this write-up.
+**Emavi** ist eine Multi-Tenant-Anwendung für Einrichtungen im Gesundheitswesen, die digitale Bewohnerdokumentation und Pflegeorganisation unterstützt. Das Projekt zeigt moderne DevSecOps-Praxis und Full-Stack-Entwicklung mit Schwerpunkt auf Sicherheit, Skalierbarkeit und Bedienbarkeit.
 
 ---
 
-## Architecture & Technology Stack
+## Die zwei Oberflächen
+
+Das Produkt hat eine harte Randbedingung, die alles andere geprägt hat: dieselben
+Daten werden von Bewohnerinnen und Bewohnern eingegeben und von Pflegekräften
+gelesen, und diese zwei Gruppen haben in Sachen Bedienbarkeit fast nichts
+gemeinsam. Deshalb gibt es zwei Oberflächen und nicht eine mit Rollenumschalter.
+
+### Bewohnersicht
+
+Eine Entscheidung pro Bildschirm, große Ziele, keine Verschachtelung. Ein
+Check-in sind drei Antippen und kann nach dem ersten fertig sein: der
+Kommentarschritt ist ausdrücklich optional, denn ein Pflichtfeld ist ein Grund,
+etwas nicht mehr zu benutzen.
+
+![Rollenauswahl auf der Startseite: getrennte Einstiege für Bewohnende, Pflegekräfte und Administration.](../../../../../docs/assets/images/emavi/01-role-select.png)
+
+![Stimmungs-Check-in: fünf Gesichter, ein Antippen, kein Freitext nötig.](../../../../../docs/assets/images/emavi/02-client-mood-picker.png)
+
+![Nach der Stimmungswahl optionale Tags und ein Freitextfeld. Beides kann übersprungen werden.](../../../../../docs/assets/images/emavi/03-client-mood-detail.png)
+
+![Der eigene Kalender der Bewohnerin. Die Historie gehört ihr, nicht nur dem Personal.](../../../../../docs/assets/images/emavi/04-client-mood-calendar.png)
+
+Der Kalender ist absichtlich auch für die Bewohnenden da und nicht nur für das
+Personal. Dokumentation, die nur nach oben fließt, ist Überwachung; der Sinn des
+Produkts ist, dass die dokumentierte Person ihre eigene Aufzeichnung sehen kann.
+
+### Personalsicht
+
+Dieselben Daten, umgekehrte Prioritäten: Dichte, Vergleich und Verlauf über eine
+Gruppe.
+
+![Personal-Dashboard: Klientenliste mit dem letzten Check-in pro Person und das vollständige Check-in-Protokoll der ausgewählten Person.](../../../../../docs/assets/images/emavi/05-staff-dashboard-checkins.png)
+
+![Stimmungsverlauf einer einzelnen Person über 7, 14 oder 30 Tage.](../../../../../docs/assets/images/emavi/06-staff-mood-trend.png)
+
+Die Screenshots nutzen eingespielte Demodaten. In diesem Aufschrieb erscheinen
+keine echten Bewohnerdaten.
+
+---
+
+## Architektur und Technologie
 
 ### Backend
-- **Framework**: FastAPI (Python) - High-performance, asynchronous web framework
-- **Database**: PostgreSQL with SQLAlchemy ORM
-- **Authentication**: JWT-based multi-tenant authentication
-- **API Design**: RESTful API with OpenAPI/Swagger documentation
-- **Migrations**: Alembic for database versioning
+- **Framework**: FastAPI (Python), asynchron und performant
+- **Datenbank**: PostgreSQL mit SQLAlchemy-ORM
+- **Authentifizierung**: Multi-Tenant-Authentifizierung über JWT
+- **API-Entwurf**: REST-API mit OpenAPI/Swagger-Dokumentation
+- **Migrationen**: Alembic für die Schemaversionierung
 
 ### Frontend
-- **Framework**: Next.js 14 (React) with TypeScript
-- **Styling**: Tailwind CSS for modern, responsive design
-- **PWA**: Progressive Web App with offline support
-- **UI Components**: Custom component library with shadcn/ui
-- **State Management**: React Context API for tenant isolation
+- **Framework**: Next.js 14 (React) mit TypeScript
+- **Styling**: Tailwind CSS für modernes, responsives Design
+- **PWA**: Progressive Web App mit Offline-Unterstützung
+- **UI-Komponenten**: eigene Komponentenbibliothek mit shadcn/ui
+- **State**: React Context API für Tenant-Isolation
 
-### DevOps & Infrastructure
-- **Containerization**: Docker & Docker Compose
-- **Reverse Proxy**: Nginx for load balancing and SSL termination
-- **Multi-Tenant Architecture**: Complete data isolation per tenant
-- **Environment Management**: Separate development and production environments
+### DevOps und Infrastruktur
+- **Containerisierung**: Docker und Docker Compose
+- **Reverse Proxy**: nginx für Lastverteilung und SSL-Terminierung
+- **Multi-Tenant-Architektur**: vollständige Datentrennung pro Tenant
+- **Umgebungen**: getrennte Entwicklungs- und Produktionsumgebung
 
 ---
 
-## Security-First Approach (DevSecOps)
+## Security zuerst (DevSecOps)
 
-### Authentication & Authorization
+### Authentifizierung und Autorisierung
 ```python
 # Multi-tenant JWT-based authentication
 - Role-based access control (Admin, Staff, Resident)
@@ -97,26 +99,26 @@ this write-up.
 - Token-based session management
 ```
 
-### API Security
-- **Input Validation**: Pydantic models for request/response validation
-- **CORS Configuration**: Strict cross-origin policies
-- **SQL Injection Protection**: ORM-based queries
-- **Rate Limiting**: Protection against brute-force attacks
+### API-Sicherheit
+- **Eingabevalidierung**: Pydantic-Modelle für Requests und Responses
+- **CORS**: strikte Cross-Origin-Regeln
+- **Schutz vor SQL-Injection**: Queries über das ORM
+- **Rate Limiting**: Schutz gegen Brute-Force
 
-### Data Security
-- **Encryption**: Sensitive data encrypted in transit and at rest
-- **GDPR Compliance**: Privacy-compliant implementation
-- **Audit Logging**: Traceable change history
-- **Tenant Isolation**: Strict data separation between tenants
+### Datensicherheit
+- **Verschlüsselung**: sensible Daten verschlüsselt im Transport und im Ruhezustand
+- **DSGVO**: datenschutzkonforme Umsetzung
+- **Audit-Logging**: nachvollziehbare Änderungshistorie
+- **Tenant-Isolation**: strikte Datentrennung zwischen Tenants
 
 ---
 
-## DevOps Practices
+## DevOps-Praxis
 
-### Container Strategy & Multi-Service Architecture
+### Container-Strategie und Multi-Service-Aufbau
 
-#### Docker Compose Orchestration
-The application uses a sophisticated multi-container setup with service dependencies and health checks:
+#### Orchestrierung per Docker Compose
+Die Anwendung nutzt ein Setup aus mehreren Containern mit Abhängigkeiten und Health Checks:
 
 ```yaml
 services:
@@ -157,18 +159,18 @@ services:
       - "5050:80"
 ```
 
-#### Container Architecture Features
-- **Service Dependencies**: Orchestrated startup order with health check conditions
-- **Persistent Volumes**: Data persistence for PostgreSQL and PgAdmin
-- **Network Isolation**: Custom bridge network for inter-service communication
-- **Restart Policies**: `unless-stopped` for automatic recovery
-- **Port Mapping**: Non-conflicting port allocation for local development
-- **Alpine Images**: Minimal base images for reduced attack surface
+#### Merkmale der Container-Architektur
+- **Service-Abhängigkeiten**: gesteuerte Startreihenfolge über Health-Check-Bedingungen
+- **Persistente Volumes**: Datenerhalt für PostgreSQL und PgAdmin
+- **Netzwerkisolation**: eigenes Bridge-Netzwerk für die Kommunikation der Dienste
+- **Restart-Policies**: `unless-stopped` für automatische Erholung
+- **Port-Mapping**: konfliktfreie Ports für die lokale Entwicklung
+- **Alpine-Images**: minimale Base-Images für kleinere Angriffsfläche
 
-### CI/CD Pipeline with GitHub Actions
+### CI/CD mit GitHub Actions
 
-#### Automated Deployment Workflow
-Fully automated deployment pipeline from push to production:
+#### Automatisierter Deployment-Workflow
+Vollautomatische Auslieferung vom Push bis in die Produktion:
 
 ```yaml
 name: Deploy HepaAssist to VM
@@ -190,9 +192,9 @@ jobs:
       - Deploy via SSH to production VM
 ```
 
-#### Pipeline Capabilities
+#### Was die Pipeline kann
 
-**1. Container Registry Integration**
+**1. Anbindung an die Container-Registry**
 ```yaml
 # GitHub Container Registry (GHCR)
 Registry: ghcr.io
@@ -200,13 +202,13 @@ Image Naming: pascalnehlsen/hepa-assist-{backend|frontend}
 Tags: latest, branch-name, commit-sha
 ```
 
-**2. Multi-Stage Builds**
-- Docker BuildKit enabled for advanced caching
-- Layer caching with GitHub Actions cache
-- Separate build contexts for backend and frontend
-- Optimized build times with `cache-from` and `cache-to`
+**2. Multi-Stage-Builds**
+- Docker BuildKit für besseres Caching aktiviert
+- Layer-Caching über den GitHub-Actions-Cache
+- getrennte Build-Kontexte für Backend und Frontend
+- kürzere Build-Zeiten über `cache-from` und `cache-to`
 
-**3. Secret Management**
+**3. Umgang mit Secrets**
 ```bash
 # Environment variables injected from GitHub Secrets
 - DATABASE_URL
@@ -216,24 +218,24 @@ Tags: latest, branch-name, commit-sha
 - Registry credentials (GHCR_PAT)
 ```
 
-**4. Automated Deployment Steps**
-- Build Docker images with commit SHA tags
-- Push to container registry
-- SCP configuration files to production server
-- SSH into VM and execute deployment commands
-- Pull latest images
-- Perform zero-downtime rolling update
-- Clean up unused images
+**4. Automatisierte Deployment-Schritte**
+- Images mit Commit-SHA-Tags bauen
+- in die Container-Registry pushen
+- Konfigurationsdateien per SCP auf den Produktionsserver
+- per SSH auf die VM und die Deployment-Befehle ausführen
+- aktuelle Images ziehen
+- Rolling Update ohne Ausfallzeit
+- unbenutzte Images aufräumen
 
-**5. Deployment Security**
-- SSH key-based authentication
-- Encrypted secrets in GitHub Actions
-- No hardcoded credentials in repository
-- Secure environment variable injection
+**5. Sicherheit beim Ausrollen**
+- Authentifizierung über SSH-Key
+- verschlüsselte Secrets in GitHub Actions
+- keine festgeschriebenen Credentials im Repository
+- Umgebungsvariablen sicher eingespeist
 
 ### Infrastructure as Code
 
-#### Production Deployment
+#### Produktions-Deployment
 ```bash
 # Automated deployment via SSH
 cd /opt/hepaassist
@@ -242,33 +244,33 @@ docker compose up -d --remove-orphans
 docker image prune -f
 ```
 
-#### Environment Configuration
-- **Development**: Local Docker Compose with hot reload
-- **Production**: VM-based deployment with Caddy reverse proxy
-- **Secret Management**: Environment-specific .env files
-- **SSL/TLS**: Automated certificate management
+#### Konfiguration der Umgebungen
+- **Entwicklung**: lokales Docker Compose mit Hot Reload
+- **Produktion**: Deployment auf einer VM mit Caddy als Reverse Proxy
+- **Secrets**: `.env`-Dateien je Umgebung
+- **SSL/TLS**: automatische Zertifikatsverwaltung
 
-### Container Benefits Demonstrated
+### Was die Container konkret bringen
 
-**Development Experience**
-- Consistent environments across team members
-- One-command setup: `docker-compose up`
-- Isolated dependencies
-- Hot reload for rapid iteration
+**Entwicklung**
+- gleiche Umgebungen für alle im Team
+- Setup mit einem Befehl: `docker-compose up`
+- isolierte Abhängigkeiten
+- Hot Reload für schnelle Iteration
 
-**Production Reliability**
-- Immutable deployments
-- Easy rollback to previous versions
-- Health checks for automatic recovery
-- Zero-downtime deployments
+**Verlässlichkeit in Produktion**
+- unveränderliche Deployments
+- einfaches Zurückrollen auf frühere Versionen
+- Health Checks für automatische Erholung
+- Deployments ohne Ausfallzeit
 
-**Scalability**
-- Horizontal scaling ready
-- Load balancing preparation
-- Database connection pooling
-- Service mesh compatible
+**Skalierbarkeit**
+- bereit für horizontales Skalieren
+- Vorbereitung für Lastverteilung
+- Connection Pooling zur Datenbank
+- tauglich für ein Service Mesh
 
-### Logging & Monitoring
+### Logging und Monitoring
 ```python
 # Structured logging for production readiness
 - Application logs in /backend/logs
@@ -280,11 +282,11 @@ docker image prune -f
 
 ---
 
-## Full-Stack Development Highlights
+## Highlights aus der Full-Stack-Entwicklung
 
-### Backend Features
+### Backend
 
-#### 1. Multi-Tenant Architecture
+#### 1. Multi-Tenant-Architektur
 ```python
 # Tenant-isolated database access
 class TenantMixin:
@@ -292,15 +294,15 @@ class TenantMixin:
     # Automatic tenant filtering in all queries
 ```
 
-#### 2. RESTful API Endpoints
-- `/api/v1/auth` - Authentication & session management
-- `/api/v1/admin` - Administrative functions
-- `/api/v1/dashboard` - Resident dashboards
-- `/api/v1/observations` - Care documentation
-- `/api/v1/mood` - Mood tracking
-- `/api/v1/export` - PDF export functionality
+#### 2. REST-Endpunkte
+- `/api/v1/auth` - Authentifizierung und Sitzungsverwaltung
+- `/api/v1/admin` - administrative Funktionen
+- `/api/v1/dashboard` - Bewohner-Dashboards
+- `/api/v1/observations` - Pflegedokumentation
+- `/api/v1/mood` - Stimmungserfassung
+- `/api/v1/export` - PDF-Export
 
-#### 3. Database Models
+#### 3. Datenmodelle
 ```
 Models:
   - User (Multi-role support)
@@ -310,7 +312,7 @@ Models:
   - ObservationBlockTemplate (Configurable templates)
 ```
 
-### Frontend Features
+### Frontend
 
 #### 1. Progressive Web App (PWA)
 ```javascript
@@ -320,7 +322,7 @@ Models:
 - Installable on iOS, Android, Windows
 ```
 
-#### 2. Responsive Multi-Device Support
+#### 2. Für mehrere Gerätetypen
 ```
 Optimized for:
   - Smartphones (care staff on the go)
@@ -328,13 +330,13 @@ Optimized for:
   - Desktop (administration)
 ```
 
-#### 3. User Interfaces
-- **Admin Dashboard**: Tenant and user management
-- **Staff Dashboard**: Resident documentation and care planning
-- **Resident Interface**: QR code-based login for residents
-- **Setup Flows**: Onboarding for new facilities
+#### 3. Oberflächen
+- **Admin-Dashboard**: Verwaltung von Tenants und Nutzenden
+- **Personal-Dashboard**: Dokumentation und Pflegeplanung
+- **Bewohneroberfläche**: Anmeldung per QR-Code
+- **Setup-Abläufe**: Onboarding neuer Einrichtungen
 
-#### 4. Component Library
+#### 4. Komponentenbibliothek
 ```typescript
 // Reusable UI components
 - Button, Card, Input, Label, Modal
@@ -344,21 +346,21 @@ Optimized for:
 
 ---
 
-## Code Quality & Best Practices
+## Codequalität und Praxis
 
 ### Backend
-- **Type Hints**: Complete Python type annotations
-- **Async/Await**: Asynchronous database operations for performance
-- **Dependency Injection**: FastAPI DI system for testable code
-- **Pydantic Models**: Strict data validation
+- **Type Hints**: durchgehende Python-Typannotationen
+- **Async/Await**: asynchrone Datenbankoperationen für Performance
+- **Dependency Injection**: das DI-System von FastAPI für testbaren Code
+- **Pydantic-Modelle**: strikte Datenvalidierung
 
 ### Frontend
-- **TypeScript**: Type safety throughout the frontend
-- **Component-Driven**: Modular, reusable components
-- **Tailwind CSS**: Consistent design system
-- **Server Components**: Next.js 14 App Router with RSC
+- **TypeScript**: Typsicherheit im gesamten Frontend
+- **Komponentengetrieben**: modulare, wiederverwendbare Komponenten
+- **Tailwind CSS**: einheitliches Designsystem
+- **Server Components**: Next.js 14 App Router mit RSC
 
-### Documentation
+### Dokumentation
 ```
 Docs:
   - API documentation (OpenAPI/Swagger)
@@ -369,23 +371,23 @@ Docs:
 
 ---
 
-## Development Workflow
+## Arbeitsablauf
 
-### Database Management
+### Datenbank
 ```bash
 # Alembic migrations
 alembic revision --autogenerate -m "Description"
 alembic upgrade head
 ```
 
-### Local Development
+### Lokale Entwicklung
 ```bash
 # Docker-based development environment
 docker-compose up --build
 # Hot reload for backend and frontend
 ```
 
-### Testing
+### Tests
 ```python
 # Test suite prepared
 tests/
@@ -395,99 +397,99 @@ tests/
 
 ---
 
-## Project Metrics
+## Projektkennzahlen
 
-### Technical Complexity
-- **Backend**: 15+ API endpoints
-- **Frontend**: 10+ routes with different user roles
-- **Data Models**: 7+ SQLAlchemy models
-- **Services**: 4 Docker containers in production
+### Technische Komplexität
+- **Backend**: 15+ API-Endpunkte
+- **Frontend**: 10+ Routen für unterschiedliche Rollen
+- **Datenmodelle**: 7+ SQLAlchemy-Modelle
+- **Dienste**: 4 Docker-Container in Produktion
 
-### Features
-- Multi-tenant architecture
-- Role-based authentication
-- PWA with offline support
-- QR code-based login
-- PDF export functionality
-- Responsive design
-- GDPR compliant
-- Docker containerization
+### Funktionen
+- Multi-Tenant-Architektur
+- rollenbasierte Authentifizierung
+- PWA mit Offline-Unterstützung
+- Anmeldung per QR-Code
+- PDF-Export
+- responsives Design
+- DSGVO-konform
+- Containerisierung mit Docker
 
 ---
 
-## Demonstrated Skills
+## Gezeigte Fähigkeiten
 
 ### DevSecOps
-- **Container Orchestration**: Docker Compose with multi-service dependencies and health checks
-- **CI/CD Pipelines**: GitHub Actions with automated build, test, and deployment
-- **Container Registry**: GitHub Container Registry (GHCR) management and versioning
-- **Secret Management**: Secure credential handling with GitHub Secrets
-- **Infrastructure as Code**: Declarative container configuration with docker-compose.yml
-- **Security-by-Design**: JWT, RBAC, encryption at multiple layers
-- **Automated Deployments**: SSH-based deployment automation to production VM
-- **Image Optimization**: Multi-stage builds with layer caching strategies
-- **Database Migrations**: Version-controlled schema management with Alembic
-- **Zero-Downtime Deployments**: Rolling updates with service dependencies
+- **Container-Orchestrierung**: Docker Compose mit Abhängigkeiten mehrerer Dienste und Health Checks
+- **CI/CD-Pipelines**: GitHub Actions mit automatisiertem Bauen, Testen und Ausrollen
+- **Container-Registry**: Verwaltung und Versionierung in der GitHub Container Registry (GHCR)
+- **Secrets**: sicherer Umgang mit Credentials über GitHub Secrets
+- **Infrastructure as Code**: deklarative Container-Konfiguration über docker-compose.yml
+- **Security by Design**: JWT, RBAC, Verschlüsselung auf mehreren Ebenen
+- **Automatisierte Deployments**: Ausrollen per SSH auf die Produktions-VM
+- **Image-Optimierung**: Multi-Stage-Builds mit Layer-Caching
+- **Datenbankmigrationen**: versionierte Schemaverwaltung mit Alembic
+- **Deployments ohne Ausfallzeit**: Rolling Updates mit Service-Abhängigkeiten
 
-### Backend Development
-- **Python/FastAPI**: Async web framework with automatic OpenAPI documentation
-- **RESTful API Design**: Versioned endpoints with proper HTTP semantics
-- **PostgreSQL & ORM**: SQLAlchemy with multi-tenant data isolation
-- **Async/Await Patterns**: Non-blocking database operations for performance
-- **Multi-Tenant Architecture**: Tenant-aware queries and data separation
-- **Authentication & Authorization**: JWT-based security with role management
-- **Containerization**: Optimized Dockerfiles with production-ready configurations
+### Backend-Entwicklung
+- **Python/FastAPI**: asynchrones Framework mit automatischer OpenAPI-Dokumentation
+- **REST-Entwurf**: versionierte Endpunkte mit korrekter HTTP-Semantik
+- **PostgreSQL und ORM**: SQLAlchemy mit Multi-Tenant-Datentrennung
+- **Async/Await**: nichtblockierende Datenbankoperationen für Performance
+- **Multi-Tenant-Architektur**: tenant-bewusste Queries und Datentrennung
+- **Authentifizierung und Autorisierung**: JWT mit Rollenverwaltung
+- **Containerisierung**: optimierte Dockerfiles für den Produktionsbetrieb
 
-### Frontend Development
-- **React/Next.js 14**: Server-side rendering with App Router
-- **TypeScript**: Complete type safety across the application
-- **Progressive Web Apps**: Offline-first architecture with service workers
-- **Responsive Design**: Mobile-first approach with Tailwind CSS
-- **State Management**: React Context API for tenant isolation
-- **Component Libraries**: Reusable UI components with shadcn/ui
-- **Build Optimization**: Docker multi-stage builds for minimal image size
+### Frontend-Entwicklung
+- **React/Next.js 14**: serverseitiges Rendern mit App Router
+- **TypeScript**: vollständige Typsicherheit
+- **Progressive Web Apps**: Offline-first mit Service Workern
+- **Responsives Design**: Mobile-first mit Tailwind CSS
+- **State**: React Context API für Tenant-Isolation
+- **Komponentenbibliotheken**: wiederverwendbare UI-Komponenten mit shadcn/ui
+- **Build-Optimierung**: Docker-Multi-Stage-Builds für minimale Images
 
-### Software Engineering
-- **Clean Code**: Consistent coding standards and best practices
-- **Design Patterns**: Dependency injection, repository pattern, mixins
-- **API Design**: RESTful principles with versioning and documentation
-- **Version Control**: Git workflow with feature branches and protected main
-- **Documentation**: Comprehensive API docs, flowcharts, and setup guides
-- **Testing Infrastructure**: Test suite setup with multi-tenant test cases
-- **Environment Management**: Separation of dev, staging, and production configs
-
----
-
-## Future Development Potential
-
-### Planned DevOps Extensions
-- Automated testing integration (unit, integration, E2E) in CI/CD
-- Kubernetes deployment for advanced orchestration
-- Prometheus & Grafana monitoring stack
-- ELK stack for centralized logging
-- Automated security scans (Snyk, Trivy)
-- Blue-green deployment strategy
-- Auto-scaling based on load metrics
-
-### Planned Features
-- Care documentation
-- Real-time notifications
-- Advanced analytics dashboard
-- Multi-language support
-- Mobile native apps
+### Software-Engineering
+- **Clean Code**: einheitliche Standards und bewährte Praxis
+- **Entwurfsmuster**: Dependency Injection, Repository-Muster, Mixins
+- **API-Entwurf**: REST-Prinzipien mit Versionierung und Dokumentation
+- **Versionskontrolle**: Git-Workflow mit Feature-Branches und geschütztem main
+- **Dokumentation**: API-Doku, Flussdiagramme und Setup-Anleitungen
+- **Testinfrastruktur**: Testsuite mit Multi-Tenant-Testfällen
+- **Umgebungen**: Trennung der Konfiguration für dev, staging und Produktion
 
 ---
 
-## Summary
+## Was noch kommen könnte
 
-HepaAssist demonstrates a modern, security-oriented approach to developing scalable applications. The project combines DevSecOps best practices with full-stack development and provides practical solutions for real business requirements in the regulated healthcare sector.
+### Geplante DevOps-Erweiterungen
+- automatisierte Tests (Unit, Integration, E2E) in CI/CD
+- Kubernetes für weitergehende Orchestrierung
+- Monitoring-Stack aus Prometheus und Grafana
+- ELK-Stack für zentrales Logging
+- automatische Security-Scans (Snyk, Trivy)
+- Blue-Green-Deployment
+- Auto-Scaling anhand von Lastmetriken
 
-**Core Strengths:**
-- Production-ready multi-tenant architecture with live deployment
-- Automated CI/CD pipeline with GitHub Actions
-- Container-based infrastructure with Docker Compose orchestration
-- Security at all levels with encrypted secrets and JWT authentication
-- GitHub Container Registry integration for image management
-- Modern technology stack with TypeScript and FastAPI
-- User-centric frontend design with PWA capabilities
-- GDPR-compliant implementation for healthcare sector
+### Geplante Funktionen
+- Pflegedokumentation
+- Benachrichtigungen in Echtzeit
+- ausgebautes Analyse-Dashboard
+- Mehrsprachigkeit
+- native Mobil-Apps
+
+---
+
+## Zusammenfassung
+
+HepaAssist zeigt einen modernen, sicherheitsorientierten Weg, skalierbare Anwendungen zu entwickeln. Das Projekt verbindet bewährte DevSecOps-Praxis mit Full-Stack-Entwicklung und liefert praktische Antworten auf echte fachliche Anforderungen im regulierten Gesundheitsbereich.
+
+**Kernstärken:**
+- produktionsreife Multi-Tenant-Architektur mit laufendem Deployment
+- automatisierte CI/CD-Pipeline mit GitHub Actions
+- containerbasierte Infrastruktur, orchestriert mit Docker Compose
+- Sicherheit auf allen Ebenen, mit verschlüsselten Secrets und JWT-Authentifizierung
+- Anbindung an die GitHub Container Registry für die Image-Verwaltung
+- moderner Stack mit TypeScript und FastAPI
+- am Menschen ausgerichtetes Frontend mit PWA-Fähigkeiten
+- DSGVO-konforme Umsetzung für das Gesundheitswesen

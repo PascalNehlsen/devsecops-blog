@@ -1,19 +1,17 @@
-# OWASP Juice Shop Challenges
+# OWASP-Juice-Shop-Challenges
 
-This repository contains the documentation of specific OWASP Juice Shop Challenges designed to help users understand and mitigate common web vulnerabilities. Each challenge provides hands-on experience in identifying and exploiting security flaws in a safe and educational environment.
+Dieses Repository enthält die Dokumentation einzelner OWASP-Juice-Shop-Challenges. Sie sollen helfen, verbreitete Web-Schwachstellen zu verstehen und zu entschärfen. Jede Challenge ist praktische Übung darin, Sicherheitsfehler in einer geschützten Lernumgebung zu finden und auszunutzen.
 
-# Admin Registration Challenge Report
-
-:::danger[Only for Testing Purposes]
-This tool is intended for educational and authorized penetration testing purposes only. Unauthorized use of this tool against systems that you do not have explicit permission to test is illegal and unethical.
+:::danger[Nur für Testzwecke]
+Dieses Werkzeug ist ausschließlich für Ausbildung und autorisierte Penetrationstests gedacht. Es gegen Systeme einzusetzen, für die du keine ausdrückliche Testerlaubnis hast, ist strafbar und unethisch.
 :::
 
-**Direct Documentation Link**:
+**Direkt zur Dokumentation**:
 
-- [API-only XSS Challenge](./api-only-xss.md): How to exploit cross-site scripting vulnerabilities in API responses.
-- [Captcha Bypass Challenge](./captcha-bypass.md): Discover technique for bypassing CAPTCHA mechanisms.
-- [Admin Registration](./admin-registration.md): Explore the process of registering a user as an administrator.
-- [Deluxe Fraud Challenge](./deluxe-fraud.md): Get the Deluxe Membership of the Juice Shop for free.
+- [API-only-XSS-Challenge](./api-only-xss.md): Cross-Site-Scripting in API-Antworten ausnutzen.
+- [CAPTCHA-Bypass-Challenge](./captcha-bypass.md): eine Technik, um CAPTCHA-Mechanismen zu umgehen.
+- [Admin-Registrierung](./admin-registration.md): wie man sich als Administrator registriert.
+- [Deluxe-Betrug-Challenge](./deluxe-fraud.md): die Deluxe-Mitgliedschaft des Juice Shop kostenlos bekommen.
 
 ---
 

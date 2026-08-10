@@ -1,93 +1,93 @@
-﻿---
+---
 id: hydra
-title: Hydra Tool
-sidebar_label: Hydra Tool
+title: Hydra-Werkzeug
+sidebar_label: Hydra-Werkzeug
 sidebar_position: 3
 ---
 
 
-# My SSH cracker Tool
+# Mein SSH-Cracker
 
-This repository contains the source code for my own implementation of the `hydra` tool, a network logon cracker used for brute-force attacks against various protocols. This lightweight implementation focuses on SSH brute-force and dictionary attacks.
+Dieses Repository enthält den Quellcode meiner eigenen Umsetzung des `hydra`-Werkzeugs, eines Netzwerk-Logon-Crackers für Brute-Force gegen verschiedene Protokolle. Diese leichtgewichtige Umsetzung konzentriert sich auf SSH-Brute-Force und Wörterbuchangriffe.
 
-:::danger[Only for Testing Purposes]
-This tool is intended for educational and authorized penetration testing purposes only. Unauthorized use of this tool against systems that you do not have explicit permission to test is illegal and unethical.
+:::danger[Nur für Testzwecke]
+Dieses Werkzeug ist ausschließlich für Ausbildung und autorisierte Penetrationstests gedacht. Es gegen Systeme einzusetzen, für die du keine ausdrückliche Testerlaubnis hast, ist strafbar und unethisch.
 :::
 
-## Table of Contents
+## Inhalt
 
-- [Features](#features)
-- [Getting Started](#getting-started)
-- [Usage Examples](#usage-examples)
-  - [Brute-Force Attack](#brute-force-attack)
-  - [Dictionary Attack](#dictionary-attack)
-  - [All Hydra-Options](#all-hydra-options)
+- [Funktionen](#funktionen)
+- [Loslegen](#loslegen)
+- [Beispiele](#beispiele)
+  - [Brute-Force](#brute-force)
+  - [Wörterbuchangriff](#wörterbuchangriff)
+  - [Alle Hydra-Optionen](#alle-hydra-optionen)
 - [Logging](#logging)
 
-## Features
+## Funktionen
 
-This implementation covers the following features/options:
+Diese Umsetzung deckt folgende Funktionen ab:
 
-- **SSH Brute-Force Attack**: Attempts to crack SSH passwords by trying all combinations within a given length and character set.
-- **Dictionary Attack**: Uses a provided wordlist to attempt to find the correct password.
-- **Configurability**: Allows customization of minimum and maximum password lengths, as well as character sets.
-- **Logging**: Provides unstructured detailed logs of all connection attempts and results.
+- **SSH-Brute-Force**: probiert SSH-Passwörter über alle Kombinationen innerhalb einer gegebenen Länge und eines Zeichensatzes.
+- **Wörterbuchangriff**: nutzt eine vorgegebene Wortliste.
+- **Konfigurierbar**: minimale und maximale Passwortlänge sowie Zeichensätze sind einstellbar.
+- **Logging**: liefert unstrukturierte, ausführliche Protokolle aller Versuche und Ergebnisse.
 
-## Getting Started
+## Loslegen
 
-To get started with the `hydra` tool, follow these steps:
+So kommst du mit dem `hydra`-Werkzeug los:
 
-1. **Clone the Repository**:
+1. **Repository klonen**:
 
 ```shell
 git clone https://github.com/pascalnehlsen/hydra.git
 cd hydra
 ```
 
-2. **Create a Virtual Environment**:
+2. **Virtuelle Umgebung anlegen**:
 
 ```bash
 python -m venv myenv
 ```
 
-- Here, myenv is the name of the virtual environment. You can name it anything you like.
+- myenv ist der Name der Umgebung. Du kannst ihn beliebig wählen.
 
-3. **Activate the Virtual Environment**:
+3. **Virtuelle Umgebung aktivieren**:
 
-Using a virtual environment allows you to create isolated Python environments for different projects, ensuring that dependencies and package versions do not conflict with each other.
+Eine virtuelle Umgebung schafft isolierte Python-Umgebungen pro Projekt, sodass Abhängigkeiten und Paketversionen sich nicht in die Quere kommen.
 
-- For Windows (using Command Prompt or PowerShell):
+- Windows (Eingabeaufforderung oder PowerShell):
 
 ```bash
 myenv\Scripts\activate
 ```
 
-- For macOS/Linux:
+- macOS/Linux:
 
 ```bash
 source myenv/bin/activate
 ```
 
-- For Windows (using Git Bash or MINGW64):
+- Windows (Git Bash oder MINGW64):
 
 ```bash
 source myenv/Scripts/activate
 ```
 
-Once activated, you should see the name of your virtual environment (e.g., `(myenv)`) in your command prompt, indicating that you are now working inside that environment.
+Nach dem Aktivieren siehst du den Namen der Umgebung (etwa `(myenv)`) im Prompt, du arbeitest also nun darin.
 
-4. **Install Dependencies**:
-   Ensure you have **paramiko** installed. You can install it using the requirements.txt:
+4. **Abhängigkeiten installieren**:
+   Stelle sicher, dass **paramiko** installiert ist. Über die requirements.txt:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Usage Examples
+## Beispiele
 
-### Brute-Force Attack
+### Brute-Force
 
-To perform a brute-force attack without a wordlist, use the following command:
+Für einen Brute-Force ohne Wortliste:
 
 ```shell
 python hydra.py \
@@ -99,7 +99,7 @@ python hydra.py \
     -c <charset>
 ```
 
-Example:
+Beispiel:
 
 ```shell
 python hydra.py \
@@ -111,9 +111,9 @@ python hydra.py \
     -c abc123
 ```
 
-### Dictionary Attack
+### Wörterbuchangriff
 
-To perform a dictionary attack using a wordlist, use the following command:
+Für einen Wörterbuchangriff mit Wortliste:
 
 ```shell
 python hydra.py \
@@ -123,9 +123,9 @@ python hydra.py \
     -w <path_to_wordlist>
 ```
 
-- path_to_wordlist (`-w`): Path to the wordlist file (required for dictionary attack)
+- path_to_wordlist (`-w`): Pfad zur Wortliste (für den Wörterbuchangriff nötig)
 
-Example:
+Beispiel:
 
 ```shell
 python hydra.py \
@@ -135,21 +135,21 @@ python hydra.py \
     -w ./password.txt
 ```
 
-### All Hydra Options
+### Alle Hydra-Optionen
 
-| Option        | Shorthand | Description                                    | Default value | Required |
+| Option        | Kurzform  | Beschreibung                                   | Standardwert  | Pflicht |
 | ------------- | --------- | ---------------------------------------------- | ------------- | -------- |
-| `--username`  | `-u`      | Username for SSH login                         | root          | x        |
-| `--server`    | `-s`      | Server IP address or DNS                       | -             | x        |
-| `--port`      | `-p`      | Port for SSH connection                        | 22            |          |
-| `--wordlist`  | `-w`      | Path to the wordlist for dictionary attack     | -             |          |
-| `--character` | `-c`      | Charset for brute force attack                 | alphanumeric  |          |
-| `--minimum`   | `--min`   | Minimum password length for brute force attack | 1             |          |
-| `--maximum`   | `--max`   | Maximum password length for brute force attack | 4             |          |
+| `--username`  | `-u`      | Benutzername für den SSH-Login                 | root          | x        |
+| `--server`    | `-s`      | Server-IP oder DNS                             | -             | x        |
+| `--port`      | `-p`      | Port für die SSH-Verbindung                    | 22            |          |
+| `--wordlist`  | `-w`      | Pfad zur Wortliste für den Wörterbuchangriff   | -             |          |
+| `--character` | `-c`      | Zeichensatz für den Brute-Force                | alphanumerisch |          |
+| `--minimum`   | `--min`   | Minimale Passwortlänge beim Brute-Force        | 1             |          |
+| `--maximum`   | `--max`   | Maximale Passwortlänge beim Brute-Force        | 4             |          |
 
 ## Logging
 
-Logs are written to **hydra.log**. The **hydra.log** will be placed in your source code folder. If there is already a **hydra.log** in this folder, the generated log files are appended to the content You can check this file to review detailed information about the connection attempts and outcomes.
+Die Logs gehen nach **hydra.log** im Quellcode-Ordner. Liegt dort schon eine **hydra.log**, werden die neuen Einträge angehängt. In dieser Datei findest du die Details zu Verbindungsversuchen und Ergebnissen.
 
 ---
 

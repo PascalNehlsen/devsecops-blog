@@ -1,62 +1,62 @@
-﻿---
+---
 id: metascan
-title: PDF Download Tool
-sidebar_label: PDF Download Tool
+title: PDF-Download-Werkzeug
+sidebar_label: PDF-Download-Werkzeug
 sidebar_position: 5
 ---
 
 
-# PDF Download/ Scan Metadata Tool
+# PDF-Download- und Metadaten-Scan-Werkzeug
 
-This repository contains a Python tool that automates the process of downloading all PDF documents from a given webpage and extracting their metadata. The extracted metadata is then saved into a CSV file.
+Dieses Repository enthält ein Python-Werkzeug, das alle PDFs einer Webseite herunterlädt und ihre Metadaten ausliest. Die Metadaten werden in eine CSV-Datei geschrieben.
 
-:::danger[Only for Testing Purposes]
-This tool is intended for educational and authorized penetration testing purposes only. Unauthorized use of this tool against systems that you do not have explicit permission to test is illegal and unethical.
+:::danger[Nur für Testzwecke]
+Dieses Werkzeug ist ausschließlich für Ausbildung und autorisierte Penetrationstests gedacht. Es gegen Systeme einzusetzen, für die du keine ausdrückliche Testerlaubnis hast, ist strafbar und unethisch.
 :::
 
-## Table of Contents
+## Inhalt
 
-- [Features](#features)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
+- [Funktionen](#funktionen)
+- [Loslegen](#loslegen)
+  - [Voraussetzungen](#voraussetzungen)
   - [Installation](#installation)
-- [Usage](#usage)
-  - [Command-Line Options](#command-line-options)
-  - [Examples](#examples)
-- [Output CSV](#output-csv)
-- [Error Handling](#error-handling)
+- [Benutzung](#benutzung)
+  - [Kommandozeilen-Optionen](#kommandozeilen-optionen)
+  - [Beispiele](#beispiele)
+- [Ausgabe-CSV](#ausgabe-csv)
+- [Fehlerbehandlung](#fehlerbehandlung)
 
-## Features
+## Funktionen
 
-This tool offers the following features:
+Dieses Werkzeug bietet:
 
-- **Download PDFs**: Automatically downloads all PDF files found on a given webpage.
-- **Extract Metadata**: Extracts metadata from each PDF, including the following fields:
+- **PDFs herunterladen**: lädt automatisch alle PDFs einer Webseite herunter.
+- **Metadaten auslesen**: liest aus jedem PDF folgende Felder:
   - Title
   - Author
   - Creator
-  - Created (Creation Date)
-  - Modified (Modification Date)
+  - Created (Erstellungsdatum)
+  - Modified (Änderungsdatum)
   - Subject
   - Keywords
   - Description
   - Producer
   - PDF Version
-- **Save to CSV**: The extracted metadata is saved into a CSV file, where each row represents one PDF document.
+- **In CSV speichern**: schreibt die Metadaten in eine CSV, eine Zeile pro PDF.
 
-## Getting Started
+## Loslegen
 
-### Prerequisites
+### Voraussetzungen
 
-Before running the script, make sure you have the following installed:
+Vor dem Ausführen muss installiert sein:
 
-- **Python 3.7 or higher**
-- Python libraries:
+- **Python 3.7 oder höher**
+- Python-Bibliotheken:
   - `requests`
   - `beautifulsoup4`
   - `PyPDF2`
 
-You can install these dependencies using `pip`:
+Installieren mit `pip`:
 
 ```shell
 pip install requests beautifulsoup4 PyPDF2
@@ -64,53 +64,49 @@ pip install requests beautifulsoup4 PyPDF2
 
 ### Installation
 
-**Clone the Repository**:
+**Repository klonen**:
 
 ```shell
 git clone https://github.com/yourusername/metascan.git
 cd metascan
 ```
 
-## Usage
+## Benutzung
 
-This tool is run via the command line and offers a few options for customizing the operation.
+Das Werkzeug läuft über die Kommandozeile und bietet ein paar Optionen.
 
-### Command-Line Options
+### Kommandozeilen-Optionen
 
-| Option | Description                                  | Required |
-| ------ | -------------------------------------------- | -------- |
-| `-u`   | The URL of the webpage to scan for PDF files | x        |
-| `-n`   | The name of the output CSV file              | x        |
+| Option | Beschreibung                                   | Pflicht |
+| ------ | ---------------------------------------------- | -------- |
+| `-u`   | URL der Webseite, die nach PDFs durchsucht wird | x        |
+| `-n`   | Name der Ausgabe-CSV                           | x        |
 
-### Examples
+### Beispiele
 
-**Download PDFs and Extract Metadata from a Webpage**
-
-To download all PDFs from a given webpage and extract their metadata:
+**PDFs von einer Webseite herunterladen und Metadaten auslesen**
 
 ```shell
 python metascan.py -u https://example.com -n output.csv
 ```
 
-- This command will scan `https://example.com` for PDF files, download them, and save their metadata to a file called `output.csv`.
+- Dieser Befehl durchsucht `https://example.com` nach PDFs, lädt sie herunter und schreibt ihre Metadaten in `output.csv`.
 
-**Specifying a Different Output File**
-
-You can specify a different name for the output CSV file:
+**Anderen Ausgabedateinamen angeben**
 
 ```shell
 python metascan.py -u https://example.com -n my_metadata.csv
 ```
 
-- This will save the metadata to `my_metadata.csv` instead of the default `output.csv`.
+- Speichert die Metadaten in `my_metadata.csv` statt in die Standarddatei `output.csv`.
 
-## Output CSV
+## Ausgabe-CSV
 
-The output CSV file will contain metadata for each PDF file in a structured format. Each row corresponds to one PDF, and the following fields (columns) are included:
+Die Ausgabe-CSV enthält die Metadaten je PDF in strukturierter Form. Jede Zeile steht für ein PDF, mit diesen Feldern (Spalten):
 
-## Example CSV Output
+## Beispielausgabe
 
-The CSV file generated by the tool will look like the table below, with semicolons (;) separating the values:
+Die vom Werkzeug erzeugte CSV sieht aus wie die Tabelle unten, mit Semikolon (;) als Trennzeichen:
 
 | Title       | Author     | Creator   | Created    | Modified   | Subject | Keywords | Description   | Producer    | PDF Version |
 | ----------- | ---------- | --------- | ---------- | ---------- | ------- | -------- | ------------- | ----------- | ----------- |
@@ -119,13 +115,13 @@ The CSV file generated by the tool will look like the table below, with semicolo
 | Test PDF    | None       | None      | 2020-12-12 | 2020-12-13 | Manual  | None     | User manual   | Foxit       | 1.4         |
 | Report 2022 | Mark Smith | ReportGen | 2022-02-15 | 2022-02-16 | Annual  | Report   | Yearly Report | Adobe       | 1.7         |
 
-The entries in the CSV file are separated by semicolons (`;`).
+Die Einträge in der CSV sind durch Semikolon (`;`) getrennt.
 
-## Error Handling
+## Fehlerbehandlung
 
-In cases where a PDF file cannot be read or if the metadata is incomplete, the tool will log the error and move on to the next file without stopping the entire process. It will also print a message in the terminal indicating which files had issues.
+Lässt sich ein PDF nicht lesen oder sind die Metadaten unvollständig, protokolliert das Werkzeug den Fehler und macht mit der nächsten Datei weiter, ohne den ganzen Vorgang abzubrechen. Im Terminal erscheint zudem eine Meldung, welche Dateien Probleme hatten.
 
-Example error message:
+Beispiel für eine Fehlermeldung:
 
 ```shell
 Error reading metadata from pdf_downloads/document.pdf: EOF marker not found

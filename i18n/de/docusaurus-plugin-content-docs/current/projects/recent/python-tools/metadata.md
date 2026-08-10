@@ -1,103 +1,103 @@
-﻿---
+---
 id: metadata
-title: PDF Metadata Scan Tool
-sidebar_label: PDF Metadata Scan Tool
+title: PDF-Metadaten-Scan-Werkzeug
+sidebar_label: PDF-Metadaten-Scan-Werkzeug
 sidebar_position: 4
 ---
 
 
-# My PDF Metadata Scan Tool
+# Mein PDF-Metadaten-Scan-Werkzeug
 
-This repository contains the source code for my custom implementation of the `metadata` tool. This lightweight tool automates the extraction of metadata from PDF documents and exports them into a CSV file. It supports both individual PDF files and directories containing multiple PDFs.
+Dieses Repository enthält den Quellcode meiner eigenen Umsetzung des `metadata`-Werkzeugs. Es liest Metadaten aus PDFs aus und exportiert sie in eine CSV-Datei. Es verarbeitet einzelne PDFs und Verzeichnisse mit mehreren PDFs.
 
-:::danger[Only for Testing Purposes]
-This tool is intended for educational and authorized penetration testing purposes only. Unauthorized use of this tool against systems that you do not have explicit permission to test is illegal and unethical.
+:::danger[Nur für Testzwecke]
+Dieses Werkzeug ist ausschließlich für Ausbildung und autorisierte Penetrationstests gedacht. Es gegen Systeme einzusetzen, für die du keine ausdrückliche Testerlaubnis hast, ist strafbar und unethisch.
 :::
 
-## Table of Contents
+## Inhalt
 
-- [Features](#features)
-- [Getting Started](#getting-started)
-- [Usage Examples](#usage-examples)
-  - [Options](#options)
-  - [Extract Metadata from a Single File](#extract-metadata-from-a-single-file)
-  - [Extract Metadata from a Directory](#extract-metadata-from-a-directory)
+- [Funktionen](#funktionen)
+- [Loslegen](#loslegen)
+- [Beispiele](#beispiele)
+  - [Optionen](#optionen)
+  - [Metadaten aus einer einzelnen Datei](#metadaten-aus-einer-einzelnen-datei)
+  - [Metadaten aus einem Verzeichnis](#metadaten-aus-einem-verzeichnis)
 
-## Features
+## Funktionen
 
-This implementation covers the following features/options:
+Diese Umsetzung deckt folgende Funktionen ab:
 
-- **Metadata Extraction**: Extracts metadata such as title, author, creation date, and more from PDF documents.
-- **Single File or Directory Support**: Handles both individual PDFs and directories containing multiple PDFs.
-- **CSV Export**: Outputs metadata into a CSV file with semicolon-separated values.
-- **Configurable Output**: User can specify the output filename.
+- **Metadaten auslesen**: liest Metadaten wie Titel, Autor, Erstellungsdatum und mehr aus PDFs.
+- **Einzeldatei oder Verzeichnis**: verarbeitet einzelne PDFs und ganze Verzeichnisse.
+- **CSV-Export**: schreibt die Metadaten in eine CSV-Datei mit Semikolon als Trennzeichen.
+- **Konfigurierbare Ausgabe**: der Dateiname der Ausgabe ist wählbar.
 
-## Getting Started
+## Loslegen
 
-To get started with this `metadata` tool, follow these steps:
+So kommst du mit dem `metadata`-Werkzeug los:
 
-1. **Clone the Repository**:
+1. **Repository klonen**:
 
 ```shell
 git clone https://github.com/yourusername/metadata-tool.git
 cd metadata-tool
 ```
 
-2. **Install Dependencies**:
+2. **Abhängigkeiten installieren**:
 
 ```shell
 pip install PyPDF2
 ```
 
-## Usage Examples
+## Beispiele
 
-### Options
+### Optionen
 
-| Option        | Shorthand | Description                              | Required |
+| Option        | Kurzform  | Beschreibung                              | Pflicht |
 | ------------- | --------- | ---------------------------------------- | -------- |
-| `--directory` | `-d`      | Specify path to a single PDF file        |          |
-| `--file`      | `-f`      | Specify path to a directory of PDF files |          |
-| `--name`      | `-n`      | Specify output CSV file name             | x        |
+| `--directory` | `-d`      | Pfad zu einem einzelnen PDF              |          |
+| `--file`      | `-f`      | Pfad zu einem Verzeichnis mit PDFs       |          |
+| `--name`      | `-n`      | Name der Ausgabe-CSV                     | x        |
 
-- One option is required: `--directory` or `--file`
+- Eine Option ist Pflicht: `--directory` oder `--file`
 
-### Extract Metadata from a Single File
+### Metadaten aus einer einzelnen Datei
 
-To extract metadata from a single PDF file and save it to a CSV file, use the following command:
+Um Metadaten aus einem einzelnen PDF in eine CSV zu schreiben:
 
 ```shell
 python metadata.py -f <path_to_pdf> -n <output_filename>
 ```
 
-- `path_to_pdf`: The path to the PDF file.
-- `output_filename`: The name of the CSV file where the metadata will be stored.
+- `path_to_pdf`: der Pfad zum PDF.
+- `output_filename`: der Name der CSV, in der die Metadaten landen.
 
-Example:
+Beispiel:
 
 ```shell
 python metadata.py -f example.pdf -n metadata.csv
 ```
 
-### Extract Metadata from a Directory
+### Metadaten aus einem Verzeichnis
 
-To extract metadata from all PDF files in a directory and save them to a CSV file, use the following command:
+Um Metadaten aus allen PDFs eines Verzeichnisses in eine CSV zu schreiben:
 
 ```shell
 python metadata.py -d <path_to_directory> -n <output_filename>
 ```
 
-- `path_to_directory`: The path to the directory containing PDF files.
-- `output_filename`: The name of the CSV file where the metadata will be stored.
+- `path_to_directory`: der Pfad zum Verzeichnis mit den PDFs.
+- `output_filename`: der Name der CSV, in der die Metadaten landen.
 
-Example:
+Beispiel:
 
 ```shell
 python metadata.py -d /path/to/pdf/folder -n metadata.csv
 ```
 
-## CSV Output Format
+## Format der CSV
 
-The output CSV file will contain the following metadata fields for each PDF:
+Die Ausgabe-CSV enthält je PDF diese Metadatenfelder:
 
 - Title
 - Author
@@ -110,7 +110,7 @@ The output CSV file will contain the following metadata fields for each PDF:
 - Producer
 - PDF Version
 
-Each entry will be separated by a semicolon (`;`) as per your specification.
+Die Einträge sind wie vorgesehen durch Semikolon (`;`) getrennt.
 
 ---
 

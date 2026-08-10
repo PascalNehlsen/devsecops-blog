@@ -1,56 +1,54 @@
 ---
 id: api-only-xss
-title: API Only XSS
-sidebar_label: API Only XSS
+title: API-only XSS
+sidebar_label: API-only XSS
 sidebar_position: 2
 ---
 
-# Admin Registration Challenge Report
+# Bericht: Challenge "API-only XSS"
 
-# API-only XSS Challenge Report
-
-:::danger[Only for Testing Purposes]
-This tool is intended for educational and authorized penetration testing purposes only. Unauthorized use of this tool against systems that you do not have explicit permission to test is illegal and unethical.
+:::danger[Nur für Testzwecke]
+Dieses Werkzeug ist ausschließlich für Ausbildung und autorisierte Penetrationstests gedacht. Es gegen Systeme einzusetzen, für die du keine ausdrückliche Testerlaubnis hast, ist strafbar und unethisch.
 :::
 
-**Project**: OWASP Juice Shop - API-only XSS Challenge (XSS) <br/ >
-**Tools**: Kali Linux with Burp Suite <br/ >
-**Author**: Pascal Nehlsen <br/ >
-**GitHub Link**: [https://github.com/PascalNehlsen/juice-shop-challenges/blob/main/challenges/api-only-xss.md](https://github.com/PascalNehlsen/juice-shop-challenges/blob/main/challenges/api-only-xss.md)
+**Projekt**: OWASP Juice Shop, Challenge "API-only XSS" (XSS) <br/ >
+**Werkzeuge**: Kali Linux mit Burp Suite <br/ >
+**Autor**: Pascal Nehlsen <br/ >
+**GitHub-Link**: [https://github.com/PascalNehlsen/juice-shop-challenges/blob/main/challenges/api-only-xss.md](https://github.com/PascalNehlsen/juice-shop-challenges/blob/main/challenges/api-only-xss.md)
 
-## Table of Contents
+## Inhalt
 
-1. [Introduction](#introduction)
-2. [Objective](#objective)
-3. [Approach](#approach)
-   - [Step 1: Information Gathering](#step-1-information-gathering)
-   - [Step 2: Analyzing API Endpoints](#step-2-analyzing-api-endpoints)
-   - [Step 3: Injecting XSS Payload](#step-3-injecting-xss-payload)
-4. [Conclusion](#conclusion)
+1. [Einführung](#einführung)
+2. [Ziel](#ziel)
+3. [Vorgehen](#vorgehen)
+   - [Schritt 1: Informationen sammeln](#schritt-1-informationen-sammeln)
+   - [Schritt 2: API-Endpunkte analysieren](#schritt-2-api-endpunkte-analysieren)
+   - [Schritt 3: XSS-Payload einschleusen](#schritt-3-xss-payload-einschleusen)
+4. [Fazit](#fazit)
 
-### Introduction
+### Einführung
 
-The OWASP Juice Shop is a deliberately vulnerable web application designed to demonstrate security issues, including Cross-Site Scripting (XSS). This report details the steps I followed to complete the API-only XSS challenge.
+Der OWASP Juice Shop ist eine absichtlich verwundbare Webanwendung, die Sicherheitsprobleme vorführt, darunter Cross-Site Scripting (XSS). Dieser Bericht beschreibt die Schritte, mit denen ich die Challenge "API-only XSS" gelöst habe.
 
-### Objective
+### Ziel
 
-The objective of this challenge was to exploit an XSS vulnerability through the API endpoints of the Juice Shop application. The approach involved embedding malicious scripts into a product's description to see if these would execute in the browser. Successfully completing the challenge required persisting an XSS payload within the application.
+Ziel war, eine XSS-Schwachstelle über die API-Endpunkte des Juice Shop auszunutzen. Der Weg dahin: schädliche Skripte in die Beschreibung eines Produkts einbetten und prüfen, ob sie im Browser ausgeführt werden. Gelöst ist die Challenge, wenn ein XSS-Payload dauerhaft in der Anwendung liegt.
 
-### Approach
+### Vorgehen
 
-#### Step 1: Information Gathering
+#### Schritt 1: Informationen sammeln
 
-To identify where persistent data is stored within the shop, I examined product descriptions as a likely target. Using Burp Suite's "Intercept" feature, I intercepted the HTTP requests within the application to analyze the API calls involved.
+Um herauszufinden, wo dauerhafte Daten im Shop liegen, habe ich Produktbeschreibungen als wahrscheinliches Ziel betrachtet. Mit der "Intercept"-Funktion von Burp Suite habe ich die HTTP-Requests abgefangen, um die beteiligten API-Aufrufe zu untersuchen.
 
 <div align="center">
 
-![Information Gathering](../../../assets/images/juice-shop/api-only-xss/information.png)
+![Informationen sammeln](../../../../../../../docs/assets/images/juice-shop/api-only-xss/information.png)
 
 </div>
 
-Upon reviewing the HTTP history, I found a `GET` request to `/api/Quantitys/`. I then sent this request to Burp Suite's Repeater tool for modification. By changing the API endpoint to `/api/Products/`, I accessed a complete JSON response containing all product details.
+In der HTTP-History fand ich einen `GET`-Request an `/api/Quantitys/`. Diesen schickte ich in den Repeater von Burp Suite. Als ich den Endpunkt auf `/api/Products/` änderte, bekam ich eine vollständige JSON-Antwort mit allen Produktdaten.
 
-Sample Product in JSON Format:
+Beispielprodukt im JSON-Format:
 
 ```json
 {
@@ -66,19 +64,19 @@ Sample Product in JSON Format:
 }
 ```
 
-#### Step 2: Analyzing API Endpoints
+#### Schritt 2: API-Endpunkte analysieren
 
-After identifying the product data, I further explored the Juice Shop API endpoints. By sending an `OPTIONS` request to `/api/Products/`, I confirmed that the API supports standard HTTP methods (GET, POST, PUT, PATCH).
+Nachdem ich die Produktdaten hatte, sah ich mir die API-Endpunkte genauer an. Ein `OPTIONS`-Request an `/api/Products/` bestätigte, dass die API die üblichen HTTP-Methoden unterstützt (GET, POST, PUT, PATCH).
 
 ```bash
 OPTIONS /api/Products/ HTTP/1.1
 ```
 
-Since attempts to update product data with the `PATCH` method were unsuccessful (resulting in a 500 status code), I opted to use the `PUT` method, which replaces data in its entirety. Additionally, I set the `Content-Type` to `application/json`, as the GET response data format was JSON. With IDs listed in the JSON data, I accessed the first product directly via `/api/products/1`.
+Da Versuche, die Produktdaten mit `PATCH` zu ändern, fehlschlugen (Status 500), nahm ich `PUT`, das die Daten vollständig ersetzt. Zusätzlich setzte ich `Content-Type` auf `application/json`, weil die GET-Antwort JSON war. Über die IDs in den JSON-Daten erreichte ich das erste Produkt direkt unter `/api/products/1`.
 
-I first tested updating the product description without any XSS payload:
+Zuerst testete ich das Ändern der Beschreibung ohne XSS-Payload:
 
-**PUT Request to Update Product Description**
+**PUT-Request zum Ändern der Produktbeschreibung**
 
 ```bash
 PUT /api/products/1 HTTP/1.1
@@ -91,7 +89,7 @@ Connection: keep-alive
 }
 ```
 
-The server responded with a 200 status code, confirming the update:
+Der Server antwortete mit Status 200 und bestätigte die Änderung:
 
 ```json
 {
@@ -110,17 +108,17 @@ The server responded with a 200 status code, confirming the update:
 }
 ```
 
-On checking the OWASP Juice Shop UI, the product description was successfully updated.
+In der Oberfläche des Juice Shop war die Beschreibung erfolgreich geändert.
 
 <div align="center">
 
-![New Product](../../../assets/images/juice-shop/api-only-xss/new-product.png)
+![Neues Produkt](../../../../../../../docs/assets/images/juice-shop/api-only-xss/new-product.png)
 
 </div>
 
-#### Step 3: Injecting XSS Payload
+#### Schritt 3: XSS-Payload einschleusen
 
-To complete the challenge, I attempted to add an iframe to the description with a JavaScript payload:
+Um die Challenge zu lösen, versuchte ich, ein iframe mit JavaScript-Payload in die Beschreibung zu legen:
 
 ```json
 {
@@ -128,23 +126,23 @@ To complete the challenge, I attempted to add an iframe to the description with 
 }
 ```
 
-When testing without escaped double quotes, the server returned a 500 error due to syntax issues. Adding backslashes before the double quotes (`\"`) allowed the payload to be processed, resulting in a 200 status code.
+Ohne escapte Anführungszeichen gab der Server wegen Syntaxfehlern eine 500 zurück. Mit Backslashes vor den Anführungszeichen (`\"`) wurde der Payload verarbeitet und der Status war 200.
 
-Upon refreshing the OWASP Juice Shop page, I observed the modified product description. The XSS payload executed as intended when viewing the product, confirming the successful exploitation of the XSS vulnerability.
+Nach dem Neuladen der Seite sah ich die geänderte Beschreibung. Der XSS-Payload wurde beim Ansehen des Produkts wie beabsichtigt ausgeführt, die Schwachstelle war damit bestätigt.
 
 <div align="center">
 
-![Information Gathering](../../../assets/images/juice-shop/api-only-xss/result.png)
+![Ergebnis](../../../../../../../docs/assets/images/juice-shop/api-only-xss/result.png)
 
 </div>
 
-### Conclusion
+### Fazit
 
-This test successfully completed the API-only XSS Challenge by embedding a persistent XSS payload in the description of the Apple Juice product through a direct API request, bypassing the web frontend.
+Der Test hat die Challenge gelöst, indem ein dauerhafter XSS-Payload über einen direkten API-Request in die Beschreibung des Apfelsaft-Produkts eingebettet wurde, am Web-Frontend vorbei.
 
 <div align="center">
 
-![Challenge Accepted](../../../assets/images/juice-shop/api-only-xss/challenge-accept.png)
+![Challenge gelöst](../../../../../../../docs/assets/images/juice-shop/api-only-xss/challenge-accept.png)
 
 </div>
 

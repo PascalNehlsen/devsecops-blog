@@ -1,92 +1,92 @@
 ---
 id: conduit
-title: Conduit Deploy with Docker Compose
-sidebar_label: Conduit Deploy
+title: Conduit ausrollen mit Docker Compose
+sidebar_label: Conduit ausrollen
 sidebar_position: 2
 ---
 
 
-# Conduit Deploy with Docker Compose
+# Conduit ausrollen mit Docker Compose
 
-## Table of Contents
+## Inhalt
 
-1. [Description](#description)
-2. [Quickstart](#quickstart)
-3. [Usage](#usage)
-   - [Configuration](#configuration)
+1. [Beschreibung](#beschreibung)
+2. [Schnellstart](#schnellstart)
+3. [Benutzung](#benutzung)
+   - [Konfiguration](#konfiguration)
 
-## Description
+## Beschreibung
 
-This repository sets up a multi-container environment using Docker Compose to run both the Conduit Frontend and Conduit Backend applications.
-The Conduit Frontend is forked from <br /> [Developer-Akademie-GmbH/conduit-frontend](https://github.com/Developer-Akademie-GmbH/conduit-frontend), <br /> and the Conduit Backend is forked from <br /> [https://github.com/Developer-Akademie-GmbH/conduit-backend](https://github.com/Developer-Akademie-GmbH/conduit-backend) and integrated as submodules.
+Dieses Repository baut mit Docker Compose eine Umgebung aus mehreren Containern auf, in der Conduit-Frontend und Conduit-Backend zusammen laufen.
+Das Conduit-Frontend ist geforkt von <br /> [Developer-Akademie-GmbH/conduit-frontend](https://github.com/Developer-Akademie-GmbH/conduit-frontend), <br /> das Conduit-Backend von <br /> [https://github.com/Developer-Akademie-GmbH/conduit-backend](https://github.com/Developer-Akademie-GmbH/conduit-backend), beide als Submodule eingebunden.
 
-Both the frontend and backend are containerized, and Docker Compose is used to orchestrate their operation, ensuring they work seamlessly together. This setup provides a consistent and scalable development environment, simplifying the process of running both applications in parallel.
+Frontend und Backend sind containerisiert, und Docker Compose orchestriert ihren Betrieb, damit sie reibungslos zusammenarbeiten. Das ergibt eine gleichförmige, skalierbare Entwicklungsumgebung und macht es einfach, beide Anwendungen parallel zu betreiben.
 
-## Quickstart
+## Schnellstart
 
-### Prerequisites
+### Voraussetzungen
 
-Ensure you have the following tools installed:
+Diese Werkzeuge müssen installiert sein:
 
 - [Docker](https://www.docker.com/products/docker-desktop)
 
-  - Docker Compose was included with Docker versions 20.10 and later, but recently it is no longer included by default. For the latest Docker versions, you will need to install Docker Compose manually as a plugin. Follow the official instructions for detailed steps.
+  - Docker Compose war in Docker 20.10 und später enthalten, ist es inzwischen aber nicht mehr standardmäßig. Bei aktuellen Docker-Versionen musst du Docker Compose als Plugin von Hand installieren. Die offizielle Anleitung beschreibt die Schritte.
 
-- For a **Frontend** Quickstart, refer to the [Conduit Frontend README](https://github.com/Developer-Akademie-GmbH/conduit-frontend/blob/master/README.md)
-- For a **Backend** Quickstart, refer to the [Conduit Backend README](https://github.com/Developer-Akademie-GmbH/conduit-backend/blob/master/README.md)
+- Für den Schnellstart des **Frontends** siehe die [README des Conduit-Frontends](https://github.com/Developer-Akademie-GmbH/conduit-frontend/blob/master/README.md)
+- Für den Schnellstart des **Backends** siehe die [README des Conduit-Backends](https://github.com/Developer-Akademie-GmbH/conduit-backend/blob/master/README.md)
 
-1. Clone the repository:
+1. Repository klonen:
 
    ```bash
    git clone https://github.com/PascalNehlsen/conduit.git
    cd conduit
    ```
 
-2. Copy the `example.env` file to `.env`:
+2. `example.env` nach `.env` kopieren:
 
    ```bash
    cp example.env .env
    ```
 
-3. Init submodules
+3. Submodule initialisieren
 
    ```bash
    git submodule update --init --recursive
    ```
 
-4. Build and start the application using Docker Compose:
+4. Anwendung mit Docker Compose bauen und starten:
 
    ```bash
    docker-compose up --build -d
    ```
 
-5. Access the application:
+5. Anwendung aufrufen:
 
-- The **Frontend** should be accessible at `http://localhost:8282` in your web browser.
-- The **Backend** should be accessible at `http://localhost:8000/admin` in your web browser.
+- Das **Frontend** sollte im Browser unter `http://localhost:8282` erreichbar sein.
+- Das **Backend** sollte im Browser unter `http://localhost:8000/admin` erreichbar sein.
 
-5. To stop the application, use:
+5. Zum Stoppen:
    ```bash
    docker-compose down
    ```
 
-## Usage
+## Benutzung
 
-Once the application is running, you can interact with the Conduit API via the **Backend** at `http://localhost:8000`. The **Frontend** will communicate with the API to fetch and display data.
+Sobald die Anwendung läuft, kannst du über das **Backend** unter `http://localhost:8000` mit der Conduit-API arbeiten. Das **Frontend** spricht die API an, um Daten zu holen und anzuzeigen.
 
-### Configuration
+### Konfiguration
 
-You need to configure several environment variables for the Django project to work properly. Below is an example of the necessary variables to set in your example.env file:
+Für das Django-Projekt sind einige Umgebungsvariablen zu setzen. Hier die nötigen Werte für deine `example.env`:
 
-| Variable                    | Description                                                                                  | Default value          |
+| Variable                    | Beschreibung                                                                                 | Standardwert           |
 | --------------------------- | -------------------------------------------------------------------------------------------- | ---------------------- |
-| `DJANGO_SUPERUSER_USERNAME` | The username for the Django admin superuser.                                                 | admin                  |
-| `DJANGO_SUPERUSER_EMAIL`    | The email address associated with the Django admin superuser.                                | admin@example.com      |
-| `DJANGO_SUPERUSER_PASSWORD` | The password for the Django admin superuser                                                  | adminpassword          |
-| `SECRET_KEY`                | A crucial security key used by Django for cryptographic signing                              | example.env#SECRET_KEY |
-| `DEBUG`                     | Set to True for local development to enable debugging features.                              | False                  |
-| `ALLOWED_HOSTS`             | A comma-separated list of allowed hostnames or IP addresses that your Django site can serve. | 127.0.0.1, localhost   |
-| `CORS_ALLOWED_ORIGINS`      | A list of allowed origins for cross-origin requests.                                         | http://localhost:8282  |
+| `DJANGO_SUPERUSER_USERNAME` | Benutzername des Django-Admin-Superusers.                                                    | admin                  |
+| `DJANGO_SUPERUSER_EMAIL`    | E-Mail-Adresse des Django-Admin-Superusers.                                                  | admin@example.com      |
+| `DJANGO_SUPERUSER_PASSWORD` | Passwort des Django-Admin-Superusers.                                                        | adminpassword          |
+| `SECRET_KEY`                | Zentraler Sicherheitsschlüssel, den Django für kryptografisches Signieren nutzt.              | example.env#SECRET_KEY |
+| `DEBUG`                     | Für die lokale Entwicklung auf True, um Debugging zu aktivieren.                              | False                  |
+| `ALLOWED_HOSTS`             | Kommaseparierte Liste erlaubter Hostnamen oder IP-Adressen, die die Django-Seite bedienen darf. | 127.0.0.1, localhost   |
+| `CORS_ALLOWED_ORIGINS`      | Liste erlaubter Origins für Cross-Origin-Anfragen.                                            | http://localhost:8282  |
 
 ---
 

@@ -1,114 +1,114 @@
-﻿---
+---
 id: vm-setup
-title: VM Setup
-sidebar_label: VM Setup
+title: VM-Setup
+sidebar_label: VM-Setup
 sidebar_position: 4
 ---
 
 
-# Virtual Machine Setup with Nginx and SSH Configuration
+# Virtuelle Maschine mit nginx und SSH einrichten
 
-In this blog post, you’ll learn how to configure an existing virtual machine (VM) with nginx as a web server while also setting up a secure SSH configuration. We will walk through generating SSH keys, disabling password-based authentication, using SSH aliases, and managing multiple SSH identities.
+In diesem Beitrag richtest du eine bestehende virtuelle Maschine (VM) mit nginx als Webserver ein und konfigurierst SSH sicher. Wir gehen durch das Erzeugen von SSH-Keys, das Abschalten der Passwort-Anmeldung, SSH-Aliase und den Umgang mit mehreren SSH-Identitäten.
 
-## Quick Start (README)
+## Schnellstart (README)
 
-### Prerequisites
+### Voraussetzungen
 
-- A Linux-based server with SSH access
-- Root or sudo privileges
+- Ein Linux-Server mit SSH-Zugang
+- root- oder sudo-Rechte
 
-1. Generate an SSH Key
-   Generate an SSH key on your local machine to secure access to your server:
+1. SSH-Key erzeugen
+   Erzeuge auf deiner lokalen Maschine einen SSH-Key, um den Zugriff auf den Server abzusichern:
 
 ```bash
 ssh-keygen -t ed25519
 ```
 
-Follow the instructions and store the key in a secure location. Optionally, you can add a passphrase for extra security.
+Folge den Hinweisen und lege den Key an einem sicheren Ort ab. Optional kannst du eine Passphrase setzen.
 
-2. Login to the VM
-   Login to your virtual machine using SSH (replace with your VM’s IP address):
+2. An der VM anmelden
+   Melde dich per SSH an deiner VM an (die IP-Adresse ersetzen):
 
 ```bash
 ssh USER@192.655.265.55
 ```
 
-Accept the fingerprint and enter your server’s password.
+Akzeptiere den Fingerprint und gib das Serverpasswort ein.
 
-3. Store the SSH Key on the VM
-   Copy your public SSH key to the VM:
+3. SSH-Key auf der VM ablegen
+   Kopiere deinen öffentlichen SSH-Key auf die VM:
 
 ```bash
 ssh-copy-id -i ~/.ssh/key.pub USER@192.655.265.55
 ```
 
-Now you can log in using the key:
+Jetzt kannst du dich mit dem Key anmelden:
 
 ```bash
 ssh -i ~/.ssh/key.pub USER@192.655.265.55
 ```
 
-4. Disable Password Authentication
-   For enhanced security, disable password-based login on the server.
+4. Passwort-Anmeldung abschalten
+   Für mehr Sicherheit schaltest du die Anmeldung per Passwort auf dem Server ab.
 
-- First, verify that you can log in with your SSH key.
-- Edit the SSH configuration on the server:
+- Prüfe zuerst, dass die Anmeldung mit dem SSH-Key funktioniert.
+- Bearbeite die SSH-Konfiguration auf dem Server:
 
 ```bash
 sudo nano /etc/ssh/sshd_config
 ```
 
-Find the `PasswordAuthentication` line and change it from:
+Finde die Zeile `PasswordAuthentication` und ändere sie von:
 
 ```bash
 #PasswordAuthentication no
 ```
 
-to:
+zu:
 
 ```bash
 PasswordAuthentication no
 ```
 
-4. Save the file and restart the SSH service:
+4. Datei speichern und den SSH-Dienst neu starten:
 
 ```bash
 sudo systemctl restart ssh.service
 ```
 
-5. Install and Configure Nginx
-   Install nginx to run the server as a web server:
+5. nginx installieren und konfigurieren
+   Installiere nginx, damit der Server als Webserver arbeitet:
 
-- Update the package repositories:
+- Paketquellen aktualisieren:
 
 ```bash
 sudo apt update
 ```
 
-- Install nginx:
+- nginx installieren:
 
 ```bash
 sudo apt install nginx -y
 ```
 
-Open the server in your browser (using the VM's IP address).
+Öffne den Server im Browser (über die IP-Adresse der VM).
 
-6. Set Up an Alternate Index for Nginx
-   Create an alternative index page and configure nginx to serve it on a different port (8081).
+6. Zweite Index-Seite für nginx einrichten
+   Lege eine alternative Index-Seite an und lass nginx sie auf einem anderen Port (8081) ausliefern.
 
-- Create a new directory for the alternate site:
+- Neues Verzeichnis für die zweite Seite anlegen:
 
 ```bash
 sudo mkdir /var/www/alternatives
 ```
 
-- Create the new index.html:
+- Die neue index.html erzeugen:
 
 ```bash
 sudo touch /var/www/alternatives/your-index.html
 ```
 
-- Add content to `your-index.html`:
+- Inhalt in `your-index.html` schreiben:
 
 ```bash
 <!DOCTYPE html>
@@ -124,13 +124,13 @@ sudo touch /var/www/alternatives/your-index.html
 </html>
 ```
 
-- Configure nginx to serve this site on port 8081:
+- nginx so konfigurieren, dass die Seite auf Port 8081 läuft:
 
 ```bash
 sudo nano /etc/nginx/sites-enabled/alternatives
 ```
 
-- Add the following configuration:
+- Diese Konfiguration eintragen:
 
 ```nginx
 server {
@@ -146,39 +146,39 @@ server {
 }
 ```
 
-- Restart the nginx service:
+- nginx neu starten:
 
 ```bash
 sudo service nginx restart
 ```
 
-Open the server in your browser with the VM’s IP address and port 8081.
+Öffne den Server im Browser mit der IP-Adresse der VM und Port 8081.
 
-# Detailed Explanation (Writeup)
+# Ausführliche Erklärung (Writeup)
 
-1. Why Use SSH Keys and Disable Password Authentication?
-   SSH keys provide stronger authentication compared to password-based login. By disabling password login, you add an extra layer of security, reducing the risk of brute-force attacks. This is especially important when managing servers in production environments.
+1. Warum SSH-Keys und warum Passwort-Anmeldung abschalten?
+   SSH-Keys authentifizieren stärker als Passwörter. Wer die Passwort-Anmeldung abschaltet, nimmt Brute-Force-Angriffen die Angriffsfläche. Das zählt besonders, wenn du Server in Produktion betreibst.
 
-2. Setting Up Nginx for Multiple Sites
-   By configuring nginx to serve an alternative `index.html` on a different port, you can host multiple websites or test environments on the same server. This is a useful approach for separating staging environments or hosting multiple microservices.
+2. nginx für mehrere Seiten einrichten
+   Wenn nginx eine zweite `index.html` auf einem anderen Port ausliefert, kannst du mehrere Websites oder Testumgebungen auf demselben Server betreiben. Praktisch, um Staging zu trennen oder mehrere Microservices zu hosten.
 
-3. Using SSH Aliases for Easier Connections
-   Instead of typing out long SSH commands every time, you can create an alias for frequently accessed servers. For example, add the following alias to your shell configuration (~/.bashrc or ~/.zshrc):
+3. SSH-Aliase für kürzere Befehle
+   Statt jedes Mal einen langen SSH-Befehl zu tippen, legst du für häufig genutzte Server einen Alias an. Zum Beispiel in deiner Shell-Konfiguration (~/.bashrc oder ~/.zshrc):
 
 ```bash
 alias myserver="ssh -o StrictHostKeyChecking=False -i ~/.ssh/key.pub USER@192.655.265.55"
 ```
 
-This allows you to connect to your server by simply typing:
+Damit verbindest du dich mit:
 
 ```bash
 myserver
 ```
 
-4. Managing Multiple SSH Identities
-   If you work with multiple servers, each with its own SSH key, you can manage them using the SSH configuration file. This allows you to use different keys for different servers without having to specify them each time you connect.
+4. Mehrere SSH-Identitäten verwalten
+   Wenn du mit mehreren Servern arbeitest, die je einen eigenen SSH-Key haben, verwaltest du sie über die SSH-Konfigurationsdatei. Dann musst du den Key nicht bei jeder Verbindung angeben.
 
-Edit your `~/.ssh/config` file and add an entry for each server:
+Bearbeite `~/.ssh/config` und lege pro Server einen Eintrag an:
 
 ```bash
 Host myserver
@@ -187,17 +187,17 @@ Host myserver
     IdentityFile ~/.ssh/key
 ```
 
-Now you can connect to your server with:
+Jetzt verbindest du dich mit:
 
 ```bash
 ssh myserver
 ```
 
-### Conclusion
+### Fazit
 
-By following this guide, you can set up a secure and efficient virtual machine with nginx for web hosting and SSH keys for access control. Implementing SSH aliases and multiple identities further streamlines server management, especially when dealing with multiple environments.
+Mit dieser Anleitung steht eine virtuelle Maschine, die nginx als Webserver betreibt und den Zugang über SSH-Keys regelt. Aliase und mehrere Identitäten machen die Verwaltung schlanker, gerade bei mehreren Umgebungen.
 
-If you have any questions or need further assistance, feel free to reach out!
+Bei Fragen oder wenn etwas hängt, schreib mir gerne.
 
 ---
 

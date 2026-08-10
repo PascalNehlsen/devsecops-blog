@@ -1,33 +1,33 @@
 ---
 id: chatbot
-title: "AI Chatbot Platform"
-sidebar_label: "AI Chatbot Platform"
+title: "KI-Chatbot-Plattform"
+sidebar_label: "KI-Chatbot-Plattform"
 sidebar_position: 3
-description: "Multi-tenant chatbot platform embeddable via a script tag: Shadow DOM isolation, per-tenant CORS validation, appointment booking."
+description: "Multi-Tenant-Chatbot-Plattform, per Script-Tag einbettbar: Shadow-DOM-Isolation, CORS-Prüfung pro Tenant, Terminbuchung."
 keywords: [multi-tenant, shadow dom, chatbot, next.js, prisma, tenant isolation]
 ---
 
-# AI Chatbot Platform
+# KI-Chatbot-Plattform
 
-:::info[Not embedded here]
-The widget used to load on every page of this site. It was removed: a
-third-party script with full DOM access on forty content pages is not
-something I want to defend on a site about securing delivery pipelines, and
-this site does not sell anything. It runs at
+:::info[Hier nicht eingebettet]
+Das Widget lud früher auf jeder Seite dieser Site. Es ist entfernt: ein
+Third-Party-Script mit vollem DOM-Zugriff auf vierzig Inhaltsseiten will ich auf
+einer Seite über das Absichern von Delivery-Pipelines nicht verteidigen, und
+diese Seite verkauft nichts. Es läuft unter
 [start.chatbot-mit-pascal.de](https://start.chatbot-mit-pascal.de).
 :::
 
-## Executive Summary
+## Kurzfassung
 
-This is a production-ready, multi-tenant platform for embedding customizable AI chatbots with appointment booking capabilities into e-commerce websites. Built with a modern fullstack architecture emphasizing security, scalability, and DevSecOps best practices.
+Eine produktionsreife Multi-Tenant-Plattform, die anpassbare KI-Chatbots mit Terminbuchung in E-Commerce-Websites einbettet. Gebaut mit einer modernen Full-Stack-Architektur, mit Schwerpunkt auf Sicherheit, Skalierbarkeit und bewährter DevSecOps-Praxis.
 
-**Tech Stack:** Next.js 13, React 18, TypeScript, Prisma ORM, PostgreSQL 17, OpenAI GPT-4, Docker, Node.js 20
+**Stack:** Next.js 13, React 18, TypeScript, Prisma ORM, PostgreSQL 17, OpenAI GPT-4, Docker, Node.js 20
 
-## Architecture Overview
+## Architektur im Überblick
 
-The platform consists of client websites embedding a widget via script tag, a Next.js server handling API routes, and a PostgreSQL database. External services include OpenAI API and SMTP for emails.
+Die Plattform besteht aus Kundenseiten, die ein Widget per Script-Tag einbetten, einem Next.js-Server mit den API-Routen und einer PostgreSQL-Datenbank. Externe Dienste sind die OpenAI-API und SMTP für E-Mails.
 
-### High-Level Architecture
+### Aufbau
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -76,245 +76,62 @@ The platform consists of client websites embedding a widget via script tag, a Ne
               └──────────────────┘
 ```
 
-## Technology Stack
+## Technologie
 
-### Frontend Technologies
+### Frontend
 
-| Technology | Version | Purpose |
+| Technologie | Version | Zweck |
 |------------|---------|---------|
-| **React** | 18.2.0 | Widget UI framework with hooks-based state management |
-| **TypeScript** | 5.8.3 | Type safety across frontend and API layers |
-| **Vite** | 7.0.0 | Widget bundler with IIFE output for script tag embedding |
-| **TailwindCSS** | 3.3.2 | Utility-first CSS framework (build-time only) |
-| **Shadow DOM** | Native | CSS/JS isolation for widget embedding |
-
-### Backend Technologies
-
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **Next.js** | 13.4.12 | Full-stack React framework with API routes |
-| **Node.js** | 20 | Server runtime (LTS version) |
-| **Prisma** | 6.11.1 | Type-safe ORM with migration system |
-| **PostgreSQL** | 17.5 | Primary relational database |
-| **OpenAI SDK** | 4.18.0 | GPT-4 integration for conversational AI |
-
-### Security & Infrastructure
-
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **bcryptjs** | 3.0.3 | Password hashing (12 rounds, salted) |
-| **jsonwebtoken** | 9.0.2 | JWT token generation for session management |
-| **Nodemailer** | 7.0.4 | Secure email delivery (password resets, appointments) |
-| **CORS** | Built-in | Origin validation per bot configuration |
-| **Docker** | Latest | Containerization for consistent deployments |
-| **Docker Compose** | v2 | Multi-container orchestration |
-
-## Security Architecture
-
-The platform implements comprehensive DevSecOps practices with multi-layered security.
-
-### Authentication & Authorization
-
-- 12-round bcrypt hashing for all passwords
-- Secure password reset flow with time-limited tokens (1 hour expiry)
-- Rate limiting: Max 3 reset requests per hour per user
-- Password policy enforcement: Min 8 chars, 1 uppercase, 1 number
-
-### Data Protection
-
-Sensitive data handling ensures passwords are never exposed in API responses. Environment variables isolate secrets like OPENAI_API_KEY, JWT_SECRET, and EMAIL_PASS. Email security includes SMTP authentication, TLS encryption, and no sensitive data in subjects.
-
-### DevSecOps Best Practices
-
-Container security uses multi-stage builds to minimize attack surface. Automated Prisma migrations run on container start. Health checks ensure database availability. PostgreSQL is exposed only to localhost. Regular automated backups with timestamped SQL dumps. Rate limiting on password reset endpoints. Token expiration enforced on all JWTs and reset links.
-
-## Database Design
-
-The database uses Prisma ORM with PostgreSQL 17. The schema includes BotConfig (multi-tenant root), Message, AppointmentDate, and PasswordReset entities.
-
-### Entity Relationship
-
-BotConfig is the central entity with relationships to messages, appointment dates, and password resets. It includes fields for client identification, hashed passwords, email, allowed hosts, and UI configurations.
-
-### Key Tables
-
-- **BotConfig**: Stores bot settings, passwords (bcrypt hashed), CORS origins, and tenant-specific configurations.
-- **AppointmentDate**: Manages booking slots with support for recurring appointments and race condition prevention.
-- **PasswordReset**: Handles secure token management with bcrypt-hashed tokens and 1-hour expiry.
-- **Message**: Stores conversation history between users and AI.
-
-Migrations are automated in Docker, with history tracked in prisma/migrations.
-
-## API Architecture
-
-The API follows RESTful principles with Next.js API routes.
-
-### Route Structure
-
-```
-/api
-├── chat.ts                    # OpenAI chat completions
-├── login.ts                   # Authentication endpoint
-├── bot/
-│   ├── [clientId].ts         # Get bot configuration
-│   ├── appointment.js        # Book appointment slot
-│   ├── config.js             # Create new bot
-│   ├── getConfig.js          # List all bot configs
-│   ├── updateConfig.ts       # Update bot settings
-│   └── confirm/[id].js       # Confirm/cancel appointment
-└── reset-password/
-    ├── index.ts              # Request password reset
-    ├── [token].ts            # Validate reset token
-    └── confirm.ts            # Complete password reset
-```
-
-### Core Endpoints
-
-- **Chat Interface**: Processes messages using OpenAI GPT-4, maintains context, stores conversations.
-- **Bot Configuration**: Retrieves settings and appointments for widget initialization with CORS validation.
-- **Appointment Booking**: Reserves slots with race condition prevention, sends confirmation emails with .ics attachments.
-- **Bot Creation**: Creates new bots with hashed passwords and deduplicated appointments.
-- **Password Reset**: Secure flow with rate limiting, token hashing, and email delivery.
-
-All endpoints include CORS validation, input sanitization, and security checks.
-
-## Widget System
-
-The widget is a self-contained React app bundled as IIFE for script tag embedding.
-
-### Key Features
-
-- Shadow DOM isolation prevents CSS/JS conflicts
-- Zero dependencies, all bundled in single JS file
-- Responsive design with mobile fullscreen mode
-- Position flexibility (bottom-right/left/center)
-- Theme customization per bot
-
-### Initialization
-
-The widget reads attributes from the script tag, creates a shadow root, injects styles, and mounts the React component.
-
-## Deployment & Infrastructure
-
-### Docker Setup
-
-Multi-stage Dockerfile minimizes attack surface. Docker Compose orchestrates PostgreSQL and app containers with health checks and volume persistence.
-
-### Environment Configuration
-
-Required variables include database credentials, OpenAI key, JWT secret, and SMTP settings. All secrets are environment-based, no hardcoding.
-
-## Code Structure
-
-```
-chatbot/
-├── src/
-│   ├── pages/api/             # Next.js API routes
-│   ├── utils/                 # CORS, mailer utilities
-│   ├── config/                # Bot configurations
-│   └── types/                 # TypeScript definitions
-├── widget-src/                # Widget source
-├── prisma/                    # Schema and migrations
-├── public/dist/               # Compiled widget
-├── docker-compose.yml         # Orchestration
-├── Dockerfile                 # Build definition
-└── package.json               # Dependencies
-```
-
-## Security Checklist
-
-### Application Security
-
-- [x] Bcrypt password hashing (12 rounds)
-- [x] JWT tokens with expiration
-- [x] CORS validation on all endpoints
-- [x] Password reset token expiry
-- [x] Rate limiting on resets
-- [x] No sensitive data in responses
-- [x] Input validation and SQL injection prevention
-- [x] XSS prevention via React escaping
-- [x] HTTPS enforcement
-- [x] Environment variable secrets
-
-### Infrastructure Security
-
-- [x] Database localhost-only access
-- [x] No root containers
-- [x] Multi-stage builds
-- [x] Automated backups
-- [x] Health checks
-- [x] Restart policies
-- [x] Volume encryption
-
-### Future Improvements
-
-- Implement 2FA for admin accounts
-- Add rate limiting middleware
-- Automated security scanning
-- Audit logging
-- Webhook signatures
-- CSP headers
-- SSL certificate renewal
-
-## Conclusion
-
-This chatbot platform demonstrates production-grade fullstack development with strong DevSecOps practices: security-first approach, scalable multi-tenant architecture, modern tech stack, and comprehensive security measures.
-
-**Key Differentiators:**
-- Shadow DOM widget isolation
-- Race condition prevention in booking
-- Comprehensive password reset flow
-- Per-bot CORS whitelisting
-- Mobile-first responsive design
-
----
-
-*Last Updated: December 2025*
+| **React** | 18.2.0 | UI-Framework des Widgets, State über Hooks |
+| **TypeScript** | 5.8.3 | Typsicherheit über Frontend und API-Schicht |
+| **Vite** | 7.0.0 | Bundler des Widgets, IIFE-Ausgabe für die Einbettung per Script-Tag |
+| **TailwindCSS** | 3.3.2 | Utility-First-CSS (nur zur Build-Zeit) |
+| **Shadow DOM** | nativ | CSS- und JS-Isolation für die Einbettung |
 
 ### Backend
 
-| Technology | Version | Purpose |
+| Technologie | Version | Zweck |
 |------------|---------|---------|
-| **Next.js** | 13.4.12 | Full-stack React framework with API routes |
-| **Node.js** | 20 | Server runtime (LTS version) |
-| **Prisma** | 6.11.1 | Type-safe ORM with migration system |
-| **PostgreSQL** | 17.5 | Primary relational database |
-| **OpenAI SDK** | 4.18.0 | GPT-4 integration for conversational AI |
+| **Next.js** | 13.4.12 | Full-Stack-React-Framework mit API-Routen |
+| **Node.js** | 20 | Server-Laufzeit (LTS) |
+| **Prisma** | 6.11.1 | typsicheres ORM mit Migrationssystem |
+| **PostgreSQL** | 17.5 | primäre relationale Datenbank |
+| **OpenAI SDK** | 4.18.0 | GPT-4-Anbindung für die Dialoge |
 
-### Security & DevSecOps
+### Security und DevSecOps
 
-| Technology | Version | Purpose |
+| Technologie | Version | Zweck |
 |------------|---------|---------|
-| **bcryptjs** | 3.0.3 | Password hashing (12 rounds, salted) |
-| **jsonwebtoken** | 9.0.2 | JWT token generation for session management |
-| **Nodemailer** | 7.0.4 | Secure email delivery (password resets, appointments) |
-| **CORS** | Built-in | Origin validation per bot configuration |
+| **bcryptjs** | 3.0.3 | Passwort-Hashing (12 Runden, gesalzen) |
+| **jsonwebtoken** | 9.0.2 | JWT-Erzeugung für die Sitzungsverwaltung |
+| **Nodemailer** | 7.0.4 | sicherer E-Mail-Versand (Passwort-Reset, Termine) |
+| **CORS** | eingebaut | Origin-Prüfung pro Bot-Konfiguration |
 
-### Infrastructure
+### Infrastruktur
 
-| Technology | Version | Purpose |
+| Technologie | Version | Zweck |
 |------------|---------|---------|
-| **Docker** | Latest | Containerization for consistent deployments |
-| **Docker Compose** | v2 | Multi-container orchestration |
-| **PostgreSQL** | 17.5 | Database container with health checks |
-| **Bash Scripts** | - | Automated database backups |
+| **Docker** | aktuell | Containerisierung für gleiche Deployments |
+| **Docker Compose** | v2 | Orchestrierung mehrerer Container |
+| **PostgreSQL** | 17.5 | Datenbank-Container mit Health Checks |
+| **Bash-Scripte** | - | automatisierte Datenbank-Backups |
 
 ---
 
-## Security Architecture (DevSecOps)
+## Security-Architektur (DevSecOps)
 
-### 1. Authentication & Authorization
+### Authentifizierung und Autorisierung
 
-#### Password Security
+#### Passwortsicherheit
 
-**Features:**
-- ✅ 12-round bcrypt hashing for all passwords
-- ✅ Automatic hashing on bot creation and updates
-- ✅ Secure password reset flow with time-limited tokens (1 hour expiry)
-- ✅ Rate limiting: Max 3 reset requests per hour per user
-- ✅ Password policy enforcement: Min 8 chars, 1 uppercase, 1 number
+**Merkmale:**
+- ✅ bcrypt mit 12 Runden für alle Passwörter
+- ✅ automatisches Hashing beim Anlegen und Ändern eines Bots
+- ✅ sicherer Reset-Ablauf mit zeitlich begrenzten Tokens (1 Stunde)
+- ✅ Rate Limiting: höchstens 3 Reset-Anfragen pro Stunde und Nutzer
+- ✅ Passwortregeln: mindestens 8 Zeichen, 1 Großbuchstabe, 1 Ziffer
 
-#### Password Reset Flow
+#### Ablauf beim Passwort-Reset
 ```
 ┌─────────────┐      ┌──────────────┐      ┌──────────────┐
 │   Request   │      │   Validate   │      │  Send Email  │
@@ -332,16 +149,18 @@ This chatbot platform demonstrates production-grade fullstack development with s
 User clicks link → Validate token → Update password (bcrypt) → Delete all tokens
 ```
 
-**Security Features:**
-- ✅ Per-bot domain whitelisting (stored in `BotConfig.allowedHost`)
-- ✅ Strict origin validation on all API endpoints
-- ✅ Preflight request handling for complex CORS scenarios
-- ✅ Widget validates origin server-side before rendering
-- ✅ Cache-Control and Pragma headers allowed for fresh data fetches
+#### CORS und Origin-Prüfung
 
-### 4. Data Protection
+**Merkmale:**
+- ✅ Domain-Whitelist pro Bot (in `BotConfig.allowedHost`)
+- ✅ strikte Origin-Prüfung an allen API-Endpunkten
+- ✅ Behandlung von Preflight-Requests für komplexere CORS-Fälle
+- ✅ das Widget prüft den Origin serverseitig, bevor es rendert
+- ✅ Cache-Control- und Pragma-Header erlaubt, damit frische Daten geholt werden können
 
-**Sensitive Data Handling:**
+### Datenschutz in der Umsetzung
+
+**Umgang mit sensiblen Daten:**
 ```typescript
 // Never expose passwords in API responses
 select: {
@@ -356,15 +175,15 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const EMAIL_PASS = process.env.EMAIL_PASS;
 ```
 
-**Email Security:**
-- ✅ SMTP authentication with secure credentials
-- ✅ TLS encryption for email transmission (port 587)
-- ✅ Confirmation emails for all critical actions
-- ✅ No sensitive data in email subjects or metadata
+**E-Mail-Sicherheit:**
+- ✅ SMTP-Authentifizierung mit eigenen Credentials
+- ✅ TLS-Verschlüsselung beim Versand (Port 587)
+- ✅ Bestätigungsmails für alle kritischen Vorgänge
+- ✅ keine sensiblen Daten in Betreff oder Metadaten
 
-### 6. DevSecOps Best Practices
+### Bewährte DevSecOps-Praxis
 
-**Container Security:**
+**Container-Sicherheit:**
 ```dockerfile
 # Multi-stage builds to minimize attack surface
 FROM node:20 AS widget-builder
@@ -379,20 +198,20 @@ COPY --from=nextjs-builder /app/.next ./.next
 COPY --from=nextjs-builder /app/node_modules ./node_modules
 ```
 
-**Security Checklist:**
-- ✅ No hardcoded secrets (all via environment variables)
-- ✅ Prisma migrations run automatically on container start
-- ✅ Health checks for database availability
-- ✅ PostgreSQL exposed only to localhost (127.0.0.1)
-- ✅ Regular automated backups with timestamped SQL dumps
-- ✅ Rate limiting on password reset endpoints
-- ✅ Token expiration enforced on all JWTs and reset links
+**Checkliste:**
+- ✅ keine festgeschriebenen Secrets (alles über Umgebungsvariablen)
+- ✅ Prisma-Migrationen laufen automatisch beim Containerstart
+- ✅ Health Checks für die Verfügbarkeit der Datenbank
+- ✅ PostgreSQL nur auf localhost erreichbar (127.0.0.1)
+- ✅ regelmäßige automatische Backups mit zeitgestempelten SQL-Dumps
+- ✅ Rate Limiting an den Reset-Endpunkten
+- ✅ Ablauf erzwungen für alle JWTs und Reset-Links
 
 ---
 
-## Database Design
+## Datenbankentwurf
 
-### Prisma Schema Overview
+### Prisma-Schema
 
 ```prisma
 datasource db {
@@ -405,7 +224,7 @@ generator client {
 }
 ```
 
-### Entity Relationship Diagram
+### Beziehungen
 
 ```
 ┌─────────────────────────────────────────────────┐
@@ -439,9 +258,9 @@ generator client {
               └───────────────┘
 ```
 
-### Table Details
+### Die Tabellen im Detail
 
-#### BotConfig (Multi-Tenant Root Entity)
+#### BotConfig (Wurzel des Mandanten)
 ```typescript
 model BotConfig {
   id                   String           @id @default(cuid())
@@ -473,15 +292,15 @@ model BotConfig {
 }
 ```
 
-**Key Features:**
-- `client`: Unique identifier for URL routing (`/api/bot/[clientId]`)
-- `password`: Always stored as bcrypt hash (12 rounds)
-- `allowedHost`: Comma-separated list for CORS validation
-- `confirmed`: Prevents unauthorized bots from being active
-- `position`: Controls widget placement (bottom-right/left/center)
+**Wichtige Felder:**
+- `client`: eindeutiger Bezeichner für das Routing (`/api/bot/[clientId]`)
+- `password`: immer als bcrypt-Hash gespeichert (12 Runden)
+- `allowedHost`: kommaseparierte Liste für die CORS-Prüfung
+- `confirmed`: verhindert, dass nicht freigegebene Bots aktiv sind
+- `position`: steuert die Platzierung des Widgets (bottom-right/left/center)
 
 
-#### AppointmentDate (Booking Slots)
+#### AppointmentDate (Terminfenster)
 ```typescript
 model AppointmentDate {
   id          String     @id @default(cuid())
@@ -494,13 +313,13 @@ model AppointmentDate {
 }
 ```
 
-**Features:**
-- Supports one-time and recurring appointments
-- Duplicate prevention via `date_time` uniqueness check
-- All duplicates marked as booked simultaneously to prevent race conditions
-- Only `booked: false` slots returned to widget
+**Merkmale:**
+- einmalige und wiederkehrende Termine
+- Doppelte werden über eine Prüfung auf `date_time` verhindert
+- alle Doppelten werden gleichzeitig als gebucht markiert, damit keine Race Condition entsteht
+- an das Widget gehen nur Fenster mit `booked: false`
 
-#### PasswordReset (Secure Token Management)
+#### PasswordReset (Token-Verwaltung)
 ```typescript
 model PasswordReset {
   id         String    @id @default(cuid())
@@ -515,15 +334,15 @@ model PasswordReset {
 }
 ```
 
-**Security:**
-- Tokens stored as bcrypt hashes (not reversible)
-- 1-hour expiration enforced at validation time
-- Cascade delete when user account removed
-- Old tokens deleted on successful password reset
+**Sicherheit:**
+- Tokens liegen als bcrypt-Hash, also nicht umkehrbar
+- Ablauf nach einer Stunde, geprüft bei der Validierung
+- Cascade-Delete, wenn das Konto entfernt wird
+- alte Tokens werden nach erfolgreichem Reset gelöscht
 
-### Database Migrations
+### Migrationen
 
-**Migration System:**
+**Wie sie laufen:**
 ```bash
 # Development: Create new migration
 npx prisma migrate dev --name add_feature
@@ -532,20 +351,20 @@ npx prisma migrate dev --name add_feature
 npx prisma migrate deploy
 ```
 
-**Automated in Docker:**
+**Automatisch im Container:**
 ```dockerfile
 CMD ["sh", "-c", "npx prisma migrate deploy && npm run start"]
 ```
 
-**Migration History:**
-- `20250721125001_add_position_field`: Added widget positioning
-- Migrations tracked in `prisma/migrations/migration_lock.toml`
+**Historie:**
+- `20250721125001_add_position_field`: Positionierung des Widgets ergänzt
+- Migrationen sind in `prisma/migrations/migration_lock.toml` verzeichnet
 
 ---
 
-## API Architecture
+## API-Architektur
 
-### API Route Structure
+### Routenaufbau
 
 ```
 /api
@@ -565,11 +384,11 @@ CMD ["sh", "-c", "npx prisma migrate deploy && npm run start"]
     └── confirm.ts            # Complete password reset
 ```
 
-### Core API Endpoints
+### Die wichtigsten Endpunkte
 
-#### 1. Chat Interface (`POST /api/chat`)
+#### 1. Chat (`POST /api/chat`)
 
-**Purpose:** Process user messages and return AI-generated responses
+**Zweck:** Nachrichten verarbeiten und KI-Antworten zurückgeben
 
 ```typescript
 // Request
@@ -589,7 +408,7 @@ CMD ["sh", "-c", "npx prisma migrate deploy && npm run start"]
 }
 ```
 
-**Implementation:**
+**Umsetzung:**
 ```typescript
 const messages = [
   { role: 'system', content: botConfig.system }, // AI personality
@@ -603,15 +422,15 @@ const completion = await openai.chat.completions.create({
 });
 ```
 
-**Features:**
-- ✅ Stores both user and AI messages in database
-- ✅ Maintains conversation context via history array
-- ✅ Custom system prompts per bot configuration
-- ✅ CORS validation with origin whitelisting
+**Merkmale:**
+- ✅ speichert Nutzer- und KI-Nachrichten in der Datenbank
+- ✅ hält den Gesprächskontext über das History-Array
+- ✅ eigener System-Prompt pro Bot-Konfiguration
+- ✅ CORS-Prüfung gegen die Origin-Whitelist
 
-#### 2. Bot Configuration (`GET /api/bot/[clientId]`)
+#### 2. Bot-Konfiguration (`GET /api/bot/[clientId]`)
 
-**Purpose:** Retrieve bot settings and available appointments for widget initialization
+**Zweck:** Einstellungen und freie Termine für den Start des Widgets holen
 
 ```typescript
 // Request
@@ -636,16 +455,16 @@ GET /api/bot/clxxx123?t=1638360000000  // Cache-busting query param
 }
 ```
 
-**Security Checks:**
-1. Validate `clientId` format and existence
-2. Ensure bot is confirmed (`confirmed: true`)
-3. Verify request origin against `allowedHost`
-4. Filter out booked appointments (`booked: false`)
-5. Set appropriate CORS headers
+**Sicherheitsprüfungen:**
+1. Format und Existenz der `clientId` prüfen
+2. sicherstellen, dass der Bot freigegeben ist (`confirmed: true`)
+3. Origin des Requests gegen `allowedHost` prüfen
+4. gebuchte Termine herausfiltern (`booked: false`)
+5. passende CORS-Header setzen
 
-#### 3. Appointment Booking (`POST /api/bot/appointment`)
+#### 3. Terminbuchung (`POST /api/bot/appointment`)
 
-**Purpose:** Reserve appointment slot and send confirmation emails
+**Zweck:** Termin reservieren und Bestätigungsmails versenden
 
 ```typescript
 // Request
@@ -665,7 +484,7 @@ GET /api/bot/clxxx123?t=1638360000000  // Cache-busting query param
 { "error": "Dieser Termin wurde bereits gebucht" }
 ```
 
-**Booking Flow:**
+**Ablauf:**
 ```typescript
 // 1. Validate slot exists and is available
 const requestedSlot = await prisma.appointmentDate.findFirst({
@@ -698,16 +517,16 @@ await transporter.sendMail({
 });
 ```
 
-**Security Features:**
-- ✅ Duplicate request prevention via in-memory locks (2-minute auto-expire)
-- ✅ Atomic database updates with `updateMany` to mark all duplicates
-- ✅ 409 Conflict response when slot already taken
-- ✅ Email validation before processing
-- ✅ CORS validation against bot's allowed origins
+**Sicherheitsmerkmale:**
+- ✅ doppelte Anfragen über In-Memory-Locks abgefangen (verfallen nach 2 Minuten)
+- ✅ atomare Datenbankänderung per `updateMany`, die alle Doppelten markiert
+- ✅ Antwort 409 Conflict, wenn das Fenster schon weg ist
+- ✅ E-Mail-Prüfung vor der Verarbeitung
+- ✅ CORS-Prüfung gegen die erlaubten Origins des Bots
 
-#### 4. Bot Creation (`POST /api/bot/config`)
+#### 4. Bot anlegen (`POST /api/bot/config`)
 
-**Purpose:** Create new bot configuration with appointment slots
+**Zweck:** neue Bot-Konfiguration samt Terminfenstern erzeugen
 
 ```typescript
 // Request
@@ -727,7 +546,7 @@ await transporter.sendMail({
 }
 ```
 
-**Implementation:**
+**Umsetzung:**
 ```typescript
 // Hash password with bcrypt (12 rounds)
 const hashedPassword = await bcrypt.hash(password, 12);
@@ -751,9 +570,9 @@ await prisma.botConfig.create({
 });
 ```
 
-#### 5. Password Reset Flow
+#### 5. Passwort-Reset
 
-**5a. Request Reset (`POST /api/reset-password`)**
+**5a. Reset anfordern (`POST /api/reset-password`)**
 ```typescript
 // Request
 { "email": "user@example.com" }
@@ -765,7 +584,7 @@ await prisma.botConfig.create({
 }
 ```
 
-**Backend Logic:**
+**Serverseitig:**
 ```typescript
 // Rate limiting: Max 3 requests per hour
 const recentResets = await prisma.passwordReset.findMany({
@@ -801,7 +620,7 @@ await sendEmail({
 });
 ```
 
-**5b. Validate Token (`GET /api/reset-password/[token]`)**
+**5b. Token prüfen (`GET /api/reset-password/[token]`)**
 ```typescript
 // Response (Valid)
 { "success": true }
@@ -810,7 +629,7 @@ await sendEmail({
 { "success": false, "message": "Token ungültig oder abgelaufen" }
 ```
 
-**5c. Complete Reset (`POST /api/reset-password/confirm`)**
+**5c. Reset abschließen (`POST /api/reset-password/confirm`)**
 ```typescript
 // Request
 {
@@ -838,20 +657,20 @@ await prisma.$transaction([
 
 ---
 
-## Widget System
+## Das Widget
 
-### Architecture
+### Architektur
 
-The widget is a fully self-contained React application bundled as an IIFE (Immediately Invoked Function Expression) that can be embedded into any website via a simple `<script>` tag.
+Das Widget ist eine vollständig eigenständige React-Anwendung, gebündelt als IIFE (Immediately Invoked Function Expression), die per einfachem `<script>`-Tag in jede Website eingebettet werden kann.
 
-**Key Features:**
-- ✅ **Shadow DOM Isolation:** Prevents CSS/JS conflicts with host page
-- ✅ **Zero Dependencies:** All styles and logic bundled in single JS file
-- ✅ **Responsive Design:** Mobile-first with fullscreen mode on mobile devices
-- ✅ **Position Flexibility:** bottom-right, bottom-left, bottom-center
-- ✅ **Theme Customization:** Per-bot color schemes and branding
+**Merkmale:**
+- ✅ **Shadow-DOM-Isolation:** verhindert CSS- und JS-Konflikte mit der Gastseite
+- ✅ **Keine Abhängigkeiten:** alle Styles und Logik in einer JS-Datei
+- ✅ **Responsiv:** Mobile-first, auf Mobilgeräten im Vollbild
+- ✅ **Position wählbar:** bottom-right, bottom-left, bottom-center
+- ✅ **Anpassbares Theme:** Farbschema und Branding pro Bot
 
-**Widget Initialization:**
+**Initialisierung:**
 ```typescript
 // widget-src/index.tsx
 const rootDiv = document.getElementById('widget-root');
@@ -875,13 +694,13 @@ ReactDOM.createRoot(container).render(
 );
 ```
 
-## Deployment & Infrastructure
+## Ausrollen und Infrastruktur
 
-### Docker Architecture
+### Docker-Aufbau
 
-**Multi-Stage Dockerfile**
+**Mehrstufiges Dockerfile**
 
-### Docker Compose Setup
+### Docker Compose
 
 ```yaml
 services:
@@ -917,15 +736,15 @@ volumes:
   postgres-data:
 ```
 
-**Security Features:**
-- ✅ Database only accessible from localhost
-- ✅ Health checks ensure database ready before app starts
-- ✅ Named volumes for data persistence
-- ✅ Restart policies for fault tolerance
+**Sicherheitsmerkmale:**
+- ✅ Datenbank nur von localhost erreichbar
+- ✅ Health Checks sorgen dafür, dass die Datenbank vor der App bereit ist
+- ✅ benannte Volumes für den Datenerhalt
+- ✅ Restart-Policies für Fehlertoleranz
 
-### Environment Configuration
+### Umgebungsvariablen
 
-**Required Environment Variables:**
+**Erforderlich:**
 ```bash
 # Database
 DATABASE_URL=postgresql://user:pass@db:5432/chatbot
@@ -954,7 +773,7 @@ EMAIL_BOT=bot@example.com
 ```
 ---
 
-### Code Structure
+### Codeaufbau
 
 ```
 chatbot/
@@ -985,61 +804,61 @@ chatbot/
 └── package.json              # Dependencies & scripts
 ```
 
-## Security Hardening Checklist
+## Härtungs-Checkliste
 
-### Application Security
+### Anwendung
 
-- [x] All passwords hashed with bcrypt (12 rounds)
-- [x] JWT tokens with 1-hour expiration
-- [x] CORS validation on all endpoints
-- [x] Password reset tokens expire after 1 hour
-- [x] Rate limiting on password reset (3 requests/hour)
-- [x] No sensitive data in API responses
-- [x] Input validation on all endpoints
-- [x] SQL injection prevention (Prisma parameterized queries)
-- [x] XSS prevention (React auto-escaping)
-- [x] HTTPS enforced in production
-- [x] Environment variables for all secrets
+- [x] alle Passwörter mit bcrypt gehasht (12 Runden)
+- [x] JWTs mit einer Stunde Gültigkeit
+- [x] CORS-Prüfung an allen Endpunkten
+- [x] Reset-Tokens verfallen nach einer Stunde
+- [x] Rate Limiting beim Passwort-Reset (3 Anfragen pro Stunde)
+- [x] keine sensiblen Daten in API-Antworten
+- [x] Eingabevalidierung an allen Endpunkten
+- [x] Schutz gegen SQL-Injection (parametrisierte Prisma-Queries)
+- [x] Schutz gegen XSS (automatisches Escaping in React)
+- [x] HTTPS in Produktion erzwungen
+- [x] alle Secrets über Umgebungsvariablen
 
-### Infrastructure Security
+### Infrastruktur
 
-- [x] Database only accessible from localhost
-- [x] No root user in Docker containers
-- [x] Minimal attack surface (multi-stage builds)
-- [x] Regular automated backups
-- [x] Health checks for all services
-- [x] Container restart policies
-- [x] Volume encryption (host-level)
+- [x] Datenbank nur von localhost erreichbar
+- [x] kein root-Nutzer in den Containern
+- [x] minimale Angriffsfläche (Multi-Stage-Builds)
+- [x] regelmäßige automatische Backups
+- [x] Health Checks für alle Dienste
+- [x] Restart-Policies der Container
+- [x] Volume-Verschlüsselung (auf Host-Ebene)
 
-### Future Security Improvements
+### Was noch fehlt
 
-- [ ] Implement 2FA for admin accounts
-- [ ] Add rate limiting middleware for all API routes
-- [ ] Set up automated security scanning (Dependabot)
-- [ ] Implement audit logging for all data modifications
-- [ ] Add webhook signatures for external integrations
-- [ ] CSP headers for widget embedding
-- [ ] Automated SSL certificate renewal
-
----
-
-## Conclusion
-
-This chatbot platform demonstrates production-grade fullstack development with strong DevSecOps practices:
-
-✅ **Security-First:** Bcrypt hashing, JWT authentication, CORS validation, rate limiting
-✅ **Scalable Architecture:** Multi-tenant design, stateless APIs, containerized deployment
-✅ **Developer Experience:** TypeScript type safety, Prisma ORM, hot reloading, automated migrations
-✅ **Production-Ready:** Docker orchestration, automated backups, health checks, error handling
-✅ **Modern Stack:** React 18, Next.js 13, PostgreSQL 17, OpenAI GPT-4
-
-**Key Differentiators:**
-- Shadow DOM widget isolation for zero conflict embedding
-- Race condition prevention in appointment booking system
-- Comprehensive password reset flow with token expiration
-- Per-bot CORS whitelisting for multi-tenant security
-- Mobile-first responsive design with fullscreen mode
+- [ ] 2FA für Admin-Konten
+- [ ] Rate-Limiting-Middleware für alle API-Routen
+- [ ] automatisiertes Security-Scanning (Dependabot)
+- [ ] Audit-Logging für alle Datenänderungen
+- [ ] Webhook-Signaturen für externe Integrationen
+- [ ] CSP-Header für die Widget-Einbettung
+- [ ] automatische Erneuerung der SSL-Zertifikate
 
 ---
 
-*Last Updated: December 2025*
+## Fazit
+
+Diese Chatbot-Plattform zeigt Full-Stack-Entwicklung auf Produktionsniveau mit belastbarer DevSecOps-Praxis:
+
+✅ **Security zuerst:** bcrypt-Hashing, JWT-Authentifizierung, CORS-Prüfung, Rate Limiting
+✅ **Skalierbare Architektur:** Multi-Tenant-Entwurf, zustandslose APIs, containerisiertes Deployment
+✅ **Entwicklungserfahrung:** Typsicherheit mit TypeScript, Prisma ORM, Hot Reload, automatische Migrationen
+✅ **Produktionsreif:** Docker-Orchestrierung, automatische Backups, Health Checks, Fehlerbehandlung
+✅ **Moderner Stack:** React 18, Next.js 13, PostgreSQL 17, OpenAI GPT-4
+
+**Was es unterscheidet:**
+- Shadow-DOM-Isolation des Widgets, damit die Einbettung konfliktfrei bleibt
+- Schutz gegen Race Conditions bei der Terminbuchung
+- durchdachter Passwort-Reset mit Token-Ablauf
+- CORS-Whitelist pro Bot für die Sicherheit zwischen Mandanten
+- Mobile-first-Design mit Vollbildmodus
+
+---
+
+*Letzte Aktualisierung: Dezember 2025*

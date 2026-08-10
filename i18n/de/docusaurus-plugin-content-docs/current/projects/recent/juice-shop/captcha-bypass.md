@@ -1,109 +1,107 @@
 ---
 id: captcha-bypass
-title: Captcha Bypass
-sidebar_label: Captcha Bypass
+title: CAPTCHA-Bypass
+sidebar_label: CAPTCHA-Bypass
 sidebar_position: 3
 ---
 
-# Admin Registration Challenge Report
+# Bericht: Challenge "CAPTCHA-Bypass"
 
-# CAPTCHA Bypass Challenge Report
-
-:::danger[Only for Testing Purposes]
-This tool is intended for educational and authorized penetration testing purposes only. Unauthorized use of this tool against systems that you do not have explicit permission to test is illegal and unethical.
+:::danger[Nur für Testzwecke]
+Dieses Werkzeug ist ausschließlich für Ausbildung und autorisierte Penetrationstests gedacht. Es gegen Systeme einzusetzen, für die du keine ausdrückliche Testerlaubnis hast, ist strafbar und unethisch.
 :::
 
-**Project**: OWASP Juice Shop - CAPTCHA Bypass Challenge (Broken Anti Automation) <br/ >
-**Tools**: Kali Linux with Burp Suite <br/ >
-**Author**: Pascal Nehlsen <br/ >
-**GitHub Link**: [https://github.com/PascalNehlsen/juice-shop-challenges/blob/main/challenges/captcha-bypass.md](https://github.com/PascalNehlsen/juice-shop-challenges/blob/main/challenges/captcha-bypass.md)
+**Projekt**: OWASP Juice Shop, Challenge "CAPTCHA Bypass" (fehlerhafter Automatisierungsschutz) <br/ >
+**Werkzeuge**: Kali Linux mit Burp Suite <br/ >
+**Autor**: Pascal Nehlsen <br/ >
+**GitHub-Link**: [https://github.com/PascalNehlsen/juice-shop-challenges/blob/main/challenges/captcha-bypass.md](https://github.com/PascalNehlsen/juice-shop-challenges/blob/main/challenges/captcha-bypass.md)
 
-## Table of Contents
+## Inhalt
 
-1. [Introduction](#introduction)
-2. [Objective](#objective)
-3. [Approach](#approach)
-   - [Step 1: Writing Customer Feedback](#step-1-writing-customer-feedback)
-   - [Step 2: Bypassing CAPTCHA with Burp Suite Intruder](#step-2-bypassing-captcha-with-burp-suite-intruder)
-4. [Conclusion](#conclusion)
+1. [Einführung](#einführung)
+2. [Ziel](#ziel)
+3. [Vorgehen](#vorgehen)
+   - [Schritt 1: Kundenfeedback schreiben](#schritt-1-kundenfeedback-schreiben)
+   - [Schritt 2: CAPTCHA mit Burp Suite Intruder umgehen](#schritt-2-captcha-mit-burp-suite-intruder-umgehen)
+4. [Fazit](#fazit)
 
-### Introduction
+### Einführung
 
-The OWASP Juice Shop is a deliberately vulnerable web application designed to demonstrate security vulnerabilities. This report outlines the steps I followed to complete the CAPTCHA Bypass Challenge.
+Der OWASP Juice Shop ist eine absichtlich verwundbare Webanwendung, die Sicherheitslücken vorführt. Dieser Bericht beschreibt die Schritte, mit denen ich die Challenge "CAPTCHA Bypass" gelöst habe.
 
-### Objective
+### Ziel
 
-The goal of the CAPTCHA Bypass Challenge is to bypass the CAPTCHA in the feedback section, allowing more than 10 customer feedback submissions within 20 seconds using only one solved CAPTCHA.
+Ziel der Challenge ist es, das CAPTCHA im Feedback-Bereich zu umgehen, sodass mit einem einzigen gelösten CAPTCHA mehr als 10 Feedbacks innerhalb von 20 Sekunden abgeschickt werden.
 
-### Approach
+### Vorgehen
 
-#### Step 1: Writing Customer Feedback
+#### Schritt 1: Kundenfeedback schreiben
 
-To start, I navigated to the customer feedback section and filled out feedback for the OWASP Juice Shop as usual.
-
-<div align="center">
-
-![Write custom Feedback](../../../assets/images/juice-shop/captcha-bypass/write-feedback.png)
-
-</div>
-
-Here, I encountered the CAPTCHA prompt. In this case, the CAPTCHA required solving the math problem `5 + 6 - 1`, which equals `10`.
-
-Before submitting the feedback, I activated the interception feature in Burp Suite's proxy tool.
+Zuerst bin ich in den Feedback-Bereich gegangen und habe wie üblich ein Feedback für den OWASP Juice Shop ausgefüllt.
 
 <div align="center">
 
-![Intercept Request](../../../assets/images/juice-shop/captcha-bypass/intercept.png)
+![Feedback schreiben](../../../../../../../docs/assets/images/juice-shop/captcha-bypass/write-feedback.png)
 
 </div>
 
-Upon submission, I checked the HTTP history to see the outgoing and incoming requests. I found a `POST` request to the `/api/Feedbacks/` endpoint. Within the JSON of the submitted request, I observed the following keys:
+Hier kam die CAPTCHA-Abfrage. In diesem Fall war die Rechenaufgabe `5 + 6 - 1` zu lösen, also `10`.
 
-- `"captchaIds"`: Contains the CAPTCHA identifier
-- `"captcha"`: Holds the calculated result (`10`)
-- `"comment"`: Contains the actual feedback message
-- `"rating"`: Reflects the rating assigned to the shop
+Vor dem Absenden habe ich die Intercept-Funktion im Proxy von Burp Suite aktiviert.
 
 <div align="center">
 
-![Post Request](../../../assets/images/juice-shop/captcha-bypass/request.png)
+![Request abfangen](../../../../../../../docs/assets/images/juice-shop/captcha-bypass/intercept.png)
 
 </div>
 
-#### Step 2: Bypassing CAPTCHA with Burp Suite Intruder
+Nach dem Absenden habe ich in der HTTP-History die ein- und ausgehenden Requests geprüft. Ich fand einen `POST` an `/api/Feedbacks/`. Im JSON des Requests sah ich folgende Schlüssel:
 
-I then sent this `POST` request to Burp Suite's Intruder tool, allowing multiple requests to be sent in rapid succession.
+- `"captchaIds"`: enthält die Kennung des CAPTCHA
+- `"captcha"`: enthält das errechnete Ergebnis (`10`)
+- `"comment"`: enthält die eigentliche Feedback-Nachricht
+- `"rating"`: die Bewertung für den Shop
 
-The Intruder was configured as follows:
+<div align="center">
+
+![POST-Request](../../../../../../../docs/assets/images/juice-shop/captcha-bypass/request.png)
+
+</div>
+
+#### Schritt 2: CAPTCHA mit Burp Suite Intruder umgehen
+
+Diesen `POST`-Request schickte ich an den Intruder von Burp Suite, mit dem sich viele Requests in schneller Folge senden lassen.
+
+Der Intruder war so eingestellt:
 
 - **Attack Type**: Sniper
-- **Payload Options**: None
+- **Payload Options**: keine
 - **Payloads**: Null Payloads
 - **Generate**: 20 Payloads
 
-With these settings, the Intruder generated 20 HTTP requests within a short timeframe. In the Results section of the Intruder, each request returned a `201` status code, indicating that all requests were successfully processed.
+Mit diesen Einstellungen erzeugte der Intruder in kurzer Zeit 20 HTTP-Requests. In den Ergebnissen kam bei jedem Status `201` zurück, alle wurden also verarbeitet.
 
 <div align="center">
 
-![Intruder Request](../../../assets/images/juice-shop/captcha-bypass/intruder.png)
+![Intruder-Request](../../../../../../../docs/assets/images/juice-shop/captcha-bypass/intruder.png)
 
 </div>
 
-To confirm that the feedback submissions were successful, I navigated back to the feedback section of the shop and observed all 20 feedback entries listed sequentially.
+Zur Bestätigung bin ich zurück in den Feedback-Bereich und sah alle 20 Einträge nacheinander gelistet.
 
 <div align="center">
 
-![Result](../../../assets/images/juice-shop/captcha-bypass/result.png)
+![Ergebnis](../../../../../../../docs/assets/images/juice-shop/captcha-bypass/result.png)
 
 </div>
 
-### Conclusion
+### Fazit
 
-This test successfully completed the CAPTCHA Bypass Challenge by solving the CAPTCHA once and using Burp Suite to bypass it, allowing multiple feedback submissions within the allowed time frame.
+Der Test hat die Challenge gelöst, indem das CAPTCHA einmal gelöst und mit Burp Suite umgangen wurde, sodass innerhalb der erlaubten Zeit mehrere Feedbacks abgeschickt werden konnten.
 
 <div align="center">
 
-![Intruder Request](../../../assets/images/juice-shop/captcha-bypass/challenge-accept.png)
+![Challenge gelöst](../../../../../../../docs/assets/images/juice-shop/captcha-bypass/challenge-accept.png)
 
 </div>
 

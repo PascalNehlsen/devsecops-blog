@@ -8,64 +8,64 @@ sidebar_position: 3
 
 <div align="center">
 
-![Truck Signs](../../assets/images/truck-signs/Truck_Signs_logo.png)
+![Truck Signs](../../../../../../docs/assets/images/truck-signs/Truck_Signs_logo.png)
 
-# Signs for Trucks
+# Schilder für Trucks
 
 <span class="pill">Python 3.8.10</span> <span class="pill">Django 2.2.8</span> <span class="pill">DRF 3.12.4</span>
 
 </div>
 
-## Table of Contents
+## Inhalt
 
-- [Description](#description)
+- [Beschreibung](#beschreibung)
 - [Installation](#installation)
-- [Usage](#usage)
-- [Screenshots of the Django Backend Admin Panel](#screenshots-of-the-django-backend-admin-panel)
-- [Useful Links](#useful-links)
+- [Benutzung](#benutzung)
+- [Screenshots des Django-Admin-Panels](#screenshots-des-django-admin-panels)
+- [Nützliche Links](#nützliche-links)
 
-## Description
+## Beschreibung
 
-**Signs for Trucks** is an online store to buy pre-designed vinyls with custom lines of letters (often call truck letterings). The store also allows clients to upload their own designs and to customize them on the website as well. Aside from the vinyls that are the main product of the store, clients can also purchase simple lettering vinyls with no truck logo, a fire extinguisher vinyl, and/or a vinyl with only the truck unit number (or another number selected by the client).
+**Signs for Trucks** ist ein Onlineshop für vorgestaltete Folien mit eigenen Schriftzeilen, im Englischen oft "truck lettering". Kundinnen und Kunden können außerdem eigene Entwürfe hochladen und direkt auf der Seite anpassen. Neben den Folien, dem Hauptprodukt des Shops, gibt es einfache Schriftfolien ohne Truck-Logo, eine Feuerlöscher-Folie und Folien, die nur die Fahrzeugnummer tragen (oder eine andere Nummer nach Wunsch).
 
-### Settings
+### Einstellungen
 
-The **settings** folder inside the trucks_signs_designs folder contains the different setting's configuration for each environment (so far the environments are development, docker testing, and production). Those files are extensions of the base.py file which contains the basic configuration shared among the different environments (for example, the value of the template directory location). In addition, the .env file inside this folder has the environment variables that are mostly sensitive information and should always be configured before use. By default, the environment in use is the decker testing. To change between environments modify the \_\_init.py\_\_ file.
+Der Ordner **settings** innerhalb von trucks_signs_designs enthält die Konfiguration je Umgebung (bisher Entwicklung, Docker-Test und Produktion). Diese Dateien erweitern `base.py`, in der die gemeinsame Grundkonfiguration steht (etwa der Pfad zum Template-Verzeichnis). Zusätzlich liegt in diesem Ordner die `.env` mit den Umgebungsvariablen, die meist sensible Werte enthalten und vor dem Einsatz immer gesetzt werden müssen. Standardmäßig ist die Docker-Test-Umgebung aktiv. Umgestellt wird sie in der Datei `__init.py__`.
 
-### Models
+### Modelle
 
-Most of the models do what can be inferred from their name. The following dots are notes about some of the models to make clearer their propose:
+Die meisten Modelle tun das, was ihr Name vermuten lässt. Die folgenden Punkte klären den Zweck einiger davon:
 
-- **Category Model:** The category of the vinyls in the store. It contains the title of the category as well as the basic properties shared among products that belong to a same category. For example, _Truck Logo_ is a category for all vinyls that has a logo of a truck plus some lines of letterings (note that the vinyls are instances of the model _Product_). Another category is _Fire Extinguisher_, that is for all vinyls that has a logo of a fire extinguisher.
-- **Lettering Item Category:** This is the category of the lettering, for example: _Company Name_, _VIM NUMBER_, ... Each has a different pricing.
-- **Lettering Item Variations:** This contains a foreign key to the **Lettering Item Category** and the text added by the client.
-- **Product Variation:** This model has the original product as a foreign key, plus the lettering lines (instances of the **Lettering Item Variations** model) added by the client.
-- **Order:** Contains the cart (in this case the cart is just a vinyl as only one product can be purchased each time). It also contains the contact and shipping information of the client.
-- **Payment:** It has the payment information such as the time of the purchase and the client id in Stripe.
+- **Category:** die Kategorie der Folien im Shop. Enthält den Titel der Kategorie und die Grundeigenschaften, die Produkte derselben Kategorie teilen. _Truck Logo_ ist zum Beispiel die Kategorie für alle Folien mit Truck-Logo plus Schriftzeilen (die Folien selbst sind Instanzen des Modells _Product_). Eine weitere Kategorie ist _Fire Extinguisher_ für alle Folien mit Feuerlöscher-Logo.
+- **Lettering Item Category:** die Kategorie der Beschriftung, zum Beispiel _Company Name_ oder _VIM NUMBER_. Jede hat eine eigene Preisgestaltung.
+- **Lettering Item Variations:** enthält einen Fremdschlüssel auf **Lettering Item Category** und den Text, den der Kunde eingegeben hat.
+- **Product Variation:** hat das ursprüngliche Produkt als Fremdschlüssel plus die Schriftzeilen (Instanzen von **Lettering Item Variations**), die der Kunde ergänzt hat.
+- **Order:** enthält den Warenkorb (hier eine einzelne Folie, da pro Vorgang nur ein Produkt gekauft werden kann) sowie Kontakt- und Versandangaben.
+- **Payment:** enthält die Zahlungsdaten, etwa den Zeitpunkt des Kaufs und die Kunden-ID bei Stripe.
 
-To manage the payments, the payment gateway in use is [Stripe](https://stripe.com/).
+Für die Zahlungen wird [Stripe](https://stripe.com/) als Zahlungsanbieter genutzt.
 
-### Brief Explanation of the Views
+### Kurz zu den Views
 
-Most of the views are CBV imported from _rest_framework.generics_, and they allow the backend api to do the basic CRUD operations expected, and so they inherit from the _ListAPIView_, _CreateAPIView_, _RetrieveAPIView_, ..., and so on.
+Die meisten Views sind klassenbasiert und kommen aus _rest_framework.generics_. Sie geben der Backend-API die üblichen CRUD-Operationen und erben entsprechend von _ListAPIView_, _CreateAPIView_, _RetrieveAPIView_ und so weiter.
 
-The behavior of some of the views had to be modified to address functionalities such as creation of order and payment, as in this case, for example, both functionalities are implemented in the same view, and so a _GenericAPIView_ was the view from which it inherits. Another example of this is the _UploadCustomerImage_ View that takes the vinyl template uploaded by the clients and creates a new product based on it.
+Einige Views mussten angepasst werden, etwa für das Anlegen von Bestellung und Zahlung: hier sind beide Funktionen in einem View umgesetzt, der deshalb von _GenericAPIView_ erbt. Ein weiteres Beispiel ist der View _UploadCustomerImage_, der die vom Kunden hochgeladene Vorlage nimmt und daraus ein neues Produkt erzeugt.
 
 ## Installation
 
-1. Clone the repo:
+1. Repository klonen:
    ```bash
    git clone <INSERT URL>
    ```
-1. Configure a virtual env and set up the database. See [Link for configuring Virtual Environment](https://docs.python-guide.org/dev/virtualenvs/) and [Link for Database setup](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04).
-1. Configure the environment variables.
+1. Virtuelle Umgebung anlegen und die Datenbank aufsetzen. Siehe [Anleitung für virtuelle Umgebungen](https://docs.python-guide.org/dev/virtualenvs/) und [Anleitung für das Datenbank-Setup](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04).
+1. Umgebungsvariablen setzen.
 
-   1. Copy the content of the example env file that is inside the truck_signs_designs folder into a .env file:
+   1. Kopiere den Inhalt der Beispiel-env-Datei aus dem Ordner truck_signs_designs in eine `.env`:
       ```bash
       cd truck_signs_designs/settings
       cp simple_env_config.env .env
       ```
-   1. The new .env file should contain all the environment variables necessary to run all the django app in all the environments. However, the only needed variables for the development environment to run are the following:
+   1. Die neue `.env` sollte alle Variablen enthalten, die die Django-App in allen Umgebungen braucht. Für die Entwicklungsumgebung genügen aber diese:
 
       ```bash
       SECRET_KEY=<secret_key>
@@ -85,7 +85,7 @@ The behavior of some of the views had to be modified to address functionalities 
       DJANGO_SUPERUSER_PASSWORD=adminpassword
       ```
 
-   1. For the database, the default configurations should be:
+   1. Für die Datenbank sind das die Standardwerte:
       ```bash
       DB_NAME=trucksigns_db
       DB_USER=trucksigns_user
@@ -93,50 +93,50 @@ The behavior of some of the views had to be modified to address functionalities 
       DB_HOST=localhost
       DB_PORT=5432
       ```
-   1. The SECRET_KEY is the django secret key. To generate a new one see: [Stackoverflow Link](https://stackoverflow.com/questions/41298963/is-there-a-function-for-generating-settings-secret-key-in-django)
+   1. SECRET_KEY ist der Django-Secret-Key. Wie du einen neuen erzeugst, steht hier: [Stackoverflow](https://stackoverflow.com/questions/41298963/is-there-a-function-for-generating-settings-secret-key-in-django)
 
-   1. **NOTE: not required for exercise**<br/>The STRIPE_PUBLISHABLE_KEY and the STRIPE_SECRET_KEY can be obtained from a developer account in [Stripe](https://stripe.com/).
+   1. **HINWEIS: für die Übung nicht nötig**<br/>STRIPE_PUBLISHABLE_KEY und STRIPE_SECRET_KEY bekommst du über ein Entwicklerkonto bei [Stripe](https://stripe.com/).
 
-      - To retrieve the keys from a Stripe developer account follow the next instructions:
-        1. Log in into your Stripe developer account (stripe.com) or create a new one (stripe.com > Sign Up). This should redirect to the account's Dashboard.
-        1. Go to Developer > API Keys, and copy both the Publishable Key and the Secret Key.
+      - So kommst du an die Keys:
+        1. Melde dich in deinem Stripe-Entwicklerkonto an (stripe.com) oder erstelle ein neues (stripe.com > Sign Up). Danach landest du im Dashboard.
+        1. Geh auf Developer > API Keys und kopiere Publishable Key und Secret Key.
 
-   1. The EMAIL_HOST_USER and the EMAIL_HOST_PASSWORD are the credentials to send emails from the website when a client makes a purchase. This is currently disable, but the code to activate this can be found in views.py in the create order view as comments. Therefore, any valid email and password will work.
+   1. EMAIL_HOST_USER und EMAIL_HOST_PASSWORD sind die Zugangsdaten, mit denen die Seite bei einem Kauf E-Mails verschickt. Das ist derzeit abgeschaltet; der Code dafür steht als Kommentar in `views.py` im View zum Anlegen der Bestellung. Es funktioniert also jede gültige Kombination aus Adresse und Passwort.
 
-1. Run the migrations and then the app:
+1. Migrationen und dann die App ausführen:
    ```bash
    python manage.py migrate
    python manage.py runserver
    ```
-1. Congratulations =) !!! The App should be running in [localhost:8000](http://localhost:8000)
-1. (Optional step) To create a super user run:
+1. Fertig =) !!! Die App sollte unter [localhost:8000](http://localhost:8000) laufen.
+1. (Optional) Einen Superuser anlegen:
    ```bash
    python manage.py createsuperuser
    ```
 
-## Usage
+## Benutzung
 
-1. Create a [Dockerfile](https://github.com/PascalNehlsen/truck_signs_api/blob/main/Dockerfile) on root Level
+1. Ein [Dockerfile](https://github.com/PascalNehlsen/truck_signs_api/blob/main/Dockerfile) auf oberster Ebene anlegen
 
-2. Create Docker image
+2. Docker-Image bauen
 
    ```bash
    docker build -t <image-name>:<tag-name> .
    ```
 
-   - `-t`: Stands for "tag." Used to name and optionally tag the image in the format `<image-name>:<tag-name>`.
-   - `.`: Represents the current directory, which contains the Dockerfile and the context for building the image.
+   - `-t`: steht für "tag". Benennt das Image im Format `<image-name>:<tag-name>`.
+   - `.`: das aktuelle Verzeichnis, in dem Dockerfile und Build-Kontext liegen.
 
-3. Create a network
+3. Netzwerk anlegen
 
    ```bash
    docker network create <network-name>
    ```
 
-   - `<network-name>`: The name you want to assign to the new network. This name must be unique within the Docker environment.
-   - The database and the Docker Container can communicate in this network.
+   - `<network-name>`: der Name des neuen Netzwerks. Er muss in der Docker-Umgebung eindeutig sein.
+   - Datenbank und Container können in diesem Netzwerk miteinander sprechen.
 
-4. Start the postgres container
+4. Postgres-Container starten
 
    ```bash
    docker run --name <docker-name> \
@@ -148,10 +148,10 @@ The behavior of some of the views had to be modified to address functionalities 
       -d postgres
    ```
 
-   - `<network-name>`: The network you created before.
-   - Postgres Data: The login data you created before.
+   - `<network-name>`: das Netzwerk, das du vorher angelegt hast.
+   - Postgres-Daten: die Zugangsdaten, die du vorher festgelegt hast.
 
-5. Start the Docker container
+5. Anwendungs-Container starten
 
    ```bash
    docker run --name <container-name> \
@@ -163,72 +163,72 @@ The behavior of some of the views had to be modified to address functionalities 
       <image-name>:<image-tag>
    ```
 
-   - `<network-name>`: The same network as your postgres container
-   - This container listens on Port 8020
-   - `--restart on-failure`: Configures the container to restart automatically due to an error.
-   - `<image-name>:<image-tag>`: Your image name due the build process.
+   - `<network-name>`: dasselbe Netzwerk wie beim Postgres-Container.
+   - Dieser Container hört auf Port 8020.
+   - `--restart on-failure`: startet den Container nach einem Fehler automatisch neu.
+   - `<image-name>:<image-tag>`: der Name deines Images aus dem Build.
 
-**NOTE:** To create Truck vinyls with Truck logos in them, first create the **Category** Truck Sign, and then the **Product** (can have any name). This is to make sure the frontend retrieves the Truck vinyls for display in the Product Grid as it only fetches the products of the category Truck Sign.
+**HINWEIS:** Um Truck-Folien mit Truck-Logo anzulegen, erstelle zuerst die **Kategorie** Truck Sign und dann das **Produkt** (Name beliebig). Nur so holt das Frontend die Truck-Folien für das Produktraster, denn es fragt ausschließlich Produkte der Kategorie Truck Sign ab.
 
 ---
 
 <a name="screenshots"></a>
 
-## Screenshots of the Django Backend Admin Panel
+## Screenshots des Django-Admin-Panels
 
-### Mobile View
+### Mobile Ansicht
 
 <div align="center">
 
-![alt text](../../assets/images/truck-signs/Admin_Panel_View_Mobile.png) ![alt text](../../assets/images/truck-signs/Admin_Panel_View_Mobile_2.png) ![alt text](../../assets/images/truck-signs/Admin_Panel_View_Mobile_3.png)
+![alt text](../../../../../../docs/assets/images/truck-signs/Admin_Panel_View_Mobile.png) ![alt text](../../../../../../docs/assets/images/truck-signs/Admin_Panel_View_Mobile_2.png) ![alt text](../../../../../../docs/assets/images/truck-signs/Admin_Panel_View_Mobile_3.png)
 
 ---
 
  </div>
 
-### Desktop View
+### Desktop-Ansicht
 
-![alt text](../../assets/images/truck-signs/Admin_Panel_View.png)
-
----
-
-![alt text](../../assets/images/truck-signs/Admin_Panel_View_2.png)
+![alt text](../../../../../../docs/assets/images/truck-signs/Admin_Panel_View.png)
 
 ---
 
-![alt text](../../assets/images/truck-signs/Admin_Panel_View_3.png)
+![alt text](../../../../../../docs/assets/images/truck-signs/Admin_Panel_View_2.png)
+
+---
+
+![alt text](../../../../../../docs/assets/images/truck-signs/Admin_Panel_View_3.png)
 
 <a name="useful_links"></a>
 
-## Useful Links
+## Nützliche Links
 
-### Postgresql Database
+### PostgreSQL-Datenbank
 
-- Setup Database: [Digital Ocean Link for Django Deployment on VPS](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04)
+- Datenbank aufsetzen: [Digital Ocean, Django-Deployment auf einem VPS](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04)
 
 ### Docker
 
-- [Docker Oficial Documentation](https://docs.docker.com/)
-- Dockerizing Django, PostgreSQL, guinicorn, and Nginx:
-  - Github repo of sunilale0: [Link](https://github.com/sunilale0/django-postgresql-gunicorn-nginx-dockerized/blob/master/README.md#nginx)
-  - Michael Herman article on testdriven.io: [Link](https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/)
+- [Offizielle Docker-Dokumentation](https://docs.docker.com/)
+- Django, PostgreSQL, gunicorn und nginx dockerisieren:
+  - GitHub-Repo von sunilale0: [Link](https://github.com/sunilale0/django-postgresql-gunicorn-nginx-dockerized/blob/master/README.md#nginx)
+  - Artikel von Michael Herman auf testdriven.io: [Link](https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/)
 
-### Django and DRF
+### Django und DRF
 
-- [Django Official Documentation](https://docs.djangoproject.com/en/4.0/)
-- Generate a new secret key: [Stackoverflow Link](https://stackoverflow.com/questions/41298963/is-there-a-function-for-generating-settings-secret-key-in-django)
-- Modify the Django Admin:
-  - Small modifications (add searching, columns, ...): [Link](https://realpython.com/customize-django-admin-python/)
-  - Modify Templates and css: [Link from Medium](https://medium.com/@brianmayrose/django-step-9-180d04a4152c)
-- [Django Rest Framework Official Documentation](https://www.django-rest-framework.org/)
-- More about Nested Serializers: [Stackoverflow Link](https://stackoverflow.com/questions/51182823/django-rest-framework-nested-serializers)
-- More about GenericViews: [Testdriver.io Link](https://testdriven.io/blog/drf-views-part-2/)
+- [Offizielle Django-Dokumentation](https://docs.djangoproject.com/en/4.0/)
+- Neuen Secret-Key erzeugen: [Stackoverflow](https://stackoverflow.com/questions/41298963/is-there-a-function-for-generating-settings-secret-key-in-django)
+- Django-Admin anpassen:
+  - Kleine Anpassungen (Suche, Spalten, ...): [Link](https://realpython.com/customize-django-admin-python/)
+  - Templates und CSS anpassen: [Artikel auf Medium](https://medium.com/@brianmayrose/django-step-9-180d04a4152c)
+- [Offizielle Dokumentation des Django REST Framework](https://www.django-rest-framework.org/)
+- Mehr zu verschachtelten Serializern: [Stackoverflow](https://stackoverflow.com/questions/51182823/django-rest-framework-nested-serializers)
+- Mehr zu Generic Views: [testdriven.io](https://testdriven.io/blog/drf-views-part-2/)
 
-### Miscellaneous
+### Verschiedenes
 
-- Create Virual Environment with Virtualenv and Virtualenvwrapper: [Link](https://docs.python-guide.org/dev/virtualenvs/)
-- [Configure CORS](https://www.stackhawk.com/blog/django-cors-guide/)
-- [Setup Django with Cloudinary](https://cloudinary.com/documentation/django_integration)
+- Virtuelle Umgebung mit virtualenv und virtualenvwrapper: [Link](https://docs.python-guide.org/dev/virtualenvs/)
+- [CORS konfigurieren](https://www.stackhawk.com/blog/django-cors-guide/)
+- [Django mit Cloudinary einrichten](https://cloudinary.com/documentation/django_integration)
 
 ---
 

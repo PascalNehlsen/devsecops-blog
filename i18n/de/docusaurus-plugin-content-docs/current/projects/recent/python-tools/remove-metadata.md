@@ -1,49 +1,49 @@
-﻿---
+---
 id: remove-metadata
-title: PDF Remove Metadata Tool
-sidebar_label: PDF Remove Metadata Tool
+title: PDF-Metadaten-Entferner
+sidebar_label: PDF-Metadaten-Entferner
 sidebar_position: 7
 ---
 
 
-# PDF Remove Metadata
+# PDF-Metadaten entfernen
 
-This repository contains a Python tool that cleans metadata from a specified PDF document and linearizes it for improved web performance. The original file is replaced with the cleaned version.
+Dieses Repository enthält ein Python-Werkzeug, das Metadaten aus einem PDF entfernt und es für bessere Web-Performance linearisiert. Die ursprüngliche Datei wird durch die bereinigte ersetzt.
 
-:::danger[Only for Testing Purposes]
-This tool is intended for educational and authorized penetration testing purposes only. Unauthorized use of this tool against systems that you do not have explicit permission to test is illegal and unethical.
+:::danger[Nur für Testzwecke]
+Dieses Werkzeug ist ausschließlich für Ausbildung und autorisierte Penetrationstests gedacht. Es gegen Systeme einzusetzen, für die du keine ausdrückliche Testerlaubnis hast, ist strafbar und unethisch.
 :::
 
-## Table of Contents
+## Inhalt
 
-- [Features](#features)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
+- [Funktionen](#funktionen)
+- [Loslegen](#loslegen)
+  - [Voraussetzungen](#voraussetzungen)
   - [Installation](#installation)
-- [Usage](#usage)
-  - [Adjusting the Script](#adjusting-the-script)
-  - [Running the Tool](#running-the-tool)
-- [Output](#output)
+- [Benutzung](#benutzung)
+  - [Skript anpassen](#skript-anpassen)
+  - [Werkzeug ausführen](#werkzeug-ausführen)
+- [Ausgabe](#ausgabe)
 
-## Features
+## Funktionen
 
-This tool offers the following features:
+Dieses Werkzeug bietet:
 
-- **Clean Metadata**: Removes all metadata from the specified PDF file.
-- **Display Metadata**: Outputs old and cleaned metadata in the console for comparison.
+- **Metadaten bereinigen**: entfernt alle Metadaten aus dem angegebenen PDF.
+- **Metadaten anzeigen**: gibt alte und bereinigte Metadaten zum Vergleich auf der Konsole aus.
 
-## Getting Started
+## Loslegen
 
-### Prerequisites
+### Voraussetzungen
 
-Before running the script, make sure you have the following installed:
+Vor dem Ausführen muss installiert sein:
 
-- **Python 3.7 or higher**
-- Python libraries:
+- **Python 3.7 oder höher**
+- Python-Bibliotheken:
   - `pikepdf`
   - `exiftool`
 
-You can install these dependencies using `pip`:
+Installieren mit `pip`:
 
 ```shell
 pip install pikepdf exiftool
@@ -51,30 +51,30 @@ pip install pikepdf exiftool
 
 ### Installation
 
-**Clone the Repository**:
+**Repository klonen**:
 
 ```shell
 git clone https://github.com/yourusername/pdf-metadata-cleaner.git
 cd pdf-metadata-cleaner
 ```
 
-## Usage
+## Benutzung
 
-### Adjusting the Script
+### Skript anpassen
 
-Before running the tool, open `remove-metadata.py` and change the path to the PDF file in the `clean_pdf` function to specify the file you want to edit. Make sure that the PDF file is in the same folder as the script.
+Öffne vor dem Ausführen `remove-metadata.py` und ändere in der Funktion `clean_pdf` den Pfad zum PDF, das du bearbeiten willst. Achte darauf, dass das PDF im selben Ordner wie das Skript liegt.
 
-### Running the Tool
+### Werkzeug ausführen
 
-Run the script with the following command in the command line:
+Führe das Skript in der Kommandozeile aus:
 
 ```shell
 python remove-metadata.py
 ```
 
-## Output
+## Ausgabe
 
-The script will print the old and cleaned metadata in the console, allowing you to compare the changes. The original PDF file will be replaced by the cleaned version.
+Das Skript gibt die alten und die bereinigten Metadaten auf der Konsole aus, sodass du die Änderungen vergleichen kannst. Die ursprüngliche PDF-Datei wird durch die bereinigte ersetzt.
 
 ---
 

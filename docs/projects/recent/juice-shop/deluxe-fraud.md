@@ -5,8 +5,6 @@ sidebar_label: Deluxe Fraud
 sidebar_position: 4
 ---
 
-# Admin Registration Challenge Report
-
 # Deluxe Fraud Challenge Report
 
 :::danger[Only for Testing Purposes]

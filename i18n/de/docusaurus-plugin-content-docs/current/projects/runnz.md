@@ -3,121 +3,125 @@ id: runnz
 title: "Runnz"
 sidebar_label: "Runnz"
 sidebar_position: 4
-description: "Multi-tenant SaaS for trade-fair construction scheduling: reusable workflow blocks, deadlines derived from the build date, and a security pipeline that blocks rather than warns."
+description: "Multi-Tenant-SaaS für die Planung im Messebau: wiederverwendbare Workflow-Blöcke, Fristen abgeleitet aus dem Aufbautermin, und eine Security-Pipeline, die blockiert statt warnt."
 keywords: [multi-tenant saas, nestjs, typeorm, detect-secrets, pre-commit, ci security]
 ---
 
 # Runnz
 
-:::info[Live · login required]
-[runnz.de](https://runnz.de). The repository is private; this write-up is the
-artifact.
+:::info[Live · Login erforderlich]
+[runnz.de](https://runnz.de). Das Repository ist privat; dieser Aufschrieb ist
+das Artefakt.
 :::
 
-## The problem
+## Das Problem
 
-Trade-fair construction runs backwards from a date that cannot move. The hall
-opens on a Tuesday, so the stand has to be built by Monday, which means the
-freight leaves Thursday, which means the print files are locked the Friday
-before, which means the customer approval has to land two weeks earlier. Miss
-one link and the whole chain slips onto a fair that will not wait.
+Messebau läuft rückwärts von einem Datum, das sich nicht verschieben lässt. Die
+Halle öffnet am Dienstag, also muss der Stand am Montag stehen, also geht die
+Fracht am Donnerstag raus, also sind die Druckdaten am Freitag davor fix, also
+muss die Kundenfreigabe zwei Wochen früher da sein. Reißt ein Glied, rutscht
+die ganze Kette auf eine Messe, die nicht wartet.
 
-Most of the companies doing this plan it in a spreadsheet per project, and
-rebuild the same chain of dependencies every time. The chain is nearly
-identical between projects. What differs is the build date.
+Die meisten Betriebe planen das in einer Tabelle pro Projekt und bauen dieselbe
+Abhängigkeitskette jedes Mal neu. Zwischen Projekten ist die Kette fast
+identisch. Was sich unterscheidet, ist der Aufbautermin.
 
-## The model
+## Das Modell
 
-Two ideas carry the product.
+Zwei Ideen tragen das Produkt.
 
-**Workflow blocks.** A reusable unit of work carrying an offset relative to
-the event rather than an absolute date, plus its own status chain. Technical
-registration is 56 days before the event and moves through
-`prüfen → anmelden → freigegeben → erledigt`. Booking the freight is 21 days
-and runs `offen → angefragt → bestätigt → abgeschlossen`. The offset encodes
-the scheduling rule and the chain encodes what "done" means for that
-particular kind of work, which is not the same for a floor order as it is
-for a power connection.
+**Workflow-Blöcke.** Eine wiederverwendbare Arbeitseinheit, die statt eines
+absoluten Datums einen Versatz zum Termin trägt, plus ihre eigene Statuskette.
+Die technische Anmeldung liegt 56 Tage vor dem Termin und läuft durch
+`prüfen → anmelden → freigegeben → erledigt`. Die Fracht zu buchen liegt bei
+21 Tagen und läuft `offen → angefragt → bestätigt → abgeschlossen`. Der Versatz
+kodiert die Planungsregel, die Kette kodiert, was "fertig" für diese Art Arbeit
+bedeutet, und das ist bei einer Bodenbestellung etwas anderes als bei einem
+Stromanschluss.
 
-![Six reusable workflow blocks, each with its lead time in days before the event and its own status chain.](../assets/images/runnz/02-workflow-blocks.png)
+![Sechs wiederverwendbare Workflow-Blöcke, jeder mit seiner Vorlaufzeit in Tagen vor dem Termin und seiner eigenen Statuskette.](../../../../../docs/assets/images/runnz/02-workflow-blocks.png)
 
-Blocks apply to a project, and the concrete deadlines fall out of the event
-date automatically. Move the date and the whole chain moves with it.
+Blöcke werden auf ein Projekt angewendet, und die konkreten Fristen fallen
+automatisch aus dem Termin heraus. Verschiebe den Termin, und die ganze Kette
+wandert mit.
 
-![Project edit view showing the automatically derived deadlines, with a note that they can still be adjusted by hand.](../assets/images/runnz/04-derived-deadlines.png)
+![Projektbearbeitung mit den automatisch abgeleiteten Fristen und dem Hinweis, dass sie weiterhin von Hand angepasst werden können.](../../../../../docs/assets/images/runnz/04-derived-deadlines.png)
 
-Derived, not locked. The note under the computed dates says they can be
-overridden later, which matters: the model is a default that is right most of
-the time, not a constraint that fights the planner when a hall changes its
-access times.
+Abgeleitet, nicht festgenagelt. Der Hinweis unter den berechneten Daten sagt,
+dass sie später überschrieben werden können, und das ist wichtig: das Modell ist
+ein Standard, der meistens stimmt, keine Fessel, die gegen die Planerin
+arbeitet, wenn eine Halle ihre Zufahrtszeiten ändert.
 
-![Project overview: brief, progress, and the deadline list for a single trade fair.](../assets/images/runnz/03-project-detail.png)
+![Projektübersicht: Briefing, Fortschritt und die Fristenliste für eine einzelne Messe.](../../../../../docs/assets/images/runnz/03-project-detail.png)
 
-**A year at a glance.** Exhibition companies run many projects with
-overlapping crews and overlapping halls, so the calendar is the primary
-interface, not a list. Each project renders as its run time plus separate
-bars for setup and teardown, and the official windows the organiser dictates
-are drawn apart from the ones the company plans itself. A planner sees in one
-row where two fairs want the same crew in the same week.
+**Ein Jahr auf einen Blick.** Messebauunternehmen fahren viele Projekte mit
+überlappenden Crews und überlappenden Hallen, also ist der Kalender die
+Hauptoberfläche und keine Liste. Jedes Projekt wird als Laufzeit plus getrennte
+Balken für Auf- und Abbau gezeichnet, und die offiziellen Fenster des
+Veranstalters stehen getrennt von denen, die der Betrieb selbst plant. Eine
+Planerin sieht in einer Zeile, wo zwei Messen in derselben Woche dieselbe Crew
+wollen.
 
-![Year calendar for 2026: run time, official setup, setup and teardown drawn as separate bars per project across the whole year.](../assets/images/runnz/01-year-calendar.png)
+![Jahreskalender 2026: Laufzeit, offizieller Aufbau, Aufbau und Abbau als getrennte Balken pro Projekt über das ganze Jahr.](../../../../../docs/assets/images/runnz/01-year-calendar.png)
 
-Fourteen backend modules cover the surrounding domain: customers, employees
-and their vacations, subcontractors, suppliers, file attachments, and the
-task instances themselves. Thirty-two migrations, so the schema has been
-through real change rather than being generated once.
+Vierzehn Backend-Module decken die umliegende Domäne ab: Kunden, Mitarbeitende
+und deren Urlaube, Subunternehmen, Lieferanten, Dateianhänge und die
+Aufgabeninstanzen selbst. Zweiunddreißig Migrationen, das Schema hat also echte
+Veränderung hinter sich und wurde nicht einmal generiert.
 
-Screenshots are from the staging environment with test data.
+Die Screenshots stammen aus der Staging-Umgebung mit Testdaten.
 
 ## Stack
 
-| Layer | Choice |
+| Schicht | Wahl |
 | --- | --- |
 | Backend | NestJS, TypeScript, TypeORM, PostgreSQL |
-| Auth | JWT, bcrypt, role-based access control |
+| Auth | JWT, bcrypt, rollenbasierte Zugriffskontrolle |
 | Frontend | React 18, Vite, TypeScript, Tailwind, Zustand |
-| Calendar / boards | FullCalendar, Hello Pangea DnD |
-| Delivery | Docker, GHCR, nginx, staging and production pipelines |
+| Kalender / Boards | FullCalendar, Hello Pangea DnD |
+| Ausrollen | Docker, GHCR, nginx, getrennte Pipelines für Staging und Produktion |
 
-## Security in the delivery path
+## Security im Delivery-Pfad
 
-This is the part worth reading, because it is the part most side projects
-skip.
+Das ist der Teil, der sich zu lesen lohnt, weil ihn die meisten Nebenprojekte
+auslassen.
 
-**Before the commit exists.** pre-commit runs `detect-secrets` against a
-committed baseline, `detect-private-key`, a large-file guard, and
-`no-commit-to-branch`. A credential has to get past a hook that runs on the
-developer's machine before it can reach a remote.
+**Bevor der Commit existiert.** pre-commit führt `detect-secrets` gegen eine
+committete Baseline aus, dazu `detect-private-key`, eine Sperre für große
+Dateien und `no-commit-to-branch`. Ein Credential muss erst an einem Hook auf
+der Entwicklermaschine vorbei, bevor es ein Remote erreicht.
 
-**On every push.** A dedicated `security.yml` workflow runs three jobs:
-`npm audit` on both workspaces with dev dependencies excluded, a
-`detect-secrets` scan diffed against the baseline so only *new* findings
-fail, and GitHub's dependency review on pull requests into `main`.
+**Bei jedem Push.** Ein eigener `security.yml`-Workflow fährt drei Jobs:
+`npm audit` über beide Workspaces ohne Dev-Abhängigkeiten, einen
+`detect-secrets`-Scan im Diff gegen die Baseline, sodass nur *neue* Findings
+fehlschlagen, und GitHubs Dependency Review bei Pull Requests nach `main`.
 
-**On the way out.** Images build to GHCR and deploy over SSH. Staging and
-production are separate pipelines, so the staging path is a real rehearsal
-rather than a flag.
+**Auf dem Weg nach draußen.** Images bauen nach GHCR und rollen über SSH aus.
+Staging und Produktion sind getrennte Pipelines, damit der Staging-Weg eine
+echte Probe ist und kein Flag.
 
-The `.env` file is not in the repository, which sounds like a low bar until
-you check how many multi-tenant side projects clear it.
+Die `.env`-Datei liegt nicht im Repository, was nach einer niedrigen Hürde
+klingt, bis man nachzählt, wie viele Multi-Tenant-Nebenprojekte sie reißen.
 
-## What I would change
+## Was ich ändern würde
 
-Two things, named because a project page that only lists strengths is an
-advertisement.
+Zwei Dinge, benannt, weil eine Projektseite, die nur Stärken auflistet, eine
+Anzeige ist.
 
-**Tenant isolation is enforced in application code.** Every service method
-takes a `tenantId` and every query filters on it. It works, and it is
-readable, but the guarantee is only as strong as the discipline: one query
-written without the filter is a cross-tenant read, and nothing structural
-stops it. The stronger form is PostgreSQL row-level security, where the
-database refuses the query rather than trusting the service to have asked
-correctly. That is the migration I would do next, and it is the honest answer
-when someone asks how isolation is enforced.
+**Die Tenant-Isolation wird im Anwendungscode erzwungen.** Jede Service-Methode
+nimmt eine `tenantId`, und jede Query filtert darauf. Es funktioniert und es
+liest sich gut, aber die Garantie ist nur so stark wie die Disziplin: eine
+einzige Query ohne den Filter ist ein Lesezugriff über Tenant-Grenzen hinweg,
+und strukturell hält das nichts auf. Die stärkere Form ist Row-Level Security in
+PostgreSQL, wo die Datenbank die Query verweigert, statt darauf zu vertrauen,
+dass der Service richtig gefragt hat. Das ist die Migration, die ich als
+nächstes machen würde, und es ist die ehrliche Antwort, wenn jemand fragt, wie
+die Isolation durchgesetzt wird.
 
-**The dependency audit is looser than its label.** The workflow step is named
-"HIGH+" but runs `npm audit --audit-level=critical`, so high-severity
-findings pass silently. A check whose name and behaviour disagree is worse
-than no check, because it buys confidence it has not earned. It is a
-one-word fix, and it is the kind of thing that only turns up when you read
-your own pipeline as if someone else wrote it.
+**Das Dependency-Audit ist lockerer als sein Etikett.** Der Workflow-Schritt
+heißt "HIGH+", führt aber `npm audit --audit-level=critical` aus, sodass
+Findings der Stufe high stillschweigend durchgehen. Eine Prüfung, deren Name und
+Verhalten sich widersprechen, ist schlimmer als keine Prüfung, weil sie
+Zuversicht erkauft, die sie nicht verdient hat. Es ist eine Ein-Wort-Korrektur,
+und es ist die Sorte Fund, die nur auftaucht, wenn man die eigene Pipeline liest,
+als hätte sie jemand anderes geschrieben.
