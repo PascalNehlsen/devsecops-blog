@@ -1,0 +1,14 @@
+{
+  "title": {
+    "message": "Beiträge",
+    "description": "The title for the blog used in SEO"
+  },
+  "description": {
+    "message": "Notizen aus der Arbeit an Platform- und Security-Engineering.",
+    "description": "The description for the blog used in SEO"
+  },
+  "sidebar.title": {
+    "message": "Alle Beiträge",
+    "description": "The label for the left sidebar"
+  }
+}
