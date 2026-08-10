@@ -33,7 +33,7 @@ Das Nutzungsmuster ist stoßweise: intensive Aktivität während einer Session, 
 fast Leerlauf. Genau dafür sind burstable Instanzen von AWS (`t3` / `t4g`) gebaut. Du zahlst
 einen Grundwert und sammelst im Leerlauf CPU-Credits, die du in den Spitzen ausgibst.
 
-Zwei Entscheidungen haben den Großteil der Kostenarbeit gemacht:
+Zwei Entscheidungen haben die Kosten am stärksten gedrückt:
 
 - **`t4g` (Graviton/ARM)** dort, wo die Workload architekturunabhängig ist, für das bessere Preis-Leistungs-Verhältnis.
 - **Dimensionieren auf den Burst**, nicht auf die Spitze der Spitzen, weil Credits kurze Ausschläge auffangen.
@@ -41,7 +41,7 @@ Zwei Entscheidungen haben den Großteil der Kostenarbeit gemacht:
 Gegenüber fest dimensionierten, dauerhaft laufenden Instanzen auf Spitzenniveau lagen die
 Compute-Kosten damit rund **50 % niedriger**.
 
-## Lifecycle-Automatisierung ist das ganze Spiel
+## Auf die Lifecycle-Automatisierung kommt alles an
 
 Ephemer spart nur Geld, wenn die Umgebungen tatsächlich verschwinden. Der Lebenszyklus ist
 durchgehend automatisiert:
@@ -60,7 +60,7 @@ tags = {
 }
 ```
 
-Das `expires-at`-Tag ist das Scharnier: es macht aus "bitte daran denken, sie abzuschalten"
+Das `expires-at`-Tag ist der Angelpunkt: es macht aus "bitte daran denken, sie abzuschalten"
 einen garantierten, automatischen Abbau.
 
 ## Guardrails, damit eine Sandbox eine Sandbox bleibt
@@ -69,7 +69,7 @@ Isolation und Kostenkontrolle brauchen dieselbe Durchsetzungsdisziplin wie jede 
 
 - **Eng geschnittenes IAM** pro Sandbox, keine gemeinsame, überprivilegierte Rolle.
 - **Egress-Grenzen**, damit aus einer Sandbox keine Krypto-Mining-Überraschung wird.
-- **Hartes Ablaufdatum**, damit Kosten durch Konstruktion begrenzt sind und nicht durch Wachsamkeit.
+- **Hartes Ablaufdatum**, damit Kosten von vornherein begrenzt sind und nicht von Wachsamkeit abhängen.
 
 ## Das Ergebnis
 
@@ -83,4 +83,4 @@ billige Standard.
 - Passe den Instanztyp an die **Nutzungsform** an; stoßweise Arbeit liebt burstable Instanzen.
 - Zieh **Graviton (`t4g`)** für architekturunabhängige Workloads in Betracht.
 - Mach den Abbau **automatisch und tag-getrieben**. Ephemer, das nie abläuft, ist einfach teuer.
-- Begrenze Kosten **durch Konstruktion** (hartes Ablaufdatum), nicht dadurch, dass Menschen daran denken.
+- Begrenze Kosten **von vornherein** (hartes Ablaufdatum), nicht dadurch, dass Menschen daran denken.

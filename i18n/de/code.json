@@ -1,6 +1,6 @@
 {
   "homepage.hero.statement": {
-    "message": "Ich baue die befestigte Straße: Self-Service-Infrastruktur und die Guardrails, mit denen Teams schnell ausliefern, ohne Löcher mit auszuliefern."
+    "message": "Ich baue den geebneten Weg: Self-Service-Infrastruktur und die Guardrails, mit denen Teams schnell ausliefern, ohne dabei Lücken mitzuliefern."
   },
   "homepage.hero.ctaWork": {
     "message": "Ausgewählte Arbeit"
@@ -15,7 +15,7 @@
     "message": "Ausgewählte Arbeit"
   },
   "homepage.work.subtitle": {
-    "message": "Drei Probleme, die ich von vorne bis hinten verantwortet habe: die Einschränkung, was ich geändert habe, und die Zahl, die sich bewegt hat."
+    "message": "Drei Probleme, die ich von vorne bis hinten verantwortet habe: die Randbedingung, was ich geändert habe, und die Zahl, die sich bewegt hat."
   },
   "homepage.work.alsoLine": {
     "message": "Außerdem: eine Security-Pipeline, die SAST und DAST in GitHub Actions als Gate schaltet, zwei SaaS-Produkte und eine Reihe kleinerer Projekte. {docsLink}."
@@ -48,7 +48,7 @@
     "message": "Fachsimpeln"
   },
   "homepage.cta.body": {
-    "message": "Ich vergleiche gerne Notizen zu Platform-Arbeit: Golden Paths, Approval-Gates für Agents, was deine Rollback-Kriterien wirklich sind."
+    "message": "Ich tausche mich gern über Platform-Arbeit aus: Golden Paths, Approval-Gates für Agents, was deine Rollback-Kriterien wirklich sind."
   },
   "homepage.meta.description": {
     "message": "Platform- und Security-Engineering. Terraform Golden Paths auf GCP, SLO-gesteuerte Deploys, agentische Runbooks mit menschlicher Freigabe."

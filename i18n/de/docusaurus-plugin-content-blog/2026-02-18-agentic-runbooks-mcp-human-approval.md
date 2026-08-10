@@ -35,7 +35,7 @@ für einen Schreibvorgang.
 ## MCP als Integrationsfläche
 
 Der Executor ist ein [MCP](https://modelcontextprotocol.io/)-Server in Go, der dem Agenten
-einen kleinen Satz Tools anbietet:
+eine kleine Auswahl an Tools anbietet:
 
 ```
 get_recent_deployments(service)      # read
@@ -47,7 +47,7 @@ propose_restart(service)             # write → queued for approval
 
 Lesende Tools liefern Kontext. Schreibende Tools handeln nicht. Sie stellen einen **Vorschlag**
 in die Warteschlange, mit einem für Menschen lesbaren Diff dessen, was passieren *würde*, und
-geben eine Ticket-ID zurück. In der Welt ändert sich nichts, bis ein Mensch dieses Ticket
+geben eine Ticket-ID zurück. Es passiert nichts, bis ein Mensch dieses Ticket
 freigibt.
 
 ## Jede kritische Aktion ist prüfbar und umkehrbar

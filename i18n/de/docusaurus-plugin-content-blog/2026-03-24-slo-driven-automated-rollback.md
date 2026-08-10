@@ -12,8 +12,8 @@ image: /img/og/de/slo-driven-automated-rollback.png
 
 Ein Deploy, der um 02:00 die Produktion zerlegt, sollte nicht darauf warten, dass ein Mensch
 aufwacht, ein Dashboard liest und sich für ein Rollback entscheidet. Wenn du *definieren*
-kannst, was "kaputt" in Größen heißt, die dein Monitoring messen kann, dann kann die Pipeline
-die Reißleine selbst ziehen. Dieser Beitrag geht durch, wie Observability so in das Deployment
+kannst, was "kaputt" bedeutet, und zwar so, dass dein Monitoring es messen kann, dann kann die Pipeline
+die Reißleine selbst ziehen. Dieser Beitrag zeigt Schritt für Schritt, wie Observability so in das Deployment
 verdrahtet wird, dass eine SLO-Verletzung ein automatisches Rollback auslöst.
 
 <!-- truncate -->
@@ -38,18 +38,18 @@ sum(rate(http_requests_total{service="appointments-api"}[5m]))
 
 ## Das Observability-Rückgrat
 
-Drei Signale füttern die Entscheidung:
+Drei Signale speisen die Entscheidung:
 
 - **Prometheus** scrapt Request-Rate, Fehlerrate und Latenz-Histogramme.
 - **Grafana** stellt sie dar und beherbergt die Alerting-Regeln, über die Menschen nachdenken.
-- **Strukturiertes Logging** (JSON, mit `trace_id`) macht das *Warum* grabbar, sobald das *Was* feuert.
+- **Strukturiertes Logging** (JSON, mit `trace_id`) macht das *Warum* auffindbar, sobald das *Was* feuert.
 
 Die entscheidende Disziplin: dieselbe Query, die die Linie im Dashboard zeichnet, ist die, die
 den Deploy absichert. Keine separate, wegdriftende "Rollback-Logik".
 
 ## Das Rollback-Gate
 
-Nachdem ein Deploy eine neue Revision promoted hat, betritt die Pipeline ein **Bake-Fenster**,
+Nachdem ein Deploy eine neue Revision promoted hat, geht die Pipeline in ein **Bake-Fenster**,
 sagen wir fünf Minuten, in dem sie die SLO-Queries beobachtet:
 
 1. Neue Revision promoten, Traffic umlegen.
