@@ -1,0 +1,66 @@
+# Kanonisches Tag-Vokabular.
+#
+# Bevor diese Datei existierte, waren Tags Freitext, und die zwei Generationen
+# von Beiträgen benutzten unterschiedliche Schreibweisen: `devsecops` gegen
+# `DevSecOps`, `cicd` gegen `CI/CD`. Docusaurus slugifiziert das
+# unterschiedlich, also enthielt die Sitemap beides: /blog/tags/devsecops und
+# /blog/tags/dev-sec-ops, derselbe Tag, zwei Seiten, geteilte Link-Equity.
+#
+# onInlineTags: 'throw' in docusaurus.config.ts heißt, ein Tippfehler kann
+# keine neue Tag-Seite mehr anlegen. Erst hier einen Key ergänzen, dann
+# verwenden.
+#
+# Die Keys und permalinks sind in beiden Sprachen identisch, sonst zeigt der
+# Sprachumschalter auf eine Tag-Seite, die es nicht gibt. Übersetzt werden nur
+# label und description, und auch nur dort, wo Deutsch das bessere Wort hat.
+
+platform:
+  label: Platform Engineering
+  permalink: /platform
+  description: Golden Paths, Self-Service-Infrastruktur, interne Plattformen.
+
+devsecops:
+  label: DevSecOps
+  permalink: /devsecops
+  description: Security im Delivery-Pfad, nicht hinterher angeschraubt.
+
+terraform:
+  label: Terraform
+  permalink: /terraform
+
+gcp:
+  label: GCP
+  permalink: /gcp
+
+aws:
+  label: AWS
+  permalink: /aws
+
+cicd:
+  label: CI/CD
+  permalink: /cicd
+
+observability:
+  label: Observability
+  permalink: /observability
+  description: SLOs, Metriken, und was zu tun ist, wenn sie verletzt werden.
+
+secrets:
+  label: Secrets
+  permalink: /secrets
+
+git:
+  label: Git
+  permalink: /git
+
+agents:
+  label: Agents & MCP
+  permalink: /agents
+
+cost:
+  label: Kosten
+  permalink: /cost
+
+containers:
+  label: Container
+  permalink: /containers

@@ -1,0 +1,13 @@
+pascal:
+  name: Pascal Nehlsen
+  title: Platform & Security Engineering
+  url: https://github.com/PascalNehlsen
+  # Von diesem Origin ausgeliefert, nicht von github.com. Ein von GitHub
+  # verlinkter Avatar wäre ein Third-Party-Request auf jeder Blogseite. Er
+  # verrät die IP des Lesers und würde img-src zwingen, einen externen Host
+  # zuzulassen.
+  image_url: /img/pascal-nehlsen.jpg
+  email: mail@pascal-nehlsen.de
+  socials:
+    github: PascalNehlsen
+    linkedin: pascal-nehlsen
