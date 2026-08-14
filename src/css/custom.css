@@ -184,7 +184,7 @@ samp {
 .navbar {
   position: sticky;
   top: 0;
-  z-index: 200;
+  z-index: var(--z-navbar);
   border-bottom: var(--border-w) solid var(--c-border);
   box-shadow: none;
 }
@@ -213,7 +213,7 @@ samp {
   .navbar__toggle {
     color: var(--c-text-muted);
     position: relative;
-    z-index: 202;
+    z-index: var(--z-drawer-toggle);
   }
 
   /* The burger would otherwise sit on top of the open drawer. */
@@ -227,7 +227,7 @@ samp {
 
   .navbar-sidebar {
     position: fixed;
-    z-index: 201;
+    z-index: var(--z-drawer);
     max-width: 300px;
     height: 100dvh;
     background: var(--c-bg);
@@ -236,7 +236,7 @@ samp {
 
   .navbar-sidebar__backdrop {
     position: fixed;
-    z-index: 200;
+    z-index: var(--z-navbar);
     background: var(--c-overlay);
   }
 

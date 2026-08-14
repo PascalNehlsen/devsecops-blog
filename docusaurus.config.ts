@@ -107,7 +107,12 @@ const config: Config = {
     },
   },
 
-  clientModules: ['./src/clientModules/console-notice.js'],
+  clientModules: [
+    './src/clientModules/console-notice.js',
+    // Applies the persisted data-design before hydration; see the module's
+    // header for why this cannot be an inline script (script-src 'self').
+    './src/clientModules/design-init.js',
+  ],
 
   // Only the two faces that block first paint: Plex 400 is every paragraph,
   // JetBrains Mono 700 is every h1/h2 above the fold. Preloading more would
@@ -304,6 +309,9 @@ const config: Config = {
             './src/css/fonts.css',
             './src/css/tokens.css',
             './src/css/custom.css',
+            // Last on purpose: the design variants (D shortcut) must win
+            // ties against the base token blocks on source order.
+            './src/css/designs.css',
           ],
         },
         sitemap: {
