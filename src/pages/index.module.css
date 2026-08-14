@@ -159,11 +159,11 @@
    designs.css, which cannot reach hashed module classes. */
 
 /* Paper: no dot grid. A page of print has margins, not a raster. */
-:global(html[data-design='paper']) .heroBanner::before {
+:global(html:is([data-design='paper'], :not([data-design]))) .heroBanner::before {
   display: none;
 }
 
-:global(html[data-design='paper']) .heroStatement {
+:global(html:is([data-design='paper'], :not([data-design]))) .heroStatement {
   font-family: var(--font-serif);
   font-style: italic;
   font-size: var(--fs-lg);

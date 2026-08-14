@@ -4,8 +4,9 @@
  * Docusaurus avoids the dark-mode flash with an inline <script> before first
  * paint; this site's `script-src 'self'` rules that out, so the earliest
  * same-origin moment is bundle evaluation: after first paint, before React
- * hydration. Users of a non-default design see the default for the first
- * ~100-500ms of a cold load. Accepted trade-off: only people who have
+ * hydration. The default (paper) needs no attribute at all and therefore
+ * never flashes; users who picked terminal or classic see paper for the
+ * first ~100-500ms of a cold load. Accepted trade-off: only people who have
  * pressed D at least once are affected.
  *
  * Root.tsx reads the attribute this module sets; it never reads
@@ -14,6 +15,7 @@
 import {
   DESIGN_STORAGE_KEY,
   isDesignId,
+  migrateStoredDesign,
 } from '../components/design/designs';
 
 export function onRouteDidUpdate() {
@@ -22,8 +24,10 @@ export function onRouteDidUpdate() {
 
 if (typeof window !== 'undefined') {
   try {
-    const stored = window.localStorage.getItem(DESIGN_STORAGE_KEY);
-    if (isDesignId(stored) && stored !== 'default') {
+    const stored = migrateStoredDesign(
+      window.localStorage.getItem(DESIGN_STORAGE_KEY)
+    );
+    if (isDesignId(stored) && stored !== 'paper') {
       document.documentElement.dataset.design = stored;
     }
   } catch {

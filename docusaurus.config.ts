@@ -338,7 +338,9 @@ const config: Config = {
 
   themeConfig: {
     colorMode: {
-      defaultMode: 'dark',
+      // Light, because the default design (paper) is a light-first journal
+      // look; dark remains one toggle away.
+      defaultMode: 'light',
       disableSwitch: false,
       respectPrefersColorScheme: false,
     },

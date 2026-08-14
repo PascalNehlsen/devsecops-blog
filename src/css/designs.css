@@ -14,8 +14,12 @@
  *     stamps data-theme='dark').
  *   - `html[data-design='x'][data-theme='light']` (0,2,1) always beats the
  *     base light block in tokens.css (0,1,1).
- *   - data-design='default' or a missing attribute matches nothing here, so
- *     design 1 is byte-for-byte the shipped look.
+ *   - PAPER IS THE DEFAULT: its selectors read
+ *     html:is([data-design='paper'], :not([data-design])), so a missing
+ *     attribute (first paint, no JS, fresh visitors) already renders paper.
+ *     :is() keeps the specificity identical to a plain attribute selector.
+ *   - data-design='classic' matches nothing here, which exposes the base
+ *     tokens: byte-for-byte the pre-paper look.
  *
  * Contrast ratios are computed (WCAG 2.1), not estimated; every body-text
  * pair clears 4.5:1, --c-text-dim stays decorative-only as in tokens.css.
@@ -213,7 +217,7 @@ html[data-design='terminal'] .markdown table {
    PAPER — technical journal (light) / print in a dim room (dark)
    ══════════════════════════════════════════════════════════════════════ */
 
-html[data-design='paper'] {
+html:is([data-design='paper'], :not([data-design])) {
   --ifm-heading-font-family: var(--font-serif);
   --ifm-link-decoration: underline;
 
@@ -226,7 +230,7 @@ html[data-design='paper'] {
 }
 
 /* Paper reads light-first: the light palette is the design's home. */
-html[data-design='paper'][data-theme='light'] {
+html:is([data-design='paper'], :not([data-design]))[data-theme='light'] {
   color-scheme: light;
 
   --c-bg: #faf8f3;
@@ -264,8 +268,8 @@ html[data-design='paper'][data-theme='light'] {
 }
 
 /* Warm dark: sepia newspaper at night, not the blue slate of the default. */
-html[data-design='paper'],
-html[data-design='paper'][data-theme='dark'] {
+html:is([data-design='paper'], :not([data-design])),
+html:is([data-design='paper'], :not([data-design]))[data-theme='dark'] {
   --c-bg: #18150f;
   --c-bg-alt: #1f1b14;
   --c-surface: #241f17;
@@ -305,31 +309,31 @@ html[data-design='paper'][data-theme='dark'] {
    centred titles, a drop cap, double rules, tables with horizontal rules
    only, small-caps buttons. */
 
-html[data-design='paper'] {
+html:is([data-design='paper'], :not([data-design])) {
   --prose-measure: 62ch;
 }
 
 /* Masthead: the navbar keeps its sticky behaviour (the doc sidebar's offset
    depends on it) but reads as a newspaper head with a double rule. */
-html[data-design='paper'] .navbar {
+html:is([data-design='paper'], :not([data-design])) .navbar {
   border-bottom: 3px double var(--c-border-strong);
 }
 
 /* Section rules under h2, like a journal's hairlines. */
-html[data-design='paper'] article h2,
-html[data-design='paper'] main h2 {
+html:is([data-design='paper'], :not([data-design])) article h2,
+html:is([data-design='paper'], :not([data-design])) main h2 {
   padding-bottom: var(--space-2);
   border-bottom: var(--border-w) solid var(--c-border);
 }
 
 /* Article titles are centred, like a paper's headline block. */
-html[data-design='paper'] main h1 {
+html:is([data-design='paper'], :not([data-design])) main h1 {
   text-align: center;
 }
 
 /* Drop cap on the first paragraph of an article body. Blog list previews
    get one per teaser too; a front page full of drop caps is period-correct. */
-html[data-design='paper'] article .markdown > p:first-of-type::first-letter {
+html:is([data-design='paper'], :not([data-design])) article .markdown > p:first-of-type::first-letter {
   float: left;
   padding: 0.04em 0.1em 0 0;
   font-family: var(--font-serif);
@@ -338,7 +342,7 @@ html[data-design='paper'] article .markdown > p:first-of-type::first-letter {
   line-height: 0.85;
 }
 
-html[data-design='paper'] hr {
+html:is([data-design='paper'], :not([data-design])) hr {
   height: 0;
   background: none;
   border: 0;
@@ -347,28 +351,28 @@ html[data-design='paper'] hr {
 
 /* Print tables rule horizontally only; the head is set off by a double
    rule, the vertical grid disappears. */
-html[data-design='paper'] .markdown table,
-html[data-design='paper'] .markdown th,
-html[data-design='paper'] .markdown td {
+html:is([data-design='paper'], :not([data-design])) .markdown table,
+html:is([data-design='paper'], :not([data-design])) .markdown th,
+html:is([data-design='paper'], :not([data-design])) .markdown td {
   border-left: 0;
   border-right: 0;
 }
 
-html[data-design='paper'] .markdown thead tr {
+html:is([data-design='paper'], :not([data-design])) .markdown thead tr {
   border-bottom: 3px double var(--c-border-strong);
 }
 
-html[data-design='paper'] blockquote {
+html:is([data-design='paper'], :not([data-design])) blockquote {
   font-family: var(--font-serif);
   font-style: italic;
   font-size: var(--fs-md);
 }
 
-html[data-design='paper'] .button {
+html:is([data-design='paper'], :not([data-design])) .button {
   font-variant-caps: small-caps;
   letter-spacing: var(--tracking-tight);
 }
 
-html[data-design='paper'] .footer {
+html:is([data-design='paper'], :not([data-design])) .footer {
   text-align: center;
 }

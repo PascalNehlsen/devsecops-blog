@@ -407,9 +407,9 @@
 
 /* Paper: no boxes at all. Cards flatten into rule-separated entries, the
    way a journal separates items with hairlines rather than borders. */
-:global(html[data-design='paper']) .projectCard,
-:global(html[data-design='paper']) .blogCard,
-:global(html[data-design='paper']) .skillGroup {
+:global(html:is([data-design='paper'], :not([data-design]))) .projectCard,
+:global(html:is([data-design='paper'], :not([data-design]))) .blogCard,
+:global(html:is([data-design='paper'], :not([data-design]))) .skillGroup {
   background: transparent;
   border: 0;
   border-top: var(--border-w) solid var(--c-border-strong);
@@ -418,22 +418,22 @@
   padding-right: 0;
 }
 
-:global(html[data-design='paper']) .projectCard:hover,
-:global(html[data-design='paper']) .projectCard:focus-within,
-:global(html[data-design='paper']) .blogCard:hover,
-:global(html[data-design='paper']) .skillGroup:hover {
+:global(html:is([data-design='paper'], :not([data-design]))) .projectCard:hover,
+:global(html:is([data-design='paper'], :not([data-design]))) .projectCard:focus-within,
+:global(html:is([data-design='paper'], :not([data-design]))) .blogCard:hover,
+:global(html:is([data-design='paper'], :not([data-design]))) .skillGroup:hover {
   background: transparent;
   border-color: var(--c-text-muted);
 }
 
-:global(html[data-design='paper']) .cardGrid,
-:global(html[data-design='paper']) .blogGrid,
-:global(html[data-design='paper']) .skillsGrid {
+:global(html:is([data-design='paper'], :not([data-design]))) .cardGrid,
+:global(html:is([data-design='paper'], :not([data-design]))) .blogGrid,
+:global(html:is([data-design='paper'], :not([data-design]))) .skillsGrid {
   gap: var(--space-4) var(--space-8);
 }
 
-:global(html[data-design='paper']) .cardTitle,
-:global(html[data-design='paper']) .blogTitle,
-:global(html[data-design='paper']) .skillGroupTitle {
+:global(html:is([data-design='paper'], :not([data-design]))) .cardTitle,
+:global(html:is([data-design='paper'], :not([data-design]))) .blogTitle,
+:global(html:is([data-design='paper'], :not([data-design]))) .skillGroupTitle {
   font-family: var(--font-serif);
 }

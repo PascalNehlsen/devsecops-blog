@@ -457,7 +457,7 @@
     "message": "Tags",
     "description": "The title of the tag list page"
   },
-  "design.name.default": {
+  "design.name.classic": {
     "message": "Klassisch"
   },
   "design.name.terminal": {
@@ -472,7 +472,103 @@
   "hint.design": {
     "message": "Design: {name}"
   },
+  "hint.game": {
+    "message": "Pipeline Defender spielen"
+  },
   "homepage.terminal.hint": {
-    "message": "D  wechselt das Design"
+    "message": "D  wechselt das Design · G  startet das Spiel"
+  },
+  "game.title": {
+    "message": "Pipeline Defender"
+  },
+  "game.intro": {
+    "message": "Bedrohungen fallen durch die Pipeline Richtung Produktion. Nur das passende Security-Tool stoppt sie: Wechseln mit 1-4, Bewegen mit den Pfeiltasten, Feuern mit Leertaste."
+  },
+  "game.best": {
+    "message": "Bester Lauf: {score}"
+  },
+  "game.reducedNote": {
+    "message": "Reduzierte Bewegung ist aktiv: Bedrohungen bewegen sich langsamer in diskreten Schritten, Partikeleffekte sind aus."
+  },
+  "game.start": {
+    "message": "Start [Leertaste]"
+  },
+  "game.manualOpen": {
+    "message": "Field Manual"
+  },
+  "game.manual.title": {
+    "message": "Field Manual"
+  },
+  "game.manual.readMore": {
+    "message": "Zum Beitrag"
+  },
+  "game.manual.back": {
+    "message": "Zurück"
+  },
+  "game.manual.gitleaks": {
+    "message": "Scannt Commits und Git-Historie nach Secrets: Cloud-Keys, Tokens, Passwörter. Läuft pre-commit und in der CI, denn ein Secret, das je in der Historie war, muss rotiert werden, nicht nur gelöscht."
+  },
+  "game.manual.osv": {
+    "message": "Gleicht deine Dependency-Manifeste mit Schwachstellen-Datenbanken ab und erkennt Pakete, die fast so heißen wie das gemeinte. Die meisten Supply-Chain-Vorfälle beginnen mit einem unachtsamen Install."
+  },
+  "game.manual.semgrep": {
+    "message": "Statische Analyse mit lesbaren Regeln: findet Injection-Schwachstellen, unsichere Aufrufe und fehlende Checks im eigenen Code, bevor ein Reviewer den Diff sieht. Schnell genug als Gate für jeden Pull Request."
+  },
+  "game.manual.guardrail": {
+    "message": "Ein- und Ausgabefilter um LLM-Features. Prompt Injection lässt sich nicht im Modell patchen, die Grenze muss außerhalb durchgesetzt werden, plus menschliche Freigabe für alles Unumkehrbare."
+  },
+  "game.explain.gitleaks": {
+    "message": "Gitleaks fängt Secrets, bevor sie die Git-Historie erreichen. Ist ein Key einmal in einem Commit, reicht Löschen nicht: rotieren."
+  },
+  "game.explain.osv": {
+    "message": "OSV-Scanning gleicht deine Dependencies mit bekannten CVEs ab und erkennt das typosquattete Paket, das nur einen Buchstaben vom echten entfernt ist."
+  },
+  "game.explain.semgrep": {
+    "message": "Semgrep findet Injection-Schwachstellen im eigenen Code mit statischen Regeln, noch bevor der Pull Request reviewt wird."
+  },
+  "game.explain.guardrail": {
+    "message": "Prompt Injection lässt sich nicht im Modell beheben. Ein Guardrail filtert, was ins LLM hinein- und herausgeht, und unumkehrbare Aktionen bekommen eine menschliche Freigabe."
+  },
+  "game.hud.score": {
+    "message": "Punkte"
+  },
+  "game.hud.wave": {
+    "message": "Welle"
+  },
+  "game.hud.mute": {
+    "message": "Sound: an [M]"
+  },
+  "game.hud.unmute": {
+    "message": "Sound: aus [M]"
+  },
+  "game.hud.close": {
+    "message": "Schließen [Esc]"
+  },
+  "game.wave": {
+    "message": "Welle {wave}"
+  },
+  "game.continue": {
+    "message": "Weiter [Leertaste]"
+  },
+  "game.paused": {
+    "message": "Pausiert"
+  },
+  "game.resume": {
+    "message": "Fortsetzen [P]"
+  },
+  "game.over": {
+    "message": "Incident in Produktion"
+  },
+  "game.final": {
+    "message": "Endstand: {score}"
+  },
+  "game.newBest": {
+    "message": "Neuer bester Lauf!"
+  },
+  "game.again": {
+    "message": "Nochmal [Leertaste]"
+  },
+  "game.fire": {
+    "message": "Feuer"
   }
 }
