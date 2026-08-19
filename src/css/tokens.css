@@ -6,7 +6,8 @@
  *   2. Semantic colours: one set per theme, then bridged onto the --ifm-*
  *      variables Infima actually reads.
  *
- * Nothing outside this file should contain a raw hex value. Component CSS
+ * Nothing outside this file and designs.css (the design variants for the D
+ * shortcut, same token status) should contain a raw hex value. Component CSS
  * refers to --c-* / --fs-* / --space-* and never to a colour literal.
  *
  * Contrast ratios in the comments are computed (WCAG 2.1 relative luminance),
@@ -23,6 +24,9 @@
     Consolas, monospace;
   --font-sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI',
     sans-serif;
+  /* System stack only, used by the paper design's headings: zero bytes,
+     no preload, and print aesthetics tolerate the platform variance. */
+  --font-serif: 'Iowan Old Style', Georgia, 'Times New Roman', Times, serif;
 
   /* ── Type scale ───────────────────────────────────────────────────── */
   --fs-2xs: 0.75rem; /* 12px. Badge and pill only, never prose */
@@ -87,6 +91,14 @@
 
   /* ── Layout ───────────────────────────────────────────────────────── */
   --prose-measure: 68ch;
+
+  /* ── Layers: the full stacking order in one place ────────────────── */
+  --z-navbar: 200;
+  --z-drawer: 201;
+  --z-drawer-toggle: 202;
+  --z-game: 300;
+  --z-toast: 310;
+  --z-scanlines: 320; /* pointer-events: none, may sit above everything */
 }
 
 /* ══════════════════════════════════════════════════════════════════════

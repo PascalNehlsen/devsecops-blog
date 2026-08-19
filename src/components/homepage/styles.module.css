@@ -384,3 +384,56 @@
     transition: none;
   }
 }
+
+/* ── Design variants (D shortcut) ────────────────────────────────────────
+   Structural overrides for the module-scoped homepage pieces. designs.css
+   cannot reach hashed module classes, so the per-design anatomy of these
+   components lives here, keyed on the same html[data-design] attribute. */
+
+/* Terminal: frames instead of surfaces. The cards lose their fill and rely
+   on the design's 2px borders, like panes in a tiling window manager. */
+:global(html[data-design='terminal']) .projectCard,
+:global(html[data-design='terminal']) .blogCard,
+:global(html[data-design='terminal']) .skillGroup {
+  background: transparent;
+}
+
+:global(html[data-design='terminal']) .projectCard:hover,
+:global(html[data-design='terminal']) .projectCard:focus-within,
+:global(html[data-design='terminal']) .blogCard:hover,
+:global(html[data-design='terminal']) .skillGroup:hover {
+  background: var(--c-bg-alt);
+}
+
+/* Paper: no boxes at all. Cards flatten into rule-separated entries, the
+   way a journal separates items with hairlines rather than borders. */
+:global(html[data-design='paper']) .projectCard,
+:global(html[data-design='paper']) .blogCard,
+:global(html[data-design='paper']) .skillGroup {
+  background: transparent;
+  border: 0;
+  border-top: var(--border-w) solid var(--c-border-strong);
+  border-radius: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+:global(html[data-design='paper']) .projectCard:hover,
+:global(html[data-design='paper']) .projectCard:focus-within,
+:global(html[data-design='paper']) .blogCard:hover,
+:global(html[data-design='paper']) .skillGroup:hover {
+  background: transparent;
+  border-color: var(--c-text-muted);
+}
+
+:global(html[data-design='paper']) .cardGrid,
+:global(html[data-design='paper']) .blogGrid,
+:global(html[data-design='paper']) .skillsGrid {
+  gap: var(--space-4) var(--space-8);
+}
+
+:global(html[data-design='paper']) .cardTitle,
+:global(html[data-design='paper']) .blogTitle,
+:global(html[data-design='paper']) .skillGroupTitle {
+  font-family: var(--font-serif);
+}

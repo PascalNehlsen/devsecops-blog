@@ -15,6 +15,32 @@ import ProjectCard from '../components/homepage/ProjectCard';
 import Skills from '../components/homepage/Skills';
 import BlogPreview from '../components/homepage/BlogPreview';
 import projects from '../data/projects';
+import { useShortcuts } from '../theme/Root';
+import { designLabel, nextDesign } from '../components/design/designs';
+
+/* Clickable twin of the keyboard shortcuts: the D key is invisible to touch
+   users and screen-reader users, so the same action exists as a real button.
+   The label names the *next* design, i.e. what pressing it will do. */
+function ShortcutHints() {
+  const { design, cycleDesign } = useShortcuts();
+  return (
+    <div className={styles.shortcutHints}>
+      <button
+        type="button"
+        className={styles.shortcutHint}
+        onClick={cycleDesign}
+      >
+        <kbd className={styles.shortcutKey}>D</kbd>
+        <Translate
+          id="hint.design"
+          values={{ name: designLabel(nextDesign(design)) }}
+        >
+          {'design: {name}'}
+        </Translate>
+      </button>
+    </div>
+  );
+}
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
@@ -42,6 +68,14 @@ function HomepageHeader() {
     {
       type: 'output',
       text: 'f02d88e  80+ sandboxes per cohort, compute -50%',
+    },
+    { type: 'command', text: 'help keys' },
+    {
+      type: 'output',
+      text: translate({
+        id: 'homepage.terminal.hint',
+        message: 'D  cycles the design',
+      }),
     },
   ];
 
@@ -144,6 +178,8 @@ function HomepageHeader() {
               guardrails that let teams ship fast without shipping holes.
             </Translate>
           </p>
+
+          <ShortcutHints />
         </div>
 
         {/* One primary CTA per view. The other two are secondary. */}

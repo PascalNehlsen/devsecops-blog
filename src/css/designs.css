@@ -1,0 +1,374 @@
+/**
+ * Design variants for the D shortcut.
+ *
+ * This file has token status: together with tokens.css it is the only place
+ * allowed to contain raw hex values. Each design overrides the --c-* / font /
+ * radius tokens; the Infima bridge in tokens.css reads those, so the whole
+ * theme surface follows without any --ifm-* redeclaration (except the two
+ * icon filters, which are raw filter recipes per theme).
+ *
+ * Selector contract (loaded after tokens.css and custom.css):
+ *   - `html[data-design='x']`                     theme-independent + dark
+ *     colours (dark is the default theme and also applies to bare html;
+ *     the explicit dark selector below wins on specificity when Docusaurus
+ *     stamps data-theme='dark').
+ *   - `html[data-design='x'][data-theme='light']` (0,2,1) always beats the
+ *     base light block in tokens.css (0,1,1).
+ *   - data-design='default' or a missing attribute matches nothing here, so
+ *     design 1 is byte-for-byte the shipped look.
+ *
+ * Contrast ratios are computed (WCAG 2.1), not estimated; every body-text
+ * pair clears 4.5:1, --c-text-dim stays decorative-only as in tokens.css.
+ */
+
+/* ══════════════════════════════════════════════════════════════════════
+   TERMINAL — phosphor screen (dark) / continuous-form printout (light)
+   ══════════════════════════════════════════════════════════════════════ */
+
+html[data-design='terminal'] {
+  /* Everything monospace: this line is the design. Long-form line heights
+     go up a notch because mono at 68ch needs the air. */
+  --font-sans: var(--font-mono);
+  --lh-normal: 1.55;
+  --lh-relaxed: 1.75;
+
+  /* A terminal has no rounded corners. Pills stay pills. */
+  --radius-xs: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+
+  /* Structure, not just colour: heavy frames everywhere. */
+  --border-w: 2px;
+
+  --ifm-link-decoration: underline;
+}
+
+html[data-design='terminal'],
+html[data-design='terminal'][data-theme='dark'] {
+  --c-bg: #010a05;
+  --c-bg-alt: #041108;
+  --c-surface: #06170c;
+  --c-elevated: #0a2113;
+  --c-border: #12351e;
+  --c-border-strong: #1d4f2e;
+
+  --c-text: #c8facd; /* 17.20 on bg: AAA */
+  --c-text-muted: #7ee29b; /* 12.65 on bg: AAA */
+  --c-text-dim: #3f9c62; /* 5.87 on bg; decorative-only by convention */
+
+  --c-accent: #4dff88; /* 15.26 on bg */
+  --c-accent-hover: #2ee06e;
+  --c-accent-link-h: #86ffb0; /* text-link hover goes lighter */
+  --c-accent-quiet: rgba(77, 255, 136, 0.1);
+  --c-on-accent: #01230e; /* 12.80 on accent */
+
+  --c-error: #ff6b6b; /* 7.23 on bg */
+  --c-error-quiet: rgba(255, 107, 107, 0.1);
+  --c-warn: #ffd166;
+  --c-warn-quiet: rgba(255, 209, 102, 0.1);
+  --c-info: #66e0ff;
+  --c-info-quiet: rgba(102, 224, 255, 0.1);
+
+  --c-code-bg: #02120a;
+  --c-selection: rgba(77, 255, 136, 0.25);
+  --c-overlay: rgba(1, 10, 5, 0.8);
+
+  --ifm-breadcrumb-separator-filter: invert(75%) sepia(40%) saturate(600%)
+    hue-rotate(80deg) brightness(100%) contrast(90%);
+  --ifm-menu-link-sublist-icon-filter: invert(75%) sepia(40%) saturate(600%)
+    hue-rotate(80deg) brightness(100%) contrast(90%);
+}
+
+html[data-design='terminal'][data-theme='light'] {
+  color-scheme: light;
+
+  --c-bg: #eef5ec;
+  --c-bg-alt: #e4eee1;
+  --c-surface: #f7fbf5;
+  --c-elevated: #e4eee1;
+  --c-border: #c9dcc6;
+  --c-border-strong: #a8c4a4;
+
+  --c-text: #10301c; /* 12.94 on bg: AAA */
+  --c-text-muted: #2f5e40; /* 6.76 on bg: AAA */
+  --c-text-dim: #5d8a6c; /* 3.56 on bg; decorative-only */
+
+  --c-accent: #0c6b34; /* 5.97/6.34/5.56 on bg/surface/bg-alt */
+  --c-accent-hover: #084f26;
+  --c-accent-link-h: #084f26;
+  --c-accent-quiet: rgba(12, 107, 52, 0.08);
+  --c-on-accent: #ffffff; /* 6.63 on accent */
+
+  --c-error: #a02121; /* 6.92 on bg */
+  --c-error-quiet: rgba(160, 33, 33, 0.07);
+  --c-warn: #8a5410; /* 5.63 on bg */
+  --c-warn-quiet: rgba(138, 84, 16, 0.08);
+  --c-info: #0e6a80; /* 5.57 on bg */
+  --c-info-quiet: rgba(14, 106, 128, 0.08);
+
+  --c-code-bg: #e4eee1;
+  --c-selection: rgba(12, 107, 52, 0.18);
+  --c-overlay: rgba(16, 48, 28, 0.45);
+
+  --ifm-breadcrumb-separator-filter: invert(30%) sepia(25%) saturate(700%)
+    hue-rotate(100deg) brightness(90%) contrast(88%);
+  --ifm-menu-link-sublist-icon-filter: invert(30%) sepia(25%) saturate(700%)
+    hue-rotate(100deg) brightness(90%) contrast(88%);
+}
+
+/* Phosphor glow on headings, dark screen only: a printout does not glow. */
+html[data-design='terminal']:not([data-theme='light']) h1,
+html[data-design='terminal']:not([data-theme='light']) h2 {
+  text-shadow: 0 0 10px rgba(77, 255, 136, 0.3);
+}
+
+/* Blinking block cursor after the page title. steps(1) = hard on/off. */
+html[data-design='terminal'] article h1::after,
+html[data-design='terminal'] main h1::after {
+  content: '▌';
+  margin-left: 0.15em;
+  color: var(--c-accent);
+  animation: design-cursor-blink 1.1s steps(1) infinite;
+}
+
+@keyframes design-cursor-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-design='terminal'] article h1::after,
+  html[data-design='terminal'] main h1::after {
+    animation: none;
+  }
+}
+
+/* ── Terminal structure ──────────────────────────────────────────────────
+   The design changes the page's anatomy, not just its palette: CRT
+   scanlines, heavy double rules, markdown heading markers, a `>` cursor on
+   the active menu item, uppercase chrome. All selectors are Infima globals
+   or elements; module-scoped homepage tweaks live next to their modules. */
+
+/* Static scanlines, dark screen only. Not animated, so reduced-motion is
+   unaffected; pointer-events: none keeps every layer beneath clickable. */
+html[data-design='terminal']:not([data-theme='light']) body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-scanlines);
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.16) 0 1px,
+    transparent 1px 3px
+  );
+}
+
+html[data-design='terminal'] .navbar {
+  border-bottom: 3px double var(--c-border-strong);
+}
+
+html[data-design='terminal'] .navbar__link {
+  text-transform: uppercase;
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tracking-wide);
+}
+
+html[data-design='terminal'] .button {
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+/* Headings carry their markdown source markers. Scoped to main so the
+   navbar/footer chrome stays clean. */
+html[data-design='terminal'] main h2::before {
+  content: '## ';
+  color: var(--c-text-dim);
+}
+
+html[data-design='terminal'] main h3::before {
+  content: '### ';
+  color: var(--c-text-dim);
+}
+
+/* The sidebar cursor: where you are is where the prompt sits. */
+html[data-design='terminal'] .menu__link--active::before {
+  content: '> ';
+  font-weight: var(--fw-bold);
+}
+
+html[data-design='terminal'] .footer__title {
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-eyebrow);
+  font-size: var(--fs-xs);
+}
+
+html[data-design='terminal'] .markdown table {
+  border: var(--border-w) solid var(--c-border-strong);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   PAPER — technical journal (light) / print in a dim room (dark)
+   ══════════════════════════════════════════════════════════════════════ */
+
+html[data-design='paper'] {
+  --ifm-heading-font-family: var(--font-serif);
+  --ifm-link-decoration: underline;
+
+  /* Print geometry: square corners, generous paragraph rhythm. */
+  --radius-xs: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --ifm-paragraph-margin-bottom: var(--space-5);
+}
+
+/* Paper reads light-first: the light palette is the design's home. */
+html[data-design='paper'][data-theme='light'] {
+  color-scheme: light;
+
+  --c-bg: #faf8f3;
+  --c-bg-alt: #f3f0e8;
+  --c-surface: #ffffff;
+  --c-elevated: #f3f0e8;
+  --c-border: #e0dbcf;
+  --c-border-strong: #c9c2b2;
+
+  --c-text: #1c1a15; /* 16.38 on bg: AAA */
+  --c-text-muted: #57524a; /* 7.30 on bg: AAA */
+  --c-text-dim: #78716c; /* 4.52 on bg; decorative-only */
+
+  --c-accent: #1f6b3a; /* 6.14/6.52/5.72 on bg/surface/bg-alt */
+  --c-accent-hover: #17512c;
+  --c-accent-link-h: #17512c;
+  --c-accent-quiet: rgba(31, 107, 58, 0.08);
+  --c-on-accent: #ffffff; /* 6.52 on accent */
+
+  --c-error: #a03123;
+  --c-error-quiet: rgba(160, 49, 35, 0.07);
+  --c-warn: #8a5410;
+  --c-warn-quiet: rgba(138, 84, 16, 0.08);
+  --c-info: #0e6a80;
+  --c-info-quiet: rgba(14, 106, 128, 0.08);
+
+  --c-code-bg: #f3f0e8;
+  --c-selection: rgba(31, 107, 58, 0.16);
+  --c-overlay: rgba(28, 26, 21, 0.45);
+
+  --ifm-breadcrumb-separator-filter: invert(33%) sepia(8%) saturate(300%)
+    hue-rotate(20deg) brightness(92%) contrast(86%);
+  --ifm-menu-link-sublist-icon-filter: invert(33%) sepia(8%) saturate(300%)
+    hue-rotate(20deg) brightness(92%) contrast(86%);
+}
+
+/* Warm dark: sepia newspaper at night, not the blue slate of the default. */
+html[data-design='paper'],
+html[data-design='paper'][data-theme='dark'] {
+  --c-bg: #18150f;
+  --c-bg-alt: #1f1b14;
+  --c-surface: #241f17;
+  --c-elevated: #2a251c;
+  --c-border: #3a3428;
+  --c-border-strong: #4d4636;
+
+  --c-text: #ece5d5; /* 14.51 on bg: AAA */
+  --c-text-muted: #b3a88e; /* 7.73 on bg: AAA */
+  --c-text-dim: #7a7159; /* 3.76 on bg; decorative-only */
+
+  --c-accent: #86c98b; /* 9.32 on bg */
+  --c-accent-hover: #6cb573;
+  --c-accent-link-h: #a8dfae; /* lighter on hover, dark-theme rule */
+  --c-accent-quiet: rgba(134, 201, 139, 0.1);
+  --c-on-accent: #10240f; /* 8.38 on accent */
+
+  --c-error: #ef8b7a;
+  --c-error-quiet: rgba(239, 139, 122, 0.1);
+  --c-warn: #e0b15e;
+  --c-warn-quiet: rgba(224, 177, 94, 0.1);
+  --c-info: #7cc7e8;
+  --c-info-quiet: rgba(124, 199, 232, 0.1);
+
+  --c-code-bg: #14110c;
+  --c-selection: rgba(134, 201, 139, 0.22);
+  --c-overlay: rgba(24, 21, 15, 0.75);
+
+  --ifm-breadcrumb-separator-filter: invert(70%) sepia(15%) saturate(300%)
+    hue-rotate(15deg) brightness(95%) contrast(88%);
+  --ifm-menu-link-sublist-icon-filter: invert(70%) sepia(15%) saturate(300%)
+    hue-rotate(15deg) brightness(95%) contrast(88%);
+}
+
+/* ── Paper structure ─────────────────────────────────────────────────────
+   A journal page, not a screen with warmer colours: narrower measure,
+   centred titles, a drop cap, double rules, tables with horizontal rules
+   only, small-caps buttons. */
+
+html[data-design='paper'] {
+  --prose-measure: 62ch;
+}
+
+/* Masthead: the navbar keeps its sticky behaviour (the doc sidebar's offset
+   depends on it) but reads as a newspaper head with a double rule. */
+html[data-design='paper'] .navbar {
+  border-bottom: 3px double var(--c-border-strong);
+}
+
+/* Section rules under h2, like a journal's hairlines. */
+html[data-design='paper'] article h2,
+html[data-design='paper'] main h2 {
+  padding-bottom: var(--space-2);
+  border-bottom: var(--border-w) solid var(--c-border);
+}
+
+/* Article titles are centred, like a paper's headline block. */
+html[data-design='paper'] main h1 {
+  text-align: center;
+}
+
+/* Drop cap on the first paragraph of an article body. Blog list previews
+   get one per teaser too; a front page full of drop caps is period-correct. */
+html[data-design='paper'] article .markdown > p:first-of-type::first-letter {
+  float: left;
+  padding: 0.04em 0.1em 0 0;
+  font-family: var(--font-serif);
+  font-size: 3.2em;
+  font-weight: var(--fw-bold);
+  line-height: 0.85;
+}
+
+html[data-design='paper'] hr {
+  height: 0;
+  background: none;
+  border: 0;
+  border-top: 3px double var(--c-border-strong);
+}
+
+/* Print tables rule horizontally only; the head is set off by a double
+   rule, the vertical grid disappears. */
+html[data-design='paper'] .markdown table,
+html[data-design='paper'] .markdown th,
+html[data-design='paper'] .markdown td {
+  border-left: 0;
+  border-right: 0;
+}
+
+html[data-design='paper'] .markdown thead tr {
+  border-bottom: 3px double var(--c-border-strong);
+}
+
+html[data-design='paper'] blockquote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--fs-md);
+}
+
+html[data-design='paper'] .button {
+  font-variant-caps: small-caps;
+  letter-spacing: var(--tracking-tight);
+}
+
+html[data-design='paper'] .footer {
+  text-align: center;
+}

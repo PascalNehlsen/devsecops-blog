@@ -456,5 +456,23 @@
   "theme.tags.tagsPageTitle": {
     "message": "Tags",
     "description": "The title of the tag list page"
+  },
+  "design.name.default": {
+    "message": "Klassisch"
+  },
+  "design.name.terminal": {
+    "message": "Terminal"
+  },
+  "design.name.paper": {
+    "message": "Papier"
+  },
+  "design.toast": {
+    "message": "Design: {name} · D wechselt weiter"
+  },
+  "hint.design": {
+    "message": "Design: {name}"
+  },
+  "homepage.terminal.hint": {
+    "message": "D  wechselt das Design"
   }
 }

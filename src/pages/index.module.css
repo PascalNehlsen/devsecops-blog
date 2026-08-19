@@ -90,9 +90,9 @@
   line-height: var(--lh-code);
   color: var(--c-text-muted);
   /* Reserves the typewriter's final height so it cannot cause layout shift.
-     Seven rendered lines (6 script lines + the trailing prompt), expressed in
+     Nine rendered lines (8 script lines + the trailing prompt), expressed in
      terms of the type scale so it tracks a font-size change. */
-  min-height: calc(7 * var(--lh-code) * 1em);
+  min-height: calc(9 * var(--lh-code) * 1em);
 }
 
 .terminalBody p {
@@ -152,6 +152,78 @@
   line-height: 1.6;
   color: var(--c-text-muted);
   text-wrap: balance;
+}
+
+/* ── Design variants (D shortcut) ────────────────────────────────────────
+   Module-scoped hero anatomy per design; the site-wide rules live in
+   designs.css, which cannot reach hashed module classes. */
+
+/* Paper: no dot grid. A page of print has margins, not a raster. */
+:global(html[data-design='paper']) .heroBanner::before {
+  display: none;
+}
+
+:global(html[data-design='paper']) .heroStatement {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--fs-lg);
+}
+
+/* Terminal: the hero terminal is no longer a window floating over the
+   page, it *is* the page. Chrome off, frame on. */
+:global(html[data-design='terminal']) .terminalWindow {
+  border-color: var(--c-border-strong);
+}
+
+:global(html[data-design='terminal']) .terminalHeader {
+  background: transparent;
+}
+
+:global(html[data-design='terminal']) .heroBanner::before {
+  display: none;
+}
+
+/* ── Shortcut hints ──────────────────────────────────────────────────────
+   The clickable twin of the D shortcut. Styled as a quiet terminal chip,
+   not as a third CTA: it must not compete with the buttons below.        */
+
+.shortcutHints {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.shortcutHint {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  background: transparent;
+  border: var(--border-w) solid var(--c-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease);
+}
+
+.shortcutHint:hover {
+  border-color: var(--c-border-strong);
+  color: var(--c-text);
+}
+
+.shortcutKey {
+  padding: 0 var(--space-1);
+  background: var(--c-elevated);
+  border: var(--border-w) solid var(--c-border-strong);
+  border-radius: var(--radius-xs);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-bold);
+  color: var(--c-text);
 }
 
 /* ── Responsive ──────────────────────────────────────────────────────── */
