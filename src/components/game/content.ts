@@ -78,7 +78,7 @@ export const THREATS: readonly ThreatDef[] = [
   {
     id: 'hardcoded-credential',
     toolId: 'gitleaks',
-    glyph: 'passwd="hunter2"',
+    glyph: 'passwd="hunter2"', // pragma: allowlist secret
     speedFactor: 0.85,
     points: 10,
   },
