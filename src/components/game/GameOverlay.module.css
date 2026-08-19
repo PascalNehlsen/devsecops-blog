@@ -1,0 +1,310 @@
+/**
+ * Pipeline Defender overlay. Tokens only, no colour literals; the canvas
+ * pulls the same tokens at runtime so DOM and drawing always match.
+ */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-game);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  background: var(--c-overlay);
+}
+
+.overlay:focus {
+  outline: none;
+}
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  width: min(900px, 100%);
+  max-height: 100dvh;
+  background: var(--c-bg);
+  border: var(--border-w) solid var(--c-border-strong);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+/* ── HUD ─────────────────────────────────────────────────────────────── */
+
+.hud {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-2) var(--space-4);
+  border-bottom: var(--border-w) solid var(--c-border);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+  flex-wrap: wrap;
+}
+
+.hudTitle {
+  color: var(--c-text-dim);
+}
+
+.hudItem strong {
+  color: var(--c-text);
+}
+
+.hudMultiplier {
+  margin-left: var(--space-1);
+  color: var(--c-accent);
+  font-weight: var(--fw-bold);
+}
+
+.hudLivesLost {
+  color: var(--c-text-dim);
+}
+
+.hudSpacer {
+  flex: 1;
+}
+
+.hudButton {
+  padding: var(--space-1) var(--space-2);
+  background: transparent;
+  border: var(--border-w) solid var(--c-border);
+  border-radius: var(--radius-xs);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  color: var(--c-text-muted);
+  cursor: pointer;
+}
+
+.hudButton:hover {
+  border-color: var(--c-border-strong);
+  color: var(--c-text);
+}
+
+.hudKey {
+  padding: 0 var(--space-1);
+  background: var(--c-elevated);
+  border: var(--border-w) solid var(--c-border-strong);
+  border-radius: var(--radius-xs);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-bold);
+  color: var(--c-text);
+}
+
+/* ── Playfield ───────────────────────────────────────────────────────── */
+
+.canvasWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  max-height: min(560px, calc(100dvh - 12rem));
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+
+/* ── Panels (title / interstitial / pause / game over) ───────────────── */
+
+.panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  text-align: center;
+  background: var(--c-overlay);
+}
+
+.panelTitle {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xl);
+  color: var(--c-text);
+}
+
+.panelBody {
+  max-width: 44ch;
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-relaxed);
+  color: var(--c-text);
+}
+
+.panelMuted {
+  max-width: 44ch;
+  margin: 0;
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+}
+
+.panelTool {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-bold);
+}
+
+.panelHighscore {
+  color: var(--c-accent);
+}
+
+.panelButtons {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: var(--space-2);
+}
+
+.gameButton,
+.gameButtonPrimary {
+  padding: var(--space-2) var(--space-4);
+  border: var(--border-w) solid var(--c-border-strong);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--c-text);
+  cursor: pointer;
+}
+
+.gameButtonPrimary {
+  background: var(--c-accent);
+  border-color: var(--c-accent);
+  color: var(--c-on-accent);
+  font-weight: var(--fw-semibold);
+}
+
+.gameButton:hover {
+  border-color: var(--c-text-muted);
+}
+
+.gameButtonPrimary:hover {
+  background: var(--c-accent-hover);
+  border-color: var(--c-accent-hover);
+}
+
+/* ── Toolbar ─────────────────────────────────────────────────────────── */
+
+.toolbar {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-top: var(--border-w) solid var(--c-border);
+  flex-wrap: wrap;
+}
+
+.toolChip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  background: transparent;
+  border: var(--border-w) solid;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.toolChip[data-active] {
+  color: var(--c-text);
+  opacity: 1;
+  background: var(--c-elevated);
+}
+
+.fireButton {
+  margin-left: auto;
+  padding: var(--space-1) var(--space-5);
+  background: var(--c-accent);
+  border: var(--border-w) solid var(--c-accent);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--c-on-accent);
+  cursor: pointer;
+}
+
+/* ── Field manual ────────────────────────────────────────────────────── */
+
+.manual {
+  padding: var(--space-6);
+  overflow-y: auto;
+}
+
+.manualList {
+  list-style: none;
+  margin: var(--space-4) 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.manualEntry {
+  padding: var(--space-3) var(--space-4);
+  border-left: 3px solid;
+  background: var(--c-surface);
+}
+
+.manualHead {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.manualTool {
+  font-family: var(--font-mono);
+  font-weight: var(--fw-bold);
+  color: var(--c-text);
+}
+
+.manualThreats {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  color: var(--c-text-muted);
+}
+
+.manualBody {
+  margin: var(--space-2) 0;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-relaxed);
+  color: var(--c-text);
+}
+
+.manualLink {
+  font-size: var(--fs-xs);
+}
+
+/* ── Small screens ───────────────────────────────────────────────────── */
+
+@media (max-width: 600px) {
+  .overlay {
+    padding: 0;
+  }
+
+  .stage {
+    border: 0;
+    border-radius: 0;
+    height: 100dvh;
+    max-height: none;
+  }
+
+  .canvasWrap {
+    flex: 1;
+    aspect-ratio: auto;
+    max-height: none;
+  }
+}

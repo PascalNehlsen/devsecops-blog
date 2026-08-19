@@ -4,6 +4,8 @@
  * shortcuts and the state they share with the homepage hint buttons:
  *
  *   D  cycles the design (data-design on <html>, persisted in localStorage)
+ *   G  opens Pipeline Defender, lazy-loaded on first use so the game chunk
+ *      never touches the critical path
  *
  * The design state initialises to 'default' and syncs from the DOM in an
  * effect: design-init.js has already set the attribute by then, and reading
@@ -11,6 +13,8 @@
  */
 import React, {
   createContext,
+  lazy,
+  Suspense,
   useCallback,
   useContext,
   useEffect,
@@ -26,14 +30,23 @@ import {
 } from '@site/src/components/design/designs';
 import DesignToast from '@site/src/components/design/DesignToast';
 
+/* React.lazy + "render only when open" = the whole game (engine, canvas
+   renderer, synth audio, field manual) lives in one same-origin async
+   chunk that is only fetched on the first G press or hint tap. */
+const GameOverlay = lazy(
+  () => import('@site/src/components/game/GameOverlay')
+);
+
 interface ShortcutContextValue {
   design: DesignId;
   cycleDesign: () => void;
+  openGame: () => void;
 }
 
 const ShortcutContext = createContext<ShortcutContextValue>({
-  design: 'default',
+  design: 'paper',
   cycleDesign: () => {},
+  openGame: () => {},
 });
 
 export function useShortcuts(): ShortcutContextValue {
@@ -55,8 +68,9 @@ function isTypingTarget(target: EventTarget | null): boolean {
 const TOAST_MS = 2200;
 
 export default function Root({ children }: { children: ReactNode }) {
-  const [design, setDesign] = useState<DesignId>('default');
+  const [design, setDesign] = useState<DesignId>('paper');
   const [toastDesign, setToastDesign] = useState<DesignId | null>(null);
+  const [gameOpen, setGameOpen] = useState(false);
   const toastTimer = useRef<ReturnType<typeof setTimeout> | undefined>(
     undefined
   );
@@ -72,7 +86,8 @@ export default function Root({ children }: { children: ReactNode }) {
   const cycleDesign = useCallback(() => {
     setDesign((current) => {
       const next = nextDesign(current);
-      if (next === 'default') {
+      /* Paper is the attribute-free default; the others are opt-in. */
+      if (next === 'paper') {
         delete document.documentElement.dataset.design;
       } else {
         document.documentElement.dataset.design = next;
@@ -89,6 +104,9 @@ export default function Root({ children }: { children: ReactNode }) {
     });
   }, []);
 
+  const openGame = useCallback(() => setGameOpen(true), []);
+  const closeGame = useCallback(() => setGameOpen(false), []);
+
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (
@@ -101,20 +119,35 @@ export default function Root({ children }: { children: ReactNode }) {
       ) {
         return;
       }
-      if (event.key.toLowerCase() === 'd') {
+      /* While the game is open it owns the keyboard: D is in-game movement,
+         G must not re-toggle, Escape closes via the overlay's handler. */
+      if (gameOpen) {
+        return;
+      }
+      const key = event.key.toLowerCase();
+      if (key === 'd') {
         cycleDesign();
+      } else if (key === 'g') {
+        setGameOpen(true);
       }
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [cycleDesign]);
+  }, [cycleDesign, gameOpen]);
 
   useEffect(() => () => clearTimeout(toastTimer.current), []);
 
   return (
-    <ShortcutContext.Provider value={{ design, cycleDesign }}>
+    <ShortcutContext.Provider value={{ design, cycleDesign, openGame }}>
       {children}
       {toastDesign !== null && <DesignToast design={toastDesign} />}
+      {gameOpen && (
+        /* fallback null: the chunk loads in well under a second and the
+           overlay animates in on its own; a spinner would just flash. */
+        <Suspense fallback={null}>
+          <GameOverlay onClose={closeGame} />
+        </Suspense>
+      )}
     </ShortcutContext.Provider>
   );
 }

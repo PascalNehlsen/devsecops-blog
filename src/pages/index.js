@@ -22,7 +22,7 @@ import { designLabel, nextDesign } from '../components/design/designs';
    users and screen-reader users, so the same action exists as a real button.
    The label names the *next* design, i.e. what pressing it will do. */
 function ShortcutHints() {
-  const { design, cycleDesign } = useShortcuts();
+  const { design, cycleDesign, openGame } = useShortcuts();
   return (
     <div className={styles.shortcutHints}>
       <button
@@ -37,6 +37,14 @@ function ShortcutHints() {
         >
           {'design: {name}'}
         </Translate>
+      </button>
+      <button
+        type="button"
+        className={styles.shortcutHint}
+        onClick={openGame}
+      >
+        <kbd className={styles.shortcutKey}>G</kbd>
+        <Translate id="hint.game">play pipeline defender</Translate>
       </button>
     </div>
   );
@@ -74,7 +82,7 @@ function HomepageHeader() {
       type: 'output',
       text: translate({
         id: 'homepage.terminal.hint',
-        message: 'D  cycles the design',
+        message: 'D  cycles the design · G  starts the game',
       }),
     },
   ];
