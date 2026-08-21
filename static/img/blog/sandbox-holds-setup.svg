@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="620" viewBox="0 0 980 620" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="ar-red" markerWidth="10" markerHeight="8" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,3 L0,6 Z" fill="#d1495b"/></marker>
+    <marker id="ar-gray" markerWidth="10" markerHeight="8" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,3 L0,6 Z" fill="#94a3b8"/></marker>
+  </defs>
+  <rect x="0" y="0" width="980" height="620" fill="#ffffff"/>
+  <text x="490" y="36" text-anchor="middle" font-size="21" font-weight="700" fill="#1f2933">Where the control actually is</text>
+  <text x="490" y="59" text-anchor="middle" font-size="13" fill="#66727f">Same action, two instruction sources: only the model tells them apart</text>
+  <text x="40" y="96" font-size="12" font-weight="700" fill="#66727f">1. INSTRUCTION FROM THE USER</text>
+  <rect x="30" y="150" width="150" height="64" rx="10" fill="#eef2f7" stroke="#94a3b8"/>
+  <text x="105" y="178" text-anchor="middle" font-size="13" font-weight="700" fill="#1f2933">You</text>
+  <text x="105" y="196" text-anchor="middle" font-size="11" fill="#66727f">POST the report</text>
+  <line x1="182" y1="182" x2="296" y2="182" stroke="#94a3b8" stroke-width="2" marker-end="url(#ar-gray)"/>
+  <rect x="300" y="122" width="250" height="122" rx="14" fill="#f8fafc" stroke="#334155" stroke-width="2.5"/>
+  <text x="425" y="142" text-anchor="middle" font-size="12" font-weight="700" fill="#334155">microVM sandbox</text>
+  <text x="425" y="157" text-anchor="middle" font-size="10" fill="#66727f">isolation boundary: holds</text>
+  <rect x="322" y="176" width="92" height="44" rx="8" fill="#e2e8f0" stroke="#64748b"/>
+  <text x="368" y="203" text-anchor="middle" font-size="12" font-weight="600" fill="#1f2933">AI agent</text>
+  <rect x="436" y="176" width="94" height="44" rx="6" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="483" y="199" text-anchor="middle" font-size="11" fill="#66727f">local data</text>
+  <rect x="556" y="160" width="9" height="70" fill="#cbd5e1"/>
+  <text x="605" y="140" text-anchor="middle" font-size="10" fill="#66727f">egress</text>
+  <text x="605" y="152" text-anchor="middle" font-size="10" fill="#66727f">allow-list</text>
+  <line x1="530" y1="196" x2="716" y2="188" stroke="#d1495b" stroke-width="3" marker-end="url(#ar-red)"/>
+  <text x="640" y="178" text-anchor="middle" font-size="12" font-weight="700" fill="#d1495b">data leaves</text>
+  <rect x="720" y="156" width="222" height="64" rx="10" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="831" y="182" text-anchor="middle" font-size="13" font-weight="700" fill="#1f2933">allowed host</text>
+  <text x="831" y="200" text-anchor="middle" font-size="11" fill="#66727f">(the one reporting endpoint)</text>
+  <text x="40" y="284" font-size="12" fill="#66727f">On the wire, doing its job and exfiltrating are the same bytes, and the policy cannot object.</text>
+  <line x1="30" y1="318" x2="950" y2="318" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="40" y="356" font-size="12" font-weight="700" fill="#66727f">2. SAME INSTRUCTION, FROM A FILE</text>
+  <rect x="30" y="410" width="150" height="64" rx="10" fill="#eef2f7" stroke="#94a3b8"/>
+  <text x="105" y="438" text-anchor="middle" font-size="13" font-weight="700" fill="#1f2933">Poisoned file</text>
+  <text x="105" y="456" text-anchor="middle" font-size="11" fill="#66727f">a README it reads</text>
+  <line x1="182" y1="442" x2="296" y2="442" stroke="#94a3b8" stroke-width="2" marker-end="url(#ar-gray)"/>
+  <rect x="300" y="382" width="250" height="122" rx="14" fill="#f8fafc" stroke="#334155" stroke-width="2.5"/>
+  <text x="425" y="402" text-anchor="middle" font-size="12" font-weight="700" fill="#334155">microVM sandbox</text>
+  <text x="425" y="417" text-anchor="middle" font-size="10" fill="#66727f">unchanged: same policy</text>
+  <rect x="322" y="436" width="92" height="44" rx="8" fill="#e2e8f0" stroke="#64748b"/>
+  <text x="368" y="463" text-anchor="middle" font-size="12" font-weight="600" fill="#1f2933">AI agent</text>
+  <rect x="436" y="436" width="94" height="44" rx="6" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="483" y="459" text-anchor="middle" font-size="11" fill="#66727f">local data</text>
+  <line x1="530" y1="456" x2="566" y2="456" stroke="#2a9d8f" stroke-width="3"/>
+  <rect x="568" y="424" width="8" height="64" rx="2" fill="#2a9d8f"/>
+  <text x="640" y="450" text-anchor="middle" font-size="12" font-weight="700" fill="#2a9d8f">model refuses</text>
+  <text x="640" y="466" text-anchor="middle" font-size="10" fill="#66727f">nothing sent</text>
+  <rect x="720" y="424" width="222" height="64" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-dasharray="5 4"/>
+  <text x="831" y="460" text-anchor="middle" font-size="12" fill="#94a3b8">nothing arrives</text>
+  <text x="40" y="548" font-size="12" fill="#66727f">The sandbox permitted the exact same send. The model is what stopped it.</text>
+  <text x="490" y="596" text-anchor="middle" font-size="12.5" font-style="italic" fill="#334155">The VM boundary and the allow-list are identical in both. Only the instruction origin changed.</text>
+</svg>
