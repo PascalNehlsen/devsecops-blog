@@ -6,7 +6,7 @@ authors: [pascal]
 description: "Die Firecracker-vs-gVisor-Debatte dreht sich um die Isolationsgrenze, eine Wand, die weitgehend gelöst ist. Die Sicherheitsfrage, die zählt, beginnt erst danach. Eine neue Lab-Serie über die Sicherheit autonomer KI-Agenten, wenn die Isolation vorausgesetzt ist."
 keywords: [agent security, ai agents, microvm sandbox, firecracker, gvisor, prompt injection, data exfiltration, egress]
 tags: [agents, devsecops, containers]
-image: /img/og/de/default.png
+image: /img/og/de/agent-sandboxes-wrong-axis.png
 ---
 # Alle vergleichen Agent-Sandboxes auf der falschen Achse
 
