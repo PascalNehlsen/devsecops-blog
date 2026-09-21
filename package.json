@@ -25,7 +25,7 @@
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.0.0",
     "prism-react-renderer": "^2.3.0",
-    "react": "^19.2.8",
+    "react": "^19.3.0",
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
@@ -35,7 +35,7 @@
     "@docusaurus/types": "^3.10.2",
     "@easyops-cn/docusaurus-search-local": "^0.55.3",
     "@resvg/resvg-js": "^2.6.2",
-    "@types/react": "^19.2.18",
+    "@types/react": "^19.3.0",
     "@types/react-dom": "^19.2.4",
     "gray-matter": "^4.0.3",
     "satori": "^0.33.5",
