@@ -35,11 +35,11 @@ Things I build and run myself.
 
 | Project | What it is | Stack | Links |
 | --- | --- | --- | --- |
+| **Agent Delivery Pipeline** | Gated delivery for agent-generated n8n workflows: builder and reviewer agents whose rights are enforced by hooks, a forced failure before the real run, and an acceptance log that is actually counted. | Claude Code agents, n8n, Python, Docker | [Docs](/docs/projects/agent-delivery-pipeline) · [Blog](/blog/agent-gate-it-cannot-open) |
 | **Runnz** | Multi-tenant SaaS for trade-fair construction scheduling. Reusable workflow blocks derive every deadline from the build date; secret scanning and dependency audit block in pre-commit and CI. | NestJS, PostgreSQL, React, Docker | [Docs](/docs/projects/runnz) · [Live](https://runnz.de) |
 | **Emavi** (formerly HepaAssist) | Barrier-free multi-tenant PWA for assisted-living facilities: residents log daily mood, staff see trends and generate reports. | Next.js, FastAPI, PostgreSQL, Docker, Web Push | [Docs](/docs/projects/hepa-assist) |
 | **AI Chatbot Platform** | Multi-tenant chatbot with appointment booking, embeddable as a widget with Shadow DOM isolation and per-tenant CORS validation. | Next.js, Prisma, OpenAI, Shadow DOM | [Docs](/docs/projects/chatbot) |
 | **CaptureDesk** | Linux-first Electron screen recorder on the Loom Record SDK, with a drawing overlay and a local Express backend. | Electron, Node.js, Express | none |
-| **n8n Workflow Workspace** | Versioned workspace for personal and per-client n8n automations. Strict client separation by tag and name prefix; secrets never in git. | n8n | none |
 | **This site** | Docusaurus on GitHub Pages behind a custom domain. Zero third-party requests, self-hosted fonts, offline search. | Docusaurus 3, GitHub Actions | [Docs](/docs/projects/devsecops-blog) |
 
 ## Smaller projects
