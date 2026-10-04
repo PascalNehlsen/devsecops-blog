@@ -38,7 +38,7 @@
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
     "gray-matter": "^4.0.3",
-    "satori": "^0.29.0",
+    "satori": "^0.33.5",
     "typescript": "~5.9.3",
     "wawoff2": "^2.0.1"
   },
