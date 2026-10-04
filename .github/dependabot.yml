@@ -16,6 +16,15 @@ updates:
       docusaurus:
         patterns:
           - '@docusaurus/*'
+      # react and react-dom must be the exact same version or the build stops
+      # with "Incompatible React versions". Bumped apart, neither pull request
+      # can pass on its own.
+      react:
+        patterns:
+          - 'react'
+          - 'react-dom'
+          - '@types/react'
+          - '@types/react-dom'
       patch-updates:
         update-types:
           - patch
