@@ -115,12 +115,15 @@ const projects = [
     tags: ['Electron', 'Node.js', 'Express', 'Linux'],
   },
   {
-    title: 'n8n Workflow Workspace',
+    title: 'Agent Delivery Pipeline',
     category: 'product',
+    featured: true,
     description:
-      'Versioned workspace for n8n automations, personal and per-client. Strict client separation via tags and name prefixes, secrets kept out of git, template-driven onboarding.',
-    impact: 'Client automation',
-    tags: ['n8n', 'Automation', 'Workflows'],
+      'Gated delivery for agent-generated n8n workflows. A builder agent that cannot run a shell, a reviewer that can run exactly one command, both enforced by hooks rather than prompts. A forced failure must hit the expected code on the expected node before the real run, and every gate decision lands in an acceptance log that is actually counted.',
+    impact: '0 of 4 passed first review',
+    tags: ['AI Agents', 'n8n', 'Python', 'Docker', 'Guardrails'],
+    docsUrl: '/docs/projects/agent-delivery-pipeline',
+    blogUrl: '/blog/agent-gate-it-cannot-open',
   },
 
   // ── Recent (portfolio / learning projects) ──────────────────────

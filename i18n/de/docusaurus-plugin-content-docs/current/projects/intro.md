@@ -35,11 +35,11 @@ Dinge, die ich selbst baue und betreibe.
 
 | Projekt | Was es ist | Stack | Links |
 | --- | --- | --- | --- |
+| **Agent Delivery Pipeline** | Abgesicherte Auslieferung von Agent-generierten n8n-Workflows: Builder- und Reviewer-Agents, deren Rechte per Hook erzwungen werden, ein erzwungener Fehler vor dem echten Lauf und ein Abnahmeprotokoll, das tatsächlich ausgewertet wird. | Claude-Code-Agents, n8n, Python, Docker | [Docs](/docs/projects/agent-delivery-pipeline) · [Blog](/blog/agent-gate-it-cannot-open) |
 | **Runnz** | Multi-Tenant-SaaS für die Planung im Messebau. Wiederverwendbare Workflow-Blöcke leiten jede Frist aus dem Aufbautermin ab; Secret-Scanning und Dependency-Audit blockieren im Pre-commit und in CI. | NestJS, PostgreSQL, React, Docker | [Docs](/docs/projects/runnz) · [Live](https://runnz.de) |
 | **Emavi** (früher HepaAssist) | Barrierefreie Multi-Tenant-PWA für Einrichtungen des betreuten Wohnens: Bewohnerinnen und Bewohner erfassen täglich ihre Stimmung, das Personal sieht Verläufe und erzeugt Berichte. | Next.js, FastAPI, PostgreSQL, Docker, Web Push | [Docs](/docs/projects/hepa-assist) |
 | **KI-Chatbot-Plattform** | Multi-Tenant-Chatbot mit Terminbuchung, als Widget einbettbar, mit Shadow-DOM-Isolation und CORS-Prüfung pro Tenant. | Next.js, Prisma, OpenAI, Shadow DOM | [Docs](/docs/projects/chatbot) |
 | **CaptureDesk** | Linux-zuerst gedachter Electron-Screenrecorder auf dem Loom Record SDK, mit Zeichen-Overlay und lokalem Express-Backend. | Electron, Node.js, Express | keine |
-| **n8n Workflow Workspace** | Versionierter Arbeitsbereich für eigene und kundenbezogene n8n-Automatisierungen. Strikte Kundentrennung über Tag und Namenspräfix; Secrets nie in git. | n8n | keine |
 | **Diese Seite** | Docusaurus auf GitHub Pages hinter eigener Domain. Keine Third-Party-Requests, selbst gehostete Schriften, Suche ohne Server. | Docusaurus 3, GitHub Actions | [Docs](/docs/projects/devsecops-blog) |
 
 ## Kleinere Projekte
