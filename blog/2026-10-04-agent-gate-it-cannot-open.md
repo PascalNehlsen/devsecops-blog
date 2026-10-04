@@ -59,7 +59,7 @@ hooks:
           command: python3 "$CLAUDE_PROJECT_DIR/operations/tooling/agent_guard.py" reviewer
 ```
 
-The reviewer may run exactly one command, the linter with `--no-write`, against a workflow folder. No chaining, no pipes, no substitution, no `..`. The builder has no shell at all, and may write only `workflow.json`, `README.md` and `ops.json` inside a workflow folder, after resolving symlinks. Anything the guard cannot parse is blocked. The guard has its own tests, mostly made of attempts to get around it.
+The reviewer may run exactly one command, the linter with `--no-write`, against a workflow folder. No chaining, no pipes, no substitution, no `..`. The builder has no shell at all, and may write only `workflow.json`, `README.md` and `ops.json` inside a workflow folder, after resolving symlinks. Anything the guard cannot parse is blocked. The guard has its own tests, mostly made of attempts to get around it. And I checked it live: each agent was told to break its own rules once per rule. Every attempt outside the boundary was stopped, either because the tool does not exist for that agent or by the guard. One of them was not even planned: asked to chain a command, the reviewer first put a `cd ... &&` in front of the lint on its own initiative. Blocked as well.
 
 The ops analyst and the onboarding skill still work on instructions alone. They were not first because they do not sit on the path to production; they are next.
 

@@ -59,7 +59,7 @@ hooks:
           command: python3 "$CLAUDE_PROJECT_DIR/operations/tooling/agent_guard.py" reviewer
 ```
 
-Der Reviewer darf genau einen Befehl ausführen, den Linter mit `--no-write`, gegen einen Workflow-Ordner. Kein Verketten, keine Pipes, keine Substitution, kein `..`. Der Builder hat überhaupt keine Shell und darf nur `workflow.json`, `README.md` und `ops.json` innerhalb eines Workflow-Ordners schreiben, nachdem Symlinks aufgelöst wurden. Alles, was der Guard nicht parsen kann, wird blockiert. Der Guard hat eigene Tests, die größtenteils aus Versuchen bestehen, ihn zu umgehen.
+Der Reviewer darf genau einen Befehl ausführen, den Linter mit `--no-write`, gegen einen Workflow-Ordner. Kein Verketten, keine Pipes, keine Substitution, kein `..`. Der Builder hat überhaupt keine Shell und darf nur `workflow.json`, `README.md` und `ops.json` innerhalb eines Workflow-Ordners schreiben, nachdem Symlinks aufgelöst wurden. Alles, was der Guard nicht parsen kann, wird blockiert. Der Guard hat eigene Tests, die größtenteils aus Versuchen bestehen, ihn zu umgehen. Und ich habe es live geprüft: Jeder Agent sollte jede seiner Regeln einmal brechen. Jeder Versuch außerhalb der Grenze wurde gestoppt, entweder weil das Werkzeug für diesen Agent gar nicht existiert, oder durch den Guard. Einer war nicht einmal geplant: Beim Auftrag, einen Befehl zu verketten, hat der Reviewer von sich aus zuerst ein `cd ... &&` vor den Lint gesetzt. Ebenfalls blockiert.
 
 Der Ops-Analyst und der Onboarding-Skill arbeiten weiterhin nur mit Anweisungen. Sie kamen nicht zuerst dran, weil sie nicht auf dem Weg in die Produktion liegen; sie sind die nächsten.
 
