@@ -57,6 +57,20 @@ const EXCEPTIONS = [
     reason:
       'Same package, same build-time-only reachability from our own images: the JXL/HEIF parser DoS has no untrusted-input path either, and no fixed release exists yet.',
   },
+  {
+    package: 'braces',
+    ghsa: 'GHSA-vfj7-8cjw-p6xm',
+    expires: '2026-11-07',
+    reason:
+      'Reached through micromatch and chokidar inside @docusaurus/core, expanding glob patterns written in our own config and plugin options. No visitor or contributor input becomes a pattern, so the nested-brace stack exhaustion has no untrusted path. braces 3.0.3 is the latest release and every version is affected. Revisit when braces ships a fix.',
+  },
+  {
+    package: 'http-cache-semantics',
+    ghsa: 'GHSA-ch52-4w7c-c8xp',
+    expires: '2026-11-07',
+    reason:
+      'Reached only through update-notifier, which @docusaurus/core uses to ask the npm registry for a newer version. The advisory is a shared cache serving one user\'s response to another; this runs on one machine for one user with no shared cache in between, so there is no second user to disclose to. 4.2.0 is the latest release and every version is affected. Revisit when a fix ships.',
+  },
 ];
 
 function audit() {
