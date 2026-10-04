@@ -39,8 +39,8 @@ To get started with this `nmap` implementation, follow these steps:
 1. **Clone the Repository**:
 
 ```shell
-git clone https://github.com/yourusername/nmap.git
-cd nmap
+git clone https://github.com/PascalNehlsen/dso-python-tasks.git
+cd dso-python-tasks/module-5/nmap
 ```
 
 ## Usage Examples

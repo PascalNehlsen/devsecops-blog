@@ -45,8 +45,8 @@ So kommst du mit dem `hashcat`-Werkzeug los:
 1. **Repository klonen**:
 
 ```shell
-git clone https://github.com/pascalnehlsen/hashcat.git
-cd hashcat
+git clone https://github.com/PascalNehlsen/dso-python-tasks.git
+cd dso-python-tasks/module-5/hashcat
 ```
 
 ## Beispiele

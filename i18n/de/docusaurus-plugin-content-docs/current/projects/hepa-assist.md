@@ -13,9 +13,9 @@ Ausgeliefert als **HepaAssist**, läuft heute als **Emavi**. Dieser Aufschrieb
 behält den alten Namen dort, wo er Entscheidungen beschreibt, die unter ihm
 getroffen wurden.
 
-:::info[Live · Login erforderlich]
-[emavi.de](https://emavi.de). Das Produkt liegt hinter einer Anmeldung, der Link
-landet also auf einer Login-Seite. Architektur und Entscheidungen stehen unten.
+:::info[Nicht mehr live]
+Emavi wird nicht mehr gehostet, es gibt also nichts zu verlinken. Architektur
+und Entscheidungen stehen unten, die Screenshots zeigen das Produkt, wie es lief.
 :::
 
 ## Überblick
@@ -485,7 +485,7 @@ tests/
 HepaAssist zeigt einen modernen, sicherheitsorientierten Weg, skalierbare Anwendungen zu entwickeln. Das Projekt verbindet bewährte DevSecOps-Praxis mit Full-Stack-Entwicklung und liefert praktische Antworten auf echte fachliche Anforderungen im regulierten Gesundheitsbereich.
 
 **Kernstärken:**
-- produktionsreife Multi-Tenant-Architektur mit laufendem Deployment
+- produktionsreife Multi-Tenant-Architektur, die im Produktivbetrieb lief
 - automatisierte CI/CD-Pipeline mit GitHub Actions
 - containerbasierte Infrastruktur, orchestriert mit Docker Compose
 - Sicherheit auf allen Ebenen, mit verschlüsselten Secrets und JWT-Authentifizierung

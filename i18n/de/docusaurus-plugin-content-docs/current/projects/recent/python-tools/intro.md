@@ -9,7 +9,7 @@ Pentesting-Werkzeuge in Python sind Skripte oder Programme, die Schwachstellen f
 
 ## Ausgewählte Projekte
 
-- **CVE 2023_32764 Exploit** [GitHub](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/2023_32784_exploit) | [Docs](exploit):  
+- **CVE 2023_32764 Exploit** [GitHub](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/2023-32784-exploit) | [Docs](exploit):  
   Dieses Projekt enthält den Quellcode meiner eigenen Umsetzung des **hydra**-Werkzeugs, eines Netzwerk-Logon-Crackers für Brute-Force gegen verschiedene Protokolle. Diese leichtgewichtige Umsetzung konzentriert sich auf SSH-Brute-Force und Wörterbuchangriffe.
 
 - **PDF Remove Metadata** [GitHub](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/remove-metadata) | [Docs](remove-metadata):  

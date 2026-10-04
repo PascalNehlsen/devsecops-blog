@@ -39,8 +39,8 @@ To get started with this `metadata` tool, follow these steps:
 1. **Clone the Repository**:
 
 ```shell
-git clone https://github.com/yourusername/metadata-tool.git
-cd metadata-tool
+git clone https://github.com/PascalNehlsen/dso-python-tasks.git
+cd dso-python-tasks/module-5/metadata
 ```
 
 2. **Install Dependencies**:

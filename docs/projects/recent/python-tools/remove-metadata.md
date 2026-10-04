@@ -54,8 +54,8 @@ pip install pikepdf exiftool
 **Clone the Repository**:
 
 ```shell
-git clone https://github.com/yourusername/pdf-metadata-cleaner.git
-cd pdf-metadata-cleaner
+git clone https://github.com/PascalNehlsen/dso-python-tasks.git
+cd dso-python-tasks/module-5/remove-metadata
 ```
 
 ## Usage

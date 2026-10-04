@@ -12,9 +12,9 @@ keywords: [multi-tenant saas, healthcare, fastapi, next.js, accessibility, pwa]
 Shipped as **HepaAssist**; now runs as **Emavi**. The write-up keeps the old
 name where it describes decisions made under it.
 
-:::info[Live · login required]
-[emavi.de](https://emavi.de). The product is behind authentication, so the
-link lands on a sign-in page. The architecture and the decisions are below.
+:::info[No longer live]
+Emavi is no longer hosted, so there is nothing to link to. The architecture
+and the decisions are below, and the screenshots show the product as it ran.
 :::
 
 ## Project Overview
@@ -483,7 +483,7 @@ tests/
 HepaAssist demonstrates a modern, security-oriented approach to developing scalable applications. The project combines DevSecOps best practices with full-stack development and provides practical solutions for real business requirements in the regulated healthcare sector.
 
 **Core Strengths:**
-- Production-ready multi-tenant architecture with live deployment
+- Production-ready multi-tenant architecture that ran in production
 - Automated CI/CD pipeline with GitHub Actions
 - Container-based infrastructure with Docker Compose orchestration
 - Security at all levels with encrypted secrets and JWT authentication
