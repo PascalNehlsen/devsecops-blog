@@ -67,8 +67,8 @@ pip install requests beautifulsoup4 PyPDF2
 **Clone the Repository**:
 
 ```shell
-git clone https://github.com/yourusername/metascan.git
-cd metascan
+git clone https://github.com/PascalNehlsen/dso-python-tasks.git
+cd dso-python-tasks/module-5/metascan
 ```
 
 ## Usage

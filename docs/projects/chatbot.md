@@ -13,8 +13,7 @@ keywords: [multi-tenant, shadow dom, chatbot, next.js, prisma, tenant isolation]
 The widget used to load on every page of this site. It was removed: a
 third-party script with full DOM access on forty content pages is not
 something I want to defend on a site about securing delivery pipelines, and
-this site does not sell anything. It runs at
-[start.chatbot-mit-pascal.de](https://start.chatbot-mit-pascal.de).
+this site does not sell anything. The platform itself is no longer hosted.
 :::
 
 ## Executive Summary

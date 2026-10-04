@@ -39,8 +39,8 @@ So kommst du mit dieser `nmap`-Umsetzung los:
 1. **Repository klonen**:
 
 ```shell
-git clone https://github.com/yourusername/nmap.git
-cd nmap
+git clone https://github.com/PascalNehlsen/dso-python-tasks.git
+cd dso-python-tasks/module-5/nmap
 ```
 
 ## Beispiele

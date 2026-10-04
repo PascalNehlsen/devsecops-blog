@@ -9,8 +9,8 @@ Pentesting tools in Python are scripts or applications designed to identify vuln
 
 ## Featured Projects
 
-- **CVE 2023_32764 Exploit** [GitHub](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/2023_32784_exploit) | [Docs Link](exploit):  
-  This project contains the source code for my own implementation of the **hydra** tool, a network logon cracker used for brute-force attacks against various protocols. This lightweight implementation focuses on SSH brute-force and dictionary attacks.
+- **CVE-2023-32784 Exploit** [GitHub](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/2023-32784-exploit) | [Docs Link](exploit):  
+  An exploit for CVE-2023-32784, the KeePass 2.x flaw that leaves most of the master password readable in a memory dump. The tool extracts password candidates from a .dmp file and brute-forces the characters the dump does not reveal against the .kdbx database.
 
 - **PDF Remove Metadata** [GitHub](https://github.com/PascalNehlsen/dso-python-tasks/tree/main/module-5/remove-metadata) | [Docs Link](remove-metadata):  
   This repository contains a Python tool that cleans metadata from a specified PDF document and linearizes it for improved web performance. The original file is replaced with the cleaned version.

@@ -13,8 +13,7 @@ keywords: [multi-tenant, shadow dom, chatbot, next.js, prisma, tenant isolation]
 Das Widget lud früher auf jeder Seite dieser Site. Es ist entfernt: ein
 Third-Party-Script mit vollem DOM-Zugriff auf vierzig Inhaltsseiten will ich auf
 einer Seite über das Absichern von Delivery-Pipelines nicht verteidigen, und
-diese Seite verkauft nichts. Es läuft unter
-[start.chatbot-mit-pascal.de](https://start.chatbot-mit-pascal.de).
+diese Seite verkauft nichts. Die Plattform selbst wird nicht mehr gehostet.
 :::
 
 ## Kurzfassung

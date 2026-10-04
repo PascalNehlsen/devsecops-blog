@@ -40,8 +40,8 @@ So kommst du mit dem `hydra`-Werkzeug los:
 1. **Repository klonen**:
 
 ```shell
-git clone https://github.com/pascalnehlsen/hydra.git
-cd hydra
+git clone https://github.com/PascalNehlsen/dso-python-tasks.git
+cd dso-python-tasks/module-5/hydra
 ```
 
 2. **Virtuelle Umgebung anlegen**:
