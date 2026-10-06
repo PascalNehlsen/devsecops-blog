@@ -1,8 +1,9 @@
 name: Security
 
 on:
-  push:
-    branches: [main]
+  # Pushes to main run this through main.yml, so the deploy can wait for it.
+  # A push trigger here as well would scan every commit twice.
+  workflow_call:
   pull_request:
   workflow_dispatch:
   schedule:
@@ -12,7 +13,9 @@ on:
     - cron: '0 6 * * 1'
 
 concurrency:
-  group: security-${{ github.ref }}
+  # github.workflow is the caller's name when main.yml calls this, so the
+  # weekly scheduled run on main cannot cancel the scan a deploy waits on.
+  group: security-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -71,4 +74,4 @@ jobs:
           comment-summary-in-pr: always
           # Kept in sync with EXCEPTIONS in scripts/audit-gate.mjs; the gate
           # fails if either list carries a GHSA the other does not.
-          allow-ghsas: GHSA-5c6j-r48x-rmvq, GHSA-w3rx-r6r6-pgpr, GHSA-5p2g-fcmc-qvqq, GHSA-vfj7-8cjw-p6xm, GHSA-ch52-4w7c-c8xp
+          allow-ghsas: GHSA-5c6j-r48x-rmvq, GHSA-w3rx-r6r6-pgpr, GHSA-5p2g-fcmc-qvqq, GHSA-vfj7-8cjw-p6xm, GHSA-ch52-4w7c-c8xp, GHSA-5gmw-xhrv-c9v3, GHSA-85c8-ppgw-ccpr

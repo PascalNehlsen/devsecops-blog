@@ -1,0 +1,43 @@
+name: Refresh PR security checks
+
+# The audit and dependency review answer against today's advisory database,
+# not the one from when the pull request was opened. On 2026-10-05 a
+# Dependabot PR went green at 06:19, three advisories were published that
+# night, and it merged at 06:30 the next morning on a check that was a day out
+# of date. Re-running the Security workflow on every open pull request keeps
+# the required checks no older than this schedule.
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+  pull-requests: read
+
+jobs:
+  rerun:
+    name: Re-run Security on open pull requests
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - name: Re-run the latest Security run of each open pull request
+        run: |
+          gh pr list --state open --json number,headRefOid \
+            --jq '.[] | "\(.number) \(.headRefOid)"' |
+          while read -r number sha; do
+            run_id=$(gh run list --workflow security.yml --event pull_request \
+              --commit "$sha" --limit 1 --json databaseId,status \
+              --jq '.[] | select(.status == "completed") | .databaseId')
+            if [ -z "$run_id" ]; then
+              echo "#$number: no completed Security run for $sha, skipping"
+              continue
+            fi
+            echo "#$number: re-running Security run $run_id"
+            gh run rerun "$run_id" ||
+              echo "::warning::#$number: re-run of $run_id failed"
+          done

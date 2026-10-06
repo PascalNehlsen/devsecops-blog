@@ -71,6 +71,21 @@ const EXCEPTIONS = [
     reason:
       'Reached only through update-notifier, which @docusaurus/core uses to ask the npm registry for a newer version. The advisory is a shared cache serving one user\'s response to another; this runs on one machine for one user with no shared cache in between, so there is no second user to disclose to. 4.2.0 is the latest release and every version is affected. Revisit when a fix ships.',
   },
+  // tinypool, like image-size, has two advisories and needs two entries.
+  {
+    package: 'tinypool',
+    ghsa: 'GHSA-5gmw-xhrv-c9v3',
+    expires: '2026-11-07',
+    reason:
+      'Never loaded. @docusaurus/core imports tinypool only inside its pooled SSG executor, which runs when future.faster.ssgWorkerThreads is set, and docusaurus.config.ts does not set it; a build with DOCUSAURUS_PERF_LOGGER=true shows SSG on the current thread. The fix exists only in tinypool 2.x while Docusaurus 3.10.2 declares ^1.0.2, and forcing a major into a code path we cannot exercise is a change we could not test. Turning on ssgWorkerThreads ends this exception. Revisit when Docusaurus moves to tinypool 2.',
+  },
+  {
+    package: 'tinypool',
+    ghsa: 'GHSA-85c8-ppgw-ccpr',
+    expires: '2026-11-07',
+    reason:
+      'Same package, same unreachable path. Even with the pool enabled, Docusaurus calls pool.run(task) without an options argument, which the advisory itself lists as not affected.',
+  },
 ];
 
 function audit() {

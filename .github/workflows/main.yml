@@ -11,6 +11,20 @@ permissions:
   id-token: write
 
 jobs:
+  # A green check on a pull request says what the advisory database knew when
+  # it ran. Merged a day later, the same lockfile can be failing, so the scan
+  # runs again on the commit that ships and the deploy waits for it.
+  security:
+    name: Security
+    uses: ./.github/workflows/security.yml
+    permissions:
+      contents: read
+      # Only the dependency-review job asks for this, and it is skipped
+      # outside pull requests. A called workflow cannot request more than its
+      # caller grants, so the grant has to exist here for the call to start.
+      pull-requests: write
+
   build-and-deploy-to-pages:
     name: Build website and deploy to GitHub Pages
+    needs: security
     uses: ./.github/workflows/deploy.yaml
