@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="600" viewBox="0 0 980 600" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="ar-gray" markerWidth="10" markerHeight="8" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,3 L0,6 Z" fill="#94a3b8"/></marker>
+    <marker id="ar-red" markerWidth="10" markerHeight="8" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,3 L0,6 Z" fill="#d1495b"/></marker>
+    <marker id="ar-green" markerWidth="10" markerHeight="8" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L8,3 L0,6 Z" fill="#2f9e44"/></marker>
+  </defs>
+  <rect x="0" y="0" width="980" height="600" fill="#ffffff"/>
+  <text x="490" y="36" text-anchor="middle" font-size="21" font-weight="700" fill="#1f2933">Loopback is an address, not an origin</text>
+  <text x="490" y="59" text-anchor="middle" font-size="13" fill="#66727f">DNS rebinding against a server bound to 127.0.0.1, before and after the Host check</text>
+
+  <!-- lanes -->
+  <rect x="40" y="84" width="150" height="46" rx="10" fill="#eef2f7" stroke="#94a3b8"/>
+  <text x="115" y="104" text-anchor="middle" font-size="13" font-weight="700" fill="#1f2933">User's browser</text>
+  <text x="115" y="120" text-anchor="middle" font-size="11" fill="#66727f">any open tab</text>
+  <rect x="300" y="84" width="150" height="46" rx="10" fill="#fdf1f3" stroke="#d1495b"/>
+  <text x="375" y="104" text-anchor="middle" font-size="13" font-weight="700" fill="#1f2933">Attacker's DNS</text>
+  <text x="375" y="120" text-anchor="middle" font-size="11" fill="#66727f">TTL of one second</text>
+  <rect x="540" y="84" width="150" height="46" rx="10" fill="#fdf1f3" stroke="#d1495b"/>
+  <text x="615" y="104" text-anchor="middle" font-size="13" font-weight="700" fill="#1f2933">Attacker's server</text>
+  <text x="615" y="120" text-anchor="middle" font-size="11" fill="#66727f">203.0.113.7</text>
+  <rect x="780" y="84" width="170" height="46" rx="10" fill="#f8fafc" stroke="#334155" stroke-width="2"/>
+  <text x="865" y="104" text-anchor="middle" font-size="13" font-weight="700" fill="#1f2933">CaptureDesk server</text>
+  <text x="865" y="120" text-anchor="middle" font-size="11" fill="#66727f">127.0.0.1:8080</text>
+  <line x1="115" y1="132" x2="115" y2="470" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4 4"/>
+  <line x1="375" y1="132" x2="375" y2="470" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4 4"/>
+  <line x1="615" y1="132" x2="615" y2="470" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4 4"/>
+  <line x1="865" y1="132" x2="865" y2="470" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4 4"/>
+
+  <!-- step 1 -->
+  <text x="20" y="160" font-size="12" font-weight="700" fill="#66727f">1</text>
+  <line x1="117" y1="164" x2="371" y2="164" stroke="#94a3b8" stroke-width="2" marker-end="url(#ar-gray)"/>
+  <text x="245" y="156" text-anchor="middle" font-size="11" fill="#1f2933">rebind.attacker.example ?</text>
+  <line x1="373" y1="190" x2="119" y2="190" stroke="#94a3b8" stroke-width="2" marker-end="url(#ar-gray)"/>
+  <text x="245" y="184" text-anchor="middle" font-size="11" fill="#1f2933">203.0.113.7</text>
+  <line x1="117" y1="222" x2="611" y2="222" stroke="#94a3b8" stroke-width="2" marker-end="url(#ar-gray)"/>
+  <text x="365" y="216" text-anchor="middle" font-size="11" fill="#1f2933">GET http://rebind.attacker.example:8080/  (page with a script)</text>
+
+  <!-- step 2 -->
+  <text x="20" y="266" font-size="12" font-weight="700" fill="#66727f">2</text>
+  <line x1="117" y1="270" x2="371" y2="270" stroke="#94a3b8" stroke-width="2" marker-end="url(#ar-gray)"/>
+  <text x="245" y="262" text-anchor="middle" font-size="11" fill="#1f2933">TTL expired: rebind.attacker.example ?</text>
+  <line x1="373" y1="296" x2="119" y2="296" stroke="#d1495b" stroke-width="2.5" marker-end="url(#ar-red)"/>
+  <text x="245" y="290" text-anchor="middle" font-size="11" font-weight="700" fill="#d1495b">127.0.0.1</text>
+
+  <!-- step 3 -->
+  <text x="20" y="340" font-size="12" font-weight="700" fill="#66727f">3</text>
+  <line x1="117" y1="344" x2="861" y2="344" stroke="#d1495b" stroke-width="2.5" marker-end="url(#ar-red)"/>
+  <text x="490" y="330" text-anchor="middle" font-size="11" fill="#1f2933">fetch("/api/loom-token"): same origin as the page, so the script may read the answer</text>
+  <text x="490" y="362" text-anchor="middle" font-size="11" font-family="ui-monospace, 'JetBrains Mono', Menlo, monospace" fill="#334155">Host: rebind.attacker.example:8080</text>
+
+  <!-- answers -->
+  <line x1="863" y1="402" x2="119" y2="402" stroke="#d1495b" stroke-width="2.5" marker-end="url(#ar-red)"/>
+  <text x="490" y="395" text-anchor="middle" font-size="11" font-weight="700" fill="#d1495b">before: 200 {"appId": "…"}</text>
+  <line x1="863" y1="448" x2="119" y2="448" stroke="#2f9e44" stroke-width="2.5" marker-end="url(#ar-green)"/>
+  <text x="490" y="441" text-anchor="middle" font-size="11" font-weight="700" fill="#2f9e44">after: 421, the name is neither localhost:8080 nor 127.0.0.1:8080</text>
+
+  <!-- takeaway -->
+  <rect x="40" y="494" width="900" height="76" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text x="490" y="524" text-anchor="middle" font-size="13" fill="#1f2933">Binding to 127.0.0.1 decides which machine can connect. It says nothing about which page asked.</text>
+  <text x="490" y="548" text-anchor="middle" font-size="13" fill="#1f2933">The browser still sends the name it thinks it is talking to, and that name is the one thing a rebinding page cannot fake.</text>
+</svg>
