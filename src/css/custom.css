@@ -790,3 +790,15 @@ html {
   scrollbar-color: var(--c-border-strong) var(--c-bg);
   scrollbar-width: thin;
 }
+
+/* Phone screenshots are portrait: at the full content width one of them
+   fills more than a screen. They are drawn at roughly phone size instead;
+   the file keeps twice that width, so it stays sharp on dense displays. */
+.markdown img.phone-shot {
+  display: block;
+  width: min(320px, 100%);
+  height: auto;
+  margin: var(--ifm-spacing-vertical, 1.5rem) auto;
+  border: var(--border-w, 1px) solid var(--c-border);
+  border-radius: 20px;
+}
