@@ -19,7 +19,7 @@ Es heißt aber auch: Der teuerste Teil des Systems läuft auf einem Gerät, das 
 
 <!-- truncate -->
 
-![Die Falar-Karte: ein Tagesziel von 10 Minuten, die A0-Einheit Lissabon mit ihren Stationen und die nächste Lektion „Olá! Begrüßen und verabschieden", bereit zum Start.](/img/blog/falar/map.png)
+<img src="/img/blog/falar/map.png" alt={`Die Falar-Karte: ein Tagesziel von 10 Minuten, die A0-Einheit Lissabon mit ihren Stationen und die nächste Lektion „Olá! Begrüßen und verabschieden", bereit zum Start.`} className="phone-shot" width="720" height="1473" loading="lazy" />
 
 ## Was eine manipulierte App tun könnte
 
@@ -49,7 +49,7 @@ Drei Regeln, geordnet danach, wie sehr ich ihnen vertraue.
 
 ## Was der Wächter prüft
 
-![Eine Lektion beginnt: Ana begrüßt den Lernenden mit Namen auf einer Terrasse in Lissabon, die Zielsätze der Lektion stehen als Chips darunter, und der Mikrofonknopf zeigt, dass der Lernende dran ist. Die Begrüßung kam vom Wächter auf dem Server, nicht von der App.](/img/blog/falar/lesson.png)
+<img src="/img/blog/falar/lesson.png" alt={`Eine Lektion beginnt: Ana begrüßt den Lernenden mit Namen auf einer Terrasse in Lissabon, die Zielsätze der Lektion stehen als Chips darunter, und der Mikrofonknopf zeigt, dass der Lernende dran ist. Die Begrüßung kam vom Wächter auf dem Server, nicht von der App.`} className="phone-shot" width="720" height="1473" loading="lazy" />
 
 Weil die App nur *sprechen* soll, ist alles, was sie *schreibt*, per Definition fremd. Das hält die Regeln kurz:
 
@@ -103,7 +103,7 @@ Genauer beschreibe ich das nicht, solange die App im Test ist und jede Minute be
 - **Probekonten teilen einen Tagestopf.** Jeder kann ohne Anmeldung ein Konto anlegen, Limits pro Konto wären also wertlos. Alle Probekonten zehren von einem gemeinsamen Tagestopf an Minuten; der ist die Obergrenze dessen, was Probezeit pro Tag kostet, egal wie viele Konten jemand per Skript anlegt. Kontoanlage ist außerdem pro IP gedrosselt (3 pro Stunde, 10 pro Tag), und hinter nginx vertraut die Drossel nur dem letzten Proxy-Hop in `X-Forwarded-For`.
 - **Das OpenAI-Projekt hat ein Ausgabenlimit.** Das letzte Netz, und eines, das ich hoffentlich nie berühre.
 
-![Der Profilbildschirm eines frischen Probekontos nach einem kurzen Testanruf: „Noch 9 von 10 Probeminuten", gezählt mit der Uhr des Servers.](/img/blog/falar/profile.png)
+<img src="/img/blog/falar/profile.png" alt={`Der Profilbildschirm eines frischen Probekontos nach einem kurzen Testanruf: „Noch 9 von 10 Probeminuten", gezählt mit der Uhr des Servers.`} className="phone-shot" width="720" height="1473" loading="lazy" />
 
 Der Wächter stoppt den billigen Missbrauch sofort. Das Budget stoppt den teuren Missbrauch irgendwann. Keins von beiden allein würde reichen.
 
@@ -137,7 +137,7 @@ Nach jedem Wortwechsel schickt die App den Text des Gesagten an das Backend, und
 
 Konten starten anonym: ein Gerätekonto mit zehn Probeminuten, sein Token im verschlüsselten Speicher des Handys. Um den Fortschritt über Geräte hinweg zu behalten, meldest du dich mit Google an, über ein Google-Cloud-Projekt mit zwei OAuth-Clients: einem Web-Client, gegen dessen ID das Backend Tokens prüft, und einem Android-Client, an dem Google die App erkennt.
 
-![Die Einführung: Ana stellt sich vor und fragt nach Vorname und Niveau. Zu diesem Zeitpunkt läuft die App schon mit einem anonymen Gerätekonto und zehn Probeminuten.](/img/blog/falar/intro.png)
+<img src="/img/blog/falar/intro.png" alt={`Die Einführung: Ana stellt sich vor und fragt nach Vorname und Niveau. Zu diesem Zeitpunkt läuft die App schon mit einem anonymen Gerätekonto und zehn Probeminuten.`} className="phone-shot" width="720" height="1473" loading="lazy" />
 
 Die Prüfung im Backend ist die übliche, und der übliche Fehler ist, einen Teil davon wegzulassen. `verify_oauth2_token` prüft Signatur, Ablauf und dass die Audience meine Web-Client-ID ist; der Issuer wird ausdrücklich geprüft; eine E-Mail wird nur übernommen, wenn Google sie als verifiziert markiert. Tokens für mein Backend werden nur gehasht gespeichert und verfallen nach 180 Tagen ohne Nutzung.
 

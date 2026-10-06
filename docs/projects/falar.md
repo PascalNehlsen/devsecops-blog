@@ -65,7 +65,7 @@ and pays for all of it.
   14 (the tutor's past answers kept as text instead of audio, shorter turns, a
   per-answer token cap as an emergency brake)
 
-![The four tutors to choose from: Ana, João, Dona Graça and Sr. Manuel, each with an age, a character and their own voice.](/img/blog/falar/tutors.png)
+<img src="/img/blog/falar/tutors.png" alt={`The four tutors to choose from: Ana, João, Dona Graça and Sr. Manuel, each with an age, a character and their own voice.`} className="phone-shot" width="720" height="1473" loading="lazy" />
 
 ## Delivery
 

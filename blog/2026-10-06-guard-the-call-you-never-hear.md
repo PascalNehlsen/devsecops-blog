@@ -19,7 +19,7 @@ It also means the most expensive thing in the system runs on a device I do not c
 
 <!-- truncate -->
 
-![The Falar map: a daily goal of 10 minutes, the A0 Lisbon unit with its stops, and the next lesson "Olá! Begrüßen und verabschieden" ready to start.](/img/blog/falar/map.png)
+<img src="/img/blog/falar/map.png" alt={`The Falar map: a daily goal of 10 minutes, the A0 Lisbon unit with its stops, and the next lesson "Olá! Begrüßen und verabschieden" ready to start.`} className="phone-shot" width="720" height="1473" loading="lazy" />
 
 ## What a modified app could do
 
@@ -49,7 +49,7 @@ Three rules, in order of how much I trust them.
 
 ## What the guard checks
 
-![A lesson starting: Ana greets the learner by name on a terrace in Lisbon, the lesson's target phrases are listed as chips, and the microphone button says it is the learner's turn. The greeting came from the server's guard, not from the app.](/img/blog/falar/lesson.png)
+<img src="/img/blog/falar/lesson.png" alt={`A lesson starting: Ana greets the learner by name on a terrace in Lisbon, the lesson's target phrases are listed as chips, and the microphone button says it is the learner's turn. The greeting came from the server's guard, not from the app.`} className="phone-shot" width="720" height="1473" loading="lazy" />
 
 Because the app is designed to only ever *speak*, anything it *writes* is foreign by definition. That makes the rules short:
 
@@ -103,7 +103,7 @@ I am not going to describe it more precisely while the app is in testing and pay
 - **Trials share one daily pool.** Anyone can create an account without signing in, so per-account limits would be meaningless. All trial accounts draw from a single daily pool of minutes; that pool is the upper bound for what trials cost per day, however many accounts someone scripts. Account creation is also throttled per IP (3 per hour, 10 per day), and behind nginx the throttle trusts only the last proxy hop in `X-Forwarded-For`.
 - **The OpenAI project has a spend limit.** The last net, and the one I hope never to touch.
 
-![The profile screen of a fresh trial account after one short test call: "Noch 9 von 10 Probeminuten", nine of ten trial minutes left, counted by the server's clock.](/img/blog/falar/profile.png)
+<img src="/img/blog/falar/profile.png" alt={`The profile screen of a fresh trial account after one short test call: "Noch 9 von 10 Probeminuten", nine of ten trial minutes left, counted by the server's clock.`} className="phone-shot" width="720" height="1473" loading="lazy" />
 
 The guard stops the cheap abuse at once. The budget stops the expensive abuse eventually. Neither alone would be enough.
 
@@ -137,7 +137,7 @@ After each exchange the app sends the text of what was said to the backend, and 
 
 Accounts start anonymous: a device account with ten trial minutes, its token in the phone's encrypted store. To keep progress across devices you sign in with Google, through a Google Cloud project with two OAuth clients: a web client whose ID the backend checks tokens against, and an Android client that Google uses to recognise the app.
 
-![The onboarding: Ana introduces herself, asks for a first name and the learner's level. At this point the app already runs on an anonymous device account with ten trial minutes.](/img/blog/falar/intro.png)
+<img src="/img/blog/falar/intro.png" alt={`The onboarding: Ana introduces herself, asks for a first name and the learner's level. At this point the app already runs on an anonymous device account with ten trial minutes.`} className="phone-shot" width="720" height="1473" loading="lazy" />
 
 The backend check is the standard one, and the standard mistake is to skip a part of it. `verify_oauth2_token` checks signature, expiry and that the audience is my web client ID; the issuer is checked explicitly; an email is only taken over if Google marks it verified. Tokens for my backend are stored hashed and expire after 180 days without use.
 

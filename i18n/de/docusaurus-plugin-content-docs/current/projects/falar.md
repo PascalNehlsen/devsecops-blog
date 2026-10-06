@@ -67,7 +67,7 @@ und bezahlt alles davon.
   (Anas frühere Antworten als Text statt Audio im Verlauf, kürzere Antworten,
   eine Token-Grenze pro Antwort als Notbremse)
 
-![Die vier Lehrpersonen zur Auswahl: Ana, João, Dona Graça und Sr. Manuel, jeweils mit Alter, Charakter und eigener Stimme.](/img/blog/falar/tutors.png)
+<img src="/img/blog/falar/tutors.png" alt={`Die vier Lehrpersonen zur Auswahl: Ana, João, Dona Graça und Sr. Manuel, jeweils mit Alter, Charakter und eigener Stimme.`} className="phone-shot" width="720" height="1473" loading="lazy" />
 
 ## Auslieferung
 
