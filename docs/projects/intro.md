@@ -39,7 +39,7 @@ Things I build and run myself.
 | **Runnz** | Multi-tenant SaaS for trade-fair construction scheduling. Reusable workflow blocks derive every deadline from the build date; secret scanning and dependency audit block in pre-commit and CI. | NestJS, PostgreSQL, React, Docker | [Docs](/docs/projects/runnz) · [Live](https://runnz.de) |
 | **Emavi** (formerly HepaAssist) | Barrier-free multi-tenant PWA for assisted-living facilities: residents log daily mood, staff see trends and generate reports. | Next.js, FastAPI, PostgreSQL, Docker, Web Push | [Docs](/docs/projects/hepa-assist) |
 | **AI Chatbot Platform** | Multi-tenant chatbot with appointment booking, embeddable as a widget with Shadow DOM isolation and per-tenant CORS validation. | Next.js, Prisma, OpenAI, Shadow DOM | [Docs](/docs/projects/chatbot) |
-| **CaptureDesk** | Linux-first Electron screen recorder on the Loom Record SDK, with a drawing overlay and a local Express backend. | Electron, Node.js, Express | none |
+| **CaptureDesk** | Loom recorder for Linux on the Loom Record SDK. Runs third-party code next to the screen and camera, so permissions are decided by origin and the local server rejects foreign `Host` headers against DNS rebinding. | Electron, Node.js, Express | [Docs](/docs/projects/capturedesk) · [Blog](/blog/loopback-is-not-an-origin) · [Repo](https://github.com/PascalNehlsen/CaptureDesk) |
 | **This site** | Docusaurus on GitHub Pages behind a custom domain. Zero third-party requests, self-hosted fonts, offline search. | Docusaurus 3, GitHub Actions | [Docs](/docs/projects/devsecops-blog) |
 
 ## Smaller projects
