@@ -256,7 +256,7 @@ function SelectedWork() {
             }}
           >
             {
-              'Also: a security pipeline gating SAST and DAST in GitHub Actions, two SaaS products, and a set of smaller projects. {docsLink}.'
+              'Also: at Developer Akademie, Terraform golden paths on GCP, agentic runbooks with a human-approval gate and per-user sandboxes on AWS; a security pipeline gating SAST and DAST in GitHub Actions; two SaaS products; and a set of smaller projects. {docsLink}.'
             }
           </Translate>
         </p>
