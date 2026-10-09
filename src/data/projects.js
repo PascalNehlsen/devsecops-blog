@@ -125,6 +125,18 @@ const projects = [
     docsUrl: '/docs/projects/agent-delivery-pipeline',
     blogUrl: '/blog/agent-gate-it-cannot-open',
   },
+  {
+    title: 'Shift-Left Guard',
+    category: 'product',
+    featured: true,
+    description:
+      'A Claude Code mod that blocks insecure workflows, Dockerfiles, Terraform, Kubernetes and agent configs before Claude writes them, keeps flagged shell writes out of Claude\'s commits, and puts destructive cloud commands to a human. Measured with Opus and Haiku: the measurement disproved its own README and found three holes, now fixed.',
+    impact: '5 of 5 to 0 of 5 committed',
+    tags: ['Claude Code', 'TypeScript', 'GitHub Actions', 'MCP', 'Guardrails'],
+    githubUrl: 'https://github.com/PascalNehlsen/shift-left-guard',
+    docsUrl: '/docs/projects/shift-left-guard',
+    blogUrl: '/blog/noticing-is-not-a-control',
+  },
 
   // ── Recent (portfolio / learning projects) ──────────────────────
   {
