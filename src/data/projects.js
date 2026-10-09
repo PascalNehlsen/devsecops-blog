@@ -18,48 +18,33 @@ const projects = [
   {
     title: 'Terraform Golden Paths on GCP',
     category: 'work',
-    featured: 'selected',
-    description: translate({
-      id: 'projects.terraformGoldenPaths.description',
-      message:
-        'Every new service environment was a four-hour ticket: someone hand-clicked Cloud Run, Cloud SQL, a bucket and six IAM bindings, and got it subtly wrong about a third of the time. I modularised the GCP estate around one opinionated golden path per service shape, put the guardrails in the module instead of in a wiki, and gated every plan behind automated policy checks. A team now provisions its own environment in under 45 minutes without opening a ticket, and the drift that used to surface in production surfaces in terraform plan.',
-    }),
-    impact: translate({
-      id: 'projects.terraformGoldenPaths.impact',
-      message: 'Provisioning 4 h → 45 min',
-    }),
+    featured: true,
+    description:
+      'Every new service environment was a four-hour ticket: someone hand-clicked Cloud Run, Cloud SQL, a bucket and six IAM bindings, and got it subtly wrong about a third of the time. I modularised the GCP estate around one opinionated golden path per service shape, put the guardrails in the module instead of in a wiki, and gated every plan behind automated policy checks. A team now provisions its own environment in under 45 minutes without opening a ticket, and the drift that used to surface in production surfaces in terraform plan.',
+    impact:
+      'Provisioning 4 h → 45 min',
     tags: ['Terraform', 'GCP', 'Cloud Run', 'IAM', 'GitOps'],
     blogUrl: '/blog/terraform-golden-paths-gcp',
   },
   {
     title: 'Agentic Runbooks with a Human-Approval Gate',
     category: 'work',
-    featured: 'selected',
-    description: translate({
-      id: 'projects.agenticRunbooks.description',
-      message:
-        'Known failure classes were eating on-call time not because the fix was hard, but because assembling the context (logs, Terraform state, recent deploys) took twenty minutes at 3 a.m. I built an MCP server that does the gathering and proposes a remediation, and then stops. A human approves or rejects every state-changing action, each one is logged with the reasoning that produced it, and each one is reversible. The agent is allowed to be wrong; it is not allowed to be wrong unsupervised.',
-    }),
-    impact: translate({
-      id: 'projects.agenticRunbooks.impact',
-      message: 'Response time −60%',
-    }),
+    featured: true,
+    description:
+      'Known failure classes were eating on-call time not because the fix was hard, but because assembling the context (logs, Terraform state, recent deploys) took twenty minutes at 3 a.m. I built an MCP server that does the gathering and proposes a remediation, and then stops. A human approves or rejects every state-changing action, each one is logged with the reasoning that produced it, and each one is reversible. The agent is allowed to be wrong; it is not allowed to be wrong unsupervised.',
+    impact:
+      'Response time −60%',
     tags: ['Go', 'MCP', 'GCP', 'Terraform', 'On-Call'],
     blogUrl: '/blog/agentic-runbooks-mcp-human-approval',
   },
   {
     title: 'Ephemeral Per-User Sandboxes on AWS',
     category: 'work',
-    featured: 'selected',
-    description: translate({
-      id: 'projects.ephemeralSandboxes.description',
-      message:
-        '80+ trainees each needed a production-like n8n environment, and a fixed t3.medium per person was both wasteful and, at cohort scale, expensive. The workloads are bursty by nature: idle for hours, then a spike. So I put them on burstable instances sized for the median rather than the peak, and wrote lifecycle automation that stops and reclaims anything idle past a threshold. Everyone gets a real isolated environment; compute costs about half of the fixed-size equivalent.',
-    }),
-    impact: translate({
-      id: 'projects.ephemeralSandboxes.impact',
-      message: '80+ envs, spend −50%',
-    }),
+    featured: true,
+    description:
+      '80+ trainees each needed a production-like n8n environment, and a fixed t3.medium per person was both wasteful and, at cohort scale, expensive. The workloads are bursty by nature: idle for hours, then a spike. So I put them on burstable instances sized for the median rather than the peak, and wrote lifecycle automation that stops and reclaims anything idle past a threshold. Everyone gets a real isolated environment; compute costs about half of the fixed-size equivalent.',
+    impact:
+      '80+ envs, spend −50%',
     tags: ['AWS', 'EC2', 'Terraform', 'n8n', 'Cost'],
     blogUrl: '/blog/ephemeral-aws-sandboxes-cost',
   },
@@ -117,25 +102,57 @@ const projects = [
   {
     title: 'Agent Delivery Pipeline',
     category: 'product',
-    featured: true,
-    description:
-      'Gated delivery for agent-generated n8n workflows. A builder agent that cannot run a shell, a reviewer that can run exactly one command, both enforced by hooks rather than prompts. A forced failure must hit the expected code on the expected node before the real run, and every gate decision lands in an acceptance log that is actually counted.',
-    impact: '0 of 4 passed first review',
+    featured: 'selected',
+    description: translate({
+      id: 'projects.agentDeliveryPipeline.description',
+      message:
+        'An AI agent writes n8n workflows that run against real calendars, mailboxes and spreadsheets, and after the fifth generated workflow nobody reads carefully any more. So the gate is not me: a machine-checkable contract, a builder agent that cannot run a shell and a reviewer that can run exactly one command, both enforced by hooks rather than prompts, and a forced failure before the real run. Counting the acceptance log for the first time found two holes in the gates.',
+    }),
+    impact: translate({
+      id: 'projects.agentDeliveryPipeline.impact',
+      message: '0 of 4 passed first review',
+    }),
     tags: ['AI Agents', 'n8n', 'Python', 'Docker', 'Guardrails'],
     docsUrl: '/docs/projects/agent-delivery-pipeline',
     blogUrl: '/blog/agent-gate-it-cannot-open',
   },
+
   {
     title: 'Shift-Left Guard',
     category: 'product',
-    featured: true,
-    description:
-      'A Claude Code mod that blocks insecure workflows, Dockerfiles, Terraform, Kubernetes and agent configs before Claude writes them, keeps flagged shell writes out of Claude\'s commits, and puts destructive cloud commands to a human. Measured with Opus and Haiku: the measurement disproved its own README and found three holes, now fixed.',
-    impact: '5 of 5 to 0 of 5 committed',
+    featured: 'selected',
+    description: translate({
+      id: 'projects.shiftLeftGuard.description',
+      message:
+        'Claude Code noticed a script injection in a copied workflow template every time I asked it to copy one, and still left it on disk two times in ten; a cheaper model copied and committed it every time. I built a mod that blocks insecure workflows, Dockerfiles, Terraform and agent configs before they are written and refuses Claude\'s commits while a flagged file is still flagged. Then I measured it against its own README: the measurement disproved the README and found three holes, each fixed and measured again.',
+    }),
+    impact: translate({
+      id: 'projects.shiftLeftGuard.impact',
+      message: 'Injections committed 5/5 → 0/5',
+    }),
     tags: ['Claude Code', 'TypeScript', 'GitHub Actions', 'MCP', 'Guardrails'],
     githubUrl: 'https://github.com/PascalNehlsen/shift-left-guard',
     docsUrl: '/docs/projects/shift-left-guard',
     blogUrl: '/blog/noticing-is-not-a-control',
+  },
+
+
+  {
+    title: 'Falar',
+    category: 'product',
+    featured: 'selected',
+    description: translate({
+      id: 'projects.falar.description',
+      message:
+        'A voice AI tutor where the phone talks to OpenAI\'s Realtime API directly, so my server pays for every minute of a call it never hears. The backend owns the session, watches each call over a sideband connection, measures minutes by its own clock and fails closed when it cannot, with per-call, daily and monthly limits underneath. Cost per conversation minute went from about 14 to about 9.5 cents, measured; internal test on Google Play since October 2026.',
+    }),
+    impact: translate({
+      id: 'projects.falar.impact',
+      message: '14 → 9.5 cents per minute',
+    }),
+    tags: ['Realtime API', 'Django', 'React Native', 'GCP', 'Cost Control'],
+    docsUrl: '/docs/projects/falar',
+    blogUrl: '/blog/guard-the-call-you-never-hear',
   },
 
   // ── Recent (portfolio / learning projects) ──────────────────────

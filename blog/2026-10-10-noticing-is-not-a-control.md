@@ -200,4 +200,4 @@ That is a design choice, and a good one for what it reviews: application code, w
 
 ## Scope
 
-Shift-Left Guard is MIT licensed and runs locally: no network, no model calls, no API key. The changes in this post are [pull request #10](https://github.com/PascalNehlsen/shift-left-guard/pull/10) (the cost measurement) and [pull request #11](https://github.com/PascalNehlsen/shift-left-guard/pull/11) (the commit gate, the split rule, the staged files and the corrected README). The README's first claim now reads: "Opus noticed the injection in 10 of 10 runs, fixed it in 8, and in 2 left the vulnerable file on disk."
+Shift-Left Guard is MIT licensed and runs locally: no network, no model calls, no API key. The changes in this post are [pull request #10](https://github.com/PascalNehlsen/shift-left-guard/pull/10) (the cost measurement) and [pull request #12](https://github.com/PascalNehlsen/shift-left-guard/pull/12) (the commit gate, the split rule, the staged files and the corrected README). The README's first claim now reads: "Opus noticed the injection in 10 of 10 runs, fixed it in 8, and in 2 left the vulnerable file on disk."

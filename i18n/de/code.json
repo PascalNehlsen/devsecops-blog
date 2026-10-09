@@ -18,7 +18,7 @@
     "message": "Drei Probleme, die ich von vorne bis hinten verantwortet habe: die Randbedingung, was ich geändert habe, und die Zahl, die sich bewegt hat."
   },
   "homepage.work.alsoLine": {
-    "message": "Außerdem: eine Security-Pipeline, die SAST und DAST in GitHub Actions als Gate schaltet, zwei SaaS-Produkte und eine Reihe kleinerer Projekte. {docsLink}."
+    "message": "Außerdem: bei der Developer Akademie Terraform Golden Paths auf GCP, Agentic Runbooks mit menschlicher Freigabe und Sandboxes pro Nutzer auf AWS; eine Security-Pipeline, die SAST und DAST in GitHub Actions als Gate schaltet; zwei SaaS-Produkte und eine Reihe kleinerer Projekte. {docsLink}."
   },
   "homepage.work.alsoLine.link": {
     "message": "alles davon ist dokumentiert"
@@ -73,24 +73,6 @@
   },
   "homepage.skills.development": {
     "message": "Entwicklung"
-  },
-  "projects.terraformGoldenPaths.description": {
-    "message": "Jede neue Service-Umgebung war ein Vier-Stunden-Ticket: jemand klickte Cloud Run, Cloud SQL, einen Bucket und sechs IAM-Bindings von Hand zusammen und lag dabei in etwa einem Drittel der Fälle unauffällig daneben. Ich habe die GCP-Landschaft um je einen meinungsstarken Golden Path pro Service-Form modularisiert, die Guardrails in das Modul gelegt statt in ein Wiki, und jeden Plan hinter automatische Policy-Prüfungen gehängt. Ein Team stellt seine Umgebung jetzt in unter 45 Minuten selbst bereit, ohne Ticket, und der Drift, der früher in Produktion auffiel, fällt in terraform plan auf."
-  },
-  "projects.terraformGoldenPaths.impact": {
-    "message": "Bereitstellung 4 h → 45 min"
-  },
-  "projects.agenticRunbooks.description": {
-    "message": "Bekannte Fehlerklassen haben On-Call-Zeit gefressen, nicht weil die Behebung schwer war, sondern weil das Zusammentragen des Kontexts (Logs, Terraform-State, letzte Deploys) um 3 Uhr nachts zwanzig Minuten dauerte. Ich habe einen MCP-Server gebaut, der genau dieses Zusammentragen übernimmt, eine Behebung vorschlägt und dann stehen bleibt. Ein Mensch gibt jede zustandsändernde Aktion frei oder lehnt sie ab, jede wird mit der Begründung protokolliert, die zu ihr geführt hat, und jede ist umkehrbar. Der Agent darf falsch liegen; er darf nicht unbeaufsichtigt falsch liegen."
-  },
-  "projects.agenticRunbooks.impact": {
-    "message": "Reaktionszeit −60 %"
-  },
-  "projects.ephemeralSandboxes.description": {
-    "message": "80+ Trainees brauchten je eine produktionsnahe n8n-Umgebung, und eine fest zugewiesene t3.medium pro Person war verschwenderisch und, auf Kohortengröße gerechnet, teuer. Diese Workloads sind von Natur aus stoßweise: Stunden im Leerlauf, dann eine Spitze. Also laufen sie auf burstable Instanzen, dimensioniert nach dem Median statt nach der Spitze, plus Lifecycle-Automatisierung, die alles stoppt und zurückholt, was länger als einen Schwellwert im Leerlauf steht. Jeder bekommt eine echte isolierte Umgebung; Compute kostet etwa die Hälfte der fest dimensionierten Variante."
-  },
-  "projects.ephemeralSandboxes.impact": {
-    "message": "80+ Umgebungen, Kosten −50 %"
   },
   "homepage.blogPreview.readingTime": {
     "message": "{minutes} min Lesezeit"
@@ -570,5 +552,23 @@
   },
   "game.fire": {
     "message": "Feuer"
+  },
+  "projects.shiftLeftGuard.description": {
+    "message": "Claude Code hat eine Script Injection in einer kopierten Workflow-Vorlage jedes Mal bemerkt, wenn ich es um eine Kopie gebeten habe, und sie trotzdem zwei von zehn Malen auf der Platte gelassen; ein günstigeres Modell hat sie jedes Mal kopiert und committet. Ich habe einen Mod gebaut, der unsichere Workflows, Dockerfiles, Terraform und Agenten-Konfigurationen blockiert, bevor sie geschrieben werden, und Claudes Commits ablehnt, solange eine markierte Datei noch markiert ist. Dann habe ich ihn an seinem eigenen README gemessen: Die Messung hat das README widerlegt und drei Lücken gefunden, jede behoben und neu gemessen."
+  },
+  "projects.shiftLeftGuard.impact": {
+    "message": "Committete Injections 5/5 → 0/5"
+  },
+  "projects.agentDeliveryPipeline.description": {
+    "message": "Ein KI-Agent schreibt n8n-Workflows, die gegen echte Kalender, Postfächer und Tabellen laufen, und nach dem fünften generierten Workflow liest niemand mehr genau. Also bin nicht ich das Gate: ein maschinell prüfbarer Vertrag, ein Builder-Agent, der keine Shell ausführen kann, und ein Reviewer, der genau einen Befehl ausführen darf, beides durch Hooks statt Prompts erzwungen, und ein erzwungener Fehlschlag vor dem echten Lauf. Das erste Auszählen des Abnahme-Logs hat zwei Lücken in den Gates gefunden."
+  },
+  "projects.agentDeliveryPipeline.impact": {
+    "message": "0 von 4 im ersten Review bestanden"
+  },
+  "projects.falar.description": {
+    "message": "Ein Sprach-KI-Tutor, bei dem das Handy direkt mit OpenAIs Realtime API spricht, also bezahlt mein Server jede Minute eines Gesprächs, das er nie hört. Das Backend besitzt die Sitzung, beobachtet jedes Gespräch über eine Sideband-Verbindung, misst Minuten mit der eigenen Uhr und schließt ab, wenn es das nicht kann, darunter Limits pro Gespräch, Tag und Monat. Die Kosten pro Gesprächsminute sind von etwa 14 auf etwa 9,5 Cent gesunken, gemessen; interner Test bei Google Play seit Oktober 2026."
+  },
+  "projects.falar.impact": {
+    "message": "14 → 9,5 Cent pro Minute"
   }
 }
