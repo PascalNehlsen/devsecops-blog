@@ -42,7 +42,7 @@ Neun Prompt-Injection-Fälle spielen in den Unit-Tests feindselige Modellausgabe
 
 ## Bruch 1: Die Prüfung warf richtige Antworten weg
 
-Das Demo-Notebook enthält ein Grimm-Märchen in Originalschreibweise: `daß`, `»...«`, `’`. In Produktion habe ich am Abend des ersten Releases zweimal dieselbe Frage gestellt, beide Male mit demselben Retrieval. Die erste Antwort war 62 Tokens lang, jedes Zitat wurde verworfen, und der Nutzer sah die Absage. Die zweite hatte 98 Tokens und gültige Zitate.
+Zum ersten Release enthielt das Demo-Notebook ein Grimm-Märchen in Originalschreibweise: `daß`, `»...«`, `’`. In Produktion habe ich am Abend des ersten Releases zweimal dieselbe Frage gestellt, beide Male mit demselben Retrieval. Die erste Antwort war 62 Tokens lang, jedes Zitat wurde verworfen, und der Nutzer sah die Absage. Die zweite hatte 98 Tokens und gültige Zitate.
 
 Das Modell hatte die Passage zitiert und unterwegs stillschweigend modernisiert: `dass` statt `daß`, gerade Anführungszeichen statt `»«`. Für eine exakte Teilstring-Prüfung ist das ein erfundenes Zitat. Die Prüfung war nach ihrer eigenen Definition richtig und für den Nutzer falsch: Aus einer korrekten, belegten Antwort wurde „Dazu finde ich in den Quellen keine Antwort".
 
@@ -73,8 +73,6 @@ In Produktion, eine URL als Quelle, die Frage „Was macht die Developer Akademi
 Der Server tat, was die Regel sagt, und ersetzte die Antwort durch „Dazu finde ich in den Quellen keine Antwort." Das war sicher, und es war falsch. Die Quellen waren durchsucht worden, das Modell hatte geantwortet, es hatte die Antwort nur mit keinem einzigen Zitat belegt. Und der Nutzer hatte zugesehen, wie Text erschien und dann zu einem Satz wurde, der behauptete, es gebe nichts zu finden.
 
 Jetzt gibt es zwei feste Sätze. Die Absage bleibt für „nichts abgerufen" und „das Modell hat es selbst so gesagt". Eine Antwort ohne Markierung, oder bei der jede Markierung verworfen wurde, wird zu „Ich konnte keine Antwort mit wörtlichen Zitaten aus den Quellen belegen.", mit einem Hinweis darunter, dass der zuerst angezeigte Text verworfen wurde, weil nichts darin geprüft war. Log und Eval melden `ungrounded:no-marker` und `ungrounded:dropped` getrennt. So sehe ich, wie oft das Modell das Zitieren auslässt, statt es zu raten.
-
-<!-- SCREENSHOT: ungrounded notice -->
 
 Auch der Prompt hat sich geändert: Die Zitierregel steht jetzt vor der Absageregel, er sagt, dass eine Antwort ohne jede Markierung verworfen wird, und er gibt ein erfundenes Beispiel für eine richtige Markierung. Das kostet etwa 60 Eingabe-Tokens pro Runde. Wenn die Eval auf develop weiter Faktenfälle mit `ungrounded:no-marker` durchfallen lässt, ist der nächste Schritt ein anderes Modell oder ein eingeschränktes Ausgabeformat, keine schwächere Prüfung.
 
@@ -111,4 +109,4 @@ Keiner der drei Brüche wäre damals von einem dieser Gates gefunden worden. Den
 
 ## Umfang
 
-Das Repository ist [öffentlich](https://github.com/PascalNehlsen/nblm-clone), ebenso die Entscheidungsdatensätze hinter jedem Fix: [0011](https://github.com/PascalNehlsen/nblm-clone/blob/main/docs/adr/0011-chat-with-checked-citations.md) (die Prüfung), [0016](https://github.com/PascalNehlsen/nblm-clone/blob/main/docs/adr/0016-normalized-citation-matching.md) (das Angleichen), [0018](https://github.com/PascalNehlsen/nblm-clone/blob/main/docs/adr/0018-echoed-source-blocks.md) (die Echos), [0019](https://github.com/PascalNehlsen/nblm-clone/blob/main/docs/adr/0019-eval-scores-visible-text.md) (was die Eval bewertet) und [0026](https://github.com/PascalNehlsen/nblm-clone/blob/main/docs/adr/0026-ungrounded-answer-notice.md) (der zweite Satz). Die [Live-Demo](https://app.sec-nblm.dev) legt ein anonymes Konto mit einer Kopie des Grimm-Notebooks an und löscht es nach 24 Stunden.
+Das Repository ist [öffentlich](https://github.com/PascalNehlsen/nblm-clone), ebenso die Entscheidungsdatensätze hinter jedem Fix: [0011](https://github.com/PascalNehlsen/nblm-clone/blob/main/docs/adr/0011-chat-with-checked-citations.md) (die Prüfung), [0016](https://github.com/PascalNehlsen/nblm-clone/blob/main/docs/adr/0016-normalized-citation-matching.md) (das Angleichen), [0018](https://github.com/PascalNehlsen/nblm-clone/blob/main/docs/adr/0018-echoed-source-blocks.md) (die Echos), [0019](https://github.com/PascalNehlsen/nblm-clone/blob/main/docs/adr/0019-eval-scores-visible-text.md) (was die Eval bewertet) und [0026](https://github.com/PascalNehlsen/nblm-clone/blob/main/docs/adr/0026-ungrounded-answer-notice.md) (der zweite Satz). Die [Live-Demo](https://app.sec-nblm.dev) legt ein anonymes Konto mit einer Kopie eines Demo-Notebooks an und löscht es nach 24 Stunden.

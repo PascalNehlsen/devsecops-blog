@@ -24,7 +24,7 @@ Der Artikel
 beschreibt, was das echte Modell mit der Zitatprüfung gemacht hat.
 :::
 
-<!-- SCREENSHOT: notebook with an answer and an opened citation -->
+![Ein Notebook in der App: links die Quellen, jede in ihrer eigenen Farbe; in der Mitte die Frage „Beschreibe mir kurz worum es im Projekt Falar geht?" und eine Antwort, die mit Zitat 1 endet; rechts die Quelle, an der zitierten Stelle geöffnet und in der Farbe der Quelle markiert.](/img/blog/nblm/notebook.png)
 
 ## Architektur
 

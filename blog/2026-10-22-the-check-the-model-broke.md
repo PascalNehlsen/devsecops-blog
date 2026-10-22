@@ -42,7 +42,7 @@ Nine prompt-injection cases replay hostile model output against this in the unit
 
 ## Break 1: the check threw away correct answers
 
-The demo notebook holds a Grimm fairy tale in its original spelling: `daß`, `»...«`, `’`. On production, the evening of the first release, I asked the same question twice, with the same retrieval both times. The first answer was 62 tokens long, every citation was dropped, and the user saw the abstention. The second was 98 tokens with valid citations.
+At the first release, the demo notebook held a Grimm fairy tale in its original spelling: `daß`, `»...«`, `’`. On production, the evening of the first release, I asked the same question twice, with the same retrieval both times. The first answer was 62 tokens long, every citation was dropped, and the user saw the abstention. The second was 98 tokens with valid citations.
 
 The model had quoted the passage and silently modernized it on the way: `dass` for `daß`, straight quotes for `»«`. To an exact substring check that is a fabricated quote. The check was right by its own definition and wrong for the user: a correct, sourced answer turned into "I can't find that in your sources".
 
@@ -73,8 +73,6 @@ On production, a URL source, the question "Was macht die Developer Akademie": th
 The server did what the rule says and replaced the answer with "Dazu finde ich in den Quellen keine Antwort." That was safe and it was false. The sources had been searched, the model had answered, it just had not backed the answer with a single quote. And the user had watched text appear and then turn into a sentence claiming there was nothing to find.
 
 Now there are two fixed sentences. The abstention stays for "nothing retrieved" and "the model said so". An answer with no marker, or with every marker dropped, becomes "Ich konnte keine Antwort mit wörtlichen Zitaten aus den Quellen belegen.", with a notice under it that the text shown first was discarded because nothing in it was checked. The log and the eval report `ungrounded:no-marker` and `ungrounded:dropped` separately, so I can see how often the model skips citing instead of guessing.
-
-<!-- SCREENSHOT: ungrounded notice -->
 
 The prompt also changed: the citation rule now comes before the abstention rule, it says that an answer without any marker is discarded, and it gives one fictional example of a correct marker. That costs about 60 input tokens per turn. If the develop eval keeps failing fact cases on `ungrounded:no-marker`, the next step is a different model or a constrained output format, not a weaker check.
 
@@ -111,4 +109,4 @@ None of the three breaks would have been caught by any of these at the time. The
 
 ## Scope
 
-The repository is [public](https://github.com/PascalNehlsen/nblm-clone), and so are the decision records behind each fix: [0011](https://github.com/PascalNehlsen/nblm-clone/blob/main/docs/adr/0011-chat-with-checked-citations.md) (the check), [0016](https://github.com/PascalNehlsen/nblm-clone/blob/main/docs/adr/0016-normalized-citation-matching.md) (folding), [0018](https://github.com/PascalNehlsen/nblm-clone/blob/main/docs/adr/0018-echoed-source-blocks.md) (echoes), [0019](https://github.com/PascalNehlsen/nblm-clone/blob/main/docs/adr/0019-eval-scores-visible-text.md) (what the eval scores) and [0026](https://github.com/PascalNehlsen/nblm-clone/blob/main/docs/adr/0026-ungrounded-answer-notice.md) (the second sentence). The [live demo](https://app.sec-nblm.dev) creates an anonymous account with a copy of the Grimm notebook and deletes it after 24 hours.
+The repository is [public](https://github.com/PascalNehlsen/nblm-clone), and so are the decision records behind each fix: [0011](https://github.com/PascalNehlsen/nblm-clone/blob/main/docs/adr/0011-chat-with-checked-citations.md) (the check), [0016](https://github.com/PascalNehlsen/nblm-clone/blob/main/docs/adr/0016-normalized-citation-matching.md) (folding), [0018](https://github.com/PascalNehlsen/nblm-clone/blob/main/docs/adr/0018-echoed-source-blocks.md) (echoes), [0019](https://github.com/PascalNehlsen/nblm-clone/blob/main/docs/adr/0019-eval-scores-visible-text.md) (what the eval scores) and [0026](https://github.com/PascalNehlsen/nblm-clone/blob/main/docs/adr/0026-ungrounded-answer-notice.md) (the second sentence). The [live demo](https://app.sec-nblm.dev) creates an anonymous account with a copy of a demo notebook and deletes it after 24 hours.

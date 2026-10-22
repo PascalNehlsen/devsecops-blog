@@ -22,7 +22,7 @@ The article
 covers what the real model did to the citation check.
 :::
 
-<!-- SCREENSHOT: notebook with an answer and an opened citation -->
+![A notebook in the app: the sources on the left, each in its own color; in the middle the question "Beschreibe mir kurz worum es im Projekt Falar geht?" and an answer ending in citation 1; on the right the source opened at the cited passage, highlighted in the source's color.](/img/blog/nblm/notebook.png)
 
 ## Architecture
 
