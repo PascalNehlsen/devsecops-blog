@@ -100,18 +100,32 @@ const projects = [
     tags: ['Electron', 'Node.js', 'Express', 'Linux'],
   },
   {
-    title: 'Agent Delivery Pipeline',
+    title: 'nblm-clone',
     category: 'product',
     featured: 'selected',
     description: translate({
-      id: 'projects.agentDeliveryPipeline.description',
+      id: 'projects.nblmClone.description',
       message:
-        'An AI agent writes n8n workflows that run against real calendars, mailboxes and spreadsheets, and after the fifth generated workflow nobody reads carefully any more. So the gate is not me: a machine-checkable contract, a builder agent that cannot run a shell and a reviewer that can run exactly one command, both enforced by hooks rather than prompts, and a forced failure before the real run. Counting the acceptance log for the first time found two holes in the gates.',
+        'A NotebookLM clone where no answer reaches the user unless the server has found its quote in a passage retrieved for that question. The real model broke that check three times in the first two days, each time differently, and each fix is now held by a live eval that can stop a release. Around it: OpenTofu with apply only in CI, 494 data isolation tests with real tokens, and a release I broke on purpose to watch it roll itself back.',
     }),
     impact: translate({
-      id: 'projects.agentDeliveryPipeline.impact',
-      message: '0 of 4 passed first review',
+      id: 'projects.nblmClone.impact',
+      message: 'Rollback in 43 s, no human step',
     }),
+    tags: ['RAG', 'AWS Bedrock', 'Supabase', 'OpenTofu', 'LLM Eval'],
+    githubUrl: 'https://github.com/PascalNehlsen/nblm-clone',
+    liveUrl: 'https://app.sec-nblm.dev',
+    docsUrl: '/docs/projects/nblm-clone',
+    blogUrl: '/blog/the-check-the-model-broke',
+  },
+
+  {
+    title: 'Agent Delivery Pipeline',
+    category: 'product',
+    featured: true,
+    description:
+      'An AI agent writes n8n workflows that run against real calendars, mailboxes and spreadsheets, and after the fifth generated workflow nobody reads carefully any more. So the gate is not me: a machine-checkable contract, a builder agent that cannot run a shell and a reviewer that can run exactly one command, both enforced by hooks rather than prompts, and a forced failure before the real run. Counting the acceptance log for the first time found two holes in the gates.',
+    impact: '0 of 4 passed first review',
     tags: ['AI Agents', 'n8n', 'Python', 'Docker', 'Guardrails'],
     docsUrl: '/docs/projects/agent-delivery-pipeline',
     blogUrl: '/blog/agent-gate-it-cannot-open',
