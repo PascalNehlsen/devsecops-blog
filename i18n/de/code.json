@@ -18,7 +18,7 @@
     "message": "Drei Probleme, die ich von vorne bis hinten verantwortet habe: die Randbedingung, was ich geändert habe, und die Zahl, die sich bewegt hat."
   },
   "homepage.work.alsoLine": {
-    "message": "Außerdem: bei der Developer Akademie Terraform Golden Paths auf GCP, Agentic Runbooks mit menschlicher Freigabe und Sandboxes pro Nutzer auf AWS; eine Security-Pipeline, die SAST und DAST in GitHub Actions als Gate schaltet; zwei SaaS-Produkte und eine Reihe kleinerer Projekte. {docsLink}."
+    "message": "Außerdem: eine Delivery-Pipeline für Workflows, die ein KI-Agent schreibt; bei der Developer Akademie Terraform Golden Paths auf GCP, Agentic Runbooks mit menschlicher Freigabe und Sandboxes pro Nutzer auf AWS; eine Security-Pipeline, die SAST und DAST in GitHub Actions als Gate schaltet; zwei SaaS-Produkte und eine Reihe kleinerer Projekte. {docsLink}."
   },
   "homepage.work.alsoLine.link": {
     "message": "alles davon ist dokumentiert"
@@ -559,16 +559,16 @@
   "projects.shiftLeftGuard.impact": {
     "message": "Committete Injections 5/5 → 0/5"
   },
-  "projects.agentDeliveryPipeline.description": {
-    "message": "Ein KI-Agent schreibt n8n-Workflows, die gegen echte Kalender, Postfächer und Tabellen laufen, und nach dem fünften generierten Workflow liest niemand mehr genau. Also bin nicht ich das Gate: ein maschinell prüfbarer Vertrag, ein Builder-Agent, der keine Shell ausführen kann, und ein Reviewer, der genau einen Befehl ausführen darf, beides durch Hooks statt Prompts erzwungen, und ein erzwungener Fehlschlag vor dem echten Lauf. Das erste Auszählen des Abnahme-Logs hat zwei Lücken in den Gates gefunden."
-  },
-  "projects.agentDeliveryPipeline.impact": {
-    "message": "0 von 4 im ersten Review bestanden"
-  },
   "projects.falar.description": {
     "message": "Ein Sprach-KI-Tutor, bei dem das Handy direkt mit OpenAIs Realtime API spricht, also bezahlt mein Server jede Minute eines Gesprächs, das er nie hört. Das Backend besitzt die Sitzung, beobachtet jedes Gespräch über eine Sideband-Verbindung, misst Minuten mit der eigenen Uhr und schließt ab, wenn es das nicht kann, darunter Limits pro Gespräch, Tag und Monat. Die Kosten pro Gesprächsminute sind von etwa 14 auf etwa 9,5 Cent gesunken, gemessen; interner Test bei Google Play seit Oktober 2026."
   },
   "projects.falar.impact": {
     "message": "14 → 9,5 Cent pro Minute"
+  },
+  "projects.nblmClone.description": {
+    "message": "Ein NotebookLM-Klon, in dem keine Antwort den Nutzer erreicht, solange der Server ihr Zitat nicht in einer Passage gefunden hat, die für genau diese Frage abgerufen wurde. Das echte Modell hat diese Prüfung in den ersten zwei Tagen dreimal gebrochen, jedes Mal anders, und jeden Fix hält jetzt eine Live-Eval, die ein Release stoppen kann. Drumherum: OpenTofu mit Apply nur in CI, 494 Tests zur Datentrennung mit echten Tokens und ein Release, das ich absichtlich kaputt gemacht habe, um zuzusehen, wie es sich selbst zurückrollt."
+  },
+  "projects.nblmClone.impact": {
+    "message": "Rollback in 43 s, ohne Menschen"
   }
 }
