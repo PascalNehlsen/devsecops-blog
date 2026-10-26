@@ -72,6 +72,9 @@ function card({ title, description, tags = [] }) {
     type: 'div',
     props: {
       style: {
+        // satori 0.63 defaults to content-box, which adds the padding and
+        // border to the 1200x630 and pushes the footer off the card.
+        boxSizing: 'border-box',
         width: 1200,
         height: 630,
         display: 'flex',
