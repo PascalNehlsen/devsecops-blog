@@ -28,7 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
-      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 24
           cache: pnpm
@@ -74,4 +74,4 @@ jobs:
           comment-summary-in-pr: always
           # Kept in sync with EXCEPTIONS in scripts/audit-gate.mjs; the gate
           # fails if either list carries a GHSA the other does not.
-          allow-ghsas: GHSA-5c6j-r48x-rmvq, GHSA-w3rx-r6r6-pgpr, GHSA-5p2g-fcmc-qvqq, GHSA-vfj7-8cjw-p6xm, GHSA-ch52-4w7c-c8xp, GHSA-5gmw-xhrv-c9v3, GHSA-85c8-ppgw-ccpr
+          allow-ghsas: GHSA-5c6j-r48x-rmvq, GHSA-w3rx-r6r6-pgpr, GHSA-5p2g-fcmc-qvqq, GHSA-ch52-4w7c-c8xp, GHSA-5gmw-xhrv-c9v3, GHSA-85c8-ppgw-ccpr
